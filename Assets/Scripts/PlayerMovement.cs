@@ -12,9 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 400.0f;
     public float fallForce = 200.0f;
     private bool isGrounded = false;
-
-    public float slideTime = 1.0f;
-    private float slideHoldCurrent = 0.0f;
+    
     private bool isSliding = false;
 
 
@@ -35,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         //Press jump/slide
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
-            Jump();   
+            Jump();
         } else if (Input.GetKeyDown(KeyCode.S))
         {
             Fall();
@@ -66,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isSliding = true;
         SetBoxColliderSizeSlide();
-        slideHoldCurrent += Time.deltaTime;
         animator.SetBool("IsSliding", true);
     }
 
@@ -74,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isSliding = false;
         SetBoxColliderSizeNormal();
-        slideHoldCurrent = 0.0f;
         animator.SetBool("IsSliding", false);
     }
 
