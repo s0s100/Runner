@@ -19,14 +19,13 @@ public class PlayerMovement : MonoBehaviour
 
     // X-axis movement
     public float collisionReduction = 0.1f;
-    public float accelerationBoost = 0.01f;
+    public float accelerationBoost = 0.05f;
     private float currentSpeed;
+    private bool allowSpeedIncrease = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        //SetDefaultPosition();
-
         rigidbody = this.GetComponent<Rigidbody2D>();
         collider = this.GetComponent<BoxCollider2D>();
         animator = this.GetComponent<Animator>();
@@ -35,16 +34,24 @@ public class PlayerMovement : MonoBehaviour
 
         enabled = false;
         currentSpeed = gameController.moveSpeeed;
+        //this.transform.position = defaultPosition;
+    }
+
+    public void playerObstacleCollision()
+    {
+        currentSpeed -= currentSpeed * collisionReduction * Time.deltaTime;
     }
 
     public void enableJump()
     {
         isGrounded = true;
+        animator.SetBool("IsJumping", false);
     }
 
     public void enablePlayerAnimations()
     {
         animator.SetBool("GameStarted", true);
+        allowSpeedIncrease = false;
     }
 
     // Update is called once per frame
@@ -67,21 +74,29 @@ public class PlayerMovement : MonoBehaviour
             Unslide();   
         }
 
+        Debug.Log(allowSpeedIncrease + " and " + currentSpeed);
+
         boostSpeed();
         float xPosition = transform.position.x + (currentSpeed * Time.deltaTime);
         Vector3 newPosition = new Vector3(xPosition, transform.position.y, 0);
         transform.position = newPosition;
+        allowSpeedIncrease = true;
     }
 
     // Called if player X position is less then Camera speed
     private void boostSpeed()
     {
-
-        if (this.transform.position.x < camera.transform.position.x)
+        if (allowSpeedIncrease)
         {
-            currentSpeed += currentSpeed * accelerationBoost;
+            if (this.transform.position.x < camera.transform.position.x)
+            {
+                currentSpeed += gameController.moveSpeeed * accelerationBoost * Time.deltaTime;
+            }
+            else if (currentSpeed > gameController.moveSpeeed)
+            {
+                currentSpeed = gameController.moveSpeeed;
+            }
         }
-        currentSpeed = gameController.moveSpeeed;
     }
 
     private void Jump()
@@ -111,11 +126,6 @@ public class PlayerMovement : MonoBehaviour
         SetBoxColliderSizeNormal();
         animator.SetBool("IsSliding", false);
     }
-
-    //private void SetDefaultPosition()
-    //{
-    //    this.transform.position = defaultPosition;
-    //}
 
     private void SetBoxColliderSizeSlide()
     {
