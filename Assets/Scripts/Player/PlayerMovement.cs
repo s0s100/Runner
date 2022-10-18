@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             Unslide();   
         }
 
-        Debug.Log(allowSpeedIncrease + " and " + currentSpeed);
+        Debug.Log("Current player speed: " + currentSpeed);
 
         boostSpeed();
         float xPosition = transform.position.x + (currentSpeed * Time.deltaTime);
