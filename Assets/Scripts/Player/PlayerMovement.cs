@@ -32,9 +32,10 @@ public class PlayerMovement : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         camera = FindObjectOfType<Camera>();
 
-        enabled = false;
         currentSpeed = gameController.moveSpeeed;
         //this.transform.position = defaultPosition;
+
+        enabled = false;
     }
 
     public void playerObstacleCollision()
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
             Unslide();   
         }
 
-        Debug.Log("Current player speed: " + currentSpeed);
+        //Debug.Log("Current player speed: " + currentSpeed);
 
         boostSpeed();
         float xPosition = transform.position.x + (currentSpeed * Time.deltaTime);
@@ -83,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         allowSpeedIncrease = true;
     }
 
-    // Called if player X position is less then Camera speed
+    // Increases speed if player far from camera
     private void boostSpeed()
     {
         if (allowSpeedIncrease)
@@ -138,18 +139,4 @@ public class PlayerMovement : MonoBehaviour
         collider.offset = new Vector2(collider.offset.x, -0.015f);
         collider.size = new Vector2(collider.size.x, 0.13f);
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    string collisionTag = collision.gameObject.tag;
-    //    // Allow jumping
-    //    if (collisionTag == "Ground")
-    //    {
-    //        isGrounded = true;
-    //        animator.SetBool("IsJumping", false);
-    //    } else if (collisionTag == "Obstacle")
-    //    {
-    //        currentSpeed *= (1.0f - collisionReduction);
-    //    }
-    //}
 }

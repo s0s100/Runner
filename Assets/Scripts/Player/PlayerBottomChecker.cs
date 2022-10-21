@@ -14,7 +14,6 @@ public class PlayerBottomChecker : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         string tag = collision.gameObject.tag;
-        //Debug.Log("Grounded: " + tag);
         if (tag == "Ground" || tag == "Obstacle")
         {
             playerMovement.enableJump();
