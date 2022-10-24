@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum MoveDirection
+{
+    None, Up, Down, Left, Right
+}
+
 public class PlayerMovement : MonoBehaviour
 {
     private Camera camera;
@@ -9,39 +14,18 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private GameController gameController;
 
-    // private Vector2 defaultPosition = new Vector2(-6.0f, 1.0f);
+    // Mobile touch info
+    private Vector2 startTouchPos;
+    private Vector2 endTouchPos;
 
-    // Y-axis movement
+    // Movement variables
     public float jumpForce = 400.0f;
     public float fallForce = 200.0f;
+    public float leftDashForce = 200.0f;
+    public float rightDashForce = 150.0f;
     private bool isGrounded = false;
-    //private bool isSliding = false;
-
-    // X-axis movement
-    public float collisionReduction = 0.1f;
-    public float accelerationBoost = 0.05f;
+    private bool canFall = false;
     private float currentSpeed;
-    private bool allowSpeedIncrease = true;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rigidbody = this.GetComponent<Rigidbody2D>();
-        collider = this.GetComponent<BoxCollider2D>();
-        animator = this.GetComponent<Animator>();
-        gameController = FindObjectOfType<GameController>();
-        camera = FindObjectOfType<Camera>();
-
-        currentSpeed = gameController.moveSpeeed;
-        //this.transform.position = defaultPosition;
-
-        enabled = false;
-    }
-
-    public void playerObstacleCollision()
-    {
-        currentSpeed -= currentSpeed * collisionReduction * Time.deltaTime;
-    }
 
     public void enableJump()
     {
@@ -52,52 +36,132 @@ public class PlayerMovement : MonoBehaviour
     public void enablePlayerAnimations()
     {
         animator.SetBool("GameStarted", true);
-        allowSpeedIncrease = false;
     }
+    
+    void Start()
+    {
+        rigidbody = this.GetComponent<Rigidbody2D>();
+        collider = this.GetComponent<BoxCollider2D>();
+        animator = this.GetComponent<Animator>();
+        gameController = FindObjectOfType<GameController>();
+        camera = FindObjectOfType<Camera>();
 
-    // Update is called once per frame
+        currentSpeed = gameController.moveSpeeed;
+        enabled = false;
+    }
+    
     void Update()
     {
-        //Press jump/slide
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
-        {
-            Jump();
-        } else if (Input.GetKeyDown(KeyCode.S))
-        {
-            Fall();
-        }
-
-        //Slide
-        if (Input.GetKey(KeyCode.S) && isGrounded)
-        {
-            Slide();
-        } else {
-            Unslide();   
-        }
-
-        //Debug.Log("Current player speed: " + currentSpeed);
-
-        boostSpeed();
-        float xPosition = transform.position.x + (currentSpeed * Time.deltaTime);
-        Vector3 newPosition = new Vector3(xPosition, transform.position.y, 0);
-        transform.position = newPosition;
-        allowSpeedIncrease = true;
+        MoveDirection moveDir = PlayerComputerControl();
+        // MoveDirection moveDir = PlayerMobileControl();
+        MoveByDirection(moveDir);
+        MovePlayer();
     }
 
-    // Increases speed if player far from camera
-    private void boostSpeed()
+    private MoveDirection PlayerComputerControl()
     {
-        if (allowSpeedIncrease)
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            if (this.transform.position.x < camera.transform.position.x)
+            return MoveDirection.Up;
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            return MoveDirection.Down;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            return MoveDirection.Left;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            return MoveDirection.Right;
+        }
+
+        return MoveDirection.None;
+    }
+
+    private MoveDirection PlayerMobileControl()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
             {
-                currentSpeed += gameController.moveSpeeed * accelerationBoost * Time.deltaTime;
+                startTouchPos = touch.position;
+                //Debug.Log("Began: " + startTouchPos);
             }
-            else if (currentSpeed > gameController.moveSpeeed)
+
+            if (touch.phase == TouchPhase.Ended)
             {
-                currentSpeed = gameController.moveSpeeed;
+                endTouchPos = touch.position;
+                return GetMobileTouchDirection();
+                //Debug.Log("Ended: " + endTouchPos + " , Diff: " + (endTouchPos - startTouchPos));
             }
         }
+
+        return MoveDirection.None;
+    }
+
+    private MoveDirection GetMobileTouchDirection()
+    {
+        Vector2 diff = endTouchPos - startTouchPos;
+        Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
+        bool xDiffBigger = absDiff.x > absDiff.y;
+
+        if (xDiffBigger)
+        {
+            if (diff.x > 0)
+            {
+                return MoveDirection.Right;
+            } else
+            {
+                return MoveDirection.Left;
+            }
+        } else
+        {
+            if (diff.y > 0)
+            {
+                return MoveDirection.Up;
+            }
+            else if (diff.y < 0)
+            {
+                return MoveDirection.Down;
+            }
+        }
+
+        return MoveDirection.None;
+    }
+
+    private void MoveByDirection(MoveDirection dir)
+    {
+        switch (dir)
+        {
+            case MoveDirection.Up:
+                if (isGrounded)
+                {
+                    Jump();
+                }
+                break;
+            case MoveDirection.Down:
+                if (canFall)
+                {
+                    Fall();
+                }
+                break;
+            case MoveDirection.Left:
+                LeftDast();
+                break;
+            case MoveDirection.Right:
+                RightDash();
+                break;
+        }
+    }
+
+    private void MovePlayer()
+    {
+        float xPosition = transform.position.x + (currentSpeed * Time.deltaTime);
+        float yPosition = transform.position.y;
+        Vector2 newPosition = new Vector2(xPosition, yPosition);
+        transform.position = newPosition;
     }
 
     private void Jump()
@@ -105,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 force = (Vector2.up * jumpForce * rigidbody.mass);
         rigidbody.AddForce(force);
         isGrounded = false;
+        canFall = true;
         animator.SetBool("IsJumping", true);
     }
 
@@ -112,31 +177,44 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 force = (Vector2.down * jumpForce * rigidbody.mass);
         rigidbody.AddForce(force);
+        canFall = false;
     }
 
-    private void Slide()
+    private void LeftDast()
     {
-        //isSliding = true;
-        SetBoxColliderSizeSlide();
-        animator.SetBool("IsSliding", true);
+        Vector2 force = (Vector2.left * leftDashForce * rigidbody.mass);
+        rigidbody.AddForce(force);
     }
 
-    private void Unslide()
+    private void RightDash()
     {
-        //isSliding = false;
-        SetBoxColliderSizeNormal();
-        animator.SetBool("IsSliding", false);
+        Vector2 force = (Vector2.right * rightDashForce * rigidbody.mass);
+        rigidbody.AddForce(force);
     }
 
-    private void SetBoxColliderSizeSlide()
-    {
-        collider.offset = new Vector2(collider.offset.x, 0.0f);
-        collider.size = new Vector2(collider.size.x, 0.1f);
-    }
+    //private void Slide()
+    //{
+    //    //isSliding = true;
+    //    SetBoxColliderSizeSlide();
+    //    animator.SetBool("IsSliding", true);
+    //}
 
-    private void SetBoxColliderSizeNormal()
-    {
-        collider.offset = new Vector2(collider.offset.x, -0.015f);
-        collider.size = new Vector2(collider.size.x, 0.13f);
-    }
+    //private void Unslide()
+    //{
+    //    //isSliding = false;
+    //    SetBoxColliderSizeNormal();
+    //    animator.SetBool("IsSliding", false);
+    //}
+
+    //private void SetBoxColliderSizeSlide()
+    //{
+    //    collider.offset = new Vector2(collider.offset.x, 0.0f);
+    //    collider.size = new Vector2(collider.size.x, 0.1f);
+    //}
+
+    //private void SetBoxColliderSizeNormal()
+    //{
+    //    collider.offset = new Vector2(collider.offset.x, -0.015f);
+    //    collider.size = new Vector2(collider.size.x, 0.13f);
+    //}
 }

@@ -14,20 +14,18 @@ public class DeleteObjectArea : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         string objectTag = collision.gameObject.tag;
-        Debug.Log(objectTag + "onTrigger");
         if (deleteTags.Contains(objectTag))
         {
             Destroy(collision.gameObject);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        string objectTag = collision.gameObject.tag;
-        Debug.Log(objectTag + " onCollision");
-        if (deleteTags.Contains(objectTag))
-        {
-            Destroy(collision.gameObject);
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    string objectTag = collision.gameObject.tag;
+    //    if (deleteTags.Contains(objectTag))
+    //    {
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
 }

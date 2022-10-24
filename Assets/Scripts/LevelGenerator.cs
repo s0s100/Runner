@@ -79,7 +79,7 @@ public class LevelGenerator : MonoBehaviour
             float xShift = Random.Range(xMinShift, xMaxShift);
             float yShift = Random.Range(yMinDist, yMaxDist);
 
-            Debug.Log(xShift + " and " + yShift);
+            //Debug.Log(xShift + " and " + yShift);
 
             Vector2 generatedPos = new Vector2(lastEndPrefab + xShift, yShift);
             GameObject objectToGenerate = selectPrefab();

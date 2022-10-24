@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 201206319278676032}
   - component: {fileID: 4728561284126518925}
   m_Layer: 0
-  m_Name: Pixel Small Platform with Pumpkin
+  m_Name: Pixel Small Platform with Pumpkin Right
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9081504558177591037, guid: dd9255f88f19dfd45a8f1fdb3bca4904, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0647
+      value: -0.0646
       objectReference: {fileID: 0}
     - target: {fileID: 9081504558177591037, guid: dd9255f88f19dfd45a8f1fdb3bca4904, type: 3}
       propertyPath: m_LocalPosition.y

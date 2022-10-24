@@ -605,7 +605,7 @@ MonoBehaviour:
   generationDistance: 10
   xMinShift: 2
   xMaxShift: 4
-  yMinDist: -6
+  yMinDist: -5
   yMaxDist: -2
 --- !u!1 &619394800
 GameObject:
@@ -892,6 +892,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4145456096550347632, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6621912686509322440, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
       propertyPath: m_Name
       value: Player
@@ -914,7 +918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6621912686509322445, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
       propertyPath: m_Mass
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6621912686509322445, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
       propertyPath: m_AngularDrag
