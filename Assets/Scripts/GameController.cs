@@ -21,9 +21,14 @@ public class GameController : MonoBehaviour
         // Enable update functions
         if (Input.anyKey)
         {
-            playerMovement.enabled = true;
-            playerMovement.enablePlayerAnimations();
-            cameraFollowPlayer.enabled = true;
+            StartGame();
         }
+    }
+
+    void StartGame()
+    {
+        playerMovement.enablePlayerAnimations();
+        playerMovement.enabled = true;
+        cameraFollowPlayer.enabled = true;
     }
 }
