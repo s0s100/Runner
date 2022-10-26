@@ -6,9 +6,9 @@ using System.IO;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private static string startPrefabLocation = "Assets/Prefabs/DefinedStartLocations/StartingProps.prefab";
-    private static Vector2 startPrefabPosition = new Vector2(0.0f, -3.0f);
-    private static string definedPrefabsLocation = "/Prefabs/DefinedLocations";
+    private const string START_PREFAB_LOCATION = "Assets/Prefabs/DefinedStartLocations/StartingProps.prefab";
+    private const string DEFINED_PREFABS_LOCATION = "/Prefabs/DefinedLocations";
+    private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
 
     private GameObject startPrefab;
     private GameObject[] definedPrefabs;
@@ -25,13 +25,13 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        startPrefab = AssetDatabase.LoadAssetAtPath(startPrefabLocation, typeof(GameObject)) as GameObject;
+        startPrefab = AssetDatabase.LoadAssetAtPath(START_PREFAB_LOCATION, typeof(GameObject)) as GameObject;
         definedPrefabs = GetDefinedPrefabs();        
     }
 
     private void Start()
     {
-        CreateObject(startPrefab, startPrefabPosition);
+        CreateObject(startPrefab, START_PREFAB_POSITION);
         playerObject = GameObject.FindWithTag("Player");
     }
 
@@ -42,7 +42,7 @@ public class LevelGenerator : MonoBehaviour
 
     private GameObject[] GetDefinedPrefabs()
     {
-        string[] retrievedObjectPaths = Directory.GetFiles(Application.dataPath + definedPrefabsLocation, "*.prefab", SearchOption.AllDirectories);
+        string[] retrievedObjectPaths = Directory.GetFiles(Application.dataPath + DEFINED_PREFABS_LOCATION, "*.prefab", SearchOption.AllDirectories);
 
         if (retrievedObjectPaths == null)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollowPlayer : MonoBehaviour
 {
-    private static float zDistance = -10.0f;
+    private const float Z_CAMERA_DISTANCE = -10.0f;
     private GameController gameController;
 
     void Start()
@@ -17,7 +17,7 @@ public class CameraFollowPlayer : MonoBehaviour
     {
         float moveSpeed = gameController.moveSpeeed;
         float xDistance = transform.position.x + (moveSpeed * Time.deltaTime);
-        Vector3 newVector = new Vector3(xDistance, 0, zDistance);
+        Vector3 newVector = new Vector3(xDistance, 0, Z_CAMERA_DISTANCE);
         this.transform.position = newVector;
     }
 }

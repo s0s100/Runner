@@ -905,6 +905,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 519420031}
     - target: {fileID: 6621912686509322443, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
+      propertyPath: dashSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621912686509322443, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
+      propertyPath: dashCooldown
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621912686509322443, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
       propertyPath: bottomChecker
       value: 
       objectReference: {fileID: 424652719}

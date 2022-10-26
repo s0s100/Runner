@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerLoseArea : MonoBehaviour
 {
-    private static string playerTag = "Player";
+    private const string PLAYER_TAG = "Player";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         string objectTag = collision.gameObject.tag;
-        if (objectTag == playerTag)
+        if (objectTag == PLAYER_TAG)
         {
             // 
         }
