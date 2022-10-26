@@ -11,12 +11,21 @@ public class PlayerBottomChecker : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
             playerMovement.enableJump();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        string tag = collision.gameObject.tag;
+        if (tag == "Ground" || tag == "Obstacle")
+        {
+            playerMovement.disableJump();
         }
     }
 }

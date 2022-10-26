@@ -45,6 +45,12 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsJumping", false);
     }
 
+    public void disableJump()
+    {
+        isGrounded = false;
+        animator.SetBool("IsJumping", true);
+    }
+
     public void enablePlayerAnimations()
     {
         animator.SetBool("GameStarted", true);
