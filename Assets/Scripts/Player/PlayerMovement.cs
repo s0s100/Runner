@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = true;
         isGrounded = true;
+        animator.SetBool("IsFalling", false);
         animator.SetBool("IsJumping", false);
     }
 
@@ -247,6 +248,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Fall()
     {
+        animator.SetBool("IsFalling", true);
         Vector2 force = (Vector2.down * jumpForce * rigidbody.mass);
         rigidbody.AddForce(force);
         canFall = false;
