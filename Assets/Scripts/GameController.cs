@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
 
     public float moveSpeeed = 10; // Increases every 100 meters
+
+    private const int GAME_SCENE_NUMBER = 0;
+
     private PlayerMovement playerMovement;
     private CameraFollowPlayer cameraFollowPlayer;
 
@@ -36,6 +40,13 @@ public class GameController : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(GAME_SCENE_NUMBER);
+        
     }
 
     private void StartGame()
