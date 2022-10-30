@@ -70,8 +70,15 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        //MoveDirection moveDir = PlayerComputerControl();
+        //MoveDirection moveDir = PlayerMobileControl();
+
         MoveDirection moveDir = PlayerComputerControl();
-        // MoveDirection moveDir = PlayerMobileControl();
+        if (moveDir == MoveDirection.None)
+        {
+            moveDir = PlayerMobileControl();
+        }
+        
         MoveByDirection(moveDir);
         MovePlayer();
         DashPlayer();

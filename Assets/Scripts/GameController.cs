@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject pauseMenu;
+
     public float moveSpeeed = 10; // Increases every 100 meters
     private PlayerMovement playerMovement;
     private CameraFollowPlayer cameraFollowPlayer;
@@ -14,18 +16,29 @@ public class GameController : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         cameraFollowPlayer = FindObjectOfType<CameraFollowPlayer>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        // Enable update functions
         if (Input.anyKey)
         {
             StartGame();
+            this.enabled = false;
         }
     }
 
-    void StartGame()
+    public void PauseGame() 
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+
+    public void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
+
+    private void StartGame()
     {
         playerMovement.enablePlayerAnimations();
         playerMovement.enabled = true;
