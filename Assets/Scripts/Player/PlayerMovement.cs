@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     public void disableJump()
     {
         isGrounded = false;
+        canFall = true;
         animator.SetBool("IsJumping", true);
     }
 

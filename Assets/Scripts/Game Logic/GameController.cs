@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject gameMenu;
     public GameObject pauseMenu;
+    public GameObject defeatMenu;
 
     public float moveSpeeed = 10; // Increases every 100 meters
 
+    private const float TIME_BEFORE_LATE_GAME_PAUSE = 2.0f;
     private const int GAME_SCENE_NUMBER = 0;
 
     private PlayerMovement playerMovement;
@@ -49,10 +52,26 @@ public class GameController : MonoBehaviour
         
     }
 
+    public void GameDefeat()
+    {
+        defeatMenu.SetActive(true);
+        gameMenu.SetActive(false);
+        StartCoroutine(LateGameStop());
+        Debug.Log("Wait for 2 seconds");
+    }
+
+    private IEnumerator LateGameStop()
+    {
+        yield return new WaitForSeconds(TIME_BEFORE_LATE_GAME_PAUSE);
+        Debug.Log("The time has passed");
+        Time.timeScale = 0.0f; 
+    }
+
     private void StartGame()
     {
         playerMovement.enablePlayerAnimations();
         playerMovement.enabled = true;
         cameraFollowPlayer.enabled = true;
     }
+
 }
