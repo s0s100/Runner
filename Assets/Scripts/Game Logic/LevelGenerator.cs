@@ -13,6 +13,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject startPrefab;
     private GameObject[] definedPrefabs;
     private GameObject playerObject;
+    private GameObject cameraObject;
 
     private GameObject lastGeneratePrefab;
 
@@ -33,6 +34,7 @@ public class LevelGenerator : MonoBehaviour
     {
         CreateObject(startPrefab, START_PREFAB_POSITION);
         playerObject = GameObject.FindWithTag("Player");
+        cameraObject = GameObject.FindWithTag("MainCamera");
     }
 
     private void Update()
