@@ -72,7 +72,7 @@ public class LevelGenerator : MonoBehaviour
     {
         PrefabInfo info = lastGeneratePrefab.GetComponent<PrefabInfo>();
         float lastEndPrefab = lastGeneratePrefab.transform.position.x + info.xSize;
-        bool shouldGenerate = playerObject.transform.position.x + generationDistance > lastEndPrefab;
+        bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastEndPrefab;
 
         // Debug.Log(playerObject.transform.position.x + generationDistance + " > " + lastEndPrefab + " = " + shouldGenerate);
 
