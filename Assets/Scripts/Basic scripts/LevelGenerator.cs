@@ -32,7 +32,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
-        CreateObject(startPrefab, START_PREFAB_POSITION);
+        CreateObject(startPrefab, START_PREFAB_POSITION); 
         playerObject = GameObject.FindWithTag("Player");
         cameraObject = GameObject.FindWithTag("MainCamera");
     }
@@ -106,6 +106,5 @@ public class LevelGenerator : MonoBehaviour
         lastGeneratePrefab = Instantiate(gameObject);
         lastGeneratePrefab.transform.position = pos;
         lastGeneratePrefab.transform.parent = generatedObjectsParent.transform;
-        
     }
 }
