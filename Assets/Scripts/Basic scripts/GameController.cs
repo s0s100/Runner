@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject defeatMenu;
 
-    public float moveSpeeed = 10; // Increases every 100 meters
+    public float moveSpeeed = 10; // Should increase
 
     private const float TIME_BEFORE_LATE_GAME_PAUSE = 2.0f;
     private const int MAIN_MENU_SCENE_NUMBER = 0;
@@ -17,12 +17,14 @@ public class GameController : MonoBehaviour
 
     private PlayerMovement playerMovement;
     private CameraFollowPlayer cameraFollowPlayer;
+    private LevelGenerator LevelGenerator;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
         cameraFollowPlayer = FindObjectOfType<CameraFollowPlayer>();
+        LevelGenerator = FindObjectOfType<LevelGenerator>();
     }
     
     void Update()
@@ -73,9 +75,10 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
-        playerMovement.enablePlayerAnimations();
+        playerMovement.EnablePlayerAnimations();
         playerMovement.enabled = true;
         cameraFollowPlayer.enabled = true;
+        LevelGenerator.enabled = true;
     }
 
 }

@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool canFall = false;
 
-    public void enableJump()
+    public void EnableJump()
     {
         canDash = true;
         isGrounded = true;
@@ -45,14 +45,14 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsJumping", false);
     }
 
-    public void disableJump()
+    public void DisableJump()
     {
         isGrounded = false;
         canFall = true;
         animator.SetBool("IsJumping", true);
     }
 
-    public void enablePlayerAnimations()
+    public void EnablePlayerAnimations()
     {
         animator.SetBool("GameStarted", true);
     }

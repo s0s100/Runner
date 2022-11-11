@@ -1309,6 +1309,10 @@ MonoBehaviour:
   xMaxShift: 4
   yMinDist: -5
   yMaxDist: -2
+  witchObject: {fileID: 1796074741082256812, guid: 1eb67f04c470b824d9b8d55a8751d560, type: 3}
+  witchGenerationTime: 10
+  yWitchMinDist: -3
+  yWitchMaxDist: 6
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class PlayerBottomChecker : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            playerMovement.enableJump();
+            playerMovement.EnableJump();
         }
     }
 
@@ -25,7 +25,7 @@ public class PlayerBottomChecker : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            playerMovement.disableJump();
+            playerMovement.DisableJump();
         }
     }
 }

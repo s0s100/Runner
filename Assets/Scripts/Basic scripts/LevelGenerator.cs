@@ -17,12 +17,20 @@ public class LevelGenerator : MonoBehaviour
 
     private GameObject lastGeneratePrefab;
 
+    // Prefab generation
     public GameObject generatedObjectsParent;
-    public float generationDistance = 10.0f;
+    public float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
     public float xMinShift = 2.0f;
     public float xMaxShift = 4.0f;
     public float yMinDist = -6.0f;
     public float yMaxDist = -2.0f;
+
+    // Witch generation (uses same generation distance)
+    public GameObject witchObject;
+    public float witchGenerationTime = 10.0f;
+    public float yWitchMinDist = -2.0f;
+    public float yWitchMaxDist = 5.0f;
+    private float currentWitchGenerationTime = 10.0f;
 
     private void Awake()
     {
@@ -35,11 +43,61 @@ public class LevelGenerator : MonoBehaviour
         CreateObject(startPrefab, START_PREFAB_POSITION); 
         playerObject = GameObject.FindWithTag("Player");
         cameraObject = GameObject.FindWithTag("MainCamera");
+        enabled = false;
     }
 
     private void Update()
     {
         GenerateLevel();
+        GenerateWitch();
+    }
+
+    private void GenerateLevel()
+    {
+        PrefabInfo info = lastGeneratePrefab.GetComponent<PrefabInfo>();
+        float lastEndPrefab = lastGeneratePrefab.transform.position.x + info.xSize;
+        bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastEndPrefab;
+
+        // Debug.Log(playerObject.transform.position.x + generationDistance + " > " + lastEndPrefab + " = " + shouldGenerate);
+
+        if (shouldGenerate)
+        {
+            float xShift = Random.Range(xMinShift, xMaxShift);
+            float yShift = Random.Range(yMinDist, yMaxDist);
+
+            //Debug.Log(xShift + " and " + yShift);
+
+            Vector2 generatedPos = new Vector2(lastEndPrefab + xShift, yShift);
+            GameObject objectToGenerate = selectPrefab();
+
+            CreateObject(objectToGenerate, generatedPos);
+
+            //lastGeneratePrefab = Instantiate(objectToGenerate);
+            // Debug.Log("!");
+        }
+    }
+
+    private void GenerateWitch()
+    {
+        if (currentWitchGenerationTime > 0) 
+        {
+            currentWitchGenerationTime -= Time.deltaTime;
+        } else
+        {
+            currentWitchGenerationTime = witchGenerationTime;
+
+            bool isReversed = Random.value > 0.5f; // Returns random bool
+            float xDist = generationDistance + cameraObject.transform.position.x;
+            float yDist = Random.Range(yWitchMinDist, yWitchMaxDist);
+            Vector2 witchPos = new Vector2(xDist, yDist);
+            GameObject newWitch = Instantiate(witchObject);
+
+            // Reverse witch if possible
+            WitchControl witchControl = newWitch.GetComponent<WitchControl>();
+
+            newWitch.transform.position = witchPos;
+            newWitch.transform.parent = generatedObjectsParent.transform;
+        }
     }
 
     private GameObject[] GetDefinedPrefabs()
@@ -66,31 +124,6 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return result;
-    }
-
-    private void GenerateLevel()
-    {
-        PrefabInfo info = lastGeneratePrefab.GetComponent<PrefabInfo>();
-        float lastEndPrefab = lastGeneratePrefab.transform.position.x + info.xSize;
-        bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastEndPrefab;
-
-        // Debug.Log(playerObject.transform.position.x + generationDistance + " > " + lastEndPrefab + " = " + shouldGenerate);
-
-        if (shouldGenerate)
-        {
-            float xShift = Random.Range(xMinShift, xMaxShift);
-            float yShift = Random.Range(yMinDist, yMaxDist);
-
-            //Debug.Log(xShift + " and " + yShift);
-
-            Vector2 generatedPos = new Vector2(lastEndPrefab + xShift, yShift);
-            GameObject objectToGenerate = selectPrefab();
-
-            CreateObject(objectToGenerate, generatedPos);
-
-            //lastGeneratePrefab = Instantiate(objectToGenerate);
-            // Debug.Log("!");
-        }
     }
 
     private GameObject selectPrefab()
