@@ -87,13 +87,27 @@ public class LevelGenerator : MonoBehaviour
             currentWitchGenerationTime = witchGenerationTime;
 
             bool isReversed = Random.value > 0.5f; // Returns random bool
-            float xDist = generationDistance + cameraObject.transform.position.x;
+
+            float xDist;
+            if (isReversed)
+            {
+                xDist = -generationDistance + cameraObject.transform.position.x;
+            } else
+            {
+                xDist = generationDistance + cameraObject.transform.position.x;
+            }
+            
             float yDist = Random.Range(yWitchMinDist, yWitchMaxDist);
             Vector2 witchPos = new Vector2(xDist, yDist);
             GameObject newWitch = Instantiate(witchObject);
 
             // Reverse witch if possible
-            WitchControl witchControl = newWitch.GetComponent<WitchControl>();
+            if (isReversed)
+            {
+                WitchControl witchControl = newWitch.GetComponent<WitchControl>();
+                witchControl.SetLeftToRightMovement(true);
+                newWitch.transform.Rotate(0.0f, 180.0f, 0.0f); // Rotate to make her move in the other direction
+            }
 
             newWitch.transform.position = witchPos;
             newWitch.transform.parent = generatedObjectsParent.transform;

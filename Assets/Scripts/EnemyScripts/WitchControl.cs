@@ -7,29 +7,32 @@ public class WitchControl : MonoBehaviour
     private GameController gameController;
     private float speed;
     private bool leftToRightMovement = false;
+    private float existanceTime = 10.0f;
+    
+    // Sin() function movement
 
     private void Start()
     {
         gameController = FindObjectOfType<GameController>();
-        speed = gameController.moveSpeeed / 2; // Half speed of the player
+        speed = gameController.moveSpeeed; // Same speed as a player
+        Destroy(this.gameObject, existanceTime); // Delete after
     }
 
-    public void setLeftToRightMovement(bool newVal)
+    public void SetLeftToRightMovement(bool newVal)
     {
         leftToRightMovement = newVal;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         Vector3 speedIncrement;
         if (leftToRightMovement)
         {
-            speedIncrement = Vector3.right * (gameController.moveSpeeed + speed) * Time.deltaTime;
+            speedIncrement = Vector3.right * (gameController.moveSpeeed + speed) * Time.deltaTime; // Result speed equal to player speed
             this.transform.position += speedIncrement;
         } else
         {
-            speedIncrement = (Vector3.left * (speed)) * Time.deltaTime;
+            speedIncrement = (Vector3.left * (speed)) * Time.deltaTime; // Result speed equal to player speed x2
             this.transform.position += speedIncrement;
         }
     }
