@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject defeatMenu;
 
-    public float moveSpeeed = 10; // Should increase
+    public float moveSpeeed = 10; // Should increase over time
 
     private const float TIME_BEFORE_LATE_GAME_PAUSE = 2.0f;
     private const int MAIN_MENU_SCENE_NUMBER = 0;

@@ -10,6 +10,7 @@ public class WitchControl : MonoBehaviour
     private float existanceTime = 10.0f;
     
     // Sin() function movement
+    
 
     private void Start()
     {
