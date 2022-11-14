@@ -24,27 +24,23 @@ public class PlayerHealthScript : MonoBehaviour
     {
         gameController = FindObjectOfType<GameController>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        healthText.text = curHealth.ToString();
     }
 
     private void Update()
     {
-        healthText.text = curHealth.ToString();
-
-        if (curInvulnerability > 0.0f)
-        {
-            curInvulnerability -= Time.deltaTime;
-            invulnerabilityDisplaying();
-        }
+        InvulnerabilityControl();
     }
 
     // Removes one hearth
-    public void getDamage()
+    public void GetDamage()
     {
         if (curInvulnerability <= 0)
         {
             isIncreasingTransparency = false;
             curInvulnerability = invulnerabilityTime;
             curHealth--;
+            healthText.text = curHealth.ToString();
 
             if (curHealth == 0)
             {
@@ -53,8 +49,17 @@ public class PlayerHealthScript : MonoBehaviour
         }
     }
 
+    private void InvulnerabilityControl()
+    {
+        if (curInvulnerability > 0.0f)
+        {
+            curInvulnerability -= Time.deltaTime;
+            InvulnerabilityDisplaying();
+        }
+    }
+
     // Called if player is invulnerable
-    private void invulnerabilityDisplaying()
+    private void InvulnerabilityDisplaying()
     {
         Color currentColor = playerSpriteRenderer.color;
 

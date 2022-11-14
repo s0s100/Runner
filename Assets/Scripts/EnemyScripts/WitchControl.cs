@@ -66,7 +66,7 @@ public class WitchControl : MonoBehaviour
             PlayerHealthScript playerHealthScript =
                 collision.gameObject.GetComponent<PlayerHealthScript>();
 
-            playerHealthScript.getDamage();
+            playerHealthScript.GetDamage();
         }
     }
 }

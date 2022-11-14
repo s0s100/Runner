@@ -11,7 +11,7 @@ public class PlayerDamageZone : MonoBehaviour
             PlayerHealthScript playerHealthScript = 
                 collision.gameObject.GetComponent<PlayerHealthScript>();
 
-            playerHealthScript.getDamage();
+            playerHealthScript.GetDamage();
         }
     }
 }
