@@ -1464,7 +1464,7 @@ MonoBehaviour:
   generationDistance: 10
   xMinShift: 2
   xMaxShift: 4
-  yMinDist: -5
+  yMinDist: -6
   yMaxDist: -2
   witchObject: {fileID: 1796074741082256812, guid: 1eb67f04c470b824d9b8d55a8751d560, type: 3}
   witchGenerationTime: 10

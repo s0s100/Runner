@@ -9,7 +9,7 @@ using System.Linq;
 
 public class DeleteObjectArea : MonoBehaviour
 {
-    private static string[] deleteTags = { "Ground", "Decoration", "Obstacle" , "Enemy" };
+    private static string[] deleteTags = { "Ground", "Decoration", "Obstacle" };
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

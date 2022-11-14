@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
     public float xMinShift = 2.0f;
     public float xMaxShift = 4.0f;
     public float yMinDist = -6.0f;
-    public float yMaxDist = -2.0f;
+    public float yMaxDist = -2.0f; 
 
     // Witch generation (uses same generation distance)
     public GameObject witchObject;
@@ -37,7 +37,7 @@ public class LevelGenerator : MonoBehaviour
     private void Awake()
     {
         startPrefab = AssetDatabase.LoadAssetAtPath(START_PREFAB_LOCATION, typeof(GameObject)) as GameObject;
-        definedPrefabs = GetDefinedPrefabs();        
+        definedPrefabs = GetDefinedPrefabs();
     }
 
     private void Start()
@@ -68,9 +68,13 @@ public class LevelGenerator : MonoBehaviour
             float yShift = Random.Range(yMinDist, yMaxDist);
 
             //Debug.Log(xShift + " and " + yShift);
-
-            Vector2 generatedPos = new Vector2(lastEndPrefab + xShift, yShift);
             GameObject objectToGenerate = selectPrefab();
+
+            PrefabInfo newPrefabInfo = objectToGenerate.GetComponent<PrefabInfo>();
+            xShift = xShift + lastEndPrefab + newPrefabInfo.xSize;
+            yShift = yShift - newPrefabInfo.yEnd;
+
+            Vector2 generatedPos = new Vector2(xShift , yShift);
 
             CreateObject(objectToGenerate, generatedPos);
 
