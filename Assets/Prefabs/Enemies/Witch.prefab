@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1796074741082256815}
   - component: {fileID: 1796074741082256814}
-  - component: {fileID: 1796074741082256813}
   - component: {fileID: 3523791226911950425}
   - component: {fileID: 3388513900103903825}
+  - component: {fileID: 8768334818082225820}
   m_Layer: 0
   m_Name: Witch
   m_TagString: Enemy
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1796074741082256813
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796074741082256812}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.006387636, y: -0.10585264}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4, y: 0.4}
-    newSize: {x: 0.4, y: 0.4}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.25250205, y: 0.18829466}
-  m_EdgeRadius: 0
 --- !u!114 &3523791226911950425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +119,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!68 &8768334818082225820
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796074741082256812}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.05692271, y: -0.17808615}
+  - {x: -0.041380413, y: -0.14165196}
+  - {x: -0.121455334, y: -0.13310392}
+  - {x: -0.06385703, y: -0.092040226}
+  - {x: -0.046856593, y: -0.009901365}
+  - {x: 0.024751462, y: -0.12435022}
+  - {x: 0.1324577, y: -0.12418658}
+  - {x: 0.05710876, y: -0.17738228}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

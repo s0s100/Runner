@@ -20,8 +20,11 @@ public class PlayerHealthScript : MonoBehaviour
     private float curInvulnerability = 0.0f;
     private bool isIncreasingTransparency = false;
 
+    private Animator animator;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         healthText.text = curHealth.ToString();
@@ -37,6 +40,7 @@ public class PlayerHealthScript : MonoBehaviour
     {
         if (curInvulnerability <= 0)
         {
+            animator.SetBool("IsDamaged", true);
             isIncreasingTransparency = false;
             curInvulnerability = invulnerabilityTime;
             curHealth--;
@@ -49,8 +53,9 @@ public class PlayerHealthScript : MonoBehaviour
         }
     }
 
+    // Makes object red-blinking if invulnerable
     private void InvulnerabilityControl()
-    {
+    { 
         if (curInvulnerability > 0.0f)
         {
             curInvulnerability -= Time.deltaTime;
@@ -65,18 +70,25 @@ public class PlayerHealthScript : MonoBehaviour
 
         if (curInvulnerability <= 0.0f)
         {
+            animator.SetBool("IsDamaged", false);
             currentColor.a = 1.0f;
+            currentColor.g = 1.0f;
+            currentColor.b = 1.0f;
         } else
         {
             if (isIncreasingTransparency)
             {
                 currentColor.a += Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
+                currentColor.g += Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
+                currentColor.b += Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
 
                 if (currentColor.a >= 1)
                     isIncreasingTransparency = false;
             } else
             {
                 currentColor.a -= Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
+                currentColor.g -= Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
+                currentColor.b -= Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
 
                 if (currentColor.a <= MIN_SPRITE_TRANSPARENCY)
                     isIncreasingTransparency = true;

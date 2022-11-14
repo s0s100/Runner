@@ -60,6 +60,7 @@ public class GameController : MonoBehaviour
         defeatMenu.SetActive(true);
         gameMenu.SetActive(false);
         StartCoroutine(LateGameStop());
+        playerMovement.enabled = false;
     }
 
     public void MainMenu()
