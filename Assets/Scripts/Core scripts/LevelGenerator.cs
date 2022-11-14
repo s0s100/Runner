@@ -19,6 +19,7 @@ public class LevelGenerator : MonoBehaviour
 
     // Prefab generation
     public GameObject generatedObjectsParent;
+    public GameObject generatedEnemyParent;
     public float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
     public float xMinShift = 2.0f;
     public float xMaxShift = 4.0f;
@@ -29,8 +30,9 @@ public class LevelGenerator : MonoBehaviour
     public GameObject witchObject;
     public float witchGenerationTime = 10.0f;
     public float yWitchMinDist = -2.0f;
-    public float yWitchMaxDist = 5.0f;
-    private float currentWitchGenerationTime = 10.0f;
+    public float yWitchMaxDist = 4.0f;
+    // private float currentWitchGenerationTime = 10.0f;
+    private float currentWitchGenerationTime = 0.0f;
 
     private void Awake()
     {
@@ -110,7 +112,7 @@ public class LevelGenerator : MonoBehaviour
             }
 
             newWitch.transform.position = witchPos;
-            newWitch.transform.parent = generatedObjectsParent.transform;
+            newWitch.transform.parent = generatedEnemyParent.transform;
         }
     }
 
