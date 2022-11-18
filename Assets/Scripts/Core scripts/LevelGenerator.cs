@@ -23,10 +23,10 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private GameObject generatedEnemyParent;
     private float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
-    private float xMinShift = 0.0f; // 2.0f;
-    private float xMaxShift = 0.0f; // 4.0f;
-    private float yMinShift = 0.0f; // -6.0f;
-    private float yMaxShift = 0.0f; // -2.0f; 
+    private float xMinShift = 0.0f;
+    private float xMaxShift = 0.0f;
+    private float yMinShift = 0.0f;
+    private float yMaxShift = 0.0f;
 
     // Witch generation (uses same generation distance)
     [SerializeField]
@@ -71,7 +71,7 @@ public class LevelGenerator : MonoBehaviour
             float xShift = Random.Range(xMinShift, xMaxShift);
             float yShift = Random.Range(yMinShift, yMaxShift);
             float xNewPos = lastPrefabX + xShift + newPrefabInfo.XShiftRequired + newPrefabInfo.XSize;
-            float yNewPos = lastGeneratePrefab.transform.position.y + lastPrefabInfo.YAfter + newPrefabInfo.YBefore;
+            float yNewPos = lastGeneratePrefab.transform.position.y + lastPrefabInfo.YAfter - newPrefabInfo.YBefore;
 
             Debug.Log("Generated: " + xNewPos + " " + yNewPos);
 

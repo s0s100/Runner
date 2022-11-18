@@ -12,7 +12,7 @@ public class PrefabInfo : MonoBehaviour
     [SerializeField]
     public float XShiftRequired;
 
-    // If it is positive then the previout block should be lower
+    // If it is positive then the previout block should be higher
     [SerializeField]
     public float YBefore;
 

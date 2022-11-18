@@ -162,8 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   XSize: 4.5
   XShiftRequired: 0
-  YBefore: 0
-  YAfter: 0
+  YBefore: 1
+  YAfter: 1
 --- !u!1 &5564793339674498922
 GameObject:
   m_ObjectHideFlags: 0
