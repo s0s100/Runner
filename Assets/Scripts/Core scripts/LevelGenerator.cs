@@ -18,21 +18,23 @@ public class LevelGenerator : MonoBehaviour
     private GameObject lastGeneratePrefab;
 
     // Prefab generation
-    public GameObject generatedObjectsParent;
-    public GameObject generatedEnemyParent;
-    public float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
-    public float xMinShift = 2.0f;
-    public float xMaxShift = 4.0f;
-    public float yMinDist = -6.0f;
-    public float yMaxDist = -2.0f; 
+    [SerializeField]
+    private GameObject generatedObjectsParent;
+    [SerializeField]
+    private GameObject generatedEnemyParent;
+    private float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
+    private float xMinShift = 0.0f; // 2.0f;
+    private float xMaxShift = 0.0f; // 4.0f;
+    private float yMinShift = 0.0f; // -6.0f;
+    private float yMaxShift = 0.0f; // -2.0f; 
 
     // Witch generation (uses same generation distance)
-    public GameObject witchObject;
-    public float witchGenerationTime = 10.0f;
-    public float yWitchMinDist = -2.0f;
-    public float yWitchMaxDist = 4.0f;
-    // private float currentWitchGenerationTime = 10.0f;
-    private float currentWitchGenerationTime = 0.0f;
+    [SerializeField]
+    private GameObject witchObject;
+    private float witchGenerationTime = 10.0f;
+    private float yWitchMinDist = -2.0f;
+    private float yWitchMaxDist = 4.0f;
+    private float currentWitchGenerationTime = 0.0f; // = 10.0f;
 
     private void Awake()
     {
@@ -42,7 +44,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
-        CreateObject(startPrefab, START_PREFAB_POSITION); 
+        Createprefab(startPrefab, START_PREFAB_POSITION); 
         playerObject = GameObject.FindWithTag("Player");
         cameraObject = GameObject.FindWithTag("MainCamera");
         enabled = false;
@@ -56,30 +58,25 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateLevel()
     {
-        PrefabInfo info = lastGeneratePrefab.GetComponent<PrefabInfo>();
-        float lastEndPrefab = lastGeneratePrefab.transform.position.x + info.xSize;
-        bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastEndPrefab;
-
-        // Debug.Log(playerObject.transform.position.x + generationDistance + " > " + lastEndPrefab + " = " + shouldGenerate);
+        PrefabInfo lastPrefabInfo = lastGeneratePrefab.GetComponent<PrefabInfo>();
+        float lastPrefabX = lastGeneratePrefab.transform.position.x + lastPrefabInfo.XSize;
+        bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastPrefabX;
 
         if (shouldGenerate)
         {
-            float xShift = Random.Range(xMinShift, xMaxShift);
-            float yShift = Random.Range(yMinDist, yMaxDist);
-
-            //Debug.Log(xShift + " and " + yShift);
             GameObject objectToGenerate = selectPrefab();
-
             PrefabInfo newPrefabInfo = objectToGenerate.GetComponent<PrefabInfo>();
-            xShift = xShift + lastEndPrefab + newPrefabInfo.xSize;
-            yShift = yShift - newPrefabInfo.yEnd;
 
-            Vector2 generatedPos = new Vector2(xShift , yShift);
+            // Calculate new prefab position prefab position
+            float xShift = Random.Range(xMinShift, xMaxShift);
+            float yShift = Random.Range(yMinShift, yMaxShift);
+            float xNewPos = lastPrefabX + xShift + newPrefabInfo.XShiftRequired + newPrefabInfo.XSize;
+            float yNewPos = lastGeneratePrefab.transform.position.y + lastPrefabInfo.YAfter + newPrefabInfo.YBefore;
 
-            CreateObject(objectToGenerate, generatedPos);
+            Debug.Log("Generated: " + xNewPos + " " + yNewPos);
 
-            //lastGeneratePrefab = Instantiate(objectToGenerate);
-            // Debug.Log("!");
+            Vector2 generatedPos = new Vector2(xNewPos , yNewPos);
+            Createprefab(objectToGenerate, generatedPos);
         }
     }
 
@@ -154,7 +151,7 @@ public class LevelGenerator : MonoBehaviour
         return definedPrefabs[randomSelected];
     }
 
-    private void CreateObject(GameObject gameObject, Vector2 pos)
+    private void Createprefab(GameObject gameObject, Vector2 pos)
     {
         lastGeneratePrefab = Instantiate(gameObject);
         lastGeneratePrefab.transform.position = pos;
