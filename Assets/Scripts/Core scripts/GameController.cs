@@ -16,14 +16,14 @@ public class GameController : MonoBehaviour
     private const int GAME_SCENE_NUMBER = 1;
 
     private PlayerMovement playerMovement;
-    private CameraFollowPlayer cameraFollowPlayer;
+    private CameraController cameraFollowPlayer;
     private LevelGenerator LevelGenerator;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
-        cameraFollowPlayer = FindObjectOfType<CameraFollowPlayer>();
+        cameraFollowPlayer = FindObjectOfType<CameraController>();
         LevelGenerator = FindObjectOfType<LevelGenerator>();
     }
     
