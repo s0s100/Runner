@@ -5,15 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject gameMenu;
-    public GameObject pauseMenu;
-    public GameObject defeatMenu;
+    [SerializeField]
+    private GameObject gameMenu;
+    [SerializeField]
+    private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject defeatMenu;
 
-    public float moveSpeeed = 10; // Should increase over time
+    private float moveSpeeed = 2.0f; // Should increase over time
 
     private const float TIME_BEFORE_LATE_GAME_PAUSE = 2.0f;
     private const int MAIN_MENU_SCENE_NUMBER = 0;
     private const int GAME_SCENE_NUMBER = 1;
+
+    
 
     private PlayerMovement playerMovement;
     private CameraController cameraFollowPlayer;
@@ -35,6 +40,8 @@ public class GameController : MonoBehaviour
             this.enabled = false;
         }
     }
+    
+    public float GetGameSpeed() { return moveSpeeed; }
 
     public void PauseGame() 
     {

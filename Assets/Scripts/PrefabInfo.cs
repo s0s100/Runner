@@ -8,7 +8,7 @@ public class PrefabInfo : MonoBehaviour
     [SerializeField]
     public float XSize;
 
-    // Minimal X shift required
+    // X shift before required
     [SerializeField]
     public float XShiftRequired;
 

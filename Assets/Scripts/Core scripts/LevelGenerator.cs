@@ -22,6 +22,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject generatedObjectsParent;
     [SerializeField]
     private GameObject generatedEnemyParent;
+
     private float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
     private float xMinShift = 0.0f;
     private float xMaxShift = 0.0f;
@@ -31,6 +32,7 @@ public class LevelGenerator : MonoBehaviour
     // Witch generation (uses same generation distance)
     [SerializeField]
     private GameObject witchObject;
+
     private float witchGenerationTime = 10.0f;
     private float yWitchMinDist = -2.0f;
     private float yWitchMaxDist = 4.0f;
@@ -39,12 +41,12 @@ public class LevelGenerator : MonoBehaviour
     private void Awake()
     {
         startPrefab = AssetDatabase.LoadAssetAtPath(START_PREFAB_LOCATION, typeof(GameObject)) as GameObject;
-        definedPrefabs = GetDefinedPrefabs();
+        definedPrefabs = GetFolderPrefabs(DEFINED_PREFABS_LOCATION);
     }
 
     private void Start()
     {
-        Createprefab(startPrefab, START_PREFAB_POSITION); 
+        CreatePrefab(startPrefab, START_PREFAB_POSITION); 
         playerObject = GameObject.FindWithTag("Player");
         cameraObject = GameObject.FindWithTag("MainCamera");
         enabled = false;
@@ -64,7 +66,7 @@ public class LevelGenerator : MonoBehaviour
 
         if (shouldGenerate)
         {
-            GameObject objectToGenerate = selectPrefab();
+            GameObject objectToGenerate = SelectPrefab();
             PrefabInfo newPrefabInfo = objectToGenerate.GetComponent<PrefabInfo>();
 
             // Calculate new prefab position prefab position
@@ -73,10 +75,10 @@ public class LevelGenerator : MonoBehaviour
             float xNewPos = lastPrefabX + xShift + newPrefabInfo.XShiftRequired + newPrefabInfo.XSize;
             float yNewPos = lastGeneratePrefab.transform.position.y + lastPrefabInfo.YAfter - newPrefabInfo.YBefore;
 
-            Debug.Log("Generated: " + xNewPos + " " + yNewPos);
+            // Debug.Log("Generated: " + xNewPos + " " + yNewPos);
 
             Vector2 generatedPos = new Vector2(xNewPos , yNewPos);
-            Createprefab(objectToGenerate, generatedPos);
+            CreatePrefab(objectToGenerate, generatedPos);
         }
     }
 
@@ -90,6 +92,7 @@ public class LevelGenerator : MonoBehaviour
             currentWitchGenerationTime = witchGenerationTime;
 
             bool isReversed = Random.value > 0.5f; // Returns random bool
+            bool isSinMoving = Random.value > 0.66f; 
 
             float xDist;
             if (isReversed)
@@ -108,7 +111,8 @@ public class LevelGenerator : MonoBehaviour
             if (isReversed)
             {
                 WitchControl witchControl = newWitch.GetComponent<WitchControl>();
-                witchControl.SetLeftToRightMovement(true);
+                witchControl.SetLeftToRightMovement();
+                witchControl.SetSinMovement();
                 newWitch.transform.Rotate(0.0f, 180.0f, 0.0f); // Rotate to make her move in the other direction
             }
 
@@ -117,9 +121,10 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    private GameObject[] GetDefinedPrefabs()
+    // Uploads objects from the folder
+    private GameObject[] GetFolderPrefabs(string path)
     {
-        string[] retrievedObjectPaths = Directory.GetFiles(Application.dataPath + DEFINED_PREFABS_LOCATION, "*.prefab", SearchOption.AllDirectories);
+        string[] retrievedObjectPaths = Directory.GetFiles(Application.dataPath + path, "*.prefab", SearchOption.AllDirectories);
 
         if (retrievedObjectPaths == null)
         {
@@ -143,7 +148,7 @@ public class LevelGenerator : MonoBehaviour
         return result;
     }
 
-    private GameObject selectPrefab()
+    private GameObject SelectPrefab()
     {
         int size = definedPrefabs.Length;
         int randomSelected = Random.Range(0, size - 1);
@@ -151,7 +156,7 @@ public class LevelGenerator : MonoBehaviour
         return definedPrefabs[randomSelected];
     }
 
-    private void Createprefab(GameObject gameObject, Vector2 pos)
+    private void CreatePrefab(GameObject gameObject, Vector2 pos)
     {
         lastGeneratePrefab = Instantiate(gameObject);
         lastGeneratePrefab.transform.position = pos;

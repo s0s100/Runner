@@ -5,7 +5,8 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    public TMP_Text scoreText;
+    [SerializeField]
+    private TMP_Text scoreText;
     // Score is connected to the camera position
     private GameObject camera;
 

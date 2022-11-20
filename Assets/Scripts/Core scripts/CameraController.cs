@@ -6,8 +6,8 @@ public class CameraController : MonoBehaviour
 {
     private const float Z_CAMERA_DISTANCE = -10.0f;
     // Distance between player and camera required to start moving camera
-    private const float REQUIRED_Y_DISTANCE = 0.5f;
-    private const float DEFAULT_CAMERA_ACCELERATION = 0.1f;
+    private const float REQUIRED_Y_DISTANCE = 0.1f;
+    private const float DEFAULT_CAMERA_ACCELERATION = 0.25f;
 
     [SerializeField]
     private GameObject player;
@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         gameController = FindObjectOfType<GameController>();
 
-        xSpeed = gameController.moveSpeeed;
+        xSpeed = gameController.GetGameSpeed();
         enabled = false;
     }
     

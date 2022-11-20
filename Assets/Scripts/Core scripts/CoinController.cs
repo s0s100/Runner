@@ -5,6 +5,7 @@ using TMPro;
 
 public class CoinController : MonoBehaviour
 {
+    [SerializeField]
     private TMP_Text coinText;
     private int coinsThisRound = 0;
 

@@ -11,21 +11,26 @@ public class WitchControl : MonoBehaviour
 
     // Sin() function movement (cos() acceleration coz of derivative)
     // y = A*sin(xtC)
-    private bool isSinMoving = true;
-    private float sinMoveAmplitude = 2f;
+    private bool isSinMoving = false;
+    private float sinMoveAmplitude = 2.0f;
     private float sinMoveTimeCoef = 2.0f;
 
     private void Awake()
     {
         gameController = FindObjectOfType<GameController>();
-        speed = gameController.moveSpeeed; // Same speed as a player
+        speed = gameController.GetGameSpeed(); // Same speed as a player
         Destroy(this.gameObject, existanceTime); // Delete after
     }
 
-    public void SetLeftToRightMovement(bool newVal)
+    public void SetSinMovement()
     {
-        leftToRightMovement = newVal;
-        speed = gameController.moveSpeeed * 2;
+        isSinMoving = true;
+    }
+
+    public void SetLeftToRightMovement()
+    {
+        leftToRightMovement = true;
+        speed = gameController.GetGameSpeed() * 2;
     }
 
     void Update()

@@ -9,11 +9,12 @@ public class PlayerHealthScript : MonoBehaviour
     private const float MIN_SPRITE_TRANSPARENCY = 0.5f;
     private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;
 
-    public TMP_Text healthText;
+    [SerializeField]
+    private TMP_Text healthText;
 
-    public float invulnerabilityTime = 1.0f; 
-    public int maxHealth = 10;
-    public int curHealth = START_HEALTH;
+    private float invulnerabilityTime = 1.0f; 
+    private int maxHealth = 10;
+    private int curHealth = START_HEALTH;
 
     private GameController gameController;
     private SpriteRenderer playerSpriteRenderer;

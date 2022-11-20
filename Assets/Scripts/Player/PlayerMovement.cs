@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 endTouchPos;
 
     // X-Movement variables
-    public float dashSpeed = 100.0f;
-    public float dashCooldown = 1.0f;
+    private float dashSpeed = 5.0f;
+    private float dashCooldown = 0.5f;
     private float curDashCooldown = 0.0f;
 
     private float moveSpeed = 0.0f;
@@ -31,8 +31,8 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = false;
 
     // Y-Movement variables
-    public float jumpForce = 400.0f;
-    public float fallForce = 200.0f;
+    private float jumpForce = 400.0f;
+    private  float fallForce = 200.0f;
 
     private bool isGrounded = false;
     private bool canFall = false;
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         camera = FindObjectOfType<Camera>();
 
-        moveSpeed = gameController.moveSpeeed;
+        moveSpeed = gameController.GetGameSpeed();
         enabled = false;
     }
     
