@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 endTouchPos;
 
     // X-Movement variables
-    private float dashSpeed = 5.0f;
-    private float dashCooldown = 0.5f;
+    private float dashSpeed = 10.0f;
+    private float dashCooldown = 0.2f;
     private float curDashCooldown = 0.0f;
 
     private float moveSpeed = 0.0f;

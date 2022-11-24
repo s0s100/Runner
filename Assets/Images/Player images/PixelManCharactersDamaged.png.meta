@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2da29bba0b9ee524ba082ca24eca477b
+guid: d8ac68c9d78749e45a841b1a90753fd7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,43 +129,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PixelManCharactersDamaged_0
+      name: PixelManCharactersDamaged (1)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 320
+        y: 334
         width: 320
-        height: 320
+        height: 306
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f15fe3ec4417dfc4ba0c8d4378953d7c
-      internalID: -169633593
+      spriteID: 7d3174412a1e6794e9af3aea12bcef1b
+      internalID: -1411319922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelManCharactersDamaged_1
+      name: PixelManCharactersDamaged (1)_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 14
         width: 320
-        height: 320
+        height: 306
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82db26c99e454a749a6a62ca4b14d26c
-      internalID: -2123756608
+      spriteID: 7acab6ae775838046af5117fc51e0c01
+      internalID: -1625613778
       vertices: []
       indices: 
       edges: []
@@ -181,8 +181,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PixelManCharactersDamaged_0: -169633593
-      PixelManCharactersDamaged_1: -2123756608
+      PixelManCharactersDamaged (1)_0: -1411319922
+      PixelManCharactersDamaged (1)_1: -1625613778
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
