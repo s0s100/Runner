@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected GameController gameController;
+    protected float speed;
+    protected float existanceTime = 10.0f;
+
+    protected virtual void Awake()
     {
-        
+        gameController = FindObjectOfType<GameController>();
+        Destroy(this.gameObject, existanceTime); // Delete after
+    }
+    
+    protected virtual void Update()
+    {
+        Movement();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Moves Enemy object in runtimeon the screen
+    protected abstract void Movement();
 }

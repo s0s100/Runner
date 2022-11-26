@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Witch : MonoBehaviour
+public class Witch : Enemy
 {
-    private GameController gameController;
-    private float speed;
-    private bool leftToRightMovement = false;
-    private float existanceTime = 10.0f;
-
     // Sin() function movement (cos() acceleration coz of derivative)
     // y = A*sin(xtC)
+    private bool leftToRightMovement = false;
     private bool isSinMoving = false;
     private float sinMoveAmplitude = 2.0f;
     private float sinMoveTimeCoef = 2.0f;
 
-    private void Awake()
+    protected override void Awake()
     {
-        gameController = FindObjectOfType<GameController>();
+        base.Awake();
+        // gameController = FindObjectOfType<GameController>();
         speed = gameController.GetGameSpeed(); // Same speed as a player
-        Destroy(this.gameObject, existanceTime); // Delete after
+        // Destroy(this.gameObject, existanceTime); // Delete after
     }
 
     public void SetSinMovement()
@@ -33,12 +30,7 @@ public class Witch : MonoBehaviour
         speed = gameController.GetGameSpeed() * 2;
     }
 
-    void Update()
-    {
-        Movement();
-    }
-
-    private void Movement()
+    protected override void Movement()
     {
         // X movement
         Vector3 speedIncrement;
