@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WitchControl : MonoBehaviour
+public class Witch : MonoBehaviour
 {
     private GameController gameController;
     private float speed;

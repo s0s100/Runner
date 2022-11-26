@@ -110,7 +110,7 @@ public class LevelGenerator : MonoBehaviour
             // Reverse witch if possible
             if (isReversed)
             {
-                WitchControl witchControl = newWitch.GetComponent<WitchControl>();
+                Witch witchControl = newWitch.GetComponent<Witch>();
                 witchControl.SetLeftToRightMovement();
                 witchControl.SetSinMovement();
                 newWitch.transform.Rotate(0.0f, 180.0f, 0.0f); // Rotate to make her move in the other direction
