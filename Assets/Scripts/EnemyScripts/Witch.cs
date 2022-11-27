@@ -14,9 +14,7 @@ public class Witch : Enemy
     protected override void Awake()
     {
         base.Awake();
-        // gameController = FindObjectOfType<GameController>();
         speed = gameController.GetGameSpeed(); // Same speed as a player
-        // Destroy(this.gameObject, existanceTime); // Delete after
     }
 
     public void SetSinMovement()

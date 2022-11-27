@@ -8,11 +8,12 @@ public class ScoreController : MonoBehaviour
     [SerializeField]
     private TMP_Text scoreText;
     // Score is connected to the camera position
-    private GameObject camera;
+    private new Camera camera;
 
     private void Start()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        // camera = GameObject.FindGameObjectWithTag("MainCamera");
+        camera = Camera.main;
     }
 
     private void Update()
