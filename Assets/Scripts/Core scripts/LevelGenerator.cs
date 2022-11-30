@@ -6,8 +6,8 @@ using System.IO;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private const string START_PREFAB_LOCATION = "Assets/Prefabs/DefinedStartLocations/StartingProps.prefab";
-    private const string DEFINED_PREFABS_LOCATION = "/Prefabs/DefinedLocations";
+    private const string START_PREFAB_LOCATION = "Assets/Prefabs/Locations/DefinedStartLocations/StartingProps.prefab";
+    private const string DEFINED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
 
     private GameObject startPrefab;
@@ -60,14 +60,14 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateLevel()
     {
-        PrefabInfo lastPrefabInfo = lastGeneratePrefab.GetComponent<PrefabInfo>();
+        PrefabHolder lastPrefabInfo = lastGeneratePrefab.GetComponent<PrefabHolder>();
         float lastPrefabX = lastGeneratePrefab.transform.position.x + lastPrefabInfo.XSize;
         bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastPrefabX;
 
         if (shouldGenerate)
         {
             GameObject objectToGenerate = SelectPrefab();
-            PrefabInfo newPrefabInfo = objectToGenerate.GetComponent<PrefabInfo>();
+            PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
 
             // Calculate new prefab position prefab position
             float xShift = Random.Range(xMinShift, xMaxShift);
