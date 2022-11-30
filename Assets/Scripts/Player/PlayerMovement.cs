@@ -10,9 +10,9 @@ public class PlayerMovement : MonoBehaviour
 {
     private const float DEFAULT_GRAVITY_SCALE = 1.0f;
 
-    private Camera camera;
-    private Rigidbody2D rigidbody;
-    private BoxCollider2D collider;
+    private new Camera camera;
+    private new Rigidbody2D rigidbody;
+    private new BoxCollider2D collider;
     private Animator animator;
     private GameController gameController;
 
@@ -285,30 +285,4 @@ public class PlayerMovement : MonoBehaviour
         curDashCooldown = dashCooldown;
         animator.SetBool("IsAttacking", true);
     }
-
-    //private void Slide()
-    //{
-    //    //isSliding = true;
-    //    SetBoxColliderSizeSlide();
-    //    animator.SetBool("IsSliding", true);
-    //}
-
-    //private void Unslide()
-    //{
-    //    //isSliding = false;
-    //    SetBoxColliderSizeNormal();
-    //    animator.SetBool("IsSliding", false);
-    //}
-
-    //private void SetBoxColliderSizeSlide()
-    //{
-    //    collider.offset = new Vector2(collider.offset.x, 0.0f);
-    //    collider.size = new Vector2(collider.size.x, 0.1f);
-    //}
-
-    //private void SetBoxColliderSizeNormal()
-    //{
-    //    collider.offset = new Vector2(collider.offset.x, -0.015f);
-    //    collider.size = new Vector2(collider.size.x, 0.13f);
-    //}
 }
