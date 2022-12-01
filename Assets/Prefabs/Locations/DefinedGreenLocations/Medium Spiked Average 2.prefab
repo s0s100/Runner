@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72c4a338d4ae234fbfffc01ea308b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XSize: 4.5
+  XSize: 4.4
   XShiftRequired: 3
   YBefore: 2
   YAfter: -1
