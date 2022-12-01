@@ -263,7 +263,7 @@ public class PlayerMovement : MonoBehaviour
     private void Fall()
     {
         animator.SetBool("IsFalling", true);
-        Vector2 force = (Vector2.down * jumpForce * rigidbody.mass);
+        Vector2 force = (Vector2.down * fallForce * rigidbody.mass);
         rigidbody.AddForce(force);
         canFall = false;
     }

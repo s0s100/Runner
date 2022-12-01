@@ -13,7 +13,7 @@ public class PlayerHealthScript : MonoBehaviour
     private TMP_Text healthText;
 
     private float invulnerabilityTime = 1.0f; 
-    private int maxHealth = 10;
+    private int maxHealth = 5;
     private int curHealth = START_HEALTH;
 
     private GameController gameController;

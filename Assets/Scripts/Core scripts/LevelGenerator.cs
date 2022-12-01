@@ -7,7 +7,7 @@ using System.IO;
 public class LevelGenerator : MonoBehaviour
 {
     private const string START_PREFAB_LOCATION = "Assets/Prefabs/Locations/DefinedStartLocations/StartingProps.prefab";
-    private const string DEFINED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
+    private const string DEFINED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedRedLocations";
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
 
     private GameObject startPrefab;
@@ -151,7 +151,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject SelectPrefab()
     {
         int size = definedPrefabs.Length;
-        int randomSelected = Random.Range(0, size - 1);
+        int randomSelected = Random.Range(0, size);
 
         return definedPrefabs[randomSelected];
     }
@@ -161,5 +161,10 @@ public class LevelGenerator : MonoBehaviour
         lastGeneratePrefab = Instantiate(gameObject);
         lastGeneratePrefab.transform.position = pos;
         lastGeneratePrefab.transform.parent = generatedObjectsParent.transform;
+    }
+
+    public GameObject GetEnemyParent()
+    {
+        return generatedEnemyParent;
     }
 }

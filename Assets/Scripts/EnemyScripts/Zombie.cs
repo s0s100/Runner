@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Zombie : Enemy
 {
-    private const float TIME_BEFORE_AWAKENING = 2.0f;
+    private const float TIME_BEFORE_AWAKENING = 1.5f;
 
     private Animator animator;
     private GameObject player;
@@ -15,6 +15,7 @@ public class Zombie : Enemy
     protected override void Awake()
     {
         base.Awake();
+        existanceTime = 20.0f;
         speed = (gameController.GetGameSpeed() / 2); // Half of the player speed
 
         player = GameObject.FindGameObjectWithTag("Player");
