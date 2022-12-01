@@ -24,6 +24,6 @@ public class PrefabHolder : MonoBehaviour
 
     private void Start()
     {
-        Destroy(this, DESTRUCTION_TIME);
+        Destroy(gameObject, DESTRUCTION_TIME);
     }
 }
