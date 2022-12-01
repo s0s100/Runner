@@ -7,7 +7,8 @@ using System.IO;
 public class LevelGenerator : MonoBehaviour
 {
     private const string START_PREFAB_LOCATION = "Assets/Prefabs/Locations/DefinedStartLocations/StartingProps.prefab";
-    private const string DEFINED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedRedLocations";
+    private const string DEFINED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
+    private const float MIN_Y_INCREASE = 2.0f;
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
 
     private GameObject startPrefab;
@@ -166,5 +167,11 @@ public class LevelGenerator : MonoBehaviour
     public GameObject GetEnemyParent()
     {
         return generatedEnemyParent;
+    }
+
+    // Return min distance for camera
+    public float GetMinYPos()
+    {
+        return lastGeneratePrefab.transform.position.y + MIN_Y_INCREASE;
     }
 }

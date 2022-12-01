@@ -6,13 +6,16 @@ public class CameraController : MonoBehaviour
 {
     private const float Z_CAMERA_DISTANCE = -10.0f;
     // Distance between player and camera required to start moving camera
-    private const float REQUIRED_Y_DISTANCE = 0.1f;
-    private const float DEFAULT_CAMERA_ACCELERATION = 0.25f;
+    private const float MIN_Y_DIST_REQUIRED = 0.1f;
+    private const float DEFAULT_CAMERA_ACCELERATION = 0.0025f;
+    private const float SPEED_LIMIT = 0.1f;
 
     [SerializeField]
     private GameObject player;
     [SerializeField]
     private GameController gameController;
+    [SerializeField]
+    private LevelGenerator levelGenerator;
 
     private float xSpeed;
     private float ySpeed;
@@ -21,14 +24,18 @@ public class CameraController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         gameController = FindObjectOfType<GameController>();
+        levelGenerator = FindObjectOfType<LevelGenerator>();
 
         xSpeed = gameController.GetGameSpeed();
         enabled = false;
     }
     
-    void Update()
+    void FixedUpdate()
     {
-        Movement();
+        if (!gameController.IsDefeated())
+        {
+            Movement();
+        }
     }
 
     private void Movement()
@@ -45,25 +52,26 @@ public class CameraController : MonoBehaviour
 
     private float CalculateYPos()
     {
-        // If positive, camera is higher
-        float camPlayerDiff = transform.position.y - player.transform.position.y;
-        if (Mathf.Abs(camPlayerDiff) > REQUIRED_Y_DISTANCE )
-        {
-            if (camPlayerDiff > 0)
-            {
-                ySpeed -= DEFAULT_CAMERA_ACCELERATION * Time.deltaTime;
-            } else
-            {
-                ySpeed += DEFAULT_CAMERA_ACCELERATION * Time.deltaTime;
-            }
-            
-            float newYPose = transform.position.y + (ySpeed * Time.deltaTime);
+        float minY = levelGenerator.GetMinYPos();
+        float camPlayerDiff = player.transform.position.y - transform.position.y;
 
+        bool isSpeedChanging = (transform.position.y >= minY || camPlayerDiff > 0)
+         && Mathf.Abs(camPlayerDiff) > MIN_Y_DIST_REQUIRED;
+        if (isSpeedChanging)
+        {
+            ySpeed += DEFAULT_CAMERA_ACCELERATION * camPlayerDiff;
+            if (ySpeed > SPEED_LIMIT)
+            {
+                ySpeed = SPEED_LIMIT;
+            }
+
+            float newYPose = transform.position.y + ySpeed;
             return newYPose;
         } else
         {
             ySpeed = 0;
             return transform.position.y;
         }
+        
     }
 }

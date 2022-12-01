@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    bool isDefeated = false;
+
     [SerializeField]
     private GameObject gameMenu;
     [SerializeField]
@@ -17,8 +19,6 @@ public class GameController : MonoBehaviour
     private const float TIME_BEFORE_LATE_GAME_PAUSE = 2.0f;
     private const int MAIN_MENU_SCENE_NUMBER = 0;
     private const int GAME_SCENE_NUMBER = 1;
-
-    
 
     private PlayerMovement playerMovement;
     private CameraController cameraFollowPlayer;
@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
 
     public void GameDefeat()
     {
+        isDefeated = true;
         defeatMenu.SetActive(true);
         gameMenu.SetActive(false);
         StartCoroutine(LateGameStop());
@@ -87,6 +88,11 @@ public class GameController : MonoBehaviour
         playerMovement.enabled = true;
         cameraFollowPlayer.enabled = true;
         LevelGenerator.enabled = true;
+    }
+
+    public bool IsDefeated()
+    {
+        return isDefeated;
     }
 
 }

@@ -526,7 +526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &267061657
 Transform:
   m_ObjectHideFlags: 0
@@ -1395,6 +1395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   gameController: {fileID: 0}
+  levelGenerator: {fileID: 0}
 --- !u!1 &533040834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,7 +2886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1598832237
 Transform:
   m_ObjectHideFlags: 0
@@ -4008,7 +4009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2023734573
 Transform:
   m_ObjectHideFlags: 0
