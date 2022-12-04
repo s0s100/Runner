@@ -1687,7 +1687,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PixelManPlatforms_62: 4418190150289908198
+      PixelManPlatforms_0: 7372711235586966674
       PixelManPlatforms_1: 7264296252454811243
       PixelManPlatforms_32: -4522936564363880716
       PixelManPlatforms_34: -8679201648467725981
@@ -1750,7 +1750,7 @@ TextureImporter:
       PixelManPlatforms_38: 4707754288439905977
       PixelManPlatforms_33: -7001159040486239486
       PixelManPlatforms_17: 4664405400116557802
-      PixelManPlatforms_0: 7372711235586966674
+      PixelManPlatforms_62: 4418190150289908198
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

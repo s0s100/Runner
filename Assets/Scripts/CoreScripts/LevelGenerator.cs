@@ -31,9 +31,9 @@ public class LevelGenerator : MonoBehaviour
     private GameObject generatedEnemyParent;
     private GameObject lastGeneratePrefab;
 
-    private float timeBeforeNewBiome = 30.0f;
+    private float timeBeforeNewBiome = 90.0f;
     private float curBiomeChangeTimer = 0.0f;
-    private Biome curBiome = Biome.Green;
+    private Biome curBiome = Biome.Red;
     private float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
     private float xMinShift = 0.0f;
     private float xMaxShift = 0.0f;
@@ -156,7 +156,6 @@ public class LevelGenerator : MonoBehaviour
         curBiomeChangeTimer += Time.deltaTime;
         if (curBiomeChangeTimer >= timeBeforeNewBiome)
         {
-            Debug.Log("Timer: " + curBiomeChangeTimer);
             curBiomeChangeTimer = 0.0f;
             return true;
         }
@@ -169,11 +168,9 @@ public class LevelGenerator : MonoBehaviour
         
         if (curBiome == Biome.Green)
         {
-            Debug.Log("Biome changed to red");
             curBiome = Biome.Red;
         } else
         {
-            Debug.Log("Biome changed to green");
             curBiome = Biome.Green;
         }
     }
@@ -208,7 +205,6 @@ public class LevelGenerator : MonoBehaviour
     private GameObject SelectPrefab(GameObject[] prefabs)
     {
         int size = prefabs.Length;
-        Debug.Log(size);
         int randomSelected = Random.Range(0, size);
 
         return prefabs[randomSelected];
