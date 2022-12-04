@@ -72,14 +72,14 @@ public class PlayerHealthScript : MonoBehaviour
         if (curInvulnerability <= 0.0f)
         {
             animator.SetBool("IsDamaged", false);
-            currentColor.a = 1.0f;
+            // currentColor.a = 1.0f;
             currentColor.g = 1.0f;
             currentColor.b = 1.0f;
         } else
         {
             if (isIncreasingTransparency)
             {
-                currentColor.a += Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
+                // currentColor.a += Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
                 currentColor.g += Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
                 currentColor.b += Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
 
@@ -87,7 +87,7 @@ public class PlayerHealthScript : MonoBehaviour
                     isIncreasingTransparency = false;
             } else
             {
-                currentColor.a -= Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
+                // currentColor.a -= Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
                 currentColor.g -= Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
                 currentColor.b -= Time.deltaTime * TRANSPARENCY_CHANGE_INCREMENT;
 
