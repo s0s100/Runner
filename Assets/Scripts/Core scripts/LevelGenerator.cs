@@ -14,26 +14,26 @@ public class LevelGenerator : MonoBehaviour
     private const string START_PREFAB_LOCATION = "Assets/Prefabs/Locations/DefinedStartLocations/StartingProps.prefab";
     private const string DEFINED_GREEN_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
     private const string DEFINED_RED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedRedLocations";
-
-    private const float MIN_Y_INCREASE = 2.0f;
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
+
+    private float yCameraShift = 2.0f;
 
     private GameObject startPrefab;
     private GameObject[] definedGreenPrefabs;
     private GameObject[] definedRedPrefabs;
     private GameObject playerObject;
     private GameObject cameraObject;
-
-    private GameObject lastGeneratePrefab;
-
+    
     // Prefab generation
     [SerializeField]
     private GameObject generatedObjectsParent;
     [SerializeField]
     private GameObject generatedEnemyParent;
+    private GameObject lastGeneratePrefab;
 
+    private float timeBeforeNewBiome = 30.0f;
+    private float curBiomeChangeTimer = 0.0f;
     private Biome curBiome = Biome.Green;
-    private float beforeNextBiomeDist = 1000.0f;
     private float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
     private float xMinShift = 0.0f;
     private float xMaxShift = 0.0f;
@@ -44,7 +44,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private GameObject witchObject;
 
-    private float witchGenerationTime = 10.0f;
+    private float witchGenerationTime = 15.0f;
     private float yWitchMinDist = -2.0f;
     private float yWitchMaxDist = 4.0f;
     private float currentWitchGenerationTime = 15.0f;
@@ -66,11 +66,28 @@ public class LevelGenerator : MonoBehaviour
 
     private void Update()
     {
-        GenerateLevel();
-        GenerateWitch();
+        if (IsUpdatingBiome())
+        {
+            UpdateBiome();
+        }
+
+        switch (curBiome)
+        {
+            case Biome.Green:
+                {
+                    GenerateLevel(definedGreenPrefabs);
+                    GenerateWitch();
+                    break;
+                }
+            case Biome.Red:
+                {
+                    GenerateLevel(definedRedPrefabs);
+                    break;
+                }
+        }
     }
 
-    private void GenerateLevel()
+    private void GenerateLevel(GameObject[] definedPrefabs)
     {
         PrefabHolder lastPrefabInfo = lastGeneratePrefab.GetComponent<PrefabHolder>();
         float lastPrefabX = lastGeneratePrefab.transform.position.x + lastPrefabInfo.XSize;
@@ -78,7 +95,7 @@ public class LevelGenerator : MonoBehaviour
 
         if (shouldGenerate)
         {
-            GameObject objectToGenerate = SelectPrefab(definedRedPrefabs);
+            GameObject objectToGenerate = SelectPrefab(definedPrefabs);
             PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
 
             // Calculate new prefab position prefab position
@@ -133,9 +150,32 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    // Checks whether biome requires to be changed
+    private bool IsUpdatingBiome()
+    {
+        curBiomeChangeTimer += Time.deltaTime;
+        if (curBiomeChangeTimer >= timeBeforeNewBiome)
+        {
+            Debug.Log("Timer: " + curBiomeChangeTimer);
+            curBiomeChangeTimer = 0.0f;
+            return true;
+        }
+        return false;
+    }
+
+    // TODO: Change background, use another prefab folder, decide which generation is required
     private void UpdateBiome()
     {
-
+        
+        if (curBiome == Biome.Green)
+        {
+            Debug.Log("Biome changed to red");
+            curBiome = Biome.Red;
+        } else
+        {
+            Debug.Log("Biome changed to green");
+            curBiome = Biome.Green;
+        }
     }
 
     // Uploads objects from the folder
@@ -168,6 +208,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject SelectPrefab(GameObject[] prefabs)
     {
         int size = prefabs.Length;
+        Debug.Log(size);
         int randomSelected = Random.Range(0, size);
 
         return prefabs[randomSelected];
@@ -188,6 +229,6 @@ public class LevelGenerator : MonoBehaviour
     // Return min distance for camera
     public float GetMinYPos()
     {
-        return lastGeneratePrefab.transform.position.y + MIN_Y_INCREASE;
+        return lastGeneratePrefab.transform.position.y + yCameraShift;
     }
 }
