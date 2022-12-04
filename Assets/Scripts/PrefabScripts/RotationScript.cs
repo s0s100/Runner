@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class RotationScript : MonoBehaviour
 {
-    private float rotationSpeed = 10.0f;
-
-    private float curZRotation = 0.0f;
+    private float rotationSpeed = 25.0f;
+    private float curRotation = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +25,7 @@ public class RotationScript : MonoBehaviour
 
     private void Rotate()
     {
-        curZRotation += rotationSpeed * Time.deltaTime;
-
-        Quaternion lastZRotation = transform.rotation;
-        lastZRotation.z = curZRotation;
-        transform.rotation = lastZRotation;
+        float rotation = rotationSpeed * Time.deltaTime;
+        transform.Rotate(0, 0, rotation);
     }
 }

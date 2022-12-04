@@ -31,9 +31,11 @@ public class LevelGenerator : MonoBehaviour
     private GameObject generatedEnemyParent;
     private GameObject lastGeneratePrefab;
 
+    [SerializeField]
     private float timeBeforeNewBiome = 90.0f;
-    private float curBiomeChangeTimer = 0.0f;
+    [SerializeField]
     private Biome curBiome = Biome.Red;
+    private float curBiomeChangeTimer = 0.0f;    
     private float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
     private float xMinShift = 0.0f;
     private float xMaxShift = 0.0f;
@@ -43,10 +45,13 @@ public class LevelGenerator : MonoBehaviour
     // Witch generation (uses same generation distance)
     [SerializeField]
     private GameObject witchObject;
-
+    [SerializeField]
     private float witchGenerationTime = 15.0f;
+    [SerializeField]
     private float yWitchMinDist = -2.0f;
+    [SerializeField]
     private float yWitchMaxDist = 4.0f;
+    [SerializeField]
     private float currentWitchGenerationTime = 15.0f;
 
     private void Awake()

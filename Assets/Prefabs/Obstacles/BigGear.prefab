@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4913247258201088770}
   - component: {fileID: 4172047055160427090}
   - component: {fileID: 828131537411333024}
-  - component: {fileID: 7775898899275405860}
   - component: {fileID: 390449638452606293}
+  - component: {fileID: 9201413672684976244}
   m_Layer: 0
   m_Name: BigGear
   m_TagString: Obstacle
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 353076742304623723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.314, y: -2.6418579, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -103,18 +103,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
---- !u!114 &7775898899275405860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353076742304623723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43a96feda24485b4ca9335e6b8173b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &390449638452606293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,5 +113,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af19fb7ebede1f345b3679b7a0cfbf8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9201413672684976244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353076742304623723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86f83d6dcb128c4886995d0a847f097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
