@@ -10,11 +10,8 @@ public class CameraController : MonoBehaviour
     private const float DEFAULT_CAMERA_ACCELERATION = 0.0025f;
     private const float SPEED_LIMIT = 0.1f;
 
-    [SerializeField]
     private GameObject player;
-    [SerializeField]
     private GameController gameController;
-    [SerializeField]
     private LevelGenerator levelGenerator;
 
     private float xSpeed;
