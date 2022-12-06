@@ -6,7 +6,7 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    bool isDefeated = false;
+    private bool isDefeated = false;
 
     [SerializeField]
     private GameObject gameMenu;
@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     private GameObject defeatMenu;
     [SerializeField]
     private BlinkingText startGameText;
+    [SerializeField]
+    private PrefabHolder startPosition;
 
     private float moveSpeeed = 2.0f; // Should increase over time
 
@@ -33,6 +35,7 @@ public class GameController : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         cameraFollowPlayer = FindObjectOfType<CameraController>();
         LevelGenerator = FindObjectOfType<LevelGenerator>();
+        startPosition = FindObjectOfType<PrefabHolder>();
     }
     
     void Update()
@@ -92,6 +95,7 @@ public class GameController : MonoBehaviour
         cameraFollowPlayer.enabled = true;
         LevelGenerator.enabled = true;
         startGameText.DeleteObject();
+        startPosition.LateDestroy();
     }
 
     public bool IsDefeated()
