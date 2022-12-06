@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2973260305076620790}
   m_Layer: 0
   m_Name: RedTree 1
-  m_TagString: Untagged
+  m_TagString: Decoration
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
