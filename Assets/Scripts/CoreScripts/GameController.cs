@@ -4,40 +4,30 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+// Control general game states such as defeat and overall game speed
 public class GameController : MonoBehaviour
 {
-    private bool isDefeated = false;
-
-    [SerializeField]
-    private GameObject gameMenu;
-    [SerializeField]
-    private GameObject pauseMenu;
-    [SerializeField]
-    private GameObject defeatMenu;
-    [SerializeField]
-    private BlinkingText startGameText;
-    [SerializeField]
     private PrefabHolder startPosition;
-
-    private float moveSpeeed = 2.0f; // Should increase over time
-
-    private const float TIME_BEFORE_LATE_GAME_PAUSE = 2.0f;
-    private const int MAIN_MENU_SCENE_NUMBER = 0;
-    private const int GAME_SCENE_NUMBER = 1;
-
     private PlayerMovement playerMovement;
     private CameraController cameraFollowPlayer;
-    private LevelGenerator LevelGenerator;
+    private LevelGenerator levelGenerator;
+    private UIController UIController;
+
+    private bool isDefeated = false;
+    private float moveSpeeed = 2.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
         cameraFollowPlayer = FindObjectOfType<CameraController>();
-        LevelGenerator = FindObjectOfType<LevelGenerator>();
+        //levelGenerator = FindObjectOfType<LevelGenerator>();
+        //UIController = FindObjectOfType<UIController>();
+        levelGenerator = GetComponent<LevelGenerator>();
+        UIController = GetComponent<UIController>();
 
-        // This is the first generated object - Start location
-        GameObject lastGeneratedPrefab = LevelGenerator.GetLastGeneratedPrefab();
+        // This is the first generated object: Start location
+        GameObject lastGeneratedPrefab = levelGenerator.GetLastGeneratedPrefab();
         startPosition = lastGeneratedPrefab.GetComponent<PrefabHolder>();
     }
     
@@ -46,50 +36,17 @@ public class GameController : MonoBehaviour
         if (Input.anyKey)
         {
             StartGame();
-            Debug.Log("?");
             this.enabled = false;
         }
     }
     
     public float GetGameSpeed() { return moveSpeeed; }
 
-    public void PauseGame() 
-    {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0.0f;
-    }
-
-    public void ResumeGame()
-    {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1.0f;
-    }
-
-    public void RestartGame()
-    {
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene(GAME_SCENE_NUMBER);
-        
-    }
-
     public void GameDefeat()
     {
         isDefeated = true;
-        defeatMenu.SetActive(true);
-        gameMenu.SetActive(false);
-        StartCoroutine(LateGameStop());
         playerMovement.enabled = false;
-    }
-
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(MAIN_MENU_SCENE_NUMBER);
-    }
-
-    private IEnumerator LateGameStop()
-    {
-        yield return new WaitForSeconds(TIME_BEFORE_LATE_GAME_PAUSE);
-        Time.timeScale = 0.0f; 
+        UIController.GameDefeatMenu();
     }
 
     private void StartGame()
@@ -97,9 +54,8 @@ public class GameController : MonoBehaviour
         playerMovement.EnablePlayerAnimations();
         playerMovement.enabled = true;
         cameraFollowPlayer.enabled = true;
-        LevelGenerator.enabled = true;
-        // startGameText.DeleteObject();
-        startGameText.gameObject.SetActive(false);
+        levelGenerator.enabled = true;
+        UIController.DisableStartGameText();
         startPosition.LateDestroy();
     }
 
@@ -107,5 +63,4 @@ public class GameController : MonoBehaviour
     {
         return isDefeated;
     }
-
 }
