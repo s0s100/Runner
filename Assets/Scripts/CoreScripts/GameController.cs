@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GameController : MonoBehaviour
     private GameObject pauseMenu;
     [SerializeField]
     private GameObject defeatMenu;
+    [SerializeField]
+    private BlinkingText startGameText;
 
     private float moveSpeeed = 2.0f; // Should increase over time
 
@@ -88,6 +91,7 @@ public class GameController : MonoBehaviour
         playerMovement.enabled = true;
         cameraFollowPlayer.enabled = true;
         LevelGenerator.enabled = true;
+        startGameText.DeleteObject();
     }
 
     public bool IsDefeated()
