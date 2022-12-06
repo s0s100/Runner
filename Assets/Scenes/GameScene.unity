@@ -525,7 +525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &267061657
 Transform:
   m_ObjectHideFlags: 0
@@ -748,8 +748,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 590038136}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 590038140}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
@@ -1116,8 +1116,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 590038136}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 590038140}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -1405,6 +1405,7 @@ GameObject:
   - component: {fileID: 590038137}
   - component: {fileID: 590038138}
   - component: {fileID: 590038139}
+  - component: {fileID: 590038140}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -1439,10 +1440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1d662df7149ab458857baa9affee1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMenu: {fileID: 2092030844}
-  pauseMenu: {fileID: 1980663022}
-  defeatMenu: {fileID: 413391328}
-  startGameText: {fileID: 1818866905}
 --- !u!114 &590038137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,7 +1455,7 @@ MonoBehaviour:
   generatedObjectsParent: {fileID: 777023815}
   generatedEnemyParent: {fileID: 1679250090}
   timeBeforeNewBiome: 60
-  curBiome: 1
+  curBiome: 0
   witchObject: {fileID: 1796074741082256812, guid: 1eb67f04c470b824d9b8d55a8751d560, type: 3}
   witchGenerationTime: 15
   yWitchMinDist: -2
@@ -1490,6 +1487,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 1413945803}
+--- !u!114 &590038140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590038134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e143d3d917b094ba788c2220c484b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameMenu: {fileID: 2092030844}
+  pauseMenu: {fileID: 1980663022}
+  defeatMenu: {fileID: 413391328}
+  startGameText: {fileID: 1818866905}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,8 +1776,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 590038136}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 590038140}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
@@ -1897,8 +1910,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 590038136}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 590038140}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -2263,8 +2276,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 590038136}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 590038140}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
@@ -2813,7 +2826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1598832237
 Transform:
   m_ObjectHideFlags: 0
@@ -4084,7 +4097,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2023734573
 Transform:
   m_ObjectHideFlags: 0
@@ -4328,8 +4341,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 590038136}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 590038140}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
