@@ -11,7 +11,8 @@ public enum Biome
 
 public class LevelGenerator : MonoBehaviour
 {
-    private const string START_PREFAB_LOCATION = "Assets/Prefabs/Locations/DefinedStartLocations/StartingProps.prefab";
+    //private const string START_PREFAB_LOCATION = "Assets/Prefabs/Locations/DefinedStartLocations/StartingProps.prefab";
+    private const string START_PREFABS_LOCATION = "/Prefabs/Locations/DefinedStartLocations";
     private const string DEFINED_GREEN_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
     private const string DEFINED_RED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedRedLocations";
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
@@ -21,6 +22,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject startPrefab;
     private GameObject[] definedGreenPrefabs;
     private GameObject[] definedRedPrefabs;
+    private GameObject[] startPrefabs;
     private GameObject playerObject;
     private GameObject cameraObject;
     
@@ -56,9 +58,12 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        startPrefab = AssetDatabase.LoadAssetAtPath(START_PREFAB_LOCATION, typeof(GameObject)) as GameObject;
+        //startPrefab = AssetDatabase.LoadAssetAtPath(START_PREFAB_LOCATION, typeof(GameObject)) as GameObject;
         definedGreenPrefabs = GetFolderPrefabs(DEFINED_GREEN_PREFABS_LOCATION);
         definedRedPrefabs = GetFolderPrefabs(DEFINED_RED_PREFABS_LOCATION);
+        startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
+
+        SelectStartPrefab();
     }
 
     private void Start()
@@ -220,6 +225,13 @@ public class LevelGenerator : MonoBehaviour
         lastGeneratePrefab = Instantiate(gameObject);
         lastGeneratePrefab.transform.position = pos;
         lastGeneratePrefab.transform.parent = generatedObjectsParent.transform;
+    }
+
+    private void SelectStartPrefab()
+    {
+        startPrefab = SelectPrefab(startPrefabs);
+        PrefabHolder prefabHolder = startPrefab.GetComponent<PrefabHolder>();
+        curBiome = prefabHolder.curBiome;
     }
 
     public GameObject GetEnemyParent()
