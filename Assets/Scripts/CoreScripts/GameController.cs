@@ -35,7 +35,10 @@ public class GameController : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         cameraFollowPlayer = FindObjectOfType<CameraController>();
         LevelGenerator = FindObjectOfType<LevelGenerator>();
-        startPosition = FindObjectOfType<PrefabHolder>();
+
+        // This is the first generated object - Start location
+        GameObject lastGeneratedPrefab = LevelGenerator.GetLastGeneratedPrefab();
+        startPosition = lastGeneratedPrefab.GetComponent<PrefabHolder>();
     }
     
     void Update()
@@ -43,6 +46,7 @@ public class GameController : MonoBehaviour
         if (Input.anyKey)
         {
             StartGame();
+            Debug.Log("?");
             this.enabled = false;
         }
     }
@@ -94,7 +98,8 @@ public class GameController : MonoBehaviour
         playerMovement.enabled = true;
         cameraFollowPlayer.enabled = true;
         LevelGenerator.enabled = true;
-        startGameText.DeleteObject();
+        // startGameText.DeleteObject();
+        startGameText.gameObject.SetActive(false);
         startPosition.LateDestroy();
     }
 

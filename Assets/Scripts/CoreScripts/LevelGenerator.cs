@@ -232,4 +232,9 @@ public class LevelGenerator : MonoBehaviour
     {
         return lastGeneratePrefab.transform.position.y + yCameraShift;
     }
+
+    public GameObject GetLastGeneratedPrefab()
+    {
+        return lastGeneratePrefab;
+    }
 }
