@@ -5,10 +5,15 @@ using UnityEngine;
 // Stores data about prefab, also responsible for deleting prefabs
 public class PrefabHolder : MonoBehaviour
 {
-    [SerializeField]
-    public bool IsItStartPrefab = false;
     private const float DESTRUCTION_TIME = 20.0f;
 
+    [SerializeField]
+    public Biome curBiome = Biome.Green;
+
+    [SerializeField]
+    public bool IsItStartPrefab = false;
+
+    // Amount of space required to the left and right
     [SerializeField]
     public float XSize;
 
