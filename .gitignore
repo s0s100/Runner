@@ -37,6 +37,11 @@ Latest commit eafb2ee on 10 Dec 2021
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
+# Ignore scenes
+/Assets/Scenes/TestScene.unity
+/Assets/Scenes/TestScene.unity.meta
+
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/

@@ -5,6 +5,8 @@ using UnityEngine;
 // Stores data about prefab, also responsible for deleting prefabs
 public class PrefabHolder : MonoBehaviour
 {
+    [SerializeField]
+    public bool IsItStartPrefab = false;
     private const float DESTRUCTION_TIME = 20.0f;
 
     [SerializeField]
@@ -23,6 +25,14 @@ public class PrefabHolder : MonoBehaviour
     public float YAfter;
 
     private void Start()
+    {
+        if (!IsItStartPrefab)
+        {
+            Destroy(gameObject, DESTRUCTION_TIME);
+        }
+    }
+
+    public void LateDestroy()
     {
         Destroy(gameObject, DESTRUCTION_TIME);
     }
