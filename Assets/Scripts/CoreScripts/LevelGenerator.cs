@@ -9,42 +9,58 @@ public enum Biome
     Green, Red
 }
 
+public class BiomeInstanse
+{
+    
+}
+
+// Generates playable objects on the screen, contains information about current biome
 public class LevelGenerator : MonoBehaviour
 {
-    //private const string START_PREFAB_LOCATION = "Assets/Prefabs/Locations/DefinedStartLocations/StartingProps.prefab";
-    private const string START_PREFABS_LOCATION = "/Prefabs/Locations/DefinedStartLocations";
+    // Generation settings and prefabs folders
     private const string DEFINED_GREEN_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
     private const string DEFINED_RED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedRedLocations";
+    private const string START_PREFABS_LOCATION = "/Prefabs/Locations/DefinedStartLocations";
+    private const float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
+    private const float Y_CAMERA_SHIFT = 2.0f; //Prefab locaton + this const is the min Y-axis camera location
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
+    private static readonly Vector2 START_PLAYER_POSITION = new Vector2(0.0f, 0.0f);
 
-    private float yCameraShift = 2.0f;
-
-    private GameObject startPrefab;
+    // Scene objects
+    [SerializeField]
+    private GameObject playerPrefab;
+    private GameObject playerObject;
+    private Camera cameraObject;
+    
+    // Generation prefabs
+    private GameObject lastGeneratePrefab;
     private GameObject[] definedGreenPrefabs;
     private GameObject[] definedRedPrefabs;
     private GameObject[] startPrefabs;
-    private GameObject playerObject;
-    private GameObject cameraObject;
-    
-    // Prefab generation
+
+    // Generation parent objects
     [SerializeField]
     private GameObject generatedObjectsParent;
     [SerializeField]
     private GameObject generatedEnemyParent;
-    private GameObject lastGeneratePrefab;
 
+    // Biome settings
     [SerializeField]
     private float timeBeforeNewBiome = 90.0f;
     [SerializeField]
+    private BackgroundController backgroundController;
     private Biome curBiome = Biome.Red;
-    private float curBiomeChangeTimer = 0.0f;    
-    private float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
+    private float curBiomeChangeTimer = 0.0f;
+    
+
+    // Not used for now ----------
     private float xMinShift = 0.0f;
     private float xMaxShift = 0.0f;
     private float yMinShift = 0.0f;
     private float yMaxShift = 0.0f;
+    // ----------------------------
 
-    // Witch generation (uses same generation distance)
+    // Witch generation
     [SerializeField]
     private GameObject witchObject;
     [SerializeField]
@@ -58,19 +74,20 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        //startPrefab = AssetDatabase.LoadAssetAtPath(START_PREFAB_LOCATION, typeof(GameObject)) as GameObject;
         definedGreenPrefabs = GetFolderPrefabs(DEFINED_GREEN_PREFABS_LOCATION);
         definedRedPrefabs = GetFolderPrefabs(DEFINED_RED_PREFABS_LOCATION);
-        startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
 
-        SelectStartPrefab();
+        startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
     }
 
     private void Start()
     {
-        CreatePrefab(startPrefab, START_PREFAB_POSITION); 
-        playerObject = GameObject.FindWithTag("Player");
-        cameraObject = GameObject.FindWithTag("MainCamera");
+        CreatePrefab(SelectAndNotifyBiome(), START_PREFAB_POSITION);
+
+        playerObject = Instantiate(playerPrefab);
+        playerObject.transform.position = START_PLAYER_POSITION;
+        cameraObject = Camera.main;
+
         enabled = false;
     }
 
@@ -99,26 +116,26 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateLevel(GameObject[] definedPrefabs)
     {
-        PrefabHolder lastPrefabInfo = lastGeneratePrefab.GetComponent<PrefabHolder>();
-        float lastPrefabX = lastGeneratePrefab.transform.position.x + lastPrefabInfo.XSize;
-        bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastPrefabX;
+            PrefabHolder lastPrefabInfo = lastGeneratePrefab.GetComponent<PrefabHolder>();
+            float lastPrefabX = lastGeneratePrefab.transform.position.x + lastPrefabInfo.XSize;
+            bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastPrefabX;
 
-        if (shouldGenerate)
-        {
-            GameObject objectToGenerate = SelectPrefab(definedPrefabs);
-            PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
+            if (shouldGenerate)
+            {
+                GameObject objectToGenerate = SelectPrefab(definedPrefabs);
+                PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
 
-            // Calculate new prefab position prefab position
-            float xShift = Random.Range(xMinShift, xMaxShift);
-            float yShift = Random.Range(yMinShift, yMaxShift);
-            float xNewPos = lastPrefabX + xShift + newPrefabInfo.XShiftRequired + newPrefabInfo.XSize;
-            float yNewPos = lastGeneratePrefab.transform.position.y + lastPrefabInfo.YAfter - newPrefabInfo.YBefore;
+                // Calculate new prefab position prefab position
+                float xShift = Random.Range(xMinShift, xMaxShift);
+                float yShift = Random.Range(yMinShift, yMaxShift);
+                float xNewPos = lastPrefabX + xShift + newPrefabInfo.XShiftRequired + newPrefabInfo.XSize;
+                float yNewPos = lastGeneratePrefab.transform.position.y + lastPrefabInfo.YAfter - newPrefabInfo.YBefore;
 
-            // Debug.Log("Generated: " + xNewPos + " " + yNewPos);
+                // Debug.Log("Generated: " + xNewPos + " " + yNewPos);
 
-            Vector2 generatedPos = new Vector2(xNewPos , yNewPos);
-            CreatePrefab(objectToGenerate, generatedPos);
-        }
+                Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
+                CreatePrefab(objectToGenerate, generatedPos);
+            }
     }
 
     private void GenerateWitch()
@@ -143,6 +160,8 @@ public class LevelGenerator : MonoBehaviour
             }
             
             float yDist = Random.Range(yWitchMinDist, yWitchMaxDist);
+            yDist += cameraObject.transform.position.y;
+
             Vector2 witchPos = new Vector2(xDist, yDist);
             GameObject newWitch = Instantiate(witchObject);
 
@@ -172,10 +191,9 @@ public class LevelGenerator : MonoBehaviour
         return false;
     }
 
-    // TODO: Change background, use another prefab folder, decide which generation is required
+    // Updates block use and background
     private void UpdateBiome()
     {
-        
         if (curBiome == Biome.Green)
         {
             curBiome = Biome.Red;
@@ -183,6 +201,7 @@ public class LevelGenerator : MonoBehaviour
         {
             curBiome = Biome.Green;
         }
+        backgroundController.SetBiome(curBiome);
     }
 
     // Uploads objects from the folder
@@ -227,11 +246,15 @@ public class LevelGenerator : MonoBehaviour
         lastGeneratePrefab.transform.parent = generatedObjectsParent.transform;
     }
 
-    private void SelectStartPrefab()
+    // Selects and defines biomes, also notifies background controller
+    private GameObject SelectAndNotifyBiome()
     {
-        startPrefab = SelectPrefab(startPrefabs);
+        GameObject startPrefab = SelectPrefab(startPrefabs);
         PrefabHolder prefabHolder = startPrefab.GetComponent<PrefabHolder>();
         curBiome = prefabHolder.curBiome;
+        backgroundController.SetBiome(curBiome);
+
+        return startPrefab;
     }
 
     public GameObject GetEnemyParent()
@@ -242,11 +265,16 @@ public class LevelGenerator : MonoBehaviour
     // Return min distance for camera
     public float GetMinYPos()
     {
-        return lastGeneratePrefab.transform.position.y + yCameraShift;
+        return lastGeneratePrefab.transform.position.y + Y_CAMERA_SHIFT;
     }
 
     public GameObject GetLastGeneratedPrefab()
     {
         return lastGeneratePrefab;
+    }
+
+    public GameObject getPlayer()
+    {
+        return playerObject;
     }
 }

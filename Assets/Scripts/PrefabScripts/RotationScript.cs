@@ -5,7 +5,6 @@ using UnityEngine;
 public class RotationScript : MonoBehaviour
 {
     private float rotationSpeed = 25.0f;
-    private float curRotation = 0.0f;
 
     // Start is called before the first frame update
     void Start()

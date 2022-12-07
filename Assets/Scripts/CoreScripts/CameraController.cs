@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     private const float MIN_Y_DIST_REQUIRED = 0.1f;
     private const float DEFAULT_CAMERA_ACCELERATION = 0.0025f;
     private const float SPEED_LIMIT = 0.1f;
+    private const float Y_SHIFT_BETWEEN_PLAYER = 0.5f; // 
 
     private GameObject player;
     private GameController gameController;
@@ -19,9 +20,9 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
+        player = levelGenerator.getPlayer();
 
         xSpeed = gameController.GetGameSpeed();
         enabled = false;
@@ -50,7 +51,7 @@ public class CameraController : MonoBehaviour
     private float CalculateYPos()
     {
         float minY = levelGenerator.GetMinYPos();
-        float camPlayerDiff = player.transform.position.y - transform.position.y;
+        float camPlayerDiff = player.transform.position.y - transform.position.y + Y_SHIFT_BETWEEN_PLAYER;
 
         bool isSpeedChanging = (transform.position.y >= minY || camPlayerDiff > 0)
          && Mathf.Abs(camPlayerDiff) > MIN_Y_DIST_REQUIRED;
@@ -62,7 +63,7 @@ public class CameraController : MonoBehaviour
                 ySpeed = SPEED_LIMIT;
             }
 
-            float newYPose = transform.position.y + ySpeed;
+            float newYPose = transform.position.y + ySpeed; 
             return newYPose;
         } else
         {

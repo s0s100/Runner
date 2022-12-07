@@ -9,7 +9,7 @@ public class PlayerHealthScript : MonoBehaviour
     private const float MIN_SPRITE_TRANSPARENCY = 0.5f;
     private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;
 
-    [SerializeField]
+    private UIController uiController;
     private TMP_Text healthText;
 
     private float invulnerabilityTime = 1.0f; 
@@ -28,6 +28,8 @@ public class PlayerHealthScript : MonoBehaviour
         animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        uiController = FindObjectOfType<UIController>();
+        healthText = uiController.getHealthText();
         healthText.text = curHealth.ToString();
     }
 

@@ -12,8 +12,10 @@ public class GameController : MonoBehaviour
     private CameraController cameraFollowPlayer;
     private LevelGenerator levelGenerator;
     private UIController UIController;
+    private BackgroundController backgroundController;
 
     private bool isDefeated = false;
+    [SerializeField]
     private float moveSpeeed = 2.0f;
 
     // Start is called before the first frame update
@@ -21,10 +23,10 @@ public class GameController : MonoBehaviour
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
         cameraFollowPlayer = FindObjectOfType<CameraController>();
-        //levelGenerator = FindObjectOfType<LevelGenerator>();
-        //UIController = FindObjectOfType<UIController>();
+
         levelGenerator = GetComponent<LevelGenerator>();
         UIController = GetComponent<UIController>();
+        backgroundController = GetComponent<BackgroundController>();
 
         // This is the first generated object: Start location
         GameObject lastGeneratedPrefab = levelGenerator.GetLastGeneratedPrefab();
@@ -52,9 +54,11 @@ public class GameController : MonoBehaviour
     private void StartGame()
     {
         playerMovement.EnablePlayerAnimations();
+
         playerMovement.enabled = true;
         cameraFollowPlayer.enabled = true;
         levelGenerator.enabled = true;
+        backgroundController.enabled = true;
         UIController.DisableStartGameText();
         startPosition.LateDestroy();
     }

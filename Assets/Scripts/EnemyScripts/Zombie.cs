@@ -14,7 +14,7 @@ public class Zombie : Enemy
 
     protected override void Awake()
     {
-        existanceTime = 30.0f;
+        existanceTime = 25.0f;
         base.Awake();
         speed = (gameController.GetGameSpeed() / 2); // Half of the player speed
 

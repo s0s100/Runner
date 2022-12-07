@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour
     private const int GAME_SCENE_NUMBER = 1;
 
     [SerializeField]
+    private TMP_Text healthText;
+    [SerializeField]
     private GameObject gameMenu;
     [SerializeField]
     private GameObject pauseMenu;
@@ -59,5 +61,10 @@ public class UIController : MonoBehaviour
     {
         // startGameText.DeleteObject();
         startGameText.gameObject.SetActive(false);
+    }
+
+    public TMP_Text getHealthText()
+    {
+        return healthText;
     }
 }
