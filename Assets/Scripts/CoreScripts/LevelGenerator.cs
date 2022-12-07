@@ -160,6 +160,8 @@ public class LevelGenerator : MonoBehaviour
             }
             
             float yDist = Random.Range(yWitchMinDist, yWitchMaxDist);
+            yDist += cameraObject.transform.position.y;
+
             Vector2 witchPos = new Vector2(xDist, yDist);
             GameObject newWitch = Instantiate(witchObject);
 
