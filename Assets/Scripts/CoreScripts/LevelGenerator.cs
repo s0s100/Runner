@@ -9,29 +9,37 @@ public enum Biome
     Green, Red
 }
 
+public class BiomeInstanse
+{
+    
+}
+
+// Generates playable objects on the screen, contains information about current biome
 public class LevelGenerator : MonoBehaviour
 {
-    //private const string START_PREFAB_LOCATION = "Assets/Prefabs/Locations/DefinedStartLocations/StartingProps.prefab";
     private const string START_PREFABS_LOCATION = "/Prefabs/Locations/DefinedStartLocations";
+    private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
+    private static readonly Vector2 START_PLAYER_POSITION = new Vector2(0.0f, 0.0f);
+    private const float Y_CAMERA_SHIFT = 2.0f;
+
     private const string DEFINED_GREEN_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
     private const string DEFINED_RED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedRedLocations";
-    private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
 
-    private float yCameraShift = 2.0f;
-
+    [SerializeField]
+    private GameObject playerPrefab;
     private GameObject startPrefab;
+    private GameObject lastGeneratePrefab;
     private GameObject[] definedGreenPrefabs;
     private GameObject[] definedRedPrefabs;
     private GameObject[] startPrefabs;
     private GameObject playerObject;
-    private GameObject cameraObject;
+    private Camera cameraObject;
     
     // Prefab generation
     [SerializeField]
     private GameObject generatedObjectsParent;
     [SerializeField]
     private GameObject generatedEnemyParent;
-    private GameObject lastGeneratePrefab;
 
     [SerializeField]
     private float timeBeforeNewBiome = 90.0f;
@@ -39,10 +47,13 @@ public class LevelGenerator : MonoBehaviour
     private Biome curBiome = Biome.Red;
     private float curBiomeChangeTimer = 0.0f;    
     private float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
+
+    // Not used for now ----------
     private float xMinShift = 0.0f;
     private float xMaxShift = 0.0f;
     private float yMinShift = 0.0f;
     private float yMaxShift = 0.0f;
+    // ----------------------------
 
     // Witch generation (uses same generation distance)
     [SerializeField]
@@ -58,19 +69,20 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        //startPrefab = AssetDatabase.LoadAssetAtPath(START_PREFAB_LOCATION, typeof(GameObject)) as GameObject;
         definedGreenPrefabs = GetFolderPrefabs(DEFINED_GREEN_PREFABS_LOCATION);
         definedRedPrefabs = GetFolderPrefabs(DEFINED_RED_PREFABS_LOCATION);
-        startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
 
+        startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
         SelectStartPrefab();
     }
 
     private void Start()
     {
-        CreatePrefab(startPrefab, START_PREFAB_POSITION); 
-        playerObject = GameObject.FindWithTag("Player");
-        cameraObject = GameObject.FindWithTag("MainCamera");
+        CreatePrefab(startPrefab, START_PREFAB_POSITION);
+        //playerObject = GameObject.FindWithTag("Player");
+        playerObject = Instantiate(playerPrefab);
+        playerObject.transform.position = START_PLAYER_POSITION;
+        cameraObject = Camera.main;
         enabled = false;
     }
 
@@ -91,7 +103,7 @@ public class LevelGenerator : MonoBehaviour
                 }
             case Biome.Red:
                 {
-                    GenerateLevel(definedRedPrefabs);
+                    GenerateLevel(definedRedPrefabs); 
                     break;
                 }
         }
@@ -242,11 +254,16 @@ public class LevelGenerator : MonoBehaviour
     // Return min distance for camera
     public float GetMinYPos()
     {
-        return lastGeneratePrefab.transform.position.y + yCameraShift;
+        return lastGeneratePrefab.transform.position.y + Y_CAMERA_SHIFT;
     }
 
     public GameObject GetLastGeneratedPrefab()
     {
         return lastGeneratePrefab;
+    }
+
+    public GameObject getPlayer()
+    {
+        return playerObject;
     }
 }

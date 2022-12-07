@@ -19,9 +19,9 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
+        player = levelGenerator.getPlayer();
 
         xSpeed = gameController.GetGameSpeed();
         enabled = false;
