@@ -5,6 +5,7 @@ using UnityEngine;
 // Control background images for different biomes
 public class BackgroundController : MonoBehaviour
 {
+    private const float FRONT_SPEED_MODIFIER = 8.0f;
     private float backgroundFrontYShift = -1.5f;
 
     [SerializeField]
@@ -30,31 +31,98 @@ public class BackgroundController : MonoBehaviour
     private void Start()
     {
         controller = FindObjectOfType<GameController>();
-        frontMoveSpeed = controller.GetGameSpeed();
-        backMoveSpeed = controller.GetGameSpeed();
+        frontMoveSpeed = controller.GetGameSpeed() / 2;
+        backMoveSpeed = controller.GetGameSpeed() * 4;
     }
 
     private void Update()
     {
         MoveFront();
+        MoveBack();
     }
 
     private void MoveFront()
     {
+        if (fronts.Count > 1)
+        {
+            float increment = 1.0f;
+            if (fronts.Count > 2)
+            {
+                increment = FRONT_SPEED_MODIFIER;
+            }
+            fronts[0].transform.position -= Vector3.right * frontMoveSpeed * Time.deltaTime * increment;
+            fronts[1].transform.position -= Vector3.right * frontMoveSpeed * Time.deltaTime * increment;
 
+            float frontDist = defineObjBoundaries(fronts[0]);
+            if (fronts[0].transform.localPosition.x <= -frontDist)
+            {
+                Destroy(fronts[0]);
+                fronts.RemoveAt(0);
+            }
+
+        } else
+        {
+            generateFront();
+        }
+    }
+
+    private void MoveBack()
+    {
+        if (backs.Count > 1)
+        {
+            backs[0].transform.position -= Vector3.right * backMoveSpeed * Time.deltaTime;
+            backs[1].transform.position -= Vector3.right * backMoveSpeed * Time.deltaTime;
+
+            float backDist = defineObjBoundaries(backs[0]);
+            if (backs[0].transform.localPosition.x <= -backDist)
+            {
+                Destroy(backs[0]);
+                backs.RemoveAt(0);
+            }
+        }
     }
 
     // Set current biome and set images accordingly
     public void SetBiome(Biome biome)
     {
+        Debug.Log("I was called");
         curBiome = biome;
+        Debug.Log(biome);
         generateBack();
+        generateFront();
     }
 
-    // Set current biome and update background accordingly
-    public void UpdateBiome(Biome newBiome)
+    public void generateFront()
     {
+        GameObject newFront = null;
+        switch (curBiome)
+        {
+            case Biome.Green:
+                {
+                    newFront = Instantiate(backgroundFrontGreen);
+                    break;
+                }
+            case Biome.Red:
+                {
+                    newFront = Instantiate(backgroundFrontRed);
+                    break;
+                }
+        }
 
+        newFront.transform.parent = backgroundParent.transform;
+        if (fronts.Count == 0)
+        {
+            newFront.transform.localPosition = new Vector2(0, backgroundFrontYShift);
+        }
+        else
+        {
+            GameObject lastObject = fronts[fronts.Count - 1];
+            float frontSize = defineObjBoundaries(lastObject);
+            Vector2 backPos = new Vector2(frontSize, backgroundFrontYShift);
+            newFront.transform.localPosition = backPos;
+        }
+        
+        fronts.Add(newFront);
     }
 
     // Generates backaccording to current biome
@@ -74,26 +142,27 @@ public class BackgroundController : MonoBehaviour
                     break;
                 }
         }
-        
+
+        newBack.transform.parent = backgroundParent.transform;
         if (backs.Count == 0)
         {
-            newBack.transform.position = Vector3.zero;
+            newBack.transform.localPosition = Vector3.zero;
         }
         else
         {
-            float backSize = defineObjBoundaries(newBack);
+            GameObject lastObject = backs[backs.Count - 1];
+            float backSize = defineObjBoundaries(lastObject);
             Vector2 backPos = new Vector2(backSize, 0);
-            newBack.transform.position = backPos;
+            newBack.transform.localPosition = backPos;
         }
-
-        newBack.transform.parent = backgroundParent.transform;
+        
         backs.Add(newBack);
     }
 
     // Uses render boundaries
     private float defineObjBoundaries(GameObject obj)
     {
-        float result = obj.GetComponent<Renderer>().bounds.size.x;
+        float result = obj.GetComponent<Collider2D>().bounds.size.x;
         return result;
     }
 }

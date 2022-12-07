@@ -189,10 +189,9 @@ public class LevelGenerator : MonoBehaviour
         return false;
     }
 
-    // TODO: Change background, use another prefab folder, decide which generation is required
+    // Updates block use and background
     private void UpdateBiome()
     {
-        
         if (curBiome == Biome.Green)
         {
             curBiome = Biome.Red;
@@ -200,6 +199,7 @@ public class LevelGenerator : MonoBehaviour
         {
             curBiome = Biome.Green;
         }
+        backgroundController.SetBiome(curBiome);
     }
 
     // Uploads objects from the folder
