@@ -524,7 +524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &267061657
 Transform:
   m_ObjectHideFlags: 0
@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1d662df7149ab458857baa9affee1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeeed: 2
 --- !u!114 &590038137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,7 +1201,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 6621912686509322440, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
   generatedObjectsParent: {fileID: 777023815}
   generatedEnemyParent: {fileID: 1679250090}
-  timeBeforeNewBiome: 10
+  timeBeforeNewBiome: 60
   backgroundController: {fileID: 590038141}
   witchObject: {fileID: 1796074741082256812, guid: 1eb67f04c470b824d9b8d55a8751d560, type: 3}
   witchGenerationTime: 15
@@ -2590,7 +2591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1598832237
 Transform:
   m_ObjectHideFlags: 0
@@ -3808,7 +3809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2023734573
 Transform:
   m_ObjectHideFlags: 0

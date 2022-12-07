@@ -33,6 +33,7 @@ public class BackgroundController : MonoBehaviour
         controller = FindObjectOfType<GameController>();
         frontMoveSpeed = controller.GetGameSpeed() / 2;
         backMoveSpeed = controller.GetGameSpeed() * 4;
+        this.enabled = false;
     }
 
     private void Update()
