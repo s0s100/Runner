@@ -1357,6 +1357,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac276a80a6595804a9b4435ac80d3537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundFrontGreen: {fileID: 9143545097042317036, guid: cca848f15f1e87b4cbfa85c60ea3844d, type: 3}
+  backgroundBackGreen: {fileID: 8575533655431576981, guid: 587b233bf2e0e9149a18ffc0a8293d74, type: 3}
+  backgroundFrontRed: {fileID: 488612486314827902, guid: 4dd224f5e56abab45ad2abc3295366e0, type: 3}
+  backgroundBackRed: {fileID: 5831566129806543173, guid: 0ca12cd60f4f264428500f7312c18c26, type: 3}
+  backgroundParent: {fileID: 1982820560}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
