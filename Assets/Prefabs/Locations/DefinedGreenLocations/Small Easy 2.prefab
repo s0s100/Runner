@@ -47,8 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72c4a338d4ae234fbfffc01ea308b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curBiome: 0
+  IsItStartPrefab: 0
   XSize: 2.25
-  XShiftRequired: 0
+  XShiftRequired: 1
   YBefore: 0
   YAfter: 0
 --- !u!1 &6400175927871354138
