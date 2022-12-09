@@ -9,11 +9,6 @@ public enum Biome
     Green, Red
 }
 
-public class BiomeInstanse
-{
-    
-}
-
 // Generates playable objects on the screen, contains information about current biome
 public class LevelGenerator : MonoBehaviour
 {

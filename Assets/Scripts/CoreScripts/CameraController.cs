@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     private const float Z_CAMERA_DISTANCE = -10.0f;
     // Distance between player and camera required to start moving camera
-    private const float MIN_Y_DIST_REQUIRED = 0.1f;
+    private const float MIN_Y_DIST_REQUIRED = 0.2f;
     private const float DEFAULT_CAMERA_ACCELERATION = 0.0025f;
     private const float SPEED_LIMIT = 0.1f;
     private const float Y_SHIFT_BETWEEN_PLAYER = 0.5f; // 

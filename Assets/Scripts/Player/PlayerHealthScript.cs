@@ -22,6 +22,7 @@ public class PlayerHealthScript : MonoBehaviour
     private bool isIncreasingTransparency = false;
 
     private Animator animator;
+    private ParticleSystem particleSystem;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class PlayerHealthScript : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         uiController = FindObjectOfType<UIController>();
+        particleSystem = GetComponentInChildren<ParticleSystem>();
         healthText = uiController.getHealthText();
         healthText.text = curHealth.ToString();
     }
@@ -43,6 +45,7 @@ public class PlayerHealthScript : MonoBehaviour
     {
         if (curInvulnerability <= 0)
         {
+            particleSystem.Play();
             animator.SetBool("IsDamaged", true);
             isIncreasingTransparency = false;
             curInvulnerability = invulnerabilityTime;
