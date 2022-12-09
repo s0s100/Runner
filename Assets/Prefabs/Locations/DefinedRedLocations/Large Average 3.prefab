@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curBiome: 1
   IsItStartPrefab: 0
-  XSize: 7.5
+  XSize: 9
   XShiftRequired: 2
   YBefore: 1
   YAfter: -1
@@ -914,7 +914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5951895183586319749, guid: ccf0dd1e5c6f94c4198cd29cd3a22ce3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.76358813
+      value: -0.172
       objectReference: {fileID: 0}
     - target: {fileID: 5951895183586319749, guid: ccf0dd1e5c6f94c4198cd29cd3a22ce3, type: 3}
       propertyPath: m_LocalPosition.y
