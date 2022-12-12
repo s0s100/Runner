@@ -8,7 +8,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     private PrefabHolder startPosition;
-    private PlayerMovement playerMovement;
+    private PlayerController playerMovement;
     private CameraController cameraFollowPlayer;
     private LevelGenerator levelGenerator;
     private UIController UIController;
@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = FindObjectOfType<PlayerController>();
         cameraFollowPlayer = FindObjectOfType<CameraController>();
 
         levelGenerator = GetComponent<LevelGenerator>();

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 public enum MoveDirection
 {
-    None, Up, Down, Left, Right
+    None, Up, Down, Left, Right, Middle
 }
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private const float DEFAULT_GRAVITY_SCALE = 1.0f;
+    private const float MAX_TOUCH_VECTOR_MAGNITUDE = 50.0f;
 
     private new Camera camera;
     private new Rigidbody2D rigidbody;
@@ -102,6 +103,9 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D))
         {
             return MoveDirection.Right;
+        } else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return MoveDirection.Middle;
         }
 
         return MoveDirection.None;
@@ -114,14 +118,12 @@ public class PlayerMovement : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 startTouchPos = touch.position;
-                //Debug.Log("Began: " + startTouchPos);
             }
 
             if (touch.phase == TouchPhase.Ended)
             {
                 endTouchPos = touch.position;
                 return GetMobileTouchDirection();
-                //Debug.Log("Ended: " + endTouchPos + " , Diff: " + (endTouchPos - startTouchPos));
             }
         }
 
@@ -133,6 +135,11 @@ public class PlayerMovement : MonoBehaviour
         Vector2 diff = endTouchPos - startTouchPos;
         Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
         bool xDiffBigger = absDiff.x > absDiff.y;
+
+        if (diff.magnitude < MAX_TOUCH_VECTOR_MAGNITUDE)
+        {
+            return MoveDirection.Middle;
+        }
 
         if (xDiffBigger)
         {
