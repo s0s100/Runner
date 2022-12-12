@@ -86,9 +86,7 @@ public class BackgroundController : MonoBehaviour
     // Set current biome and set images accordingly
     public void SetBiome(Biome biome)
     {
-        Debug.Log("I was called");
         curBiome = biome;
-        Debug.Log(biome);
         generateBack();
         generateFront();
     }

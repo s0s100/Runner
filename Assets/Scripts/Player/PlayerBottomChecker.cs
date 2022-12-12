@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerBottomChecker : MonoBehaviour
 {
-    private PlayerMovement playerMovement;
+    private PlayerController playerMovement;
 
     private void Start()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = FindObjectOfType<PlayerController>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
