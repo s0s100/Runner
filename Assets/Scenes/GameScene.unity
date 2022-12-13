@@ -1198,12 +1198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e616debac8577479280cc2bcf6aabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 6621912686509322440, guid: 3e63c82ace871ed46abec25566232c88, type: 3}
+  playerPrefab: {fileID: 6621912686509322440, guid: c006acbf957b93b4a95955e8fa801a3f, type: 3}
   generatedObjectsParent: {fileID: 777023815}
   generatedEnemyParent: {fileID: 1679250090}
   timeBeforeNewBiome: 60
   backgroundController: {fileID: 590038141}
-  witchObject: {fileID: 1796074741082256812, guid: 1eb67f04c470b824d9b8d55a8751d560, type: 3}
+  witchObject: {fileID: 1796074741082256812, guid: aa1b15e3d84ca79478680ec4d1e24b5a, type: 3}
   witchGenerationTime: 15
   yWitchMinDist: -2
   yWitchMaxDist: 4
@@ -1263,10 +1263,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac276a80a6595804a9b4435ac80d3537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundFrontGreen: {fileID: 9143545097042317036, guid: cca848f15f1e87b4cbfa85c60ea3844d, type: 3}
-  backgroundBackGreen: {fileID: 8575533655431576981, guid: 587b233bf2e0e9149a18ffc0a8293d74, type: 3}
-  backgroundFrontRed: {fileID: 488612486314827902, guid: 4dd224f5e56abab45ad2abc3295366e0, type: 3}
-  backgroundBackRed: {fileID: 5831566129806543173, guid: 0ca12cd60f4f264428500f7312c18c26, type: 3}
+  backgroundFrontGreen: {fileID: 9143545097042317036, guid: f72a551c6490a2c4f952adbc69f12b51, type: 3}
+  backgroundBackGreen: {fileID: 8575533655431576981, guid: e14c78e2fd1307b4493f017c8fb0954d, type: 3}
+  backgroundFrontRed: {fileID: 488612486314827902, guid: fce4b92b2558a044b92e8357066cc798, type: 3}
+  backgroundBackRed: {fileID: 5831566129806543173, guid: c85fa231c04eb1a42b89244e6ed00fd4, type: 3}
   backgroundParent: {fileID: 1982820560}
 --- !u!1 &619394800
 GameObject:

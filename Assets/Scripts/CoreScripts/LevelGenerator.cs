@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Linq;
 
 public enum Biome
 {
@@ -13,9 +14,9 @@ public enum Biome
 public class LevelGenerator : MonoBehaviour
 {
     // Generation settings and prefabs folders
-    private const string DEFINED_GREEN_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
-    private const string DEFINED_RED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedRedLocations";
-    private const string START_PREFABS_LOCATION = "/Prefabs/Locations/DefinedStartLocations";
+    private const string DEFINED_GREEN_PREFABS_LOCATION = "Prefabs/Locations/DefinedGreenLocations";
+    private const string DEFINED_RED_PREFABS_LOCATION = "Prefabs/Locations/DefinedRedLocations";
+    private const string START_PREFABS_LOCATION = "Prefabs/Locations/DefinedStartLocations";
     private const float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
     private const float Y_CAMERA_SHIFT = 2.0f; //Prefab locaton + this const is the min Y-axis camera location
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
@@ -69,10 +70,15 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        definedGreenPrefabs = GetFolderPrefabs(DEFINED_GREEN_PREFABS_LOCATION);
-        definedRedPrefabs = GetFolderPrefabs(DEFINED_RED_PREFABS_LOCATION);
+        // Use Resources instead
+        definedGreenPrefabs = Resources.LoadAll(DEFINED_GREEN_PREFABS_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
+        // definedGreenPrefabs = GetFolderPrefabs(DEFINED_GREEN_PREFABS_LOCATION);
 
-        startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
+        definedRedPrefabs = Resources.LoadAll(DEFINED_RED_PREFABS_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
+        //definedRedPrefabs = GetFolderPrefabs(DEFINED_RED_PREFABS_LOCATION);
+
+        startPrefabs = Resources.LoadAll(START_PREFABS_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
+        //startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
     }
 
     private void Start()
@@ -200,31 +206,49 @@ public class LevelGenerator : MonoBehaviour
     }
 
     // Uploads objects from the folder
-    private GameObject[] GetFolderPrefabs(string path)
-    {
-        string[] retrievedObjectPaths = Directory.GetFiles(Application.dataPath + path, "*.prefab", SearchOption.AllDirectories);
+    //private GameObject[] GetFolderPrefabs(string path)
+    //{
+    //    Debug.Log("1");
+    //    string[] retrievedObjectPaths = Directory.GetFiles(Application.dataPath + path, "*.prefab", SearchOption.AllDirectories); // Throws an exception
+    //    Debug.Log("2");
 
-        if (retrievedObjectPaths == null)
-        {
-            return null;
-        }
+    //    if (retrievedObjectPaths == null || retrievedObjectPaths.Length == 0)
+    //    {
+    //        Debug.Log("3");
+    //        return null;
+    //    }
 
-        int size = retrievedObjectPaths.Length;
-        GameObject[] result = new GameObject[size];
+    //    Debug.Log("4");
+    //    int size = retrievedObjectPaths.Length;
+    //    GameObject[] result = new GameObject[size];
 
-        string prefabPath;
-        string assetPath;
-        for (int i = 0; i < size; i++)
-        {
-            prefabPath = retrievedObjectPaths[i];
-            assetPath = "Assets" + prefabPath.Replace(Application.dataPath, "");
-            assetPath = assetPath.Replace('\\', '/');
+    //    string prefabPath;
+    //    string assetPath;
+    //    for (int i = 0; i < size; i++)
+    //    {
 
-            result[i] = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-        }
+    //        prefabPath = retrievedObjectPaths[i];
+    //        Debug.Log(prefabPath);
 
-        return result;
-    }
+
+
+    //        //assetPath = prefabPath.Replace(Application.dataPath, "");
+    //        assetPath = prefabPath.Replace(Application.dataPath + '/', "");
+    //        assetPath = assetPath.Replace('\\', '/');
+    //        assetPath = assetPath.Replace(".prefab", "");
+    //        Debug.Log(assetPath);
+
+    //        //result[i] = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
+    //        result[i] = Resources.Load(assetPath) as GameObject;
+
+    //        if (result[i] == null)
+    //        {
+    //            Debug.Log("Null object");
+    //        }
+    //    }
+
+    //    return result;
+    //}
 
     private GameObject SelectPrefab(GameObject[] prefabs)
     {
