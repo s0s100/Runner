@@ -12,8 +12,7 @@ public class PlayerHealthScript : MonoBehaviour
     private UIController uiController;
     private TMP_Text healthText;
 
-    private float invulnerabilityTime = 1.0f; 
-    private int maxHealth = 5;
+    private float invulnerabilityTime = 1.0f;
     private int curHealth = START_HEALTH;
 
     private GameController gameController;
@@ -22,7 +21,7 @@ public class PlayerHealthScript : MonoBehaviour
     private bool isIncreasingTransparency = false;
 
     private Animator animator;
-    private ParticleSystem particleSystem;
+    private new ParticleSystem particleSystem;
 
     private void Start()
     {

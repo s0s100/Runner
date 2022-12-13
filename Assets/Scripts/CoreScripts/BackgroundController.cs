@@ -124,7 +124,7 @@ public class BackgroundController : MonoBehaviour
         backs.Add(newBack);
     }
 
-    // Uses render boundaries
+    // Uses collider boundaries
     private float defineObjBoundaries(GameObject obj)
     {
         float result = obj.GetComponent<Collider2D>().bounds.size.x;

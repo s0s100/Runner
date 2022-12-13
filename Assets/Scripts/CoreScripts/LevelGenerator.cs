@@ -17,16 +17,13 @@ public class LevelGenerator : MonoBehaviour
     private static readonly Vector2 START_PLAYER_POSITION = new Vector2(0.0f, 0.0f);
 
     // Scene objects
-    [SerializeField]
-    private GameObject playerPrefab;
     private GameObject playerObject;
     private Camera cameraObject;
 
     // Generation prefabs
-    private GameObject lastGeneratePrefab;
+    private GameObject lastGeneratedPrefab;
     private GameObject[] definedPrefabs;
     private GameObject[] startPrefabs;
-
 
     // Generation parent objects
     [SerializeField]
@@ -34,26 +31,19 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private GameObject generatedEnemyParent;
 
-    // Biome settings
+    // Attached objects
+    [SerializeField]
+    private BackgroundController backgroundController;
+    [SerializeField]
+    private GameObject playerPrefab;
     [SerializeField]
     private BiomeHolder[] biomeHolders;
-    private int curActiveBiome; // Selects biome from biome holders
-
+    
+    // Biome selection
     [SerializeField]
     private float timeBeforeNewBiome = 90.0f;
     private float curBiomeChangeTimer = 0.0f;
-
-    [SerializeField]
-    private BackgroundController backgroundController;
-
-
-
-    // Not used for now ----------
-    private float xMinShift = 0.0f;
-    private float xMaxShift = 0.0f;
-    private float yMinShift = 0.0f;
-    private float yMaxShift = 0.0f;
-    // ----------------------------
+    private int curActiveBiome; // Biome holder index
 
     // Witch generation
     [SerializeField]
@@ -67,20 +57,24 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private float currentWitchGenerationTime = 15.0f;
 
+    // Not used for now ----------
+    private float xMinShift = 0.0f;
+    private float xMaxShift = 0.0f;
+    private float yMinShift = 0.0f;
+    private float yMaxShift = 0.0f;
+    // ----------------------------
+
     private void Awake()
     {
         RandomizeCurBiome();
-
         startPrefabs = Resources.LoadAll(START_PREFABS_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
     private void Start()
     {
         GenerateStartLocation();
-        playerObject = Instantiate(playerPrefab);
-        playerObject.transform.position = START_PLAYER_POSITION;
+        GeneratePlayer();
         cameraObject = Camera.main;
-
         enabled = false;
     }
 
@@ -92,6 +86,12 @@ public class LevelGenerator : MonoBehaviour
         }
 
         LevelGeneration();
+    }
+
+    private void GeneratePlayer()
+    {
+        playerObject = Instantiate(playerPrefab);
+        playerObject.transform.position = START_PLAYER_POSITION;
     }
 
     private void LevelGeneration()
@@ -106,8 +106,8 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateLevel()
     {
-        PrefabHolder lastPrefabInfo = lastGeneratePrefab.GetComponent<PrefabHolder>();
-        float lastPrefabX = lastGeneratePrefab.transform.position.x + lastPrefabInfo.XSize;
+        PrefabHolder lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+        float lastPrefabX = lastGeneratedPrefab.transform.position.x + lastPrefabInfo.XSize;
         bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastPrefabX;
 
         if (shouldGenerate)
@@ -118,11 +118,8 @@ public class LevelGenerator : MonoBehaviour
             // Calculate new prefab position prefab position
             float xShift = Random.Range(xMinShift, xMaxShift);
             float yShift = Random.Range(yMinShift, yMaxShift);
-            float xNewPos = lastPrefabX + xShift + newPrefabInfo.XShiftRequired + newPrefabInfo.XSize;
-            float yNewPos = lastGeneratePrefab.transform.position.y + lastPrefabInfo.YAfter - newPrefabInfo.YBefore;
-
-            // Debug.Log("Generated: " + xNewPos + " " + yNewPos);
-
+            float xNewPos = lastPrefabX + xShift + newPrefabInfo.XBefore + newPrefabInfo.XSize;
+            float yNewPos = lastGeneratedPrefab.transform.position.y /*+ lastPrefabInfo.YAfter*/ - newPrefabInfo.YBefore;
             Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
             CreatePrefab(objectToGenerate, generatedPos);
         }
@@ -168,8 +165,7 @@ public class LevelGenerator : MonoBehaviour
             newWitch.transform.parent = generatedEnemyParent.transform;
         }
     }
-
-    // Checks whether biome requires to be changed
+    
     private bool IsUpdatingBiome()
     {
         curBiomeChangeTimer += Time.deltaTime;
@@ -180,8 +176,7 @@ public class LevelGenerator : MonoBehaviour
         }
         return false;
     }
-
-    // Updates block use and background
+    
     private void UpdateBiome()
     {
         if (curActiveBiome == 0)
@@ -198,34 +193,29 @@ public class LevelGenerator : MonoBehaviour
 
     private void UploadDefinedPrefabs(BiomeHolder biome)
     {
-        string path = biome.PrefabPath;
-        Debug.Log(path);
+        string path = biome.PrefabsPath;
         definedPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
-        Debug.Log("Defined prefabs uploaded, size: " + definedPrefabs.Length);
     }
 
     private GameObject SelectPrefab(GameObject[] prefabs)
     {
         int size = prefabs.Length;
         int randomSelected = Random.Range(0, size);
-        Debug.Log("Prefab selected, index: " + randomSelected);
 
         return prefabs[randomSelected];
     }
 
     private void CreatePrefab(GameObject gameObject, Vector2 pos)
     {
-        lastGeneratePrefab = Instantiate(gameObject);
-        lastGeneratePrefab.transform.position = pos;
-        lastGeneratePrefab.transform.parent = generatedObjectsParent.transform;
+        lastGeneratedPrefab = Instantiate(gameObject);
+        lastGeneratedPrefab.transform.position = pos;
+        lastGeneratedPrefab.transform.parent = generatedObjectsParent.transform;
     }
 
     private void GenerateStartLocation()
     {
-        string path = biomeHolders[curActiveBiome].StartPrefabPath;
-        Debug.Log(path);
+        string path = biomeHolders[curActiveBiome].StartPrefabsPath;
         GameObject[] startLocations = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
-        Debug.Log("Start locations, size: " + startLocations.Length);
 
         int locationSize = startLocations.Length;
         int randomIndex = Random.Range(0, locationSize);
@@ -235,8 +225,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void RandomizeCurBiome()
     {
-        curActiveBiome = Random.Range(0, 2);
-        Debug.Log("Cur biome was selected: " + curActiveBiome);
+        curActiveBiome = Random.Range(0, biomeHolders.Length);
         UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
         NotifyBackground();
     }
@@ -254,12 +243,12 @@ public class LevelGenerator : MonoBehaviour
     // Return min distance for camera
     public float GetMinYPos()
     {
-        return lastGeneratePrefab.transform.position.y + Y_CAMERA_SHIFT;
+        return lastGeneratedPrefab.transform.position.y + Y_CAMERA_SHIFT;
     }
 
     public GameObject GetLastGeneratedPrefab()
     {
-        return lastGeneratePrefab;
+        return lastGeneratedPrefab;
     }
 
     public GameObject GetPlayer()

@@ -1198,14 +1198,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e616debac8577479280cc2bcf6aabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 6621912686509322440, guid: c006acbf957b93b4a95955e8fa801a3f, type: 3}
   generatedObjectsParent: {fileID: 777023815}
   generatedEnemyParent: {fileID: 1679250090}
+  backgroundController: {fileID: 590038141}
+  playerPrefab: {fileID: 6621912686509322440, guid: c006acbf957b93b4a95955e8fa801a3f, type: 3}
   biomeHolders:
   - {fileID: 3227328140635113850, guid: 4a2d2f30b63bddc419a2a66bf3d1ae34, type: 3}
   - {fileID: 3227328140635113850, guid: 0576a4b848fbd8a489d9de21d1ba2a81, type: 3}
   timeBeforeNewBiome: 10
-  backgroundController: {fileID: 590038141}
   witchObject: {fileID: 1796074741082256812, guid: aa1b15e3d84ca79478680ec4d1e24b5a, type: 3}
   witchGenerationTime: 15
   yWitchMinDist: -2

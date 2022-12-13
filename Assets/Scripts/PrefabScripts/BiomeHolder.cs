@@ -5,10 +5,10 @@ using UnityEngine;
 public class BiomeHolder : MonoBehaviour
 {
     [SerializeField]
-    public string StartPrefabPath;
+    public string StartPrefabsPath;
 
     [SerializeField]
-    public string PrefabPath;
+    public string PrefabsPath;
 
     [SerializeField]
     public GameObject BackgroundBack;

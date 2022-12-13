@@ -10,24 +10,20 @@ public class PrefabHolder : MonoBehaviour
     [SerializeField]
     public bool IsItStartPrefab = false;
 
-    // Amount of space required to the left and right
-    [SerializeField]
-    public float XSize;
-
     // X shift before required
     [SerializeField]
-    public float XShiftRequired;
+    public float XBefore;
 
-    // If it is positive then the previout block should be higher
+    // If it is positive then the previous block should be higher
     [SerializeField]
     public float YBefore;
 
-    // If it is positive then the next block should be higher
-    [SerializeField]
-    public float YAfter;
+    public float XSize { get; private set; }
 
     private void Start()
     {
+        XSize = GetComponent<Collider2D>().bounds.size.x;
+
         if (!IsItStartPrefab)
         {
             Destroy(gameObject, DESTRUCTION_TIME);
