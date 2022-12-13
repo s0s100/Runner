@@ -7,26 +7,16 @@ public class BackgroundController : MonoBehaviour
 {
     private const float FRONT_SPEED_MODIFIER = 8.0f;
     private float backgroundFrontYShift = -1.5f;
-
-    [SerializeField]
-    private GameObject backgroundFrontGreen;
-    [SerializeField]
-    private GameObject backgroundBackGreen;
-    [SerializeField]
-    private GameObject backgroundFrontRed;
-    [SerializeField]
-    private GameObject backgroundBackRed;
+    
     [SerializeField]
     private GameObject backgroundParent;
 
     private List<GameObject> backs = new List<GameObject>(); // Back background objects
     private List<GameObject> fronts = new List<GameObject>(); // Front background objects
+    private BiomeHolder curBiomeHolder;
     private GameController controller;
     private float frontMoveSpeed; // Switches regularly
     private float backMoveSpeed; // Switches if biome is changed
-
-
-    private Biome curBiome;
 
     private void Start()
     {
@@ -84,9 +74,9 @@ public class BackgroundController : MonoBehaviour
     }
 
     // Set current biome and set images accordingly
-    public void SetBiome(Biome biome)
+    public void SetBiome(BiomeHolder biomeHolder)
     {
-        curBiome = biome;
+        curBiomeHolder = biomeHolder;
         generateBack();
         generateFront();
     }
@@ -94,19 +84,7 @@ public class BackgroundController : MonoBehaviour
     public void generateFront()
     {
         GameObject newFront = null;
-        switch (curBiome)
-        {
-            case Biome.Green:
-                {
-                    newFront = Instantiate(backgroundFrontGreen);
-                    break;
-                }
-            case Biome.Red:
-                {
-                    newFront = Instantiate(backgroundFrontRed);
-                    break;
-                }
-        }
+        newFront = Instantiate(curBiomeHolder.BackgroundFront);
 
         newFront.transform.parent = backgroundParent.transform;
         if (fronts.Count == 0)
@@ -128,19 +106,7 @@ public class BackgroundController : MonoBehaviour
     private void generateBack()
     {
         GameObject newBack = null;
-        switch (curBiome)
-        {
-            case Biome.Green:
-                {
-                    newBack = Instantiate(backgroundBackGreen);
-                    break;
-                }
-            case Biome.Red:
-                {
-                    newBack = Instantiate(backgroundBackRed);
-                    break;
-                }
-        }
+        newBack = Instantiate(curBiomeHolder.BackgroundBack);
 
         newBack.transform.parent = backgroundParent.transform;
         if (backs.Count == 0)
@@ -158,7 +124,7 @@ public class BackgroundController : MonoBehaviour
         backs.Add(newBack);
     }
 
-    // Uses render boundaries
+    // Uses collider boundaries
     private float defineObjBoundaries(GameObject obj)
     {
         float result = obj.GetComponent<Collider2D>().bounds.size.x;

@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     {
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
-        player = levelGenerator.getPlayer();
+        player = levelGenerator.GetPlayer();
 
         xSpeed = gameController.GetGameSpeed();
         enabled = false;

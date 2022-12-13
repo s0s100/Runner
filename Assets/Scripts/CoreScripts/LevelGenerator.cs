@@ -3,34 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
-
-public enum Biome
-{
-    Green, Red
-}
+using System.Linq;
 
 // Generates playable objects on the screen, contains information about current biome
 public class LevelGenerator : MonoBehaviour
 {
     // Generation settings and prefabs folders
-    private const string DEFINED_GREEN_PREFABS_LOCATION = "/Prefabs/Locations/DefinedGreenLocations";
-    private const string DEFINED_RED_PREFABS_LOCATION = "/Prefabs/Locations/DefinedRedLocations";
-    private const string START_PREFABS_LOCATION = "/Prefabs/Locations/DefinedStartLocations";
+    private const string BIOME_FOLDER_LOCATION = "Prefabs/Biomes";
+    private const string START_PREFABS_LOCATION = "Prefabs/Locations/DefinedStartLocations";
     private const float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
     private const float Y_CAMERA_SHIFT = 2.0f; //Prefab locaton + this const is the min Y-axis camera location
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -3.0f);
     private static readonly Vector2 START_PLAYER_POSITION = new Vector2(0.0f, 0.0f);
 
     // Scene objects
-    [SerializeField]
-    private GameObject playerPrefab;
     private GameObject playerObject;
     private Camera cameraObject;
-    
+
     // Generation prefabs
-    private GameObject lastGeneratePrefab;
-    private GameObject[] definedGreenPrefabs;
-    private GameObject[] definedRedPrefabs;
+    private GameObject lastGeneratedPrefab;
+    private GameObject[] definedPrefabs;
     private GameObject[] startPrefabs;
 
     // Generation parent objects
@@ -39,21 +31,19 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private GameObject generatedEnemyParent;
 
-    // Biome settings
-    [SerializeField]
-    private float timeBeforeNewBiome = 90.0f;
+    // Attached objects
     [SerializeField]
     private BackgroundController backgroundController;
-    private Biome curBiome = Biome.Red;
-    private float curBiomeChangeTimer = 0.0f;
+    [SerializeField]
+    private GameObject playerPrefab;
+    [SerializeField]
+    private BiomeHolder[] biomeHolders;
     
-
-    // Not used for now ----------
-    private float xMinShift = 0.0f;
-    private float xMaxShift = 0.0f;
-    private float yMinShift = 0.0f;
-    private float yMaxShift = 0.0f;
-    // ----------------------------
+    // Biome selection
+    [SerializeField]
+    private float timeBeforeNewBiome = 90.0f;
+    private float curBiomeChangeTimer = 0.0f;
+    private int curActiveBiome; // Biome holder index
 
     // Witch generation
     [SerializeField]
@@ -69,20 +59,15 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        definedGreenPrefabs = GetFolderPrefabs(DEFINED_GREEN_PREFABS_LOCATION);
-        definedRedPrefabs = GetFolderPrefabs(DEFINED_RED_PREFABS_LOCATION);
-
-        startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
+        RandomizeCurBiome();
+        startPrefabs = Resources.LoadAll(START_PREFABS_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
     private void Start()
     {
-        CreatePrefab(SelectAndNotifyBiome(), START_PREFAB_POSITION);
-
-        playerObject = Instantiate(playerPrefab);
-        playerObject.transform.position = START_PLAYER_POSITION;
+        GenerateStartLocation();
+        GeneratePlayer();
         cameraObject = Camera.main;
-
         enabled = false;
     }
 
@@ -93,49 +78,53 @@ public class LevelGenerator : MonoBehaviour
             UpdateBiome();
         }
 
-        switch (curBiome)
+        LevelGeneration();
+    }
+
+    private void GeneratePlayer()
+    {
+        playerObject = Instantiate(playerPrefab);
+        playerObject.transform.position = START_PLAYER_POSITION;
+    }
+
+    private void LevelGeneration()
+    {
+        GenerateLevel();
+
+        // If green biome - generate witch
+        if (curActiveBiome == 0)
         {
-            case Biome.Green:
-                {
-                    GenerateLevel(definedGreenPrefabs);
-                    GenerateWitch();
-                    break;
-                }
-            case Biome.Red:
-                {
-                    GenerateLevel(definedRedPrefabs);
-                    break;
-                }
+            GenerateWitch();
         }
     }
 
-    private void GenerateLevel(GameObject[] definedPrefabs)
+    private void GenerateLevel()
     {
-            PrefabHolder lastPrefabInfo = lastGeneratePrefab.GetComponent<PrefabHolder>();
-            float lastPrefabX = lastGeneratePrefab.transform.position.x + lastPrefabInfo.XSize;
-            bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastPrefabX;
+        PrefabHolder lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+        float lastPrefabX = lastGeneratedPrefab.transform.position.x;
+        float lastPrefabY = lastGeneratedPrefab.transform.position.y;
 
-            if (shouldGenerate)
-            {
-                GameObject objectToGenerate = SelectPrefab(definedPrefabs);
-                PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
+        bool shouldGenerate = cameraObject.transform.position.x + generationDistance 
+            > lastPrefabX + (lastPrefabInfo.GetXSize() / 2);
 
-                // Calculate new prefab position prefab position
-                float xShift = Random.Range(xMinShift, xMaxShift);
-                float yShift = Random.Range(yMinShift, yMaxShift);
-                float xNewPos = lastPrefabX + xShift + newPrefabInfo.XShiftRequired + newPrefabInfo.XSize;
-                float yNewPos = lastGeneratePrefab.transform.position.y + lastPrefabInfo.YAfter - newPrefabInfo.YBefore;
+        if (shouldGenerate)
+        {
+            GameObject objectToGenerate = SelectPrefab(definedPrefabs);
+            PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
 
-                // Debug.Log("Generated: " + xNewPos + " " + yNewPos);
+            // Calculate new prefab position prefab position
+            float xNewPos = lastPrefabX + newPrefabInfo.XBefore;
+            xNewPos += (lastPrefabInfo.GetXSize() / 2);
+            float yNewPos = lastPrefabY + newPrefabInfo.YBefore;
+            Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
 
-                Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
-                CreatePrefab(objectToGenerate, generatedPos);
-            }
+            CreatePrefab(objectToGenerate, generatedPos);
+        }
     }
 
     private void GenerateWitch()
     {
-        if (currentWitchGenerationTime > 0) 
+        if (currentWitchGenerationTime > 0)
         {
             currentWitchGenerationTime -= Time.deltaTime;
         } else
@@ -143,7 +132,7 @@ public class LevelGenerator : MonoBehaviour
             currentWitchGenerationTime = witchGenerationTime;
 
             bool isReversed = Random.value > 0.5f; // Returns random bool
-            bool isSinMoving = Random.value > 0.66f; 
+            bool isSinMoving = Random.value > 0.75f;
 
             float xDist;
             if (isReversed)
@@ -153,7 +142,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 xDist = generationDistance + cameraObject.transform.position.x;
             }
-            
+
             float yDist = Random.Range(yWitchMinDist, yWitchMaxDist);
             yDist += cameraObject.transform.position.y;
 
@@ -173,8 +162,7 @@ public class LevelGenerator : MonoBehaviour
             newWitch.transform.parent = generatedEnemyParent.transform;
         }
     }
-
-    // Checks whether biome requires to be changed
+    
     private bool IsUpdatingBiome()
     {
         curBiomeChangeTimer += Time.deltaTime;
@@ -185,45 +173,25 @@ public class LevelGenerator : MonoBehaviour
         }
         return false;
     }
-
-    // Updates block use and background
+    
     private void UpdateBiome()
     {
-        if (curBiome == Biome.Green)
+        if (curActiveBiome == 0)
         {
-            curBiome = Biome.Red;
+            curActiveBiome = 1;
         } else
         {
-            curBiome = Biome.Green;
+            curActiveBiome = 0;
         }
-        backgroundController.SetBiome(curBiome);
+
+        UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
+        NotifyBackground();
     }
 
-    // Uploads objects from the folder
-    private GameObject[] GetFolderPrefabs(string path)
+    private void UploadDefinedPrefabs(BiomeHolder biome)
     {
-        string[] retrievedObjectPaths = Directory.GetFiles(Application.dataPath + path, "*.prefab", SearchOption.AllDirectories);
-
-        if (retrievedObjectPaths == null)
-        {
-            return null;
-        }
-
-        int size = retrievedObjectPaths.Length;
-        GameObject[] result = new GameObject[size];
-
-        string prefabPath;
-        string assetPath;
-        for (int i = 0; i < size; i++)
-        {
-            prefabPath = retrievedObjectPaths[i];
-            assetPath = "Assets" + prefabPath.Replace(Application.dataPath, "");
-            assetPath = assetPath.Replace('\\', '/');
-
-            result[i] = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-        }
-
-        return result;
+        string path = biome.PrefabsPath;
+        definedPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
     private GameObject SelectPrefab(GameObject[] prefabs)
@@ -236,20 +204,43 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreatePrefab(GameObject gameObject, Vector2 pos)
     {
-        lastGeneratePrefab = Instantiate(gameObject);
-        lastGeneratePrefab.transform.position = pos;
-        lastGeneratePrefab.transform.parent = generatedObjectsParent.transform;
+        bool isXShifting = (lastGeneratedPrefab != null);
+
+        lastGeneratedPrefab = Instantiate(gameObject);
+        lastGeneratedPrefab.transform.position = pos;
+
+        // Centralize object according to x size
+        if (isXShifting)
+        {
+            PrefabHolder prefabHolder = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+            float xShift = prefabHolder.GetXSize() / 2;
+            lastGeneratedPrefab.transform.position += xShift * Vector3.right;
+        }
+        
+        lastGeneratedPrefab.transform.parent = generatedObjectsParent.transform;
     }
 
-    // Selects and defines biomes, also notifies background controller
-    private GameObject SelectAndNotifyBiome()
+    private void GenerateStartLocation()
     {
-        GameObject startPrefab = SelectPrefab(startPrefabs);
-        PrefabHolder prefabHolder = startPrefab.GetComponent<PrefabHolder>();
-        curBiome = prefabHolder.curBiome;
-        backgroundController.SetBiome(curBiome);
+        string path = biomeHolders[curActiveBiome].StartPrefabsPath;
+        GameObject[] startLocations = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
 
-        return startPrefab;
+        int locationSize = startLocations.Length;
+        int randomIndex = Random.Range(0, locationSize);
+
+        CreatePrefab(startLocations[randomIndex], START_PREFAB_POSITION);
+    }
+
+    private void RandomizeCurBiome()
+    {
+        curActiveBiome = Random.Range(0, biomeHolders.Length);
+        UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
+        NotifyBackground();
+    }
+
+    private void NotifyBackground()
+    {
+        backgroundController.SetBiome(biomeHolders[curActiveBiome]);
     }
 
     public GameObject GetEnemyParent()
@@ -260,15 +251,15 @@ public class LevelGenerator : MonoBehaviour
     // Return min distance for camera
     public float GetMinYPos()
     {
-        return lastGeneratePrefab.transform.position.y + Y_CAMERA_SHIFT;
+        return lastGeneratedPrefab.transform.position.y + Y_CAMERA_SHIFT;
     }
 
     public GameObject GetLastGeneratedPrefab()
     {
-        return lastGeneratePrefab;
+        return lastGeneratedPrefab;
     }
 
-    public GameObject getPlayer()
+    public GameObject GetPlayer()
     {
         return playerObject;
     }
