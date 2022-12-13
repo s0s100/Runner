@@ -57,13 +57,6 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private float currentWitchGenerationTime = 15.0f;
 
-    // Not used for now ----------
-    private float xMinShift = 0.0f;
-    private float xMaxShift = 0.0f;
-    private float yMinShift = 0.0f;
-    private float yMaxShift = 0.0f;
-    // ----------------------------
-
     private void Awake()
     {
         RandomizeCurBiome();
@@ -98,6 +91,7 @@ public class LevelGenerator : MonoBehaviour
     {
         GenerateLevel();
 
+        // If green biome - generate witch
         if (curActiveBiome == 0)
         {
             GenerateWitch();
@@ -107,8 +101,11 @@ public class LevelGenerator : MonoBehaviour
     private void GenerateLevel()
     {
         PrefabHolder lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabHolder>();
-        float lastPrefabX = lastGeneratedPrefab.transform.position.x + lastPrefabInfo.XSize;
-        bool shouldGenerate = cameraObject.transform.position.x + generationDistance > lastPrefabX;
+        float lastPrefabX = lastGeneratedPrefab.transform.position.x;
+        float lastPrefabY = lastGeneratedPrefab.transform.position.y;
+
+        bool shouldGenerate = cameraObject.transform.position.x + generationDistance 
+            > lastPrefabX + (lastPrefabInfo.GetXSize() / 2);
 
         if (shouldGenerate)
         {
@@ -116,11 +113,11 @@ public class LevelGenerator : MonoBehaviour
             PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
 
             // Calculate new prefab position prefab position
-            float xShift = Random.Range(xMinShift, xMaxShift);
-            float yShift = Random.Range(yMinShift, yMaxShift);
-            float xNewPos = lastPrefabX + xShift + newPrefabInfo.XBefore + newPrefabInfo.XSize;
-            float yNewPos = lastGeneratedPrefab.transform.position.y /*+ lastPrefabInfo.YAfter*/ - newPrefabInfo.YBefore;
+            float xNewPos = lastPrefabX + newPrefabInfo.XBefore;
+            xNewPos += (lastPrefabInfo.GetXSize() / 2);
+            float yNewPos = lastPrefabY + newPrefabInfo.YBefore;
             Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
+
             CreatePrefab(objectToGenerate, generatedPos);
         }
     }
@@ -135,7 +132,7 @@ public class LevelGenerator : MonoBehaviour
             currentWitchGenerationTime = witchGenerationTime;
 
             bool isReversed = Random.value > 0.5f; // Returns random bool
-            bool isSinMoving = Random.value > 0.66f;
+            bool isSinMoving = Random.value > 0.75f;
 
             float xDist;
             if (isReversed)
@@ -207,8 +204,19 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreatePrefab(GameObject gameObject, Vector2 pos)
     {
+        bool isXShifting = (lastGeneratedPrefab != null);
+
         lastGeneratedPrefab = Instantiate(gameObject);
         lastGeneratedPrefab.transform.position = pos;
+
+        // Centralize object according to x size
+        if (isXShifting)
+        {
+            PrefabHolder prefabHolder = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+            float xShift = prefabHolder.GetXSize() / 2;
+            lastGeneratedPrefab.transform.position += xShift * Vector3.right;
+        }
+        
         lastGeneratedPrefab.transform.parent = generatedObjectsParent.transform;
     }
 

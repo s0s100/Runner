@@ -18,16 +18,18 @@ public class PrefabHolder : MonoBehaviour
     [SerializeField]
     public float YBefore;
 
-    public float XSize { get; private set; }
-
     private void Start()
     {
-        XSize = GetComponent<Collider2D>().bounds.size.x;
 
         if (!IsItStartPrefab)
         {
             Destroy(gameObject, DESTRUCTION_TIME);
         }
+    }
+
+    public float GetXSize()
+    {
+        return GetComponent<BoxCollider2D>().bounds.size.x;
     }
 
     public void LateDestroy()
