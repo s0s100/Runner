@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c0172a363164c41af7c23cb5baa117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  PrefabPath: Prefabs/Locations/DefinedGreenLocations
+  StartPrefabPath: Locations/GreenBiome/StartLocations
+  PrefabPath: Locations/GreenBiome/Locations
   BackgroundBack: {fileID: 8575533655431576981, guid: e14c78e2fd1307b4493f017c8fb0954d, type: 3}
   BackgroundFront: {fileID: 9143545097042317036, guid: f72a551c6490a2c4f952adbc69f12b51, type: 3}

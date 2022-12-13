@@ -8,9 +8,6 @@ public class PrefabHolder : MonoBehaviour
     private const float DESTRUCTION_TIME = 20.0f;
 
     [SerializeField]
-    public Biome curBiome = Biome.Green;
-
-    [SerializeField]
     public bool IsItStartPrefab = false;
 
     // Amount of space required to the left and right

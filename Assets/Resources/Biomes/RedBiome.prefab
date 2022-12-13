@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c0172a363164c41af7c23cb5baa117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  PrefabPath: Prefabs/Locations/DefinedRedLocations
+  StartPrefabPath: Locations/RedBiome/StartLocations
+  PrefabPath: Locations/RedBiome/Locations
   BackgroundBack: {fileID: 5831566129806543173, guid: c85fa231c04eb1a42b89244e6ed00fd4, type: 3}
   BackgroundFront: {fileID: 488612486314827902, guid: fce4b92b2558a044b92e8357066cc798, type: 3}

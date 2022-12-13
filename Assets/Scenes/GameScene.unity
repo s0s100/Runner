@@ -1201,7 +1201,10 @@ MonoBehaviour:
   playerPrefab: {fileID: 6621912686509322440, guid: c006acbf957b93b4a95955e8fa801a3f, type: 3}
   generatedObjectsParent: {fileID: 777023815}
   generatedEnemyParent: {fileID: 1679250090}
-  timeBeforeNewBiome: 60
+  biomeHolders:
+  - {fileID: 3227328140635113850, guid: 4a2d2f30b63bddc419a2a66bf3d1ae34, type: 3}
+  - {fileID: 3227328140635113850, guid: 0576a4b848fbd8a489d9de21d1ba2a81, type: 3}
+  timeBeforeNewBiome: 10
   backgroundController: {fileID: 590038141}
   witchObject: {fileID: 1796074741082256812, guid: aa1b15e3d84ca79478680ec4d1e24b5a, type: 3}
   witchGenerationTime: 15
@@ -1263,10 +1266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac276a80a6595804a9b4435ac80d3537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundFrontGreen: {fileID: 9143545097042317036, guid: f72a551c6490a2c4f952adbc69f12b51, type: 3}
-  backgroundBackGreen: {fileID: 8575533655431576981, guid: e14c78e2fd1307b4493f017c8fb0954d, type: 3}
-  backgroundFrontRed: {fileID: 488612486314827902, guid: fce4b92b2558a044b92e8357066cc798, type: 3}
-  backgroundBackRed: {fileID: 5831566129806543173, guid: c85fa231c04eb1a42b89244e6ed00fd4, type: 3}
   backgroundParent: {fileID: 1982820560}
 --- !u!1 &619394800
 GameObject:
