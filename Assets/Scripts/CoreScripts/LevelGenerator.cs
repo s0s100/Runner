@@ -5,15 +5,11 @@ using UnityEditor;
 using System.IO;
 using System.Linq;
 
-public enum Biome
-{
-    Green, Red
-}
-
 // Generates playable objects on the screen, contains information about current biome
 public class LevelGenerator : MonoBehaviour
 {
     // Generation settings and prefabs folders
+    private const string BIOME_FOLDER_LOCATION = "Prefabs/Biomes";
     private const string DEFINED_GREEN_PREFABS_LOCATION = "Prefabs/Locations/DefinedGreenLocations";
     private const string DEFINED_RED_PREFABS_LOCATION = "Prefabs/Locations/DefinedRedLocations";
     private const string START_PREFABS_LOCATION = "Prefabs/Locations/DefinedStartLocations";
@@ -30,9 +26,12 @@ public class LevelGenerator : MonoBehaviour
     
     // Generation prefabs
     private GameObject lastGeneratePrefab;
+    private BiomeHolder[] biomeHolders;
+    private GameObject[] definedPrefabs;
     private GameObject[] definedGreenPrefabs;
     private GameObject[] definedRedPrefabs;
     private GameObject[] startPrefabs;
+
 
     // Generation parent objects
     [SerializeField]
@@ -76,6 +75,8 @@ public class LevelGenerator : MonoBehaviour
 
         definedRedPrefabs = Resources.LoadAll(DEFINED_RED_PREFABS_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
         //definedRedPrefabs = GetFolderPrefabs(DEFINED_RED_PREFABS_LOCATION);
+
+        UploadBiomes();
 
         startPrefabs = Resources.LoadAll(START_PREFABS_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
         //startPrefabs = GetFolderPrefabs(START_PREFABS_LOCATION);
@@ -192,6 +193,15 @@ public class LevelGenerator : MonoBehaviour
         return false;
     }
 
+    private void UploadBiomes()
+    {
+        GameObject[] biomeObjects = Resources.LoadAll(BIOME_FOLDER_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
+        biomeHolders = new BiomeHolder[biomeObjects.Length];
+        for (int i = 0; i < biomeObjects.Length; i++) {
+            biomeHolders[i] = biomeObjects[i].GetComponent<BiomeHolder>();
+        }
+    }
+
     // Updates block use and background
     private void UpdateBiome()
     {
@@ -204,51 +214,6 @@ public class LevelGenerator : MonoBehaviour
         }
         backgroundController.SetBiome(curBiome);
     }
-
-    // Uploads objects from the folder
-    //private GameObject[] GetFolderPrefabs(string path)
-    //{
-    //    Debug.Log("1");
-    //    string[] retrievedObjectPaths = Directory.GetFiles(Application.dataPath + path, "*.prefab", SearchOption.AllDirectories); // Throws an exception
-    //    Debug.Log("2");
-
-    //    if (retrievedObjectPaths == null || retrievedObjectPaths.Length == 0)
-    //    {
-    //        Debug.Log("3");
-    //        return null;
-    //    }
-
-    //    Debug.Log("4");
-    //    int size = retrievedObjectPaths.Length;
-    //    GameObject[] result = new GameObject[size];
-
-    //    string prefabPath;
-    //    string assetPath;
-    //    for (int i = 0; i < size; i++)
-    //    {
-
-    //        prefabPath = retrievedObjectPaths[i];
-    //        Debug.Log(prefabPath);
-
-
-
-    //        //assetPath = prefabPath.Replace(Application.dataPath, "");
-    //        assetPath = prefabPath.Replace(Application.dataPath + '/', "");
-    //        assetPath = assetPath.Replace('\\', '/');
-    //        assetPath = assetPath.Replace(".prefab", "");
-    //        Debug.Log(assetPath);
-
-    //        //result[i] = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-    //        result[i] = Resources.Load(assetPath) as GameObject;
-
-    //        if (result[i] == null)
-    //        {
-    //            Debug.Log("Null object");
-    //        }
-    //    }
-
-    //    return result;
-    //}
 
     private GameObject SelectPrefab(GameObject[] prefabs)
     {
