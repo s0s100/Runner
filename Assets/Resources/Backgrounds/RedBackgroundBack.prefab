@@ -123,6 +123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fog
       objectReference: {fileID: 0}
+    - target: {fileID: 8293180534710742062, guid: 6aafe5a856a26ce42b16a057bef9d2f6, type: 3}
+      propertyPath: m_SortingOrder
+      value: -7
+      objectReference: {fileID: 0}
     - target: {fileID: 8293180534710742063, guid: 6aafe5a856a26ce42b16a057bef9d2f6, type: 3}
       propertyPath: m_RootOrder
       value: 0
