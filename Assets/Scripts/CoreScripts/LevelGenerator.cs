@@ -185,7 +185,7 @@ public class LevelGenerator : MonoBehaviour
         }
 
         UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
-        NotifyBackground();
+        backgroundController.UpdateBiome(biomeHolders[curActiveBiome]);
     }
 
     private void UploadDefinedPrefabs(BiomeHolder biome)
@@ -235,11 +235,6 @@ public class LevelGenerator : MonoBehaviour
     {
         curActiveBiome = Random.Range(0, biomeHolders.Length);
         UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
-        NotifyBackground();
-    }
-
-    private void NotifyBackground()
-    {
         backgroundController.SetBiome(biomeHolders[curActiveBiome]);
     }
 
