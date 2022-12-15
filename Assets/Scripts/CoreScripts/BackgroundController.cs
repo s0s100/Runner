@@ -2,130 +2,154 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Control background images for different biomes
+// Control background images and effects for different biomes
 public class BackgroundController : MonoBehaviour
 {
-    private const float FRONT_SPEED_MODIFIER = 8.0f;
-    private float backgroundFrontYShift = -1.5f;
-    
     [SerializeField]
     private GameObject backgroundParent;
+    [SerializeField]
+    private GameObject fogObject;
 
-    private List<GameObject> backs = new List<GameObject>(); // Back background objects
-    private List<GameObject> fronts = new List<GameObject>(); // Front background objects
+    // Fog
+    // Green biome doesn't contain fog, while red biome does
+    private bool isChangingBiome = false;
+    private float opacitySpeed = 0.25f;
+
+    // Background images
+    private GameObject backImage;
+    private List<GameObject> frontsImages = new List<GameObject>();
     private BiomeHolder curBiomeHolder;
     private GameController controller;
-    private float frontMoveSpeed; // Switches regularly
-    private float backMoveSpeed; // Switches if biome is changed
+    private float frontYShift = -1.5f;
+    private float frontMoveSpeed;
 
     private void Start()
     {
         controller = FindObjectOfType<GameController>();
         frontMoveSpeed = controller.GetGameSpeed() / 2;
-        backMoveSpeed = controller.GetGameSpeed() * 4;
         this.enabled = false;
     }
 
     private void Update()
     {
         MoveFront();
-        MoveBack();
+        
+        if (isChangingBiome)
+        {
+            FogHider();
+        }
+    }
+
+    private void FogHider()
+    {
+        SpriteRenderer spriteRenderer = fogObject.GetComponent<SpriteRenderer>();
+        Color color = spriteRenderer.color;
+
+        color.a += opacitySpeed * Time.deltaTime;
+        
+        if (color.a >= 1.0f)
+        {
+            opacitySpeed = -opacitySpeed;
+            Debug.Log("Middle execution, value:" + color.a);
+            SetBackImage();
+            SetFrontImage();
+            
+        } else if (color.a <= 0.0f)
+        {
+
+            color.a = 0.0f;
+            opacitySpeed = -opacitySpeed;
+            Debug.Log("Stopped executing, value:" + color.a);
+            isChangingBiome = false;
+        }
+
+        spriteRenderer.color = color;
     }
 
     private void MoveFront()
     {
-        if (fronts.Count > 1)
+        if (frontsImages.Count > 1)
         {
-            float increment = 1.0f;
-            if (fronts.Count > 2)
-            {
-                increment = FRONT_SPEED_MODIFIER;
-            }
-            fronts[0].transform.position -= Vector3.right * frontMoveSpeed * Time.deltaTime * increment;
-            fronts[1].transform.position -= Vector3.right * frontMoveSpeed * Time.deltaTime * increment;
+            frontsImages[0].transform.position -= Vector3.right * frontMoveSpeed * Time.deltaTime;
+            frontsImages[1].transform.position -= Vector3.right * frontMoveSpeed * Time.deltaTime;
 
-            float frontDist = defineObjBoundaries(fronts[0]);
-            if (fronts[0].transform.localPosition.x <= -frontDist)
+            float frontDist = DefineObjBoundaries(frontsImages[0]);
+            if (frontsImages[0].transform.localPosition.x <= -frontDist)
             {
-                Destroy(fronts[0]);
-                fronts.RemoveAt(0);
+                Destroy(frontsImages[0]);
+                frontsImages.RemoveAt(0);
             }
 
         } else
         {
-            generateFront();
+            AddFrontImage();
         }
     }
-
-    private void MoveBack()
+    
+    public void SetBiome(BiomeHolder newBiome)
     {
-        if (backs.Count > 1)
+        Debug.Log("Biome set");
+        curBiomeHolder = newBiome;
+        SetBackImage();
+        SetFrontImage();
+    }
+
+    public void UpdateBiome(BiomeHolder newBiome)
+    {
+        Debug.Log("Biome update");
+        curBiomeHolder = newBiome;
+        isChangingBiome = true;
+    }
+
+    private void SetFrontImage()
+    {
+        if (frontsImages.Count > 0)
         {
-            backs[0].transform.position -= Vector3.right * backMoveSpeed * Time.deltaTime;
-            backs[1].transform.position -= Vector3.right * backMoveSpeed * Time.deltaTime;
-
-            float backDist = defineObjBoundaries(backs[0]);
-            if (backs[0].transform.localPosition.x <= -backDist)
+            foreach (GameObject obj in frontsImages)
             {
-                Destroy(backs[0]);
-                backs.RemoveAt(0);
+                Destroy(obj);
             }
+            frontsImages.Clear();
         }
+
+        AddFrontImage();
     }
 
-    // Set current biome and set images accordingly
-    public void SetBiome(BiomeHolder biomeHolder)
-    {
-        curBiomeHolder = biomeHolder;
-        generateBack();
-        generateFront();
-    }
-
-    public void generateFront()
+    private void AddFrontImage()
     {
         GameObject newFront = null;
         newFront = Instantiate(curBiomeHolder.BackgroundFront);
 
         newFront.transform.parent = backgroundParent.transform;
-        if (fronts.Count == 0)
+        if (frontsImages.Count == 0)
         {
-            newFront.transform.localPosition = new Vector2(0, backgroundFrontYShift);
+            newFront.transform.localPosition = new Vector2(0, frontYShift);
         }
         else
         {
-            GameObject lastObject = fronts[fronts.Count - 1];
-            float frontSize = defineObjBoundaries(lastObject);
-            Vector2 backPos = new Vector2(frontSize, backgroundFrontYShift);
+            GameObject lastObject = frontsImages[frontsImages.Count - 1];
+            float frontSize = DefineObjBoundaries(lastObject);
+            Vector2 backPos = new Vector2(frontSize, frontYShift);
             newFront.transform.localPosition = backPos;
         }
-        
-        fronts.Add(newFront);
-    }
 
-    // Generates backaccording to current biome
-    private void generateBack()
+        frontsImages.Add(newFront);
+    }
+    
+    private void SetBackImage()
     {
-        GameObject newBack = null;
-        newBack = Instantiate(curBiomeHolder.BackgroundBack);
+        if (backImage != null)
+        {
+            Destroy(backImage);
+        }
 
+        GameObject newBack = Instantiate(curBiomeHolder.BackgroundBack);
         newBack.transform.parent = backgroundParent.transform;
-        if (backs.Count == 0)
-        {
-            newBack.transform.localPosition = Vector3.zero;
-        }
-        else
-        {
-            GameObject lastObject = backs[backs.Count - 1];
-            float backSize = defineObjBoundaries(lastObject);
-            Vector2 backPos = new Vector2(backSize, 0);
-            newBack.transform.localPosition = backPos;
-        }
-        
-        backs.Add(newBack);
+        newBack.transform.localPosition = new Vector2(0, 0);
+        backImage = newBack;
     }
-
-    // Uses collider boundaries
-    private float defineObjBoundaries(GameObject obj)
+    
+    private float DefineObjBoundaries(GameObject obj)
     {
         float result = obj.GetComponent<Collider2D>().bounds.size.x;
         return result;

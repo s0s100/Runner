@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPrefabsPath: Locations/GreenBiome/StartLocations
   PrefabsPath: Locations/GreenBiome/Locations
+  CoinPrefabPath: Locations/GreenBiome/CoinLocations
   BackgroundBack: {fileID: 8575533655431576981, guid: e14c78e2fd1307b4493f017c8fb0954d, type: 3}
-  BackgroundFront: {fileID: 9143545097042317036, guid: f72a551c6490a2c4f952adbc69f12b51, type: 3}
+  BackgroundFront: {fileID: 7509170113042373455, guid: b4fb5aff1c801604e80ef49e29887673, type: 3}
