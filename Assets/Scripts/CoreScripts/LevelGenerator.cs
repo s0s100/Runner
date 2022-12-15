@@ -23,6 +23,7 @@ public class LevelGenerator : MonoBehaviour
     // Generation prefabs
     private GameObject lastGeneratedPrefab;
     private GameObject[] definedPrefabs;
+    private GameObject[] definedCoinPrefabs;
     private GameObject[] startPrefabs;
 
     // Generation parent objects
@@ -44,6 +45,9 @@ public class LevelGenerator : MonoBehaviour
     private float timeBeforeNewBiome = 90.0f;
     private float curBiomeChangeTimer = 0.0f;
     private int curActiveBiome; // Biome holder index
+
+    // Coin generation
+    private float coinGenerationChance = 0.25f; 
 
     // Witch generation
     [SerializeField]
@@ -109,7 +113,17 @@ public class LevelGenerator : MonoBehaviour
 
         if (shouldGenerate)
         {
-            GameObject objectToGenerate = SelectPrefab(definedPrefabs);
+            // Decide which type of locations will be generated
+            bool isCoinPrefab = Random.value < coinGenerationChance;
+            GameObject objectToGenerate;
+            if (isCoinPrefab)
+            {
+                objectToGenerate = SelectPrefab(definedCoinPrefabs);
+            }  else
+            {
+                objectToGenerate = SelectPrefab(definedPrefabs);
+            }
+            
             PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
 
             // Calculate new prefab position prefab position
@@ -188,10 +202,15 @@ public class LevelGenerator : MonoBehaviour
         backgroundController.UpdateBiome(biomeHolders[curActiveBiome]);
     }
 
+    // Uploads basic and coin prefabs
     private void UploadDefinedPrefabs(BiomeHolder biome)
     {
         string path = biome.PrefabsPath;
         definedPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        // Also upload coin prefabs
+        path = biome.CoinPrefabPath;
+        definedCoinPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
     private GameObject SelectPrefab(GameObject[] prefabs)
