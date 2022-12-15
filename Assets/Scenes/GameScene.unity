@@ -1267,12 +1267,12 @@ MonoBehaviour:
   biomeHolders:
   - {fileID: 3227328140635113850, guid: 4a2d2f30b63bddc419a2a66bf3d1ae34, type: 3}
   - {fileID: 3227328140635113850, guid: 0576a4b848fbd8a489d9de21d1ba2a81, type: 3}
-  timeBeforeNewBiome: 10
+  timeBeforeNewBiome: 60
   witchObject: {fileID: 1796074741082256812, guid: aa1b15e3d84ca79478680ec4d1e24b5a, type: 3}
   witchGenerationTime: 15
   yWitchMinDist: -2
   yWitchMaxDist: 4
-  currentWitchGenerationTime: 15
+  currentWitchGenerationTime: 10
 --- !u!114 &590038138
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -145,6 +145,7 @@ public class LevelGenerator : MonoBehaviour
         {
             currentWitchGenerationTime = witchGenerationTime;
 
+            // Should probably be a class value
             bool isReversed = Random.value > 0.5f; // Returns random bool
             bool isSinMoving = Random.value > 0.75f;
 
