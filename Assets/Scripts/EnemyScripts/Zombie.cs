@@ -5,8 +5,7 @@ using UnityEngine;
 public class Zombie : Enemy
 {
     private const float TIME_BEFORE_AWAKENING = 1.5f;
-
-    private Animator animator;
+    
     private GameObject player;
 
     private new BoxCollider2D collider;

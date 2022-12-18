@@ -30,12 +30,17 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<Enemy>();
-        int health = enemy.GetCurHealth();
-        if (collision.tag == "Enemy" && health > 0)
+        
+        if (collision.tag == "Enemy")
         {
-            enemy.Damage();
-            Destroy(this.gameObject);
+            Enemy enemy = collision.GetComponent<Enemy>();
+            int health = enemy.GetCurHealth();
+
+            if (health > 0)
+            {
+                enemy.Damage();
+                Destroy(this.gameObject);
+            }
         }
     }
 }
