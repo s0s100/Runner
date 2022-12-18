@@ -54,8 +54,14 @@ public class PlayerHealthScript : MonoBehaviour
             if (curHealth == 0)
             {
                 gameController.GameDefeat();
+                PlayerKillAnimation();
             }
         }
+    }
+
+    private void PlayerKillAnimation()
+    {
+        animator.SetBool("IsKilled", true);
     }
 
     // Makes object red-blinking if invulnerable

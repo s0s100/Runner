@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faefbe6a15da540409ddaf0f87fc9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile: {fileID: 5139954913872604412, guid: 4bdbefb07678c174e93199bc14311ad8, type: 3}
 --- !u!114 &4234113284157110947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +261,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6621912686509322446}
     m_Modifications:
+    - target: {fileID: 1792512536257505231, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7258122383890266956, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
       propertyPath: m_Name
       value: BloodAnimator

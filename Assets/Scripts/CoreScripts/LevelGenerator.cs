@@ -31,6 +31,8 @@ public class LevelGenerator : MonoBehaviour
     private GameObject generatedObjectsParent;
     [SerializeField]
     private GameObject generatedEnemyParent;
+    [SerializeField]
+    private GameObject generatedProjectiles;
 
     // Attached objects
     [SerializeField]
@@ -277,5 +279,10 @@ public class LevelGenerator : MonoBehaviour
     public GameObject GetPlayer()
     {
         return playerObject;
+    }
+
+    public void SetProjectileParent(GameObject newObject)
+    {
+        newObject.transform.parent = generatedProjectiles.transform;
     }
 }
