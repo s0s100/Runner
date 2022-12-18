@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private new BoxCollider2D collider;
     private Animator animator;
     private GameController gameController;
+    private LevelGenerator levelGenerator;
 
     // Mobile touch info
     private Vector2 startTouchPos;
@@ -31,13 +32,20 @@ public class PlayerController : MonoBehaviour
     private bool isRightDash = false;
     private bool canDash = false;
 
+    // Player attack
+    [SerializeField]
+    private GameObject projectile;
+    private float attackCooldown = 0.5f;
+    private float xProjectileShift = 0.5f;
+    private float curAttackCooldown = 0.0f;
+
     // Y-Movement variables
     private float jumpForce = 400.0f;
     private  float fallForce = 200.0f;
 
     private bool isGrounded = false;
     private bool canFall = false;
-
+    
     public void EnableJump()
     {
         canDash = true;
@@ -64,6 +72,7 @@ public class PlayerController : MonoBehaviour
         collider = this.GetComponent<BoxCollider2D>();
         animator = this.GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
+        levelGenerator = FindObjectOfType<LevelGenerator>();
         camera = FindObjectOfType<Camera>();
 
         moveSpeed = gameController.GetGameSpeed();
@@ -81,9 +90,20 @@ public class PlayerController : MonoBehaviour
             moveDir = PlayerMobileControl();
         }
         
-        MoveByDirection(moveDir);
+        MakeAction(moveDir);
         MovePlayer();
         DashPlayer();
+
+        // Reduce cooldown in the end
+        ReduceCooldown();
+    }
+
+    private void ReduceCooldown()
+    {
+        if (curAttackCooldown > 0.0f)
+        {
+            curAttackCooldown -= Time.deltaTime;
+        }
     }
 
     private MoveDirection PlayerComputerControl()
@@ -165,7 +185,7 @@ public class PlayerController : MonoBehaviour
         return MoveDirection.None;
     }
 
-    private void MoveByDirection(MoveDirection dir)
+    private void MakeAction(MoveDirection dir)
     {
         switch (dir)
         {
@@ -182,14 +202,6 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case MoveDirection.Left:
-                /*
-                    public float leftDashDuration = 1.0f; // Shows the length of the dash in seconds
-                    public float leftDashDist = 50.0f; // Shows distance to move for the dash
-                    public float leftDashUseTime = 1.0f; // Shows how often can be dash used
-
-                    private float leftDashTimeCur = 0.0f; // Shows for how long does the left dash works
-                    private float leftDashCooldown = 0.0f; // Shows for how long should player wait to use left dash
-                */
                 if (curDashCooldown <= 0.0f && canDash)
                 {
                     LeftDash();
@@ -200,6 +212,12 @@ public class PlayerController : MonoBehaviour
                 if (curDashCooldown <= 0.0f && canDash)
                 {
                     RightDash();
+                }
+                break;
+            case MoveDirection.Middle:
+                if (curAttackCooldown <= 0.0f)
+                {
+                    Attack();
                 }
                 break;
         }
@@ -236,6 +254,19 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Attack()
+    {
+        GameObject newProjectile = Instantiate(projectile);
+        Vector3 position = transform.position;
+        position.x += xProjectileShift;
+        newProjectile.transform.position = position;
+
+        // animator.SetBool("IsAttacking", true);
+
+        curAttackCooldown = attackCooldown;
+        levelGenerator.SetProjectileParent(newProjectile);
     }
 
     private void SetGravity(bool isEnabled)
