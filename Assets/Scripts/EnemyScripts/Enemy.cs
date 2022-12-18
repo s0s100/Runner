@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    // For now
+    private new ParticleSystem particleSystem;
+
     protected GameController gameController;
     protected Animator animator;
     protected float speed;
@@ -16,6 +19,7 @@ public abstract class Enemy : MonoBehaviour
     {
         gameController = FindObjectOfType<GameController>();
         animator = GetComponent<Animator>();
+        particleSystem = GetComponentInChildren<ParticleSystem>();
         Destroy(this.gameObject, existanceTime); // Delete after
     }
     
@@ -52,10 +56,16 @@ public abstract class Enemy : MonoBehaviour
     protected void DamageAnimation()
     {
         // animator.SetBool("IsDamaged", true);
+        particleSystem.Play();
     }
 
     protected virtual void Kill()
     {
         animator.SetBool("IsKilled", true);
+    }
+
+    public int GetCurHealth()
+    {
+        return health;
     }
 }
