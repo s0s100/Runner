@@ -23,6 +23,7 @@ public class LevelGenerator : MonoBehaviour
     // Generation prefabs
     private GameObject lastGeneratedPrefab;
     private GameObject[] definedPrefabs;
+    private GameObject[] definedCoinPrefabs;
     private GameObject[] startPrefabs;
 
     // Generation parent objects
@@ -30,6 +31,8 @@ public class LevelGenerator : MonoBehaviour
     private GameObject generatedObjectsParent;
     [SerializeField]
     private GameObject generatedEnemyParent;
+    [SerializeField]
+    private GameObject generatedProjectiles;
 
     // Attached objects
     [SerializeField]
@@ -44,6 +47,9 @@ public class LevelGenerator : MonoBehaviour
     private float timeBeforeNewBiome = 90.0f;
     private float curBiomeChangeTimer = 0.0f;
     private int curActiveBiome; // Biome holder index
+
+    // Coin generation
+    private float coinGenerationChance = 0.25f; 
 
     // Witch generation
     [SerializeField]
@@ -109,7 +115,17 @@ public class LevelGenerator : MonoBehaviour
 
         if (shouldGenerate)
         {
-            GameObject objectToGenerate = SelectPrefab(definedPrefabs);
+            // Decide which type of locations will be generated
+            bool isCoinPrefab = Random.value < coinGenerationChance;
+            GameObject objectToGenerate;
+            if (isCoinPrefab)
+            {
+                objectToGenerate = SelectPrefab(definedCoinPrefabs);
+            }  else
+            {
+                objectToGenerate = SelectPrefab(definedPrefabs);
+            }
+            
             PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
 
             // Calculate new prefab position prefab position
@@ -131,6 +147,7 @@ public class LevelGenerator : MonoBehaviour
         {
             currentWitchGenerationTime = witchGenerationTime;
 
+            // Should probably be a class value
             bool isReversed = Random.value > 0.5f; // Returns random bool
             bool isSinMoving = Random.value > 0.75f;
 
@@ -185,13 +202,18 @@ public class LevelGenerator : MonoBehaviour
         }
 
         UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
-        NotifyBackground();
+        backgroundController.UpdateBiome(biomeHolders[curActiveBiome]);
     }
 
+    // Uploads basic and coin prefabs
     private void UploadDefinedPrefabs(BiomeHolder biome)
     {
         string path = biome.PrefabsPath;
         definedPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        // Also upload coin prefabs
+        path = biome.CoinPrefabPath;
+        definedCoinPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
     private GameObject SelectPrefab(GameObject[] prefabs)
@@ -235,11 +257,6 @@ public class LevelGenerator : MonoBehaviour
     {
         curActiveBiome = Random.Range(0, biomeHolders.Length);
         UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
-        NotifyBackground();
-    }
-
-    private void NotifyBackground()
-    {
         backgroundController.SetBiome(biomeHolders[curActiveBiome]);
     }
 
@@ -262,5 +279,10 @@ public class LevelGenerator : MonoBehaviour
     public GameObject GetPlayer()
     {
         return playerObject;
+    }
+
+    public void SetProjectileParent(GameObject newObject)
+    {
+        newObject.transform.parent = generatedProjectiles.transform;
     }
 }

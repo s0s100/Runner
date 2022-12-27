@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPrefabsPath: Locations/RedBiome/StartLocations
   PrefabsPath: Locations/RedBiome/Locations
+  CoinPrefabPath: Locations/RedBiome/CoinLocations
   BackgroundBack: {fileID: 5831566129806543173, guid: c85fa231c04eb1a42b89244e6ed00fd4, type: 3}
   BackgroundFront: {fileID: 488612486314827902, guid: fce4b92b2558a044b92e8357066cc798, type: 3}

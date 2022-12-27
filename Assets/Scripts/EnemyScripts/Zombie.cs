@@ -5,8 +5,7 @@ using UnityEngine;
 public class Zombie : Enemy
 {
     private const float TIME_BEFORE_AWAKENING = 1.5f;
-
-    private Animator animator;
+    
     private GameObject player;
 
     private new BoxCollider2D collider;
@@ -52,21 +51,28 @@ public class Zombie : Enemy
     {
         this.enabled = false;
         SetIgnorePlayerCollider(true);
-        AwakeZombie();
+        // AwakeZombie();
     }
 
-    private void AwakeZombie()
+    public void AwakeZombie()
     {
-        StartCoroutine(WaitBeforeMovement());
-    }
-
-    private IEnumerator WaitBeforeMovement()
-    {
-        yield return new WaitForSeconds(TIME_BEFORE_AWAKENING);
         SetIgnorePlayerCollider(false);
         this.enabled = true;
         isAttacking = true;
     }
+
+    //private void AwakeZombie()
+    //{
+    //    StartCoroutine(WaitBeforeMovement());
+    //}
+
+    //private IEnumerator WaitBeforeMovement()
+    //{
+    //    yield return new WaitForSeconds(TIME_BEFORE_AWAKENING);
+    //    SetIgnorePlayerCollider(false);
+    //    this.enabled = true;
+    //    isAttacking = true;
+    //}
 
     private float GetAnimationLength(string clipName)
     {
@@ -109,7 +115,17 @@ public class Zombie : Enemy
             PlayerHealthScript playerHealthScript =
                 collision.gameObject.GetComponent<PlayerHealthScript>();
 
+            animator.SetBool("IsAttacking", true);
+
             playerHealthScript.GetDamage();
         }
+    }
+
+    protected override void Kill()
+    {
+        base.Kill();
+        isAttacking = false;
+        SetIgnorePlayerCollider(true);
+        enabled = false;
     }
 }

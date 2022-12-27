@@ -32,7 +32,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2850384635306490731}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,3 +168,89 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!1001 &6600407986092160008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 78602729335701158}
+    m_Modifications:
+    - target: {fileID: 4553223949455514879, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.023529397
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553223949455514879, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.9529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553223949455514879, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.09247904
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553223949455514879, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553223949455514879, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.46226418
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553223949455514879, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.03412384
+      objectReference: {fileID: 0}
+    - target: {fileID: 7258122383890266956, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_Name
+      value: BloodAnimator
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+--- !u!4 &2850384635306490731 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8941832938614427491, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
+  m_PrefabInstance: {fileID: 6600407986092160008}
+  m_PrefabAsset: {fileID: 0}

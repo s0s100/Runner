@@ -56,12 +56,18 @@ public class Witch : Enemy
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && health > 0)
         {
             PlayerHealthScript playerHealthScript =
                 collision.gameObject.GetComponent<PlayerHealthScript>();
 
             playerHealthScript.GetDamage();
         }
+    }
+
+    protected override void Kill()
+    {
+        base.Kill();
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 }

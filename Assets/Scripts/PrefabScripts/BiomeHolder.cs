@@ -11,6 +11,9 @@ public class BiomeHolder : MonoBehaviour
     public string PrefabsPath;
 
     [SerializeField]
+    public string CoinPrefabPath;
+
+    [SerializeField]
     public GameObject BackgroundBack;
 
     [SerializeField]
