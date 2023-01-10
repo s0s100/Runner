@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour
     {
         if (ammoController.IsAttackPossible())
         {
-            animator.SetBool("IsAttacking", true);
+            animator.SetTrigger("IsAttacking");
             curAttackCooldown = attackCooldown;
             MakeProjectile();
         }
@@ -277,7 +277,6 @@ public class PlayerController : MonoBehaviour
         newProjectile.transform.position = position;
         levelGenerator.SetProjectileParent(newProjectile);
         ammoController.RemoveAmmo();
-        animator.SetBool("IsAttacking", false);
     }
 
     // Creates projectile after some delay
