@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public enum MoveDirection
 {
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
     // Player attack
     [SerializeField]
     private GameObject projectile;
-    private float attackCooldown = 1.0f;
+    private float attackCooldown = 0.5f;
     private float xProjectileShift = 0.5f;
     private float curAttackCooldown = 0.0f;
 
@@ -249,7 +250,7 @@ public class PlayerController : MonoBehaviour
                 SetGravity(true);
                 if (isRightDash)
                 {
-                    animator.SetBool("IsAttacking", false);
+                    animator.SetBool("IsShifting", false);
                 } else
                 {
                     animator.SetBool("IsDodging", false);
@@ -262,17 +263,33 @@ public class PlayerController : MonoBehaviour
     {
         if (ammoController.IsAttackPossible())
         {
-            GameObject newProjectile = Instantiate(projectile);
-            Vector3 position = transform.position;
-            position.x += xProjectileShift;
-            newProjectile.transform.position = position;
-
-            // animator.SetBool("IsAttacking", true);
-
+            animator.SetBool("IsAttacking", true);
             curAttackCooldown = attackCooldown;
-            levelGenerator.SetProjectileParent(newProjectile);
-            ammoController.RemoveAmmo();
+            MakeProjectile();
         }
+    }
+
+    private void MakeProjectile()
+    {
+        GameObject newProjectile = Instantiate(projectile);
+        Vector3 position = transform.position;
+        position.x += xProjectileShift;
+        newProjectile.transform.position = position;
+        levelGenerator.SetProjectileParent(newProjectile);
+        ammoController.RemoveAmmo();
+        animator.SetBool("IsAttacking", false);
+    }
+
+    // Creates projectile after some delay
+    public void MakeLateProjectile(float waitDuration)
+    {
+        StartCoroutine(WaitBeforeThrowing(waitDuration));
+    }
+
+    IEnumerator WaitBeforeThrowing(float animationLength)
+    {
+        yield return new WaitForSeconds(animationLength);
+        MakeProjectile();
     }
 
     private void SetGravity(bool isEnabled)
@@ -327,6 +344,6 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         isRightDash = true;
         curDashCooldown = dashCooldown;
-        animator.SetBool("IsAttacking", true);
+        animator.SetBool("IsShifting", true);
     }
 }
