@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
                 startTouchPos = touch.position;
             }
 
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Ended && startTouchPos != Vector2.zero)
             {
                 endTouchPos = touch.position;
                 return GetMobileTouchDirection();
