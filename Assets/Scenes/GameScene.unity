@@ -1322,6 +1322,7 @@ GameObject:
   - component: {fileID: 590038139}
   - component: {fileID: 590038140}
   - component: {fileID: 590038141}
+  - component: {fileID: 590038142}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -1440,6 +1441,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundParent: {fileID: 1982820560}
   fogObject: {fileID: 1982844150}
+--- !u!114 &590038142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590038134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397d1bfd937334e4695690357ff254df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoText: {fileID: 846360453}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,7 +1973,7 @@ RectTransform:
   m_GameObject: {fileID: 729217479}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 324409617}

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private GameController gameController;
     private LevelGenerator levelGenerator;
+    private AmmoController ammoController;
 
     // Mobile touch info
     private Vector2 startTouchPos;
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
     // Player attack
     [SerializeField]
     private GameObject projectile;
-    private float attackCooldown = 0.5f;
+    private float attackCooldown = 1.0f;
     private float xProjectileShift = 0.5f;
     private float curAttackCooldown = 0.0f;
 
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
         camera = FindObjectOfType<Camera>();
+        ammoController = FindObjectOfType<AmmoController>();
 
         moveSpeed = gameController.GetGameSpeed();
         enabled = false;
@@ -258,15 +260,19 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        GameObject newProjectile = Instantiate(projectile);
-        Vector3 position = transform.position;
-        position.x += xProjectileShift;
-        newProjectile.transform.position = position;
+        if (ammoController.IsAttackPossible())
+        {
+            GameObject newProjectile = Instantiate(projectile);
+            Vector3 position = transform.position;
+            position.x += xProjectileShift;
+            newProjectile.transform.position = position;
 
-        // animator.SetBool("IsAttacking", true);
+            // animator.SetBool("IsAttacking", true);
 
-        curAttackCooldown = attackCooldown;
-        levelGenerator.SetProjectileParent(newProjectile);
+            curAttackCooldown = attackCooldown;
+            levelGenerator.SetProjectileParent(newProjectile);
+            ammoController.RemoveAmmo();
+        }
     }
 
     private void SetGravity(bool isEnabled)
