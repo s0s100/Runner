@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1374,7 +1374,7 @@ MonoBehaviour:
   generatedEnemyParent: {fileID: 1679250090}
   generatedProjectiles: {fileID: 409410292}
   backgroundController: {fileID: 590038141}
-  playerPrefab: {fileID: 6650130834204407428, guid: b67156b7b01bb4176b3ccf8038d23f88, type: 3}
+  playerPrefab: {fileID: 6621912686509322440, guid: c006acbf957b93b4a95955e8fa801a3f, type: 3}
   biomeHolders:
   - {fileID: 3227328140635113850, guid: 4a2d2f30b63bddc419a2a66bf3d1ae34, type: 3}
   - {fileID: 3227328140635113850, guid: 0576a4b848fbd8a489d9de21d1ba2a81, type: 3}
@@ -1921,7 +1921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 717552095}
   m_Layer: 0
-  m_Name: Game Objects
+  m_Name: GameObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
