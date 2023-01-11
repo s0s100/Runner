@@ -20,7 +20,7 @@ public class BackgroundController : MonoBehaviour
     private List<GameObject> frontsImages = new List<GameObject>();
     private BiomeHolder curBiomeHolder;
     private GameController controller;
-    private float frontYShift = -1.5f;
+    private float frontYShift = 0;
     private float frontMoveSpeed;
 
     private void Start()
