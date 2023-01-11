@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public enum MoveDirection
 {
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private GameController gameController;
     private LevelGenerator levelGenerator;
+    private AmmoController ammoController;
 
     // Mobile touch info
     private Vector2 startTouchPos;
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
         camera = FindObjectOfType<Camera>();
+        ammoController = FindObjectOfType<AmmoController>();
 
         moveSpeed = gameController.GetGameSpeed();
         enabled = false;
@@ -140,7 +143,7 @@ public class PlayerController : MonoBehaviour
                 startTouchPos = touch.position;
             }
 
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Ended && startTouchPos != Vector2.zero)
             {
                 endTouchPos = touch.position;
                 return GetMobileTouchDirection();
@@ -247,7 +250,7 @@ public class PlayerController : MonoBehaviour
                 SetGravity(true);
                 if (isRightDash)
                 {
-                    animator.SetBool("IsAttacking", false);
+                    animator.SetBool("IsShifting", false);
                 } else
                 {
                     animator.SetBool("IsDodging", false);
@@ -258,15 +261,34 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
+        if (ammoController.IsAttackPossible())
+        {
+            animator.SetTrigger("IsAttacking");
+            curAttackCooldown = attackCooldown;
+            MakeProjectile();
+        }
+    }
+
+    private void MakeProjectile()
+    {
         GameObject newProjectile = Instantiate(projectile);
         Vector3 position = transform.position;
         position.x += xProjectileShift;
         newProjectile.transform.position = position;
-
-        // animator.SetBool("IsAttacking", true);
-
-        curAttackCooldown = attackCooldown;
         levelGenerator.SetProjectileParent(newProjectile);
+        ammoController.RemoveAmmo();
+    }
+
+    // Creates projectile after some delay
+    public void MakeLateProjectile(float waitDuration)
+    {
+        StartCoroutine(WaitBeforeThrowing(waitDuration));
+    }
+
+    IEnumerator WaitBeforeThrowing(float animationLength)
+    {
+        yield return new WaitForSeconds(animationLength);
+        MakeProjectile();
     }
 
     private void SetGravity(bool isEnabled)
@@ -321,6 +343,6 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         isRightDash = true;
         curDashCooldown = dashCooldown;
-        animator.SetBool("IsAttacking", true);
+        animator.SetBool("IsShifting", true);
     }
 }
