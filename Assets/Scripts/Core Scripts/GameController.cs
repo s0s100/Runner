@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour
     {
         isDefeated = true;
         playerMovement.enabled = false;
+        backgroundController.enabled = false;
         UIController.GameDefeatMenu();
     }
 
