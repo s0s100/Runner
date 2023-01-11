@@ -50,7 +50,7 @@ public class BackgroundController : MonoBehaviour
         if (color.a >= 1.0f)
         {
             opacitySpeed = -opacitySpeed;
-            Debug.Log("Middle execution, value:" + color.a);
+            // Debug.Log("Middle execution, value:" + color.a);
             SetBackImage();
             SetFrontImage();
             
@@ -59,7 +59,7 @@ public class BackgroundController : MonoBehaviour
 
             color.a = 0.0f;
             opacitySpeed = -opacitySpeed;
-            Debug.Log("Stopped executing, value:" + color.a);
+            // Debug.Log("Stopped executing, value:" + color.a);
             isChangingBiome = false;
         }
 
@@ -88,7 +88,7 @@ public class BackgroundController : MonoBehaviour
     
     public void SetBiome(BiomeHolder newBiome)
     {
-        Debug.Log("Biome set");
+        // Debug.Log("Biome set");
         curBiomeHolder = newBiome;
         SetBackImage();
         SetFrontImage();
@@ -96,7 +96,7 @@ public class BackgroundController : MonoBehaviour
 
     public void UpdateBiome(BiomeHolder newBiome)
     {
-        Debug.Log("Biome update");
+        // Debug.Log("Biome update");
         curBiomeHolder = newBiome;
         isChangingBiome = true;
     }
