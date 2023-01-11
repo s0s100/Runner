@@ -30,10 +30,7 @@ public class CameraController : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (!gameController.IsDefeated())
-        {
-            Movement();
-        }
+        Movement();
     }
 
     private void Movement()

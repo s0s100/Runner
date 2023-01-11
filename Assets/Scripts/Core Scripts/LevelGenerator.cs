@@ -51,18 +51,6 @@ public class LevelGenerator : MonoBehaviour
     // Coin generation
     private float coinGenerationChance = 0.25f; 
 
-    // Witch generation
-    [SerializeField]
-    private GameObject witchObject;
-    [SerializeField]
-    private float witchGenerationTime = 15.0f;
-    [SerializeField]
-    private float yWitchMinDist = -2.0f;
-    [SerializeField]
-    private float yWitchMaxDist = 4.0f;
-    [SerializeField]
-    private float currentWitchGenerationTime = 15.0f;
-
     private void Awake()
     {
         RandomizeCurBiome();
@@ -96,12 +84,6 @@ public class LevelGenerator : MonoBehaviour
     private void LevelGeneration()
     {
         GenerateLevel();
-
-        // If green biome - generate witch
-        if (curActiveBiome == 0)
-        {
-            GenerateWitch();
-        }
     }
 
     private void GenerateLevel()
@@ -135,48 +117,6 @@ public class LevelGenerator : MonoBehaviour
             Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
 
             CreatePrefab(objectToGenerate, generatedPos);
-        }
-    }
-
-    private void GenerateWitch()
-    {
-        if (currentWitchGenerationTime > 0)
-        {
-            currentWitchGenerationTime -= Time.deltaTime;
-        } else
-        {
-            currentWitchGenerationTime = witchGenerationTime;
-
-            // Should probably be a class value
-            bool isReversed = Random.value > 0.5f; // Returns random bool
-            bool isSinMoving = Random.value > 0.75f;
-
-            float xDist;
-            if (isReversed)
-            {
-                xDist = -generationDistance + cameraObject.transform.position.x;
-            } else
-            {
-                xDist = generationDistance + cameraObject.transform.position.x;
-            }
-
-            float yDist = Random.Range(yWitchMinDist, yWitchMaxDist);
-            yDist += cameraObject.transform.position.y;
-
-            Vector2 witchPos = new Vector2(xDist, yDist);
-            GameObject newWitch = Instantiate(witchObject);
-
-            // Reverse witch if possible
-            if (isReversed)
-            {
-                Witch witchControl = newWitch.GetComponent<Witch>();
-                witchControl.SetLeftToRightMovement();
-                witchControl.SetSinMovement();
-                newWitch.transform.Rotate(0.0f, 180.0f, 0.0f); // Rotate to make her move in the other direction
-            }
-
-            newWitch.transform.position = witchPos;
-            newWitch.transform.parent = generatedEnemyParent.transform;
         }
     }
     
@@ -268,7 +208,13 @@ public class LevelGenerator : MonoBehaviour
     // Return min distance for camera
     public float GetMinYPos()
     {
-        return lastGeneratedPrefab.transform.position.y + Y_CAMERA_SHIFT;
+        Collider2D collider = lastGeneratedPrefab.GetComponent<Collider2D>();
+        float colliderYSize = collider.bounds.size.y;
+
+        float result = lastGeneratedPrefab.transform.position.y + Y_CAMERA_SHIFT;
+        result -= colliderYSize / 2;
+
+        return result;
     }
 
     public GameObject GetLastGeneratedPrefab()
@@ -284,5 +230,10 @@ public class LevelGenerator : MonoBehaviour
     public void SetProjectileParent(GameObject newObject)
     {
         newObject.transform.parent = generatedProjectiles.transform;
+    }
+
+    public float GetGenerationDistance()
+    {
+        return generationDistance;
     }
 }

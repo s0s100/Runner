@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     private UIController UIController;
     private BackgroundController backgroundController;
 
+    private bool isGameRunning = false;
     private bool isDefeated = false;
     [SerializeField]
     private float moveSpeeed = 2.0f;
@@ -48,11 +49,14 @@ public class GameController : MonoBehaviour
     {
         isDefeated = true;
         playerMovement.enabled = false;
+        cameraFollowPlayer.enabled = false;
+        backgroundController.enabled = false;
         UIController.GameDefeatMenu();
     }
 
     private void StartGame()
     {
+        isGameRunning = true;
         playerMovement.EnablePlayerAnimations();
 
         playerMovement.enabled = true;
@@ -61,6 +65,22 @@ public class GameController : MonoBehaviour
         backgroundController.enabled = true;
         UIController.DisableStartGameText();
         startPosition.LateDestroy();
+        ActivateEveryWitchGenerator(); // :/
+    }
+
+    // Not the best solution, for now..
+    private void ActivateEveryWitchGenerator()
+    {
+        WitchGeneration[] generators = FindObjectsOfType<WitchGeneration>();
+        foreach (WitchGeneration generator in generators)
+        {
+            generator.enabled = true;
+        }
+    }
+
+    public bool IsGameRunning()
+    {
+        return isGameRunning;
     }
 
     public bool IsDefeated()
