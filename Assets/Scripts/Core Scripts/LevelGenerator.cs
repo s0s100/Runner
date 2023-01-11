@@ -208,7 +208,13 @@ public class LevelGenerator : MonoBehaviour
     // Return min distance for camera
     public float GetMinYPos()
     {
-        return lastGeneratedPrefab.transform.position.y + Y_CAMERA_SHIFT;
+        Collider2D collider = lastGeneratedPrefab.GetComponent<Collider2D>();
+        float colliderYSize = collider.bounds.size.y;
+
+        float result = lastGeneratedPrefab.transform.position.y + Y_CAMERA_SHIFT;
+        result -= colliderYSize / 2;
+
+        return result;
     }
 
     public GameObject GetLastGeneratedPrefab()
