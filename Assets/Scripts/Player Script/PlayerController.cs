@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.EventSystems;
 
 public enum MoveDirection
 {
@@ -20,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private GameController gameController;
     private LevelGenerator levelGenerator;
     private AmmoController ammoController;
+    private UIController uiController;
 
     // Mobile touch info
     private Vector2 startTouchPos;
@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         levelGenerator = FindObjectOfType<LevelGenerator>();
         camera = FindObjectOfType<Camera>();
         ammoController = FindObjectOfType<AmmoController>();
+        uiController = FindObjectOfType<UIController>();
 
         moveSpeed = gameController.GetGameSpeed();
         enabled = false;
@@ -139,7 +140,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began && !ShouldDiscardSwipe(touch.position))
+            if (touch.phase == TouchPhase.Began && !uiController.ShouldDiscardSwipe(touch.position))
             {
                 startTouchPos = touch.position;
             }
@@ -153,21 +154,6 @@ public class PlayerController : MonoBehaviour
         }
 
         return MoveDirection.None;
-    }
-
-    // Used to define if any GUI is below touch position
-    private bool ShouldDiscardSwipe(Vector2 touchPos)
-    {
-        PointerEventData touch = new PointerEventData(EventSystem.current)
-        {
-            position = touchPos
-        };
-
-        List<RaycastResult> raycastResults = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(touch, raycastResults);
-
-        // Debug.Log(raycastResults.Count > 0);
-        return (raycastResults.Count > 0);
     }
 
     private MoveDirection GetMobileTouchDirection()
