@@ -65,7 +65,8 @@ public class GameController : MonoBehaviour
         backgroundController.enabled = true;
         UIController.DisableStartGameText();
         startPosition.LateDestroy();
-        ActivateEveryWitchGenerator(); // :/
+        ActivateEveryWitchGenerator();
+        ActivatePrefabDestruction();
     }
 
     // Not the best solution, for now..
@@ -75,6 +76,15 @@ public class GameController : MonoBehaviour
         foreach (WitchGeneration generator in generators)
         {
             generator.enabled = true;
+        }
+    }
+
+    private void ActivatePrefabDestruction()
+    {
+        PrefabHolder[] prefabHolders = FindObjectsOfType<PrefabHolder>();
+        foreach (PrefabHolder prefabHolder in prefabHolders)
+        {
+            prefabHolder.LateDestroy();
         }
     }
 
