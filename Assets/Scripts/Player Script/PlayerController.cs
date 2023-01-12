@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public enum MoveDirection
 {
@@ -138,12 +139,13 @@ public class PlayerController : MonoBehaviour
     {
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Began && !ShouldDiscardSwipe(touch.position))
             {
                 startTouchPos = touch.position;
             }
 
-            if (touch.phase == TouchPhase.Ended && startTouchPos != Vector2.zero)
+            if (touch.phase == TouchPhase.Ended && 
+                startTouchPos != Vector2.zero)
             {
                 endTouchPos = touch.position;
                 return GetMobileTouchDirection();
@@ -153,11 +155,27 @@ public class PlayerController : MonoBehaviour
         return MoveDirection.None;
     }
 
+    // Used to define if any GUI is below touch position
+    private bool ShouldDiscardSwipe(Vector2 touchPos)
+    {
+        PointerEventData touch = new PointerEventData(EventSystem.current)
+        {
+            position = touchPos
+        };
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(touch, raycastResults);
+
+        // Debug.Log(raycastResults.Count > 0);
+        return (raycastResults.Count > 0);
+    }
+
     private MoveDirection GetMobileTouchDirection()
     {
         Vector2 diff = endTouchPos - startTouchPos;
         Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
         bool xDiffBigger = absDiff.x > absDiff.y;
+        startTouchPos = Vector2.zero;
 
         if (diff.magnitude < MAX_TOUCH_VECTOR_MAGNITUDE)
         {

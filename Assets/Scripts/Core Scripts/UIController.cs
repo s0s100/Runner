@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 // Control UI elements on the game scene and update time scale
 public class UIController : MonoBehaviour
@@ -24,12 +25,14 @@ public class UIController : MonoBehaviour
 
     public void PauseGame()
     {
+        gameMenu.SetActive(false);
         pauseMenu.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void ResumeGame()
     {
+        gameMenu.SetActive(true);
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }
