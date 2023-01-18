@@ -26,4 +26,9 @@ public class CoinController : MonoBehaviour
     {
 
     }
+
+    public int GetCoinAmount()
+    {
+        return coinsThisRound;
+    }
 }

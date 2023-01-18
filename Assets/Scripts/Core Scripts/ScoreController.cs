@@ -5,6 +5,8 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
+    private int curScore;
+
     [SerializeField]
     private TMP_Text scoreText;
     // Score is connected to the camera position
@@ -19,7 +21,12 @@ public class ScoreController : MonoBehaviour
     private void Update()
     {
         float travelledDistance = camera.transform.position.x;
-        int newScore = (int) (travelledDistance * 10);
-        scoreText.text = newScore.ToString();
+        curScore = (int) (travelledDistance * 10);
+        scoreText.text = curScore.ToString();
+    }
+
+    public int GetScore()
+    {
+        return curScore;
     }
 }

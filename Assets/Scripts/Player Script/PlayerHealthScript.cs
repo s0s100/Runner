@@ -30,7 +30,7 @@ public class PlayerHealthScript : MonoBehaviour
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         uiController = FindObjectOfType<UIController>();
         particleSystem = GetComponentInChildren<ParticleSystem>();
-        healthText = uiController.getHealthText();
+        healthText = uiController.GetHealthText();
         healthText.text = curHealth.ToString();
     }
 
