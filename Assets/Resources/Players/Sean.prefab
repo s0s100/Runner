@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6650130834204407428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.592, z: 0}
-  m_LocalScale: {x: 2.522539, y: 2.522539, z: 2.522539}
+  m_LocalPosition: {x: 0, y: -0.289, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2332239449244009779}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 78b0284e241824f51bb6e66a8913f604, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6812bff95aa5b40b28e38aa4f9d92b84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ Animator:
   m_GameObject: {fileID: 6650130834204407428}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f82e4f86b7c5b4fe799de37d07c14c0c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1922b0d5a3ff90147b3b3e3776bccad2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -170,18 +170,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0038292557, y: 0.0052928627}
+  m_Offset: {x: 0.00017241202, y: 0.0016360469}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4, y: 0.4}
+    oldSize: {x: 0.1, y: 0.1}
     newSize: {x: 0.1, y: 0.1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.14389369, y: 0.33052462}
+  m_Size: {x: 0.034188967, y: 0.08290545}
   m_EdgeRadius: 0
 --- !u!1 &6650130834700845037
 GameObject:
@@ -229,7 +229,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12414926, y: 1.3296795}
+  m_Offset: {x: -0.13079804, y: 2.5991194}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -240,7 +240,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2247104, y: 0.14899254}
+  m_Size: {x: 0.048043042, y: 0.054959774}
   m_EdgeRadius: 0
 --- !u!114 &6650130834700845035
 MonoBehaviour:
