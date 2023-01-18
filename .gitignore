@@ -118,4 +118,5 @@ Blog
 About
 
 # Ignore Mesh Pro
-**/TextMesh*Pro
+/Assets/External*Resources/TextMesh*Pro/
+Assets/External Resources/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Electronic Highway Sign SDF.asset
