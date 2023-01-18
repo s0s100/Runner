@@ -7,12 +7,20 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 // Control UI elements on the game scene and update time scale
+// Also update responsible for displaying result score /coins
 public class UIController : MonoBehaviour
 {
     private const float TIME_BEFORE_LATE_GAME_PAUSE = 2.0f;
     private const int MAIN_MENU_SCENE_NUMBER = 0;
     private const int GAME_SCENE_NUMBER = 1;
 
+    // Defeat fields
+    [SerializeField]
+    private TMP_Text scoreResult;
+    [SerializeField]
+    private TMP_Text coinResult;
+
+    // Menu links
     [SerializeField]
     private TMP_Text healthText;
     [SerializeField]
@@ -23,6 +31,37 @@ public class UIController : MonoBehaviour
     private GameObject defeatMenu;
     [SerializeField]
     private BlinkingText startGameText;
+
+    // Score/coin controllers
+    private ScoreController scoreController;
+    private CoinController coinController;
+
+    // Used to update coin/score values after defeat
+    private bool isFillingData = false;
+    private float curScoreDefeat = 0.0f;
+    private float curCoinsDefeat = 0.0f;
+    private float scoreSpeedDefeat = 10.0f; // How fast does the value changes
+    private float coinSpeedDefeat = 1.0f; // How fast does the value changes
+
+
+    private void Start()
+    {
+        scoreController = FindObjectOfType<ScoreController>();
+        coinController = FindObjectOfType<CoinController>();
+        this.enabled = false;
+    }
+
+    private void Update()
+    {
+        CoinTextUpdate();
+        ScoreTextUpdate();
+    
+        if (Input.anyKey)
+        {
+            InstaUpdate();
+            this.enabled = false;
+        }
+    }
 
     public void PauseGame()
     {
@@ -54,6 +93,8 @@ public class UIController : MonoBehaviour
     {
         yield return new WaitForSeconds(TIME_BEFORE_LATE_GAME_PAUSE);
         Time.timeScale = 0.0f;
+        // isFillingData = true;
+        this.enabled = true;
     }
 
     public void MainMenu()
@@ -67,7 +108,7 @@ public class UIController : MonoBehaviour
         startGameText.gameObject.SetActive(false);
     }
 
-    public TMP_Text getHealthText()
+    public TMP_Text GetHealthText()
     {
         return healthText;
     }
@@ -85,5 +126,31 @@ public class UIController : MonoBehaviour
 
         // Debug.Log(raycastResults.Count > 0);
         return (raycastResults.Count > 0);
+    }
+
+    private void CoinTextUpdate()
+    {
+        if (curCoinsDefeat < coinController.GetCoinAmount())
+        {
+            curCoinsDefeat += Time.fixedUnscaledDeltaTime * coinSpeedDefeat;
+            string resultString = "0 + " + ((int) curCoinsDefeat).ToString();
+            coinResult.text = resultString;
+        }
+    }
+
+    private void ScoreTextUpdate()
+    {
+        if (curScoreDefeat < scoreController.GetScore())
+        {
+            curScoreDefeat += Time.fixedUnscaledDeltaTime * scoreSpeedDefeat;
+            scoreResult.text =  ((int) curScoreDefeat).ToString();
+        }
+    }
+
+    private void InstaUpdate()
+    {
+        string resultString = "0 + " + coinController.GetCoinAmount().ToString();
+        coinResult.text = resultString;
+        scoreResult.text = scoreController.GetScore().ToString();
     }
 }
