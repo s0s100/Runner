@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 86052d48c91b2a0469bbdda3cccb1492, type: 3}
-  m_Color: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
+  m_Color: {r: 0.9811321, g: 0.4026344, b: 0.4026344, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519b153c1c4bb214197927fb4aa7bab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombiePrefab: {fileID: 78602729335701152, guid: cfe1fe98f48c26e40b4d2753585d637e, type: 3}
+  zombiePrefab: {fileID: 1380409293764219637, guid: 373f7b1867e554758ae808c106635402, type: 3}
