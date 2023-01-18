@@ -1267,11 +1267,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8293180534710742063, guid: 6aafe5a856a26ce42b16a057bef9d2f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.14
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 8293180534710742063, guid: 6aafe5a856a26ce42b16a057bef9d2f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: -0.00999999
       objectReference: {fileID: 0}
     - target: {fileID: 8293180534710742063, guid: 6aafe5a856a26ce42b16a057bef9d2f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1374,7 +1374,7 @@ MonoBehaviour:
   generatedEnemyParent: {fileID: 1679250090}
   generatedProjectiles: {fileID: 409410292}
   backgroundController: {fileID: 590038141}
-  playerPrefab: {fileID: 6650130834204407428, guid: 8dbcc5b3702bd446a8b3c6e9012fcdaf, type: 3}
+  playerPrefab: {fileID: 6650130834204407428, guid: b67156b7b01bb4176b3ccf8038d23f88, type: 3}
   biomeHolders:
   - {fileID: 3227328140635113850, guid: fa82c0c7496b1314eb9ae9aff83f2c6f, type: 3}
   timeBeforeNewBiome: 60
