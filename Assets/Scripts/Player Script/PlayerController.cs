@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private GameController gameController;
     private LevelGenerator levelGenerator;
     private AmmoController ammoController;
+    private UIController uiController;
 
     // Mobile touch info
     private Vector2 startTouchPos;
@@ -77,6 +78,7 @@ public class PlayerController : MonoBehaviour
         levelGenerator = FindObjectOfType<LevelGenerator>();
         camera = FindObjectOfType<Camera>();
         ammoController = FindObjectOfType<AmmoController>();
+        uiController = FindObjectOfType<UIController>();
 
         moveSpeed = gameController.GetGameSpeed();
         enabled = false;
@@ -138,12 +140,13 @@ public class PlayerController : MonoBehaviour
     {
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Began && !uiController.ShouldDiscardSwipe(touch.position))
             {
                 startTouchPos = touch.position;
             }
 
-            if (touch.phase == TouchPhase.Ended && startTouchPos != Vector2.zero)
+            if (touch.phase == TouchPhase.Ended && 
+                startTouchPos != Vector2.zero)
             {
                 endTouchPos = touch.position;
                 return GetMobileTouchDirection();
@@ -158,6 +161,7 @@ public class PlayerController : MonoBehaviour
         Vector2 diff = endTouchPos - startTouchPos;
         Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
         bool xDiffBigger = absDiff.x > absDiff.y;
+        startTouchPos = Vector2.zero;
 
         if (diff.magnitude < MAX_TOUCH_VECTOR_MAGNITUDE)
         {
