@@ -113,9 +113,11 @@ public class LevelGenerator : MonoBehaviour
             // Calculate new prefab position prefab position
             float xNewPos = lastPrefabX + newPrefabInfo.XBefore;
             xNewPos += (lastPrefabInfo.GetXSize() / 2);
+            xNewPos += lastPrefabInfo.GetXOffset();
             xNewPos -= newPrefabInfo.GetXOffset();
 
             float yNewPos = lastPrefabY - newPrefabInfo.YBefore;
+            yNewPos += lastPrefabInfo.GetYOffset();
             yNewPos -= newPrefabInfo.GetYOffset();
 
             Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
