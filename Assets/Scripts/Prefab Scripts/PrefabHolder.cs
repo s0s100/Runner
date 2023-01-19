@@ -17,6 +17,10 @@ public class PrefabHolder : MonoBehaviour
     [SerializeField]
     public float YBefore;
 
+    // Y difference between start and end of the block;
+    //[SerializeField]
+    //public float YDiff;
+
     private void Start()
     {
         gameController = FindObjectOfType<GameController>();
@@ -30,6 +34,16 @@ public class PrefabHolder : MonoBehaviour
     public float GetXSize()
     {
         return GetComponent<BoxCollider2D>().bounds.size.x;
+    }
+
+    public float GetXOffset()
+    {
+        return GetComponent<BoxCollider2D>().offset.x;
+    }
+
+    public float GetYOffset()
+    {
+        return GetComponent<BoxCollider2D>().offset.y;
     }
 
     public void LateDestroy()
