@@ -133,8 +133,7 @@ public class UIController : MonoBehaviour
         if (curCoinsDefeat < coinController.GetCoinAmount())
         {
             curCoinsDefeat += Time.fixedUnscaledDeltaTime * coinSpeedDefeat;
-            string resultString = "0 + " + ((int) curCoinsDefeat).ToString();
-            coinResult.text = resultString;
+            coinResult.text = ((int)curCoinsDefeat).ToString();
         }
     }
 
@@ -149,8 +148,7 @@ public class UIController : MonoBehaviour
 
     private void InstaUpdate()
     {
-        string resultString = "0 + " + coinController.GetCoinAmount().ToString();
-        coinResult.text = resultString;
+        coinResult.text = coinController.GetCoinAmount().ToString();
         scoreResult.text = scoreController.GetScore().ToString();
     }
 }
