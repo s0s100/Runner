@@ -119,6 +119,7 @@ public class LevelGenerator : MonoBehaviour
             float yNewPos = lastPrefabY - newPrefabInfo.YBefore;
             yNewPos += lastPrefabInfo.GetYOffset();
             yNewPos -= newPrefabInfo.GetYOffset();
+            yNewPos += lastPrefabInfo.YDiff;
 
             Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
 

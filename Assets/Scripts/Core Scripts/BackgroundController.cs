@@ -7,8 +7,8 @@ public class BackgroundController : MonoBehaviour
 {
     [SerializeField]
     private GameObject backgroundParent;
-    [SerializeField]
-    private GameObject fogObject;
+    //[SerializeField]
+    //private GameObject fogObject;
 
     // Fog
     // Green biome doesn't contain fog, while red biome does
@@ -33,38 +33,39 @@ public class BackgroundController : MonoBehaviour
     private void Update()
     {
         MoveFront();
-        
-        if (isChangingBiome)
-        {
-            FogHider();
-        }
+        // Required another visual update
+
+        //if (isChangingBiome)
+        //{
+        //    FogHider();
+        //}
     }
 
-    private void FogHider()
-    {
-        SpriteRenderer spriteRenderer = fogObject.GetComponent<SpriteRenderer>();
-        Color color = spriteRenderer.color;
+    //private void FogHider()
+    //{
+    //    SpriteRenderer spriteRenderer = fogObject.GetComponent<SpriteRenderer>();
+    //    Color color = spriteRenderer.color;
 
-        color.a += opacitySpeed * Time.deltaTime;
+    //    color.a += opacitySpeed * Time.deltaTime;
         
-        if (color.a >= 1.0f)
-        {
-            opacitySpeed = -opacitySpeed;
-            // Debug.Log("Middle execution, value:" + color.a);
-            SetBackImage();
-            SetFrontImage();
+    //    if (color.a >= 1.0f)
+    //    {
+    //        opacitySpeed = -opacitySpeed;
+    //        // Debug.Log("Middle execution, value:" + color.a);
+    //        SetBackImage();
+    //        SetFrontImage();
             
-        } else if (color.a <= 0.0f)
-        {
+    //    } else if (color.a <= 0.0f)
+    //    {
 
-            color.a = 0.0f;
-            opacitySpeed = -opacitySpeed;
-            // Debug.Log("Stopped executing, value:" + color.a);
-            isChangingBiome = false;
-        }
+    //        color.a = 0.0f;
+    //        opacitySpeed = -opacitySpeed;
+    //        // Debug.Log("Stopped executing, value:" + color.a);
+    //        isChangingBiome = false;
+    //    }
 
-        spriteRenderer.color = color;
-    }
+    //    spriteRenderer.color = color;
+    //}
 
     private void MoveFront()
     {
