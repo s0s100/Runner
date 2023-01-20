@@ -18,8 +18,8 @@ public class PrefabHolder : MonoBehaviour
     public float YBefore;
 
     // Y difference between start and end of the block;
-    //[SerializeField]
-    //public float YDiff;
+    [SerializeField]
+    public float YDiff;
 
     private void Start()
     {

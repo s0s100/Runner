@@ -5,6 +5,8 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
+    private static string MAX_SCORE_STORAGE = "MaxScore";
+
     private int curScore;
 
     [SerializeField]
@@ -28,5 +30,21 @@ public class ScoreController : MonoBehaviour
     public int GetScore()
     {
         return curScore;
+    }
+
+    public static int GetMaxScore()
+    {
+        return PlayerPrefs.GetInt(MAX_SCORE_STORAGE);
+    }
+    
+    public bool UpdateMaxScore()
+    {
+        if (curScore > GetMaxScore())
+        {
+            PlayerPrefs.SetInt(MAX_SCORE_STORAGE ,curScore);
+            return true;
+        }
+
+        return false;
     }
 }
