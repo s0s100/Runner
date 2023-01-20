@@ -38,7 +38,7 @@ public class CoinController : MonoBehaviour
         return coinsThisRound;
     }
 
-    public int GetTotalAmount()
+    public static int GetTotalAmount()
     {
         return PlayerPrefs.GetInt(COIN_STORAGE);
     }

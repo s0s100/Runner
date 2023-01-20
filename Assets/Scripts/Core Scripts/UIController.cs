@@ -18,6 +18,8 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private TMP_Text scoreResultText;
     [SerializeField]
+    private TMP_Text lastResultText;
+    [SerializeField]
     private TMP_Text currentCoinsText;
     [SerializeField]
     private TMP_Text coinsAddedText;
@@ -54,9 +56,7 @@ public class UIController : MonoBehaviour
     }
 
     private void Update()
-    {
-        TextUpdate();
-    
+    {    
         if (Input.anyKey)
         {
             InstaTextUpdate();
@@ -95,6 +95,7 @@ public class UIController : MonoBehaviour
     private IEnumerator LateGameStop()
     {
         yield return new WaitForSeconds(TIME_BEFORE_LATE_GAME_PAUSE);
+        TextUpdate();
         Time.timeScale = 0.0f;
         // isFillingData = true;
         this.enabled = true;
@@ -134,16 +135,28 @@ public class UIController : MonoBehaviour
 
     private void TextUpdate()
     {
-        int coinsBeforeAdding = coinController.GetTotalAmount() - coinController.GetCoinsAdded();
+        int coinsBeforeAdding = CoinController.GetTotalAmount() - coinController.GetCoinsAdded();
         currentCoinsText.text = coinsBeforeAdding.ToString();
         coinsAddedText.text = "+ " + coinController.GetCoinsAdded().ToString();
 
         scoreResultText.text = scoreController.GetScore().ToString();
+
+        string output;
+        if (scoreController.UpdateMaxScore())
+        {
+            output = "New record!";
+        } else
+        {
+            output = "Best record: " + ScoreController.GetMaxScore();
+            lastResultText.color = new Color(255,100,100);
+        }
+
+        lastResultText.text = output;
     }
 
     private void InstaTextUpdate()
     {
-        currentCoinsText.text = coinController.GetTotalAmount().ToString();
+        currentCoinsText.text = CoinController.GetTotalAmount().ToString();
         coinsAddedText.text = "";
 
         scoreResultText.text = scoreController.GetScore().ToString();
