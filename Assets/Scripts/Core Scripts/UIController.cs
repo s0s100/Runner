@@ -10,15 +10,17 @@ using UnityEngine.EventSystems;
 // Also update responsible for displaying result score /coins
 public class UIController : MonoBehaviour
 {
-    private const float TIME_BEFORE_LATE_GAME_PAUSE = 2.0f;
+    private const float TIME_BEFORE_LATE_GAME_PAUSE = 1.0f;
     private const int MAIN_MENU_SCENE_NUMBER = 0;
     private const int GAME_SCENE_NUMBER = 1;
 
     // Defeat fields
     [SerializeField]
-    private TMP_Text scoreResult;
+    private TMP_Text scoreResultText;
     [SerializeField]
-    private TMP_Text coinResult;
+    private TMP_Text currentCoinsText;
+    [SerializeField]
+    private TMP_Text coinsAddedText;
 
     // Menu links
     [SerializeField]
@@ -37,11 +39,11 @@ public class UIController : MonoBehaviour
     private CoinController coinController;
 
     // Used to update coin/score values after defeat
-    private bool isFillingData = false;
-    private float curScoreDefeat = 0.0f;
-    private float curCoinsDefeat = 0.0f;
-    private float scoreSpeedDefeat = 10.0f; // How fast does the value changes
-    private float coinSpeedDefeat = 1.0f; // How fast does the value changes
+    //private bool isFillingData = false;
+    //private float curScoreDefeat = 0.0f;
+    //private float curCoinsDefeat = 0.0f;
+    //private float scoreSpeedDefeat = 10.0f; // How fast does the value changes
+    //private float coinSpeedDefeat = 1.0f; // How fast does the value changes
 
 
     private void Start()
@@ -53,12 +55,11 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        CoinTextUpdate();
-        ScoreTextUpdate();
+        TextUpdate();
     
         if (Input.anyKey)
         {
-            InstaUpdate();
+            InstaTextUpdate();
             this.enabled = false;
         }
     }
@@ -79,6 +80,7 @@ public class UIController : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1.0f;
+        coinController.StoreCoins();
         SceneManager.LoadScene(GAME_SCENE_NUMBER);
     }
 
@@ -86,6 +88,7 @@ public class UIController : MonoBehaviour
     {
         defeatMenu.SetActive(true);
         gameMenu.SetActive(false);
+        coinController.StoreCoins();
         StartCoroutine(LateGameStop());
     }
 
@@ -99,6 +102,7 @@ public class UIController : MonoBehaviour
 
     public void MainMenu()
     {
+        coinController.StoreCoins();
         SceneManager.LoadScene(MAIN_MENU_SCENE_NUMBER);
     }
 
@@ -128,27 +132,20 @@ public class UIController : MonoBehaviour
         return (raycastResults.Count > 0);
     }
 
-    private void CoinTextUpdate()
+    private void TextUpdate()
     {
-        if (curCoinsDefeat < coinController.GetCoinAmount())
-        {
-            curCoinsDefeat += Time.fixedUnscaledDeltaTime * coinSpeedDefeat;
-            coinResult.text = ((int)curCoinsDefeat).ToString();
-        }
+        int coinsBeforeAdding = coinController.GetTotalAmount() - coinController.GetCoinsAdded();
+        currentCoinsText.text = coinsBeforeAdding.ToString();
+        coinsAddedText.text = "+ " + coinController.GetCoinsAdded().ToString();
+
+        scoreResultText.text = scoreController.GetScore().ToString();
     }
 
-    private void ScoreTextUpdate()
+    private void InstaTextUpdate()
     {
-        if (curScoreDefeat < scoreController.GetScore())
-        {
-            curScoreDefeat += Time.fixedUnscaledDeltaTime * scoreSpeedDefeat;
-            scoreResult.text =  ((int) curScoreDefeat).ToString();
-        }
-    }
+        currentCoinsText.text = coinController.GetTotalAmount().ToString();
+        coinsAddedText.text = "";
 
-    private void InstaUpdate()
-    {
-        coinResult.text = coinController.GetCoinAmount().ToString();
-        scoreResult.text = scoreController.GetScore().ToString();
+        scoreResultText.text = scoreController.GetScore().ToString();
     }
 }
