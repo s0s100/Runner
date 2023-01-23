@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     private UIController uiController;
 
     // Mobile touch info
+    private bool isTouching;
     private Vector2 startTouchPos;
-    private Vector2 endTouchPos;
 
     // X-Movement variables
     private float dashSpeed = 8.0f;
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             moveDir = PlayerMobileControl();
         }
-        
+
         MakeAction(moveDir);
         MovePlayer();
         DashPlayer();
@@ -138,19 +138,15 @@ public class PlayerController : MonoBehaviour
 
     private MoveDirection PlayerMobileControl()
     {
-        foreach (Touch touch in Input.touches)
+        if (!isTouching && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
-            if (touch.phase == TouchPhase.Began && !uiController.ShouldDiscardSwipe(touch.position))
-            {
-                startTouchPos = touch.position;
-            }
+            isTouching = true;
+            startTouchPos = Input.touches[0].position;
+        }
 
-            if (touch.phase == TouchPhase.Ended && 
-                startTouchPos != Vector2.zero)
-            {
-                endTouchPos = touch.position;
-                return GetMobileTouchDirection();
-            }
+        if (isTouching && Input.touchCount > 0)
+        {
+            return GetMobileTouchDirection();
         }
 
         return MoveDirection.None;
@@ -158,34 +154,41 @@ public class PlayerController : MonoBehaviour
 
     private MoveDirection GetMobileTouchDirection()
     {
-        Vector2 diff = endTouchPos - startTouchPos;
+        Vector2 diff = Input.touches[0].position - startTouchPos;
         Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
         bool xDiffBigger = absDiff.x > absDiff.y;
-        startTouchPos = Vector2.zero;
 
         if (diff.magnitude < MAX_TOUCH_VECTOR_MAGNITUDE)
         {
-            return MoveDirection.Middle;
-        }
-
-        if (xDiffBigger)
-        {
-            if (diff.x > 0)
+            if (Input.touches[0].phase == TouchPhase.Ended)
             {
-                return MoveDirection.Right;
-            } else
-            {
-                return MoveDirection.Left;
+                isTouching = false;
+                return MoveDirection.Middle;
             }
         } else
         {
-            if (diff.y > 0)
+            isTouching = false;
+            if (xDiffBigger)
             {
-                return MoveDirection.Up;
+                if (diff.x > 0)
+                {
+                    return MoveDirection.Right;
+                }
+                else
+                {
+                    return MoveDirection.Left;
+                }
             }
-            else if (diff.y < 0)
+            else
             {
-                return MoveDirection.Down;
+                if (diff.y > 0)
+                {
+                    return MoveDirection.Up;
+                }
+                else if (diff.y < 0)
+                {
+                    return MoveDirection.Down;
+                }
             }
         }
 

@@ -32,6 +32,9 @@ public class GameController : MonoBehaviour
         // This is the first generated object: Start location
         GameObject lastGeneratedPrefab = levelGenerator.GetLastGeneratedPrefab();
         startPosition = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+
+        // Increase max FPS to 60 (for every platform for now)
+        Application.targetFrameRate = 60;
     }
     
     void Update()
