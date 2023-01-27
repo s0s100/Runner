@@ -15,21 +15,24 @@ public class PlayerHealthScript : MonoBehaviour
     private float invulnerabilityTime = 1.0f;
     private int curHealth = START_HEALTH;
 
+    private LevelGenerator levelGenerator;
     private GameController gameController;
     private SpriteRenderer playerSpriteRenderer;
     private float curInvulnerability = 0.0f;
     private bool isIncreasingTransparency = false;
 
     private Animator animator;
-    private new ParticleSystem particleSystem;
+
+    [SerializeField]
+    private GameObject bloodObject;
 
     private void Start()
     {
+        levelGenerator = FindObjectOfType<LevelGenerator>();
         animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         uiController = FindObjectOfType<UIController>();
-        particleSystem = GetComponentInChildren<ParticleSystem>();
         healthText = uiController.GetHealthText();
         healthText.text = curHealth.ToString();
     }
@@ -44,7 +47,8 @@ public class PlayerHealthScript : MonoBehaviour
     {
         if (curInvulnerability <= 0)
         {
-            particleSystem.Play();
+            CreateBlood();
+
             animator.SetBool("IsDamaged", true);
             isIncreasingTransparency = false;
             curInvulnerability = invulnerabilityTime;
@@ -57,6 +61,14 @@ public class PlayerHealthScript : MonoBehaviour
                 PlayerKillAnimation();
             }
         }
+    }
+
+    private void CreateBlood()
+    {
+        GameObject newBlood = Instantiate(bloodObject);
+        newBlood.transform.position = transform.position;
+        newBlood.transform.parent = levelGenerator.GetAnimationParent().transform;
+        newBlood.GetComponent<ParticleSystem>().Play();
     }
 
     private void PlayerKillAnimation()

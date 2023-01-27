@@ -1448,6 +1448,7 @@ MonoBehaviour:
   generatedObjectsParent: {fileID: 777023815}
   generatedEnemyParent: {fileID: 1679250090}
   generatedProjectiles: {fileID: 409410292}
+  generatedAnimations: {fileID: 943088948}
   backgroundController: {fileID: 590038141}
   playerPrefab: {fileID: 6650130834204407428, guid: 8dbcc5b3702bd446a8b3c6e9012fcdaf, type: 3}
   biomeHolders:
@@ -1513,7 +1514,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundParent: {fileID: 1982820560}
-  fogObject: {fileID: 0}
 --- !u!114 &590038142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2014,6 +2014,7 @@ Transform:
   - {fileID: 803827386}
   - {fileID: 1679250091}
   - {fileID: 409410293}
+  - {fileID: 943088949}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2426,6 +2427,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846360451}
   m_CullTransparentMesh: 1
+--- !u!1 &943088948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 943088949}
+  m_Layer: 0
+  m_Name: Animations/Particles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &943088949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943088948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 717552095}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &980544375
 GameObject:
   m_ObjectHideFlags: 0

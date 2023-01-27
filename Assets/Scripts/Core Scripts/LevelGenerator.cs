@@ -33,6 +33,8 @@ public class LevelGenerator : MonoBehaviour
     private GameObject generatedEnemyParent;
     [SerializeField]
     private GameObject generatedProjectiles;
+    [SerializeField]
+    private GameObject generatedAnimations;
 
     // Attached objects
     [SerializeField]
@@ -210,6 +212,12 @@ public class LevelGenerator : MonoBehaviour
     public GameObject GetEnemyParent()
     {
         return generatedEnemyParent;
+    }
+
+
+    public GameObject GetAnimationParent()
+    {
+        return generatedAnimations;
     }
 
     // Return min distance for camera
