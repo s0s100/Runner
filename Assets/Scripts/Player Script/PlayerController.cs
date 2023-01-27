@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private UIController uiController;
 
     // Mobile touch info
-    private bool isTouching;
     private Vector2 startTouchPos;
 
     // X-Movement variables
@@ -138,13 +137,17 @@ public class PlayerController : MonoBehaviour
 
     private MoveDirection PlayerMobileControl()
     {
-        if (!isTouching && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        bool doesTouchCounts = Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began
+            && !uiController.ShouldDiscardSwipe(Input.touches[0].position);
+
+        if (doesTouchCounts)
         {
-            isTouching = true;
             startTouchPos = Input.touches[0].position;
         }
 
-        if (isTouching && Input.touchCount > 0)
+        bool doesTouchContinues = startTouchPos != Vector2.zero;
+
+        if (doesTouchContinues)
         {
             return GetMobileTouchDirection();
         }
@@ -154,6 +157,7 @@ public class PlayerController : MonoBehaviour
 
     private MoveDirection GetMobileTouchDirection()
     {
+
         Vector2 diff = Input.touches[0].position - startTouchPos;
         Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
         bool xDiffBigger = absDiff.x > absDiff.y;
@@ -162,12 +166,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.touches[0].phase == TouchPhase.Ended)
             {
-                isTouching = false;
+                startTouchPos = Vector2.zero;
                 return MoveDirection.Middle;
             }
         } else
         {
-            isTouching = false;
+            startTouchPos = Vector2.zero;
             if (xDiffBigger)
             {
                 if (diff.x > 0)
