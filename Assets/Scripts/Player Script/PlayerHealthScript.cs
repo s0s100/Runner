@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// Health and condition controller
 public class PlayerHealthScript : MonoBehaviour
 {
     private const int START_HEALTH = 3;

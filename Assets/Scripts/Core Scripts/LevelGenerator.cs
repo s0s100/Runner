@@ -74,7 +74,7 @@ public class LevelGenerator : MonoBehaviour
             UpdateBiome();
         }
 
-        LevelGeneration();
+        GenerateLocation();
     }
 
     private void GeneratePlayer()
@@ -83,12 +83,7 @@ public class LevelGenerator : MonoBehaviour
         playerObject.transform.position = START_PLAYER_POSITION;
     }
 
-    private void LevelGeneration()
-    {
-        GenerateLevel();
-    }
-
-    private void GenerateLevel()
+    private void GenerateLocation()
     {
         PrefabHolder lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabHolder>();
         float lastPrefabX = lastGeneratedPrefab.transform.position.x;
