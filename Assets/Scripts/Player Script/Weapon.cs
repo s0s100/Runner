@@ -41,7 +41,7 @@ public class Weapon : MonoBehaviour
 
             if (curAmmo == 0)
             {
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
     }

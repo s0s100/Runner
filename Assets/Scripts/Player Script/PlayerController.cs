@@ -18,8 +18,9 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private GameController gameController;
     private LevelGenerator levelGenerator;
-    private AmmoController ammoController;
+    // private AmmoController ammoController;
     private UIController uiController;
+    private Weapon weapon;
 
     // Mobile touch info
     private Vector2 startTouchPos;
@@ -70,13 +71,14 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
+        weapon = GetComponentInChildren<Weapon>();
         rigidbody = this.GetComponent<Rigidbody2D>();
         collider = this.GetComponent<BoxCollider2D>();
         animator = this.GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
         camera = FindObjectOfType<Camera>();
-        ammoController = FindObjectOfType<AmmoController>();
+        // ammoController = FindObjectOfType<AmmoController>();
         uiController = FindObjectOfType<UIController>();
 
         moveSpeed = gameController.GetGameSpeed();
@@ -272,34 +274,15 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (ammoController.IsAttackPossible())
+        if (weapon != null)
         {
-            animator.SetTrigger("IsAttacking");
-            curAttackCooldown = attackCooldown;
-            MakeProjectile();
+            weapon.Shoot();
         }
     }
 
-    private void MakeProjectile()
+    public void NotifyAboutWeapon(Weapon newWeapon)
     {
-        GameObject newProjectile = Instantiate(projectile);
-        Vector3 position = transform.position;
-        position.x += xProjectileShift;
-        newProjectile.transform.position = position;
-        levelGenerator.SetProjectileParent(newProjectile);
-        ammoController.RemoveAmmo();
-    }
-
-    // Creates projectile after some delay
-    public void MakeLateProjectile(float waitDuration)
-    {
-        StartCoroutine(WaitBeforeThrowing(waitDuration));
-    }
-
-    IEnumerator WaitBeforeThrowing(float animationLength)
-    {
-        yield return new WaitForSeconds(animationLength);
-        MakeProjectile();
+        weapon = newWeapon;
     }
 
     private void SetGravity(bool isEnabled)
