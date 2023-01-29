@@ -1,28 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 // Health and condition controller
 public class PlayerHealthScript : MonoBehaviour
 {
-    private const int START_HEALTH = 3;
     private const float MIN_SPRITE_TRANSPARENCY = 0.5f;
-    private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;
+    private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;    
 
-    private UIController uiController;
-    private TMP_Text healthText;
-
+    private int maxHealth = 3;
+    private int curHealth = 2;
     private float invulnerabilityTime = 1.0f;
-    private int curHealth = START_HEALTH;
-
-    private LevelGenerator levelGenerator;
-    private GameController gameController;
-    private SpriteRenderer playerSpriteRenderer;
     private float curInvulnerability = 0.0f;
     private bool isIncreasingTransparency = false;
 
+    private UIController uiController;
+    private LevelGenerator levelGenerator;
+    private GameController gameController;
+    private SpriteRenderer playerSpriteRenderer;
     private Animator animator;
+    private PlayerDataScreen playerDataScreen;
 
     [SerializeField]
     private GameObject bloodObject;
@@ -34,8 +31,10 @@ public class PlayerHealthScript : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         uiController = FindObjectOfType<UIController>();
-        healthText = uiController.GetHealthText();
-        healthText.text = curHealth.ToString();
+        playerDataScreen = FindObjectOfType<PlayerDataScreen>();
+
+        playerDataScreen.SetMaxHealth(maxHealth);
+        playerDataScreen.SetCurHealth(curHealth);
     }
 
     private void Update()
@@ -54,7 +53,8 @@ public class PlayerHealthScript : MonoBehaviour
             isIncreasingTransparency = false;
             curInvulnerability = invulnerabilityTime;
             curHealth--;
-            healthText.text = curHealth.ToString();
+
+            playerDataScreen.GetDamage();
 
             if (curHealth == 0)
             {
