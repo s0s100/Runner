@@ -14,13 +14,17 @@ public class Weapon : MonoBehaviour
     private float curReload;
 
     private LevelGenerator levelGenerator;
+    private PlayerDataScreen playerDataScreen;
     private int curAmmo;
 
     // Start is called before the first frame update
     void Start()
     {
         levelGenerator = FindObjectOfType<LevelGenerator>();
+        playerDataScreen = FindObjectOfType<PlayerDataScreen>();
+
         curAmmo = maxAmmo;
+        playerDataScreen.FillAmmoBar();
     }
 
     private void Update()
@@ -38,6 +42,8 @@ public class Weapon : MonoBehaviour
             CreateProjectile();
             curReload = shootingSpeed;
             curAmmo--;
+
+            playerDataScreen.SetAmmoCounter(curAmmo, maxAmmo);
 
             if (curAmmo == 0)
             {

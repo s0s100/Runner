@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class PlayerDataScreen : MonoBehaviour
 {
     // Weapon info
+    private float ammoPercentage; // Between 0 and 1
+
     [SerializeField]
     private GameObject weaponIcon;
     [SerializeField]
-    private GameObject ammoBar;
+    private Image ammoBar;
 
     // Health info
     private int curHealth;
@@ -67,5 +69,16 @@ public class PlayerDataScreen : MonoBehaviour
             Animator animator = hearthImages[curHealth].GetComponent<Animator>();
             animator.SetTrigger("RestoreHearth");
         }
+    }
+
+    public void FillAmmoBar()
+    {
+        ammoBar.fillAmount = 1.0f;
+    }
+
+    public void SetAmmoCounter(int curAmmo, int maxAmmo)
+    {
+        float result = (float)curAmmo / (float)maxAmmo;
+        ammoBar.fillAmount = result;
     }
 }
