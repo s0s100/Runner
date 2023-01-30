@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Weapon : MonoBehaviour
     private float shootingSpeed;
     [SerializeField]
     private float curReload;
+    [SerializeField]
+    private Sprite weaponSprite;
 
     private LevelGenerator levelGenerator;
     private PlayerDataScreen playerDataScreen;
@@ -25,6 +28,12 @@ public class Weapon : MonoBehaviour
 
         curAmmo = maxAmmo;
         playerDataScreen.FillAmmoBar();
+        playerDataScreen.UpdateWeaponImage(weaponSprite);
+    }
+
+    private void OnDestroy()
+    {
+        playerDataScreen.SetEmptyHandIcon();
     }
 
     private void Update()

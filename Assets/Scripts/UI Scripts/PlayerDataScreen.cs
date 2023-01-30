@@ -10,9 +10,11 @@ public class PlayerDataScreen : MonoBehaviour
     private float ammoPercentage; // Between 0 and 1
 
     [SerializeField]
-    private GameObject weaponIcon;
+    private Image weaponIcon;
     [SerializeField]
     private Image ammoBar;
+    [SerializeField]
+    private Sprite emptyHand;
 
     // Health info
     private int curHealth;
@@ -80,5 +82,15 @@ public class PlayerDataScreen : MonoBehaviour
     {
         float result = (float)curAmmo / (float)maxAmmo;
         ammoBar.fillAmount = result;
+    }
+
+    public void UpdateWeaponImage(Sprite weaponImage)
+    {
+        weaponIcon.sprite = weaponImage;
+    }
+
+    public void SetEmptyHandIcon()
+    {
+        weaponIcon.sprite = emptyHand;
     }
 }
