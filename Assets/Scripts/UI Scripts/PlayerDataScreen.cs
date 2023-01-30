@@ -91,6 +91,9 @@ public class PlayerDataScreen : MonoBehaviour
 
     public void SetEmptyHandIcon()
     {
-        weaponIcon.sprite = emptyHand;
+        if (weaponIcon != null)
+        {
+            weaponIcon.sprite = emptyHand;
+        }
     }
 }

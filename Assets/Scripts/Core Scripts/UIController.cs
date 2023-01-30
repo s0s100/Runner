@@ -35,6 +35,8 @@ public class UIController : MonoBehaviour
     private GameObject defeatMenu;
     [SerializeField]
     private BlinkingText startGameText;
+    [SerializeField]
+    private Button pauseMenuButton;
 
     // Score/coin controllers
     private ScoreController scoreController;
@@ -66,14 +68,16 @@ public class UIController : MonoBehaviour
 
     public void PauseGame()
     {
-        gameMenu.SetActive(false);
+        //gameMenu.SetActive(false);
+        pauseMenuButton.gameObject.SetActive(false);
         pauseMenu.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void ResumeGame()
     {
-        gameMenu.SetActive(true);
+        //gameMenu.SetActive(true);
+        pauseMenuButton.gameObject.SetActive(true);
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }
