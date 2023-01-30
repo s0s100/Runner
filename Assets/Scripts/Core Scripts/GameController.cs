@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     private PlayerController playerMovement;
     private CameraController cameraFollowPlayer;
     private LevelGenerator levelGenerator;
-    private UIController UIController;
+    private UIController uiController;
     private BackgroundController backgroundController;
 
     private bool isGameRunning = false;
@@ -26,17 +26,20 @@ public class GameController : MonoBehaviour
         cameraFollowPlayer = FindObjectOfType<CameraController>();
 
         levelGenerator = GetComponent<LevelGenerator>();
-        UIController = GetComponent<UIController>();
+        uiController = GetComponent<UIController>();
         backgroundController = GetComponent<BackgroundController>();
 
         // This is the first generated object: Start location
         GameObject lastGeneratedPrefab = levelGenerator.GetLastGeneratedPrefab();
         startPosition = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+
+        // Increase max FPS to 60 (for every platform for now)
+        Application.targetFrameRate = 60;
     }
     
     void Update()
     {
-        if (Input.anyKey)
+        if (Input.anyKey && !uiController.ShouldDiscardSwipe(Input.touches[0].position))
         {
             StartGame();
             this.enabled = false;
@@ -51,7 +54,7 @@ public class GameController : MonoBehaviour
         playerMovement.enabled = false;
         cameraFollowPlayer.enabled = false;
         backgroundController.enabled = false;
-        UIController.GameDefeatMenu();
+        uiController.GameDefeatMenu();
     }
 
     private void StartGame()
@@ -63,7 +66,7 @@ public class GameController : MonoBehaviour
         cameraFollowPlayer.enabled = true;
         levelGenerator.enabled = true;
         backgroundController.enabled = true;
-        UIController.DisableStartGameText();
+        uiController.DisableStartGameText();
         startPosition.LateDestroy();
         ActivateEveryWitchGenerator();
         ActivatePrefabDestruction();

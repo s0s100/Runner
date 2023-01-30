@@ -18,12 +18,12 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private GameController gameController;
     private LevelGenerator levelGenerator;
-    private AmmoController ammoController;
+    // private AmmoController ammoController;
     private UIController uiController;
+    private Weapon weapon;
 
     // Mobile touch info
     private Vector2 startTouchPos;
-    private Vector2 endTouchPos;
 
     // X-Movement variables
     private float dashSpeed = 8.0f;
@@ -71,13 +71,14 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
+        weapon = GetComponentInChildren<Weapon>();
         rigidbody = this.GetComponent<Rigidbody2D>();
         collider = this.GetComponent<BoxCollider2D>();
         animator = this.GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
         camera = FindObjectOfType<Camera>();
-        ammoController = FindObjectOfType<AmmoController>();
+        // ammoController = FindObjectOfType<AmmoController>();
         uiController = FindObjectOfType<UIController>();
 
         moveSpeed = gameController.GetGameSpeed();
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
         {
             moveDir = PlayerMobileControl();
         }
-        
+
         MakeAction(moveDir);
         MovePlayer();
         DashPlayer();
@@ -138,19 +139,19 @@ public class PlayerController : MonoBehaviour
 
     private MoveDirection PlayerMobileControl()
     {
-        foreach (Touch touch in Input.touches)
-        {
-            if (touch.phase == TouchPhase.Began && !uiController.ShouldDiscardSwipe(touch.position))
-            {
-                startTouchPos = touch.position;
-            }
+        bool doesTouchCounts = Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began
+            && !uiController.ShouldDiscardSwipe(Input.touches[0].position);
 
-            if (touch.phase == TouchPhase.Ended && 
-                startTouchPos != Vector2.zero)
-            {
-                endTouchPos = touch.position;
-                return GetMobileTouchDirection();
-            }
+        if (doesTouchCounts)
+        {
+            startTouchPos = Input.touches[0].position;
+        }
+
+        bool doesTouchContinues = startTouchPos != Vector2.zero;
+
+        if (doesTouchContinues)
+        {
+            return GetMobileTouchDirection();
         }
 
         return MoveDirection.None;
@@ -158,34 +159,42 @@ public class PlayerController : MonoBehaviour
 
     private MoveDirection GetMobileTouchDirection()
     {
-        Vector2 diff = endTouchPos - startTouchPos;
+
+        Vector2 diff = Input.touches[0].position - startTouchPos;
         Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
         bool xDiffBigger = absDiff.x > absDiff.y;
-        startTouchPos = Vector2.zero;
 
         if (diff.magnitude < MAX_TOUCH_VECTOR_MAGNITUDE)
         {
-            return MoveDirection.Middle;
-        }
-
-        if (xDiffBigger)
-        {
-            if (diff.x > 0)
+            if (Input.touches[0].phase == TouchPhase.Ended)
             {
-                return MoveDirection.Right;
-            } else
-            {
-                return MoveDirection.Left;
+                startTouchPos = Vector2.zero;
+                return MoveDirection.Middle;
             }
         } else
         {
-            if (diff.y > 0)
+            startTouchPos = Vector2.zero;
+            if (xDiffBigger)
             {
-                return MoveDirection.Up;
+                if (diff.x > 0)
+                {
+                    return MoveDirection.Right;
+                }
+                else
+                {
+                    return MoveDirection.Left;
+                }
             }
-            else if (diff.y < 0)
+            else
             {
-                return MoveDirection.Down;
+                if (diff.y > 0)
+                {
+                    return MoveDirection.Up;
+                }
+                else if (diff.y < 0)
+                {
+                    return MoveDirection.Down;
+                }
             }
         }
 
@@ -265,34 +274,15 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (ammoController.IsAttackPossible())
+        if (weapon != null)
         {
-            animator.SetTrigger("IsAttacking");
-            curAttackCooldown = attackCooldown;
-            MakeProjectile();
+            weapon.Shoot();
         }
     }
 
-    private void MakeProjectile()
+    public void NotifyAboutWeapon(Weapon newWeapon)
     {
-        GameObject newProjectile = Instantiate(projectile);
-        Vector3 position = transform.position;
-        position.x += xProjectileShift;
-        newProjectile.transform.position = position;
-        levelGenerator.SetProjectileParent(newProjectile);
-        ammoController.RemoveAmmo();
-    }
-
-    // Creates projectile after some delay
-    public void MakeLateProjectile(float waitDuration)
-    {
-        StartCoroutine(WaitBeforeThrowing(waitDuration));
-    }
-
-    IEnumerator WaitBeforeThrowing(float animationLength)
-    {
-        yield return new WaitForSeconds(animationLength);
-        MakeProjectile();
+        weapon = newWeapon;
     }
 
     private void SetGravity(bool isEnabled)

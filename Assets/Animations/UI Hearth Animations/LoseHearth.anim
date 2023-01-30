@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HearhIDLE
+  m_Name: LoseHearth
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -2144132643, guid: 7e835c225c2fe9649b3afaba32a570a9, type: 3}
+      value: {fileID: 21300000, guid: b9d920fb113d10546b8d6a04b84ecb91, type: 3}
     - time: 0.016666668
-      value: {fileID: -599207764, guid: 7e835c225c2fe9649b3afaba32a570a9, type: 3}
+      value: {fileID: 21300000, guid: 4282c2dfc988f9d4393f0e268c5df5e3, type: 3}
     attribute: m_Sprite
     path: 
     classID: 114
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -2144132643, guid: 7e835c225c2fe9649b3afaba32a570a9, type: 3}
-    - {fileID: -599207764, guid: 7e835c225c2fe9649b3afaba32a570a9, type: 3}
+    - {fileID: 21300000, guid: b9d920fb113d10546b8d6a04b84ecb91, type: 3}
+    - {fileID: 21300000, guid: 4282c2dfc988f9d4393f0e268c5df5e3, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

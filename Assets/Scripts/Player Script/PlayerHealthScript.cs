@@ -1,37 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
+// Health and condition controller
 public class PlayerHealthScript : MonoBehaviour
 {
-    private const int START_HEALTH = 3;
     private const float MIN_SPRITE_TRANSPARENCY = 0.5f;
-    private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;
+    private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;    
 
-    private UIController uiController;
-    private TMP_Text healthText;
-
+    private int maxHealth = 3;
+    private int curHealth = 2;
     private float invulnerabilityTime = 1.0f;
-    private int curHealth = START_HEALTH;
-
-    private GameController gameController;
-    private SpriteRenderer playerSpriteRenderer;
     private float curInvulnerability = 0.0f;
     private bool isIncreasingTransparency = false;
 
+    private UIController uiController;
+    private LevelGenerator levelGenerator;
+    private GameController gameController;
+    private SpriteRenderer playerSpriteRenderer;
     private Animator animator;
-    private new ParticleSystem particleSystem;
+    private PlayerDataScreen playerDataScreen;
+
+    [SerializeField]
+    private GameObject bloodObject;
 
     private void Start()
     {
+        levelGenerator = FindObjectOfType<LevelGenerator>();
         animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         uiController = FindObjectOfType<UIController>();
-        particleSystem = GetComponentInChildren<ParticleSystem>();
-        healthText = uiController.GetHealthText();
-        healthText.text = curHealth.ToString();
+        playerDataScreen = FindObjectOfType<PlayerDataScreen>();
+
+        playerDataScreen.SetMaxHealth(maxHealth);
+        playerDataScreen.SetCurHealth(curHealth);
     }
 
     private void Update()
@@ -44,12 +47,14 @@ public class PlayerHealthScript : MonoBehaviour
     {
         if (curInvulnerability <= 0)
         {
-            particleSystem.Play();
+            CreateBlood();
+
             animator.SetBool("IsDamaged", true);
             isIncreasingTransparency = false;
             curInvulnerability = invulnerabilityTime;
             curHealth--;
-            healthText.text = curHealth.ToString();
+
+            playerDataScreen.GetDamage();
 
             if (curHealth == 0)
             {
@@ -57,6 +62,14 @@ public class PlayerHealthScript : MonoBehaviour
                 PlayerKillAnimation();
             }
         }
+    }
+
+    private void CreateBlood()
+    {
+        GameObject newBlood = Instantiate(bloodObject);
+        newBlood.transform.position = transform.position;
+        newBlood.transform.parent = levelGenerator.GetAnimationParent().transform;
+        newBlood.GetComponent<ParticleSystem>().Play();
     }
 
     private void PlayerKillAnimation()

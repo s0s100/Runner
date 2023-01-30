@@ -33,6 +33,8 @@ public class LevelGenerator : MonoBehaviour
     private GameObject generatedEnemyParent;
     [SerializeField]
     private GameObject generatedProjectiles;
+    [SerializeField]
+    private GameObject generatedAnimations;
 
     // Attached objects
     [SerializeField]
@@ -72,7 +74,7 @@ public class LevelGenerator : MonoBehaviour
             UpdateBiome();
         }
 
-        LevelGeneration();
+        GenerateLocation();
     }
 
     private void GeneratePlayer()
@@ -81,12 +83,7 @@ public class LevelGenerator : MonoBehaviour
         playerObject.transform.position = START_PLAYER_POSITION;
     }
 
-    private void LevelGeneration()
-    {
-        GenerateLevel();
-    }
-
-    private void GenerateLevel()
+    private void GenerateLocation()
     {
         PrefabHolder lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabHolder>();
         float lastPrefabX = lastGeneratedPrefab.transform.position.x;
@@ -210,6 +207,12 @@ public class LevelGenerator : MonoBehaviour
     public GameObject GetEnemyParent()
     {
         return generatedEnemyParent;
+    }
+
+
+    public GameObject GetAnimationParent()
+    {
+        return generatedAnimations;
     }
 
     // Return min distance for camera
