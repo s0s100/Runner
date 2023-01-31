@@ -35,18 +35,12 @@ public class UIController : MonoBehaviour
     private GameObject defeatMenu;
     [SerializeField]
     private BlinkingText startGameText;
+    [SerializeField]
+    private Button pauseMenuButton;
 
     // Score/coin controllers
     private ScoreController scoreController;
     private CoinController coinController;
-
-    // Used to update coin/score values after defeat
-    //private bool isFillingData = false;
-    //private float curScoreDefeat = 0.0f;
-    //private float curCoinsDefeat = 0.0f;
-    //private float scoreSpeedDefeat = 10.0f; // How fast does the value changes
-    //private float coinSpeedDefeat = 1.0f; // How fast does the value changes
-
 
     private void Start()
     {
@@ -66,14 +60,16 @@ public class UIController : MonoBehaviour
 
     public void PauseGame()
     {
-        gameMenu.SetActive(false);
+        //gameMenu.SetActive(false);
+        pauseMenuButton.gameObject.SetActive(false);
         pauseMenu.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void ResumeGame()
     {
-        gameMenu.SetActive(true);
+        //gameMenu.SetActive(true);
+        pauseMenuButton.gameObject.SetActive(true);
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }

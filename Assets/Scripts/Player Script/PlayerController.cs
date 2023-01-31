@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private GameController gameController;
     private LevelGenerator levelGenerator;
-    // private AmmoController ammoController;
     private UIController uiController;
     private Weapon weapon;
 
@@ -77,9 +76,8 @@ public class PlayerController : MonoBehaviour
         animator = this.GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
-        camera = FindObjectOfType<Camera>();
-        // ammoController = FindObjectOfType<AmmoController>();
         uiController = FindObjectOfType<UIController>();
+        camera = Camera.main;
 
         moveSpeed = gameController.GetGameSpeed();
         enabled = false;
@@ -87,9 +85,6 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        //MoveDirection moveDir = PlayerComputerControl();
-        //MoveDirection moveDir = PlayerMobileControl();
-
         MoveDirection moveDir = PlayerComputerControl();
         if (moveDir == MoveDirection.None)
         {

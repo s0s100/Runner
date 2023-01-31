@@ -45,13 +45,10 @@ public class LevelGenerator : MonoBehaviour
     private BiomeHolder[] biomeHolders;
     
     // Biome selection
-    [SerializeField]
-    private float timeBeforeNewBiome = 90.0f;
-    private float curBiomeChangeTimer = 0.0f;
     private int curActiveBiome; // Biome holder index
 
     // Coin generation
-    private float coinGenerationChance = 0.25f; 
+    private float coinGenerationChance = 0.25f;
 
     private void Awake()
     {
@@ -64,16 +61,10 @@ public class LevelGenerator : MonoBehaviour
         GenerateStartLocation();
         GeneratePlayer();
         cameraObject = Camera.main;
-        // enabled = false;
     }
 
     private void Update()
     {
-        if (IsUpdatingBiome())
-        {
-            UpdateBiome();
-        }
-
         GenerateLocation();
     }
 
@@ -122,31 +113,6 @@ public class LevelGenerator : MonoBehaviour
 
             CreatePrefab(objectToGenerate, generatedPos);
         }
-    }
-    
-    private bool IsUpdatingBiome()
-    {
-        curBiomeChangeTimer += Time.deltaTime;
-        if (curBiomeChangeTimer >= timeBeforeNewBiome)
-        {
-            curBiomeChangeTimer = 0.0f;
-            return true;
-        }
-        return false;
-    }
-    
-    private void UpdateBiome()
-    {
-        if (curActiveBiome == 0)
-        {
-            curActiveBiome = 1;
-        } else
-        {
-            curActiveBiome = 0;
-        }
-
-        UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
-        backgroundController.UpdateBiome(biomeHolders[curActiveBiome]);
     }
 
     // Uploads basic and coin prefabs

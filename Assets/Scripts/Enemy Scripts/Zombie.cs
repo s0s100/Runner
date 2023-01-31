@@ -61,19 +61,6 @@ public class Zombie : Enemy
         isAttacking = true;
     }
 
-    //private void AwakeZombie()
-    //{
-    //    StartCoroutine(WaitBeforeMovement());
-    //}
-
-    //private IEnumerator WaitBeforeMovement()
-    //{
-    //    yield return new WaitForSeconds(TIME_BEFORE_AWAKENING);
-    //    SetIgnorePlayerCollider(false);
-    //    this.enabled = true;
-    //    isAttacking = true;
-    //}
-
     private float GetAnimationLength(string clipName)
     {
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
@@ -96,17 +83,6 @@ public class Zombie : Enemy
         Collider2D playerCollider = player.GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(collider, playerCollider, isIgnoring);
     }
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.tag == "Player" && isAttacking)
-    //    {
-    //        PlayerHealthScript playerHealthScript =
-    //            collision.gameObject.GetComponent<PlayerHealthScript>();
-
-    //        playerHealthScript.GetDamage();
-    //    }
-    //}
 
     private void OnCollisionStay2D(Collision2D collision)
     {

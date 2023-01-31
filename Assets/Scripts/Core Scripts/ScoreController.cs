@@ -7,16 +7,14 @@ public class ScoreController : MonoBehaviour
 {
     private static string MAX_SCORE_STORAGE = "MaxScore";
 
+    private new Camera camera;
     private int curScore;
 
     [SerializeField]
     private TMP_Text scoreText;
-    // Score is connected to the camera position
-    private new Camera camera;
-
+    
     private void Start()
     {
-        // camera = GameObject.FindGameObjectWithTag("MainCamera");
         camera = Camera.main;
     }
 

@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-/// <summary>
-/// Area script to free memory and delete objects touching an area
-/// </summary>
-
 public class DeleteObjectArea : MonoBehaviour
 {
     private static readonly string[] deleteTags = { "Ground", "Decoration", "Obstacle" };
