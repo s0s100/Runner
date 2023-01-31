@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WitchGeneration : MonoBehaviour
+public class EnemyGenerator : MonoBehaviour
 {
     private GameObject generatedEnemyParent;
     private LevelGenerator levelGenerator;
     private GameController gameController;
 
     [SerializeField]
-    private GameObject witchObject;
+    private GameObject enemyObject;
     [SerializeField]
-    private float witchGenerationTime = 15.0f;
+    private float enemyGenerationTime = 15.0f;
     [SerializeField]
-    private float yWitchMinDist = -2.0f;
+    private float yEnemyMinDist = -2.0f;
     [SerializeField]
-    private float yWitchMaxDist = 4.0f;
+    private float yEnemyMaxDist = 4.0f;
     [SerializeField]
-    private float currentWitchGenerationTime = 15.0f;
+    private float currentEnemyGenerationTime = 15.0f;
     private float generationDistance;
 
     private void Start()
@@ -35,22 +35,19 @@ public class WitchGeneration : MonoBehaviour
 
     private void Update()
     {
-        GenerateWitch();
+        GenerateEnemy();
     }
 
-    private void GenerateWitch()
+    private void GenerateEnemy()
     {
-        if (currentWitchGenerationTime > 0)
+        if (currentEnemyGenerationTime > 0)
         {
-            currentWitchGenerationTime -= Time.deltaTime;
-            // Debug.Log(currentWitchGenerationTime);
+            currentEnemyGenerationTime -= Time.deltaTime;
         }
         else
         {
-            // Debug.Log("Witch is generated!");
-            currentWitchGenerationTime = witchGenerationTime;
-
-            // Should probably be a class value
+            currentEnemyGenerationTime = enemyGenerationTime;
+            
             bool isReversed = Random.value > 0.5f; // Returns random bool
             bool isSinMoving = Random.value > 0.75f;
 
@@ -64,23 +61,23 @@ public class WitchGeneration : MonoBehaviour
                 xDist = generationDistance + this.transform.position.x;
             }
 
-            float yDist = Random.Range(yWitchMinDist, yWitchMaxDist);
+            float yDist = Random.Range(yEnemyMinDist, yEnemyMaxDist);
             yDist += this.transform.position.y;
 
             Vector2 witchPos = new Vector2(xDist, yDist);
-            GameObject newWitch = Instantiate(witchObject);
+            GameObject newEnemy = Instantiate(enemyObject);
 
-            // Reverse witch if possible
+            // Reverse enemy if possible
             if (isReversed)
             {
-                Witch witchControl = newWitch.GetComponent<Witch>();
+                FlyingEnemy witchControl = newEnemy.GetComponent<FlyingEnemy>();
                 witchControl.SetLeftToRightMovement();
                 witchControl.SetSinMovement();
-                newWitch.transform.Rotate(0.0f, 180.0f, 0.0f); // Rotate to make her move in the other direction
+                newEnemy.transform.Rotate(0.0f, 180.0f, 0.0f); // Rotate to make her move in the other direction
             }
 
-            newWitch.transform.position = witchPos;
-            newWitch.transform.parent = generatedEnemyParent.transform;
+            newEnemy.transform.position = witchPos;
+            newEnemy.transform.parent = generatedEnemyParent.transform;
         }
     }
 }

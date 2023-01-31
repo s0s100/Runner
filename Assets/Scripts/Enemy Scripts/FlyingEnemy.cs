@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Witch : Enemy
+public class FlyingEnemy : Enemy
 {
     // Sin() function movement (cos() acceleration coz of derivative)
     // y = A*sin(xtC)

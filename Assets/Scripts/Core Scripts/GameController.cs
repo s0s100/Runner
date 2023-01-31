@@ -24,12 +24,9 @@ public class GameController : MonoBehaviour
     {
         playerMovement = FindObjectOfType<PlayerController>();
         cameraFollowPlayer = FindObjectOfType<CameraController>();
-
         levelGenerator = GetComponent<LevelGenerator>();
         uiController = GetComponent<UIController>();
         backgroundController = GetComponent<BackgroundController>();
-
-        // This is the first generated object: Start location
         GameObject lastGeneratedPrefab = levelGenerator.GetLastGeneratedPrefab();
         startPosition = lastGeneratedPrefab.GetComponent<PrefabHolder>();
 
@@ -45,8 +42,6 @@ public class GameController : MonoBehaviour
             this.enabled = false;
         }
     }
-    
-    public float GetGameSpeed() { return moveSpeeed; }
 
     public void GameDefeat()
     {
@@ -68,15 +63,15 @@ public class GameController : MonoBehaviour
         backgroundController.enabled = true;
         uiController.DisableStartGameText();
         startPosition.LateDestroy();
-        ActivateEveryWitchGenerator();
+        ActivateEveryEnemyGenerator();
         ActivatePrefabDestruction();
     }
 
     // Not the best solution, for now..
-    private void ActivateEveryWitchGenerator()
+    private void ActivateEveryEnemyGenerator()
     {
-        WitchGeneration[] generators = FindObjectsOfType<WitchGeneration>();
-        foreach (WitchGeneration generator in generators)
+        EnemyGenerator[] generators = FindObjectsOfType<EnemyGenerator>();
+        foreach (EnemyGenerator generator in generators)
         {
             generator.enabled = true;
         }
@@ -89,6 +84,11 @@ public class GameController : MonoBehaviour
         {
             prefabHolder.LateDestroy();
         }
+    }
+
+    public float GetGameSpeed()
+    {
+        return moveSpeeed;
     }
 
     public bool IsGameRunning()

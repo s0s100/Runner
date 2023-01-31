@@ -7,20 +7,13 @@ public class BackgroundController : MonoBehaviour
 {
     [SerializeField]
     private GameObject backgroundParent;
-    //[SerializeField]
-    //private GameObject fogObject;
-
-    // Fog
-    // Green biome doesn't contain fog, while red biome does
-    private bool isChangingBiome = false;
-    private float opacitySpeed = 0.25f;
 
     // Background images
     private GameObject backImage;
     private List<GameObject> frontsImages = new List<GameObject>();
     private BiomeHolder curBiomeHolder;
     private GameController controller;
-    private float frontYShift = 0;
+    private float frontYShift = 0; // Middle background Y shift
     private float frontMoveSpeed;
 
     private void Start()
@@ -33,39 +26,7 @@ public class BackgroundController : MonoBehaviour
     private void Update()
     {
         MoveFront();
-        // Required another visual update
-
-        //if (isChangingBiome)
-        //{
-        //    FogHider();
-        //}
     }
-
-    //private void FogHider()
-    //{
-    //    SpriteRenderer spriteRenderer = fogObject.GetComponent<SpriteRenderer>();
-    //    Color color = spriteRenderer.color;
-
-    //    color.a += opacitySpeed * Time.deltaTime;
-        
-    //    if (color.a >= 1.0f)
-    //    {
-    //        opacitySpeed = -opacitySpeed;
-    //        // Debug.Log("Middle execution, value:" + color.a);
-    //        SetBackImage();
-    //        SetFrontImage();
-            
-    //    } else if (color.a <= 0.0f)
-    //    {
-
-    //        color.a = 0.0f;
-    //        opacitySpeed = -opacitySpeed;
-    //        // Debug.Log("Stopped executing, value:" + color.a);
-    //        isChangingBiome = false;
-    //    }
-
-    //    spriteRenderer.color = color;
-    //}
 
     private void MoveFront()
     {
@@ -89,7 +50,6 @@ public class BackgroundController : MonoBehaviour
     
     public void SetBiome(BiomeHolder newBiome)
     {
-        // Debug.Log("Biome set");
         curBiomeHolder = newBiome;
         SetBackImage();
         SetFrontImage();
@@ -97,9 +57,7 @@ public class BackgroundController : MonoBehaviour
 
     public void UpdateBiome(BiomeHolder newBiome)
     {
-        // Debug.Log("Biome update");
         curBiomeHolder = newBiome;
-        isChangingBiome = true;
     }
 
     private void SetFrontImage()

@@ -42,14 +42,6 @@ public class UIController : MonoBehaviour
     private ScoreController scoreController;
     private CoinController coinController;
 
-    // Used to update coin/score values after defeat
-    //private bool isFillingData = false;
-    //private float curScoreDefeat = 0.0f;
-    //private float curCoinsDefeat = 0.0f;
-    //private float scoreSpeedDefeat = 10.0f; // How fast does the value changes
-    //private float coinSpeedDefeat = 1.0f; // How fast does the value changes
-
-
     private void Start()
     {
         scoreController = FindObjectOfType<ScoreController>();

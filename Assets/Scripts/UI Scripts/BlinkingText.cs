@@ -11,13 +11,12 @@ public class BlinkingText : MonoBehaviour
     private TMP_Text textHolder;
     private float incSpeed = 0.4f;
     private float curOpacity = MIN_OPACITY;
-    // Start is called before the first frame update
+
     void Start()
     {
         textHolder = this.GetComponent<TMP_Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateOpacity();
