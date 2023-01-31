@@ -50,7 +50,7 @@ public class PlayerDataScreen : MonoBehaviour
         for (int i = curHealth; i < maxHealth; i++)
         {
             Animator animator = hearthImages[i].GetComponent<Animator>();
-            animator.SetTrigger("LoseHearth");
+            animator.SetTrigger("DirectLose");
         }
     }
 
