@@ -50,7 +50,6 @@ public class FlyingEnemy : Enemy
             speedIncrement += Mathf.Cos(sinCoef) * sinMoveAmplitude * Vector3.up * Time.deltaTime;
         }
 
-
         this.transform.position += speedIncrement;
     }
 

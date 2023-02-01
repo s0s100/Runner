@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7935885234398968794}
   - component: {fileID: 1371143392525836361}
   - component: {fileID: 3147442741380578657}
+  - component: {fileID: 6300673265560886718}
   m_Layer: 0
   m_Name: SteampunkBackgroundBack
   m_TagString: Untagged
@@ -112,6 +113,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 15.332176, y: 10.120576}
   m_EdgeRadius: 0
+--- !u!114 &6300673265560886718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200644036753557121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 766b872e3650bee44a8c62b91a25d5c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyObject: {fileID: 3799535159409124182, guid: 54021811f0db2564d8d160f1d917e06a, type: 3}
+  enemyGenerationTime: 15
+  yEnemyMinDist: -2
+  yEnemyMaxDist: 4
+  currentEnemyGenerationTime: 15
 --- !u!1001 &748174301573097778
 PrefabInstance:
   m_ObjectHideFlags: 0
