@@ -7,8 +7,6 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private float speedModifier;
     [SerializeField]
-    private float rotationSpeed;
-    [SerializeField]
     private float deleteTime;
 
     private GameController gameController;
@@ -24,8 +22,13 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
-        transform.position += Vector3.right * Time.deltaTime * speed;
+        MoveProjectile();
+    }
+
+    private void MoveProjectile()
+    {
+        transform.position += Vector3.right * Time.deltaTime * speed * Mathf.Cos(transform.rotation.z);
+        transform.position += Vector3.up * Time.deltaTime * speed * Mathf.Sin(transform.rotation.z);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

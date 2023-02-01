@@ -8,13 +8,14 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private GameObject projectileObject;
     [SerializeField]
+    private Sprite weaponSprite;
+    [SerializeField]
     private int maxAmmo;
     [SerializeField]
     private float shootingSpeed;
-    [SerializeField]
     private float curReload;
     [SerializeField]
-    private Sprite weaponSprite;
+    private float spreadAngle;
 
     private LevelGenerator levelGenerator;
     private PlayerDataScreen playerDataScreen;
@@ -64,7 +65,11 @@ public class Weapon : MonoBehaviour
     private void CreateProjectile()
     {
         GameObject newProjectile = Instantiate(projectileObject);
+
+        float randomizedAngle = Random.Range(-spreadAngle, spreadAngle);
         newProjectile.transform.position = transform.position;
+        newProjectile.transform.Rotate(0, 0, randomizedAngle);
+
         levelGenerator.SetProjectileParent(newProjectile);
     }
 }
