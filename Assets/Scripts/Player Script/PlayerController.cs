@@ -34,13 +34,6 @@ public class PlayerController : MonoBehaviour
     private bool isRightDash = false;
     private bool canDash = false;
 
-    // Player attack
-    [SerializeField]
-    private GameObject projectile;
-    private float attackCooldown = 0.5f;
-    private float xProjectileShift = 0.5f;
-    private float curAttackCooldown = 0.0f;
-
     // Y-Movement variables
     private float jumpForce = 400.0f;
     private  float fallForce = 200.0f;
@@ -85,26 +78,12 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        MoveDirection moveDir = PlayerComputerControl();
-        if (moveDir == MoveDirection.None)
-        {
-            moveDir = PlayerMobileControl();
-        }
+        //MoveDirection moveDir = PlayerComputerControl();
+        MoveDirection moveDir = PlayerMobileControl();
 
         MakeAction(moveDir);
         MovePlayer();
         DashPlayer();
-
-        // Reduce cooldown in the end
-        ReduceCooldown();
-    }
-
-    private void ReduceCooldown()
-    {
-        if (curAttackCooldown > 0.0f)
-        {
-            curAttackCooldown -= Time.deltaTime;
-        }
     }
 
     private MoveDirection PlayerComputerControl()
@@ -226,10 +205,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case MoveDirection.Middle:
-                if (curAttackCooldown <= 0.0f)
-                {
-                    Attack();
-                }
+                Attack();
                 break;
         }
     }
