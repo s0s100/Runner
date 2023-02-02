@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBottomChecker : MonoBehaviour
+public class PlayerDashCheck : MonoBehaviour
 {
     private PlayerController playerMovement;
 
@@ -16,7 +16,7 @@ public class PlayerBottomChecker : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            playerMovement.EnableJump();
+            playerMovement.DisableDash();
         }
     }
 
@@ -25,7 +25,7 @@ public class PlayerBottomChecker : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            playerMovement.DisableJump();
+            playerMovement.EnableDash();
         }
     }
 }

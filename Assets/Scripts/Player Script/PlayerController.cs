@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private const float DEFAULT_GRAVITY_SCALE = 1.0f;
     private const float MAX_TOUCH_VECTOR_MAGNITUDE = 50.0f;
 
+    // Attached objects
     private new Camera camera;
     private new Rigidbody2D rigidbody;
     private new BoxCollider2D collider;
@@ -25,6 +26,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 startTouchPos;
     private bool isTrackingTouch;
 
+    // Particles
+    [SerializeField]
+    private ParticleSystem footstepParticles;
+    [SerializeField]
+    private GameObject fallParticlesObject;
+
     // Move
     private float moveSpeed = 0.0f;
     private bool isMoving = false;
@@ -32,7 +39,8 @@ public class PlayerController : MonoBehaviour
     // Dash
     private bool canDash = true;
     private float dashSpeed = 8.0f;
-    private float dashCooldown = 0.25f;
+    private float dashStopCooldown = 0.3f;
+    private float dashCooldown = 0.5f;
     private float curDashCooldown = 0.0f;
 
     // Jump
@@ -48,9 +56,19 @@ public class PlayerController : MonoBehaviour
         weapon = newWeapon;
     }
 
-    public bool IsMoving()
+    public bool IsMoveParticles()
     {
         return isMoving;
+    }
+
+    public void DisableDash()
+    {
+        canDash = false;
+    }
+
+    public void EnableDash()
+    {
+        canDash = true;
     }
 
     // Used when the player lands on the ground
@@ -76,7 +94,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("GameStarted", true);
     }
 
-    void Start()
+    void Awake()
     {
         weapon = GetComponentInChildren<Weapon>();
         rigidbody = GetComponent<Rigidbody2D>();
@@ -125,7 +143,8 @@ public class PlayerController : MonoBehaviour
 
         // Also track second touch for shooting with a second hand
         bool doesSecondTouchStarted = Input.touchCount > 1;
-        if (doesSecondTouchStarted)
+        bool pcSecondTouch = Input.GetKeyDown(KeyCode.Space); // For testing purposes
+        if (doesSecondTouchStarted || pcSecondTouch)
         {
             return MoveDirection.Middle;
         }
@@ -145,6 +164,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (diff.x > 0)
                 {
+                    startTouchPos = Input.touches[0].position;
                     return MoveDirection.Right;
                 } else
                 {
@@ -154,9 +174,11 @@ public class PlayerController : MonoBehaviour
             {
                 if (diff.y > 0)
                 {
+                    startTouchPos = Input.touches[0].position;
                     return MoveDirection.Up;
                 } else
                 {
+                    startTouchPos = Input.touches[0].position;
                     return MoveDirection.Down;
                 }
             }
@@ -182,7 +204,10 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case MoveDirection.Left:
-                StopPlayer();
+                if (canJump)
+                {
+                    StopPlayer();
+                }
                 break;
             case MoveDirection.Right:
                 if (curDashCooldown <= 0.0f && canDash)
@@ -222,7 +247,7 @@ public class PlayerController : MonoBehaviour
     private void StopPlayer()
     {
         isMoving = false;
-        animator.SetBool("IsStopping", true); 
+        animator.SetBool("IsStopping", true);
     }
 
     private void Attack()
@@ -241,7 +266,7 @@ public class PlayerController : MonoBehaviour
             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
         }
 
-        if (curDashCooldown >= 0.0f)
+        if (curDashCooldown >= dashStopCooldown)
         {
             transform.position += Vector3.right * dashSpeed * Time.deltaTime;
         }
@@ -252,7 +277,7 @@ public class PlayerController : MonoBehaviour
         if (curDashCooldown >= 0.0f)
         {
             curDashCooldown -= Time.deltaTime;
-            if (curDashCooldown <= 0.0f)
+            if (curDashCooldown <= dashStopCooldown)
             {
                 SetGravity(true);
                 animator.SetBool("IsDashing", false);
@@ -271,5 +296,19 @@ public class PlayerController : MonoBehaviour
             rigidbody.velocity = Vector2.zero;
             rigidbody.gravityScale = 0.0f;
         }
+    }
+
+    private void CreateFallParticles()
+    {
+        GameObject tracksParticles = Instantiate(fallParticlesObject);
+        tracksParticles.transform.position = transform.position;
+        AddColliderDifference(tracksParticles.transform);
+    }
+
+    private void AddColliderDifference(Transform objTransform)
+    {
+        BoxCollider2D collider = transform.GetComponent<BoxCollider2D>();
+        float yDiff = collider.size.y / 2;
+        objTransform.transform.position -= Vector3.up * yDiff;
     }
 }
