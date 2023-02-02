@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private const float DEFAULT_GRAVITY_SCALE = 1.0f;
     private const float MAX_TOUCH_VECTOR_MAGNITUDE = 50.0f;
 
+    // Attached objects
     private new Camera camera;
     private new Rigidbody2D rigidbody;
     private new BoxCollider2D collider;
@@ -23,108 +24,127 @@ public class PlayerController : MonoBehaviour
 
     // Mobile touch info
     private Vector2 startTouchPos;
+    private bool isTrackingTouch;
 
-    // X-Movement variables
+    // Particles
+    [SerializeField]
+    private ParticleSystem footstepParticles;
+    [SerializeField]
+    private GameObject fallParticlesObject;
+
+    // Move
+    private float moveSpeed = 0.0f;
+    private bool isMoving = false;
+
+    // Dash
+    private bool canDash = true;
     private float dashSpeed = 8.0f;
-    private float dashCooldown = 0.2f;
+    private float dashStopCooldown = 0.3f;
+    private float dashCooldown = 0.5f;
     private float curDashCooldown = 0.0f;
 
-    private float moveSpeed = 0.0f;
-
-    private bool isRightDash = false;
-    private bool canDash = false;
-
-    // Player attack
-    [SerializeField]
-    private GameObject projectile;
-    private float attackCooldown = 0.5f;
-    private float xProjectileShift = 0.5f;
-    private float curAttackCooldown = 0.0f;
-
-    // Y-Movement variables
+    // Jump
+    private bool canJump = true;
     private float jumpForce = 400.0f;
-    private  float fallForce = 200.0f;
 
-    private bool isGrounded = false;
-    private bool canFall = false;
-    
-    public void EnableJump()
+    // Fall
+    private bool canFall = true;
+    private float fallForce = 200.0f;
+
+    public void UpdateWeapon(Weapon newWeapon)
+    {
+        weapon = newWeapon;
+    }
+
+    public bool IsMoveParticles()
+    {
+        return isMoving;
+    }
+
+    public void DisableDash()
+    {
+        canDash = false;
+    }
+
+    public void EnableDash()
     {
         canDash = true;
-        isGrounded = true;
+    }
+
+    // Used when the player lands on the ground
+    public void EnableJump()
+    {
+        canJump = true;
+        canDash = true;
         animator.SetBool("IsFalling", false);
         animator.SetBool("IsJumping", false);
     }
 
+    // Used when the player falls off the land
     public void DisableJump()
     {
-        isGrounded = false;
+        canJump = false;
         canFall = true;
         animator.SetBool("IsJumping", true);
     }
 
-    public void EnablePlayerAnimations()
+    public void EnableMovement()
     {
+        isMoving = true;
         animator.SetBool("GameStarted", true);
     }
-    
-    void Start()
+
+    void Awake()
     {
         weapon = GetComponentInChildren<Weapon>();
-        rigidbody = this.GetComponent<Rigidbody2D>();
-        collider = this.GetComponent<BoxCollider2D>();
-        animator = this.GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
         uiController = FindObjectOfType<UIController>();
         camera = Camera.main;
 
         moveSpeed = gameController.GetGameSpeed();
+        isMoving = false;
         enabled = false;
     }
     
     void Update()
     {
-        MoveDirection moveDir = PlayerComputerControl();
-        if (moveDir == MoveDirection.None)
-        {
-            moveDir = PlayerMobileControl();
-        }
-
+        MoveDirection moveDir = GetAction();
         MakeAction(moveDir);
         MovePlayer();
-        DashPlayer();
-
-        // Reduce cooldown in the end
-        ReduceCooldown();
+        ReduceCooldowns();
     }
 
-    private void ReduceCooldown()
+    // Use Queue to prevent double touch error (ignoring one of the commands)
+    private MoveDirection GetAction()
     {
-        if (curAttackCooldown > 0.0f)
+        if (Input.touchCount == 0)
         {
-            curAttackCooldown -= Time.deltaTime;
+            animator.SetBool("IsStopping", false);
+            isTrackingTouch = false;
+            isMoving = true;
         }
-    }
 
-    private MoveDirection PlayerComputerControl()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
+        bool doesTouchStarted = Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began
+            && !uiController.ShouldDiscardSwipe(Input.touches[0].position);
+        if (doesTouchStarted)
         {
-            return MoveDirection.Up;
+            startTouchPos = Input.touches[0].position;
+            isTrackingTouch = true;
+        }        
+
+        if (isTrackingTouch)
+        {
+            return GetMoveDirection();
         }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            return MoveDirection.Down;
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            return MoveDirection.Left;
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            return MoveDirection.Right;
-        } else if (Input.GetKeyDown(KeyCode.Space))
+
+        // Also track second touch for shooting with a second hand
+        bool doesSecondTouchStarted = Input.touchCount > 1;
+        bool pcSecondTouch = Input.GetKeyDown(KeyCode.Space); // For testing purposes
+        if (doesSecondTouchStarted || pcSecondTouch)
         {
             return MoveDirection.Middle;
         }
@@ -132,62 +152,33 @@ public class PlayerController : MonoBehaviour
         return MoveDirection.None;
     }
 
-    private MoveDirection PlayerMobileControl()
+    private MoveDirection GetMoveDirection()
     {
-        bool doesTouchCounts = Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began
-            && !uiController.ShouldDiscardSwipe(Input.touches[0].position);
-
-        if (doesTouchCounts)
-        {
-            startTouchPos = Input.touches[0].position;
-        }
-
-        bool doesTouchContinues = startTouchPos != Vector2.zero;
-
-        if (doesTouchContinues)
-        {
-            return GetMobileTouchDirection();
-        }
-
-        return MoveDirection.None;
-    }
-
-    private MoveDirection GetMobileTouchDirection()
-    {
-
         Vector2 diff = Input.touches[0].position - startTouchPos;
-        Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
-        bool xDiffBigger = absDiff.x > absDiff.y;
 
-        if (diff.magnitude < MAX_TOUCH_VECTOR_MAGNITUDE)
+        if (diff.magnitude > MAX_TOUCH_VECTOR_MAGNITUDE)
         {
-            if (Input.touches[0].phase == TouchPhase.Ended)
-            {
-                startTouchPos = Vector2.zero;
-                return MoveDirection.Middle;
-            }
-        } else
-        {
-            startTouchPos = Vector2.zero;
+            Vector2 absDiff = new Vector2(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
+            bool xDiffBigger = absDiff.x > absDiff.y;
             if (xDiffBigger)
             {
                 if (diff.x > 0)
                 {
+                    startTouchPos = Input.touches[0].position;
                     return MoveDirection.Right;
-                }
-                else
+                } else
                 {
                     return MoveDirection.Left;
                 }
-            }
-            else
+            } else
             {
                 if (diff.y > 0)
                 {
+                    startTouchPos = Input.touches[0].position;
                     return MoveDirection.Up;
-                }
-                else if (diff.y < 0)
+                } else
                 {
+                    startTouchPos = Input.touches[0].position;
                     return MoveDirection.Down;
                 }
             }
@@ -196,12 +187,12 @@ public class PlayerController : MonoBehaviour
         return MoveDirection.None;
     }
 
-    private void MakeAction(MoveDirection dir)
+    private void MakeAction(MoveDirection moveDirection)
     {
-        switch (dir)
+        switch (moveDirection)
         {
             case MoveDirection.Up:
-                if (isGrounded)
+                if (canJump)
                 {
                     Jump();
                 }
@@ -213,58 +204,50 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case MoveDirection.Left:
-                if (curDashCooldown <= 0.0f && canDash)
+                if (canJump)
                 {
-                    LeftDash();
+                    StopPlayer();
                 }
-                
                 break;
             case MoveDirection.Right:
                 if (curDashCooldown <= 0.0f && canDash)
                 {
-                    RightDash();
+                    Dash();
                 }
                 break;
             case MoveDirection.Middle:
-                if (curAttackCooldown <= 0.0f)
-                {
-                    Attack();
-                }
+                Attack();
                 break;
         }
     }
 
-    private void DashPlayer()
+    private void Jump()
     {
-        if (curDashCooldown > 0.0f)
-        {
-            float xPosition = transform.position.x;
-            float yPosition = transform.position.y;
+        Vector2 force = Vector2.up * jumpForce;
+        rigidbody.AddForce(force);
+        DisableJump();
+    }
 
-            if (isRightDash)
-            {
-                xPosition += dashSpeed * Time.deltaTime;
-            } else
-            {
-                xPosition -= dashSpeed * Time.deltaTime;
-            }
+    private void Fall()
+    {
+        Vector2 force = Vector2.down * fallForce;
+        rigidbody.AddForce(force);
+        canFall = false;
+        animator.SetBool("IsFalling", true);
+    }
 
-            Vector2 newPosition = new Vector2(xPosition, yPosition);
-            transform.position = newPosition;
+    private void Dash()
+    {
+        SetGravity(false);
+        canDash = false;
+        curDashCooldown = dashCooldown;
+        animator.SetBool("IsDashing", true);
+    }
 
-            curDashCooldown -= Time.deltaTime;
-            if (curDashCooldown <= 0.0f)
-            {
-                SetGravity(true);
-                if (isRightDash)
-                {
-                    animator.SetBool("IsShifting", false);
-                } else
-                {
-                    animator.SetBool("IsDodging", false);
-                }
-            }
-        }
+    private void StopPlayer()
+    {
+        isMoving = false;
+        animator.SetBool("IsStopping", true);
     }
 
     private void Attack()
@@ -273,11 +256,33 @@ public class PlayerController : MonoBehaviour
         {
             weapon.Shoot();
         }
+        animator.SetBool("IsAttacking", true);
     }
 
-    public void NotifyAboutWeapon(Weapon newWeapon)
+    private void MovePlayer()
     {
-        weapon = newWeapon;
+        if (isMoving)
+        {
+            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+        }
+
+        if (curDashCooldown >= dashStopCooldown)
+        {
+            transform.position += Vector3.right * dashSpeed * Time.deltaTime;
+        }
+    }
+
+    private void ReduceCooldowns()
+    {
+        if (curDashCooldown >= 0.0f)
+        {
+            curDashCooldown -= Time.deltaTime;
+            if (curDashCooldown <= dashStopCooldown)
+            {
+                SetGravity(true);
+                animator.SetBool("IsDashing", false);
+            }
+        } 
     }
 
     private void SetGravity(bool isEnabled)
@@ -285,53 +290,25 @@ public class PlayerController : MonoBehaviour
         if (isEnabled)
         {
             rigidbody.gravityScale = DEFAULT_GRAVITY_SCALE;
-        } else
+        }
+        else
         {
             rigidbody.velocity = Vector2.zero;
             rigidbody.gravityScale = 0.0f;
         }
     }
 
-    private void MovePlayer()
+    private void CreateFallParticles()
     {
-        float xPosition = transform.position.x + (moveSpeed * Time.deltaTime);
-        float yPosition = transform.position.y;
-        Vector2 newPosition = new Vector2(xPosition, yPosition);
-        transform.position = newPosition;
+        GameObject tracksParticles = Instantiate(fallParticlesObject);
+        tracksParticles.transform.position = transform.position;
+        AddColliderDifference(tracksParticles.transform);
     }
 
-    private void Jump()
+    private void AddColliderDifference(Transform objTransform)
     {
-        Vector2 force = (Vector2.up * jumpForce * rigidbody.mass);
-        rigidbody.AddForce(force);
-        isGrounded = false;
-        canFall = true;
-        animator.SetBool("IsJumping", true);
-    }
-
-    private void Fall()
-    {
-        animator.SetBool("IsFalling", true);
-        Vector2 force = (Vector2.down * fallForce * rigidbody.mass);
-        rigidbody.AddForce(force);
-        canFall = false;
-    }
-
-    private void LeftDash()
-    {
-        SetGravity(false);
-        canDash = false;
-        isRightDash = false;
-        curDashCooldown = dashCooldown;
-        animator.SetBool("IsDodging", true);
-    }
-
-    private void RightDash()
-    {
-        SetGravity(false);
-        canDash = false;
-        isRightDash = true;
-        curDashCooldown = dashCooldown;
-        animator.SetBool("IsShifting", true);
+        BoxCollider2D collider = transform.GetComponent<BoxCollider2D>();
+        float yDiff = collider.size.y / 2;
+        objTransform.transform.position -= Vector3.up * yDiff;
     }
 }

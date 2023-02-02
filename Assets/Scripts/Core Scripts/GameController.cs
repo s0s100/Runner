@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
     private void StartGame()
     {
         isGameRunning = true;
-        playerMovement.EnablePlayerAnimations();
+        playerMovement.EnableMovement();
 
         playerMovement.enabled = true;
         cameraFollowPlayer.enabled = true;

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileObject: {fileID: 3006627213681070596, guid: 620f3a73ba750c24fa94185abb236b26, type: 3}
+  weaponSprite: {fileID: 498745037, guid: 4d2b5e75ad35d6045b593d8c22353635, type: 3}
   maxAmmo: 10
   shootingSpeed: 0.1
-  curReload: 0
-  weaponSprite: {fileID: 498745037, guid: 4d2b5e75ad35d6045b593d8c22353635, type: 3}
+  spreadAngle: 15

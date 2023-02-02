@@ -15,6 +15,8 @@ public class PlayerDataScreen : MonoBehaviour
     private Image ammoBar;
     [SerializeField]
     private Sprite emptyHand;
+    [SerializeField]
+    private Image scoreBar;
 
     // Health info
     private int curHealth;
@@ -95,5 +97,11 @@ public class PlayerDataScreen : MonoBehaviour
         {
             weaponIcon.sprite = emptyHand;
         }
+    }
+
+    public void UpdateScoreBar(int curScore, int maxScore)
+    {
+        float result = (float)curScore / (float)maxScore;
+        scoreBar.fillAmount = result;
     }
 }
