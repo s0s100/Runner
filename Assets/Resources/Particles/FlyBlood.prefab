@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4553223949455514879}
   - component: {fileID: 1792512536257505231}
   m_Layer: 0
-  m_Name: BloodAnimator
+  m_Name: FlyBlood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -1305,7 +1305,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.9528302, g: 0.022472408, b: 0.022472408, a: 0.9673364}
+        key0: {r: 1, g: 0.7839799, b: 0, a: 0.9673364}
         key1: {r: 0.667, g: 0.107692696, b: 0.107692696, a: 1}
         key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
