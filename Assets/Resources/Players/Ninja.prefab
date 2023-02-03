@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 466444624413961405}
   m_Layer: 0
   m_Name: Ninja
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faefbe6a15da540409ddaf0f87fc9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstepParticles: {fileID: 0}
-  fallParticlesObject: {fileID: 0}
+  footstepParticles: {fileID: 7311768219225316114}
+  fallParticlesObject: {fileID: 5149513476182381338, guid: f2943b2a0f303f14fa3454f4c5a7e96d, type: 3}
 --- !u!114 &466444624413961405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0697cad650164564499c8bc2d1bfa485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodObject: {fileID: 0}
+  bloodObject: {fileID: 7258122383890266956, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
 --- !u!1 &6144565119649166200
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +389,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66e4778a30d944f48a814dfe67f748f5, type: 3}
+--- !u!198 &7311768219225316114 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5149513476182381340, guid: 66e4778a30d944f48a814dfe67f748f5, type: 3}
+  m_PrefabInstance: {fileID: 2453935464027670542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7311768219225316115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5149513476182381341, guid: 66e4778a30d944f48a814dfe67f748f5, type: 3}
