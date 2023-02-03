@@ -36,7 +36,9 @@ public class GameController : MonoBehaviour
     
     void Update()
     {
-        if (Input.anyKey && !uiController.ShouldDiscardSwipe(Input.touches[0].position))
+        bool isLegit = Input.anyKey || (Input.touchCount > 0 && !uiController.ShouldDiscardSwipe(Input.touches[0].position));
+
+        if (isLegit)
         {
             StartGame();
             this.enabled = false;
