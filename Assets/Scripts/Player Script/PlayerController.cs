@@ -223,6 +223,9 @@ public class PlayerController : MonoBehaviour
 
     private void MakeAction(MoveDirection moveDirection)
     {
+        // If dashing nothing can be activated
+        if (curDashCooldown >= dashStopCooldown) return;
+
         switch (moveDirection)
         {
             case MoveDirection.Up:
