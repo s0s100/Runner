@@ -91,7 +91,6 @@ public class PlayerController : MonoBehaviour
     public void EnableMovement()
     {
         isMoving = true;
-        animator.SetBool("GameStarted", true);
     }
 
     void Awake()
@@ -154,9 +153,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.touchCount == 0)
         {
-            animator.SetBool("IsStopping", false);
             isTrackingTouch = false;
-            isMoving = true;
+            AllowMovement();
         }
 
         bool doesTouchStarted = Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began
@@ -258,6 +256,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void AllowMovement()
+    {
+        isMoving = true;
+        animator.SetBool("IsMoving", true);
+    }
+
     private void Jump()
     {
         Vector2 force = Vector2.up * jumpForce;
@@ -284,7 +288,7 @@ public class PlayerController : MonoBehaviour
     private void StopPlayer()
     {
         isMoving = false;
-        animator.SetBool("IsStopping", true);
+        animator.SetBool("IsMoving", false);
     }
 
     private void Attack()
@@ -293,7 +297,7 @@ public class PlayerController : MonoBehaviour
         {
             weapon.Shoot();
         }
-        animator.SetBool("IsAttacking", true);
+        animator.SetTrigger("IsAttacking");
     }
 
     private void MovePlayer()
@@ -322,7 +326,7 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
-    private void SetGravity(bool isEnabled)
+    public void SetGravity(bool isEnabled)
     {
         if (isEnabled)
         {
@@ -335,7 +339,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CreateFallParticles()
+    public void SetFootstepParticleState(bool isActive)
+    {
+        if (isActive)
+        {
+            footstepParticles.Play();
+        } else
+        {
+            footstepParticles.Stop();
+        }
+    }
+
+    public void CreateFallParticles()
     {
         GameObject tracksParticles = Instantiate(fallParticlesObject);
         tracksParticles.transform.position = transform.position;

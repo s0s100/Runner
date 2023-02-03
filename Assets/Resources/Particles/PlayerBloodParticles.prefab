@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4553223949455514879}
   - component: {fileID: 1792512536257505231}
   m_Layer: 0
-  m_Name: PlayerBloodAnimator
+  m_Name: PlayerBloodParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

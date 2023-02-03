@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour
         playerMovement.enabled = false;
         cameraFollowPlayer.enabled = false;
         backgroundController.enabled = false;
+        playerMovement.SetGravity(true);
         uiController.GameDefeatMenu();
     }
 

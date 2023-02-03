@@ -17,6 +17,7 @@ public class PlayerBottomChecker : MonoBehaviour
         if (tag == "Ground" || tag == "Obstacle")
         {
             playerMovement.EnableJump();
+            playerMovement.CreateFallParticles();
         }
     }
 
