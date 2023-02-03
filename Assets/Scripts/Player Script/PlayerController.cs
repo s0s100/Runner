@@ -109,13 +109,44 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
         enabled = false;
     }
-    
+
     void Update()
     {
-        MoveDirection moveDir = GetAction();
+        MoveDirection moveDir = GetPCAction();
+        if (moveDir == MoveDirection.None)
+        {
+            moveDir = GetAction();
+        }
+
         MakeAction(moveDir);
         MovePlayer();
         ReduceCooldowns();
+    }
+
+    private MoveDirection GetPCAction()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            return MoveDirection.Up;
+        } else 
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            return MoveDirection.Down;
+        } else
+        if (Input.GetKey(KeyCode.A))
+        {
+            return MoveDirection.Left;
+        } else
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            return MoveDirection.Right;
+        } else
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return MoveDirection.Middle;
+        }
+
+        return MoveDirection.None;
     }
 
     // Use Queue to prevent double touch error (ignoring one of the commands)
@@ -134,19 +165,22 @@ public class PlayerController : MonoBehaviour
         {
             startTouchPos = Input.touches[0].position;
             isTrackingTouch = true;
-        }        
+        }
 
         if (isTrackingTouch)
         {
-            return GetMoveDirection();
+            MoveDirection directionResult = GetMoveDirection();
+            if (directionResult != MoveDirection.None)
+            {
+                return directionResult;
+            }
         }
 
         // Also track second touch for shooting with a second hand
         bool doesSecondTouchStarted = Input.touchCount > 1;
-        bool pcSecondTouch = Input.GetKeyDown(KeyCode.Space); // For testing purposes
-        if (doesSecondTouchStarted || pcSecondTouch)
+        if (doesSecondTouchStarted)
         {
-            return MoveDirection.Middle;
+            Attack();
         }
 
         return MoveDirection.None;
