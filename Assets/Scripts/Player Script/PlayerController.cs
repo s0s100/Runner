@@ -339,7 +339,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CreateFallParticles()
+    public void SetFootstepParticleState(bool isActive)
+    {
+        if (isActive)
+        {
+            footstepParticles.Play();
+        } else
+        {
+            footstepParticles.Stop();
+        }
+    }
+
+    public void CreateFallParticles()
     {
         GameObject tracksParticles = Instantiate(fallParticlesObject);
         tracksParticles.transform.position = transform.position;
