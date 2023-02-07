@@ -100,6 +100,7 @@ public class UIController : MonoBehaviour
     public void MainMenu()
     {
         coinController.StoreCoins();
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(MAIN_MENU_SCENE_NUMBER);
     }
 
