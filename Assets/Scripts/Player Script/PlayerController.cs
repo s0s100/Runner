@@ -355,6 +355,9 @@ public class PlayerController : MonoBehaviour
         GameObject tracksParticles = Instantiate(fallParticlesObject);
         tracksParticles.transform.position = transform.position;
         AddColliderDifference(tracksParticles.transform);
+
+        GameObject levelParent = levelGenerator.GetAnimationParent();
+        tracksParticles.transform.parent = levelParent.transform;
     }
 
     private void AddColliderDifference(Transform objTransform)
