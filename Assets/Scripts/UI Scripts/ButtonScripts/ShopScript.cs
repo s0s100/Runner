@@ -10,18 +10,18 @@ public class ShopScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField]
     private GameObject selectionEffect;
 
-    [SerializeField]
-    private GameObject textField;
+    //[SerializeField]
+    //private GameObject textField;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         selectionEffect.SetActive(false);
-        textField.SetActive(true);
+        // textField.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         selectionEffect.SetActive(true);
-        textField.SetActive(false);
+        // textField.SetActive(false);
     }
 }
