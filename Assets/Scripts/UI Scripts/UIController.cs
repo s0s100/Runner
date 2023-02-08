@@ -38,14 +38,16 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Button pauseMenuButton;
 
-    // Score/coin controllers
+    // Score/coin/player controllers
     private ScoreController scoreController;
     private CoinController coinController;
+    private PlayerController playerController;
 
     private void Start()
     {
         scoreController = FindObjectOfType<ScoreController>();
         coinController = FindObjectOfType<CoinController>();
+        playerController = FindObjectOfType<PlayerController>();
         this.enabled = false;
     }
 
@@ -63,6 +65,7 @@ public class UIController : MonoBehaviour
         //gameMenu.SetActive(false);
         pauseMenuButton.gameObject.SetActive(false);
         pauseMenu.SetActive(true);
+        playerController.enabled = false;
         Time.timeScale = 0.0f;
     }
 
@@ -70,6 +73,7 @@ public class UIController : MonoBehaviour
     {
         //gameMenu.SetActive(true);
         pauseMenuButton.gameObject.SetActive(true);
+        playerController.enabled = true;
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }
