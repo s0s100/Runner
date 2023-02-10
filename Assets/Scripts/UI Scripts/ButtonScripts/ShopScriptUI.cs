@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ShopScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ShopScriptUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // Currently active
     [SerializeField]

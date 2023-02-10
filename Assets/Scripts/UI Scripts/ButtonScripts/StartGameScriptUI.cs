@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class StartGameScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class StartGameScriptUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // Currently inactive
     [SerializeField]
