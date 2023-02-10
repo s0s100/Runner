@@ -9,7 +9,7 @@ public static class StoragePlayerManager
 {
     private static string directoryPath = "SaveData";
     private static string fileName = "SaveData.txt";
-
+    
     public static void Save(StoragePlayerData saveObj)
     {
         if (!DirectoryExists())

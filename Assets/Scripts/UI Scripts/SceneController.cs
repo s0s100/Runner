@@ -10,7 +10,13 @@ public class SceneController : MonoBehaviour
     private StoragePlayerData playerData;
 
     private const int GAME_SCENE_NUMBER = 1;
-    
+
+    private void Awake()
+    {
+        // Updage file before staring the scene
+        UpdateFile();
+    }
+
     public void StartGameScene()
     {
         Time.timeScale = 1.0f;
@@ -30,5 +36,10 @@ public class SceneController : MonoBehaviour
     public void UpdateFile()
     {
         StoragePlayerManager.Load(playerData);
+    }
+
+    public StoragePlayerData GetPlayerData()
+    {
+        return playerData;
     }
 }

@@ -28,4 +28,9 @@ public class StoragePlayerData : ScriptableObject
     {
         return JsonUtility.ToJson(this, true);
     }
+
+    public List<SkinData> GetSkinList()
+    {
+        return skins;
+    }
 }

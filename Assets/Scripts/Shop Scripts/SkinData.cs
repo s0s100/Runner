@@ -27,6 +27,11 @@ public class SkinData :  IBuyable
         this.skinPrice = skinPrice;
     }
 
+    public AnimatorController GetPreview()
+    {
+        return skinPreview;
+    }
+
     public int Buy(int curMoney)
     {
         if (CanBuy(curMoney))

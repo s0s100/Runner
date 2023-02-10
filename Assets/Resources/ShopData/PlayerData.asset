@@ -26,12 +26,12 @@ MonoBehaviour:
     isOwned: 1
     skinName: Ninja
     skinPrice: 0
-  - skinPreview: {fileID: 9100000, guid: ce897679f1acd884683ba708053ec2b2, type: 2}
+  - skinPreview: {fileID: 9100000, guid: b31970193c2e7db418544cfb90cd9112, type: 2}
     skin: {fileID: 9100000, guid: ce897679f1acd884683ba708053ec2b2, type: 2}
     isOwned: 1
     skinName: Witch
     skinPrice: 10
-  - skinPreview: {fileID: 9100000, guid: 38a620984062dbf439895f3293aec9c5, type: 2}
+  - skinPreview: {fileID: 9100000, guid: d50f1d712110ae24facb76d4df8051a0, type: 2}
     skin: {fileID: 9100000, guid: 38a620984062dbf439895f3293aec9c5, type: 2}
     isOwned: 0
     skinName: Zombie
