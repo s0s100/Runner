@@ -4,8 +4,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "SkinData", menuName = "ScriptableObjects/SkinData", order = 2)]
-public class SkinData : ScriptableObject, IBuyable
+public class SkinData :  IBuyable
 {
     [SerializeField]
     private AnimatorController skinPreview;
@@ -18,6 +17,15 @@ public class SkinData : ScriptableObject, IBuyable
     private string skinName;
     [SerializeField]
     private int skinPrice;
+
+    public SkinData(AnimatorController skinPreview, AnimatorController skin, bool isOwned, string skinName, int skinPrice)
+    {
+        this.skinPreview = skinPreview;
+        this.skin = skin;
+        this.isOwned = isOwned;
+        this.skinName = skinName;
+        this.skinPrice = skinPrice;
+    }
 
     public int Buy(int curMoney)
     {

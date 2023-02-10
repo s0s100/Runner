@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "UpgradeData", menuName = "ScriptableObjects/UpgradeData", order = 3)]
-public class UpgradeData : ScriptableObject, IBuyable
+public class UpgradeData : IBuyable
 {
     [SerializeField]
     private int curUpgradeStatus;
@@ -12,6 +11,13 @@ public class UpgradeData : ScriptableObject, IBuyable
     private string upgradeName;
     [SerializeField]
     private List<int> upgradePrice;
+
+    public UpgradeData(int curUpgradeStatus, string upgradeName, List<int> upgradePrice)
+    {
+        this.curUpgradeStatus = curUpgradeStatus;
+        this.upgradeName = upgradeName;
+        this.upgradePrice = upgradePrice;
+    }
 
     public int Buy(int curMoney)
     {

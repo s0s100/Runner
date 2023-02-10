@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/WeaponData", order = 4)]
-public class WeaponData : ScriptableObject, IBuyable
+public class WeaponData : IBuyable
 {
     [SerializeField]
     private bool isOwned;
@@ -12,6 +11,13 @@ public class WeaponData : ScriptableObject, IBuyable
     private Weapon weapon;
     [SerializeField]
     private int weaponPrice;
+
+    public WeaponData(bool isOwned, Weapon weapon, int weaponPrice)
+    {
+        this.isOwned = isOwned;
+        this.weapon = weapon;
+        this.weaponPrice = weaponPrice;
+    }
 
     public int Buy(int curMoney)
     {

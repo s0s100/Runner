@@ -24,15 +24,11 @@ public class SceneController : MonoBehaviour
 
     public void SaveFile()
     {
-        // Debug.Log(playerData.ToJSON());
-        //StoragePlayerManager.Save(playerData);
+        StoragePlayerManager.Save(playerData);;
     }
-
-    // Loads file and updates StoragePlayerData
+    
     public void UpdateFile()
     {
-
-        //StoragePlayerData storagePlayerData = StoragePlayerManager.Load();
-        //playerData = storagePlayerData;
+        StoragePlayerManager.Load(playerData);
     }
 }

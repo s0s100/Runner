@@ -12,13 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718b87df6e8a9c749adba2f13c441799, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  fileName: Test.txt
   weapons:
-  - {fileID: 11400000, guid: 63b3b5556921bd146a392c920d6aa883, type: 2}
-  - {fileID: 11400000, guid: c7b4dbfb04ac7ee4fbd83b1df7c1d92f, type: 2}
+  - isOwned: 1
+    weapon: {fileID: 3670960664320624816, guid: 723d8dc7dfc2ba141bac4baeb9c9f19d, type: 3}
+    weaponPrice: 0
+  - isOwned: 0
+    weapon: {fileID: 3670960664320624816, guid: 723d8dc7dfc2ba141bac4baeb9c9f19d, type: 3}
+    weaponPrice: 10
   skins:
-  - {fileID: 11400000, guid: 827b6be806fcfbe4eb9da2f90f651803, type: 2}
-  - {fileID: 11400000, guid: fda1992541c775447b2a7ff72e13ee23, type: 2}
-  - {fileID: 11400000, guid: 413878de34e73134a8390c26c70aa4bf, type: 2}
+  - skinPreview: {fileID: 9100000, guid: e26881ca4b8ae8a449396aaeb54af208, type: 2}
+    skin: {fileID: 9100000, guid: ca1992fec6a5f4aef8b342f3cb445bfd, type: 2}
+    isOwned: 1
+    skinName: Ninja
+    skinPrice: 0
+  - skinPreview: {fileID: 9100000, guid: ce897679f1acd884683ba708053ec2b2, type: 2}
+    skin: {fileID: 9100000, guid: ce897679f1acd884683ba708053ec2b2, type: 2}
+    isOwned: 1
+    skinName: Witch
+    skinPrice: 10
+  - skinPreview: {fileID: 9100000, guid: 38a620984062dbf439895f3293aec9c5, type: 2}
+    skin: {fileID: 9100000, guid: 38a620984062dbf439895f3293aec9c5, type: 2}
+    isOwned: 0
+    skinName: Zombie
+    skinPrice: 20
   upgrades:
-  - {fileID: 11400000, guid: c2eafcd52d9fd6f4aa9a003bb45e91fc, type: 2}
-  - {fileID: 11400000, guid: 693244f1e8bd3d546ba77a1e45259ad8, type: 2}
+  - curUpgradeStatus: 1
+    upgradeName: MaxHP
+    upgradePrice: 0a000000140000001e000000
+  - curUpgradeStatus: 0
+    upgradeName: Double Jump
+    upgradePrice: 32000000
+  - curUpgradeStatus: 0
+    upgradeName: Magnet
+    upgradePrice: 0a00000014000000

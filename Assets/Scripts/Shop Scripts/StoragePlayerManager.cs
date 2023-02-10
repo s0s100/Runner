@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class StoragePlayerManager
 {
     private static string directoryPath = "SaveData";
-    private static string fileName = "SaveData.comp3";
+    private static string fileName = "SaveData.txt";
 
     public static void Save(StoragePlayerData saveObj)
     {
@@ -19,35 +19,33 @@ public static class StoragePlayerManager
 
         try
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = File.Create(GetFullPath());
-            binaryFormatter.Serialize(fileStream, saveObj);
-            fileStream.Close();
+            string JSONdata = saveObj.ToJSON();
+            File.WriteAllText(GetFullPath(), JSONdata);
+
+            Debug.Log("Save path: " + GetFullPath());
+
         } catch (FileNotFoundException e)
         {
             Debug.LogError(e);
         }
     }
 
-    public static StoragePlayerData Load()
+    public static void Load(StoragePlayerData saveObj)
     {
         if (DirectoryExists() && SaveFileExists())
         {
             try
             {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                FileStream fileStream = File.Open(GetFullPath(), FileMode.Open);
-                StoragePlayerData playerData = (StoragePlayerData)binaryFormatter.Deserialize(fileStream);
-                fileStream.Close();
+                string JSONdata = File.ReadAllText(GetFullPath());
+                JsonUtility.FromJsonOverwrite(JSONdata, saveObj);
 
-                return playerData;
+                Debug.Log("Load path: " + GetFullPath());
+
             } catch (SerializationException e)
             {
                 Debug.LogError(e);
             }
         }
-
-        return null;
     }
 
     private static bool SaveFileExists()
