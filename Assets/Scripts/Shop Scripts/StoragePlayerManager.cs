@@ -38,7 +38,6 @@ public static class StoragePlayerManager
             {
                 string JSONdata = File.ReadAllText(GetFullPath());
                 JsonUtility.FromJsonOverwrite(JSONdata, saveObj);
-
                 Debug.Log("Load path: " + GetFullPath());
 
             } catch (SerializationException e)
