@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameMachineControl : MonoBehaviour
 {
+    private static string LAST_SKIN_INDEX = "LastSkinIndex";
+
     private SceneController sceneController;
     private List<SkinData> skins;
     private int curSkin;
@@ -17,22 +19,24 @@ public class GameMachineControl : MonoBehaviour
     {
         sceneController = FindObjectOfType<SceneController>();
         skins = sceneController.GetPlayerData().GetSkinList();
-        
+
         // For now this solution, after save selected skin ID
-        if (skins.Count > 0)
+        int lastSkinIndex = GetLastSkinIndex();
+        if (skins.Count > lastSkinIndex)
         {
-            curSkin = 0;
+            curSkin = lastSkinIndex;
             UpdageCurSkin();
         } else
         {
-            curSkin = -1;
             throw new System.Exception("Empty skin list");
         }
     }
 
     public void UpdageCurSkin()
     {
-        Debug.Log("Updating skin");
+        // Also store cur index state
+        PlayerPrefs.SetInt(LAST_SKIN_INDEX, curSkin);
+
         Animator anim = skinImage.GetComponent<Animator>();
         anim.runtimeAnimatorController = skins[curSkin].GetPreview() as RuntimeAnimatorController;
     }
@@ -57,5 +61,10 @@ public class GameMachineControl : MonoBehaviour
             curSkin = 0;
         }
         UpdageCurSkin();
+    }
+
+    private int GetLastSkinIndex()
+    {
+        return PlayerPrefs.GetInt(LAST_SKIN_INDEX);
     }
 }
