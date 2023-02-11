@@ -42,6 +42,15 @@ public class SkinData :  IBuyable
         //return skinPreview;
     }
 
+    public AnimatorController GetAnimator()
+    {
+        string resultSkinName = skinName + ADDITIONAL_ANIMATOR_KEYWORD;
+        string resultPreviewPath = Path.Combine(pathToAnimators, resultSkinName);
+        AnimatorController skinPreview = Resources.Load<AnimatorController>(resultPreviewPath);
+
+        return skinPreview;
+    }
+
     public int Buy(int curMoney)
     {
         if (CanBuy(curMoney))

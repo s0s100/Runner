@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEditor.Animations;
 
 // Control general game states such as defeat and overall game speed
 public class GameController : MonoBehaviour
@@ -19,6 +20,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private float moveSpeeed = 2.0f;
 
+    [SerializeField]
+    private StoragePlayerData storagePlayerData;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,7 @@ public class GameController : MonoBehaviour
         backgroundController = GetComponent<BackgroundController>();
         GameObject lastGeneratedPrefab = levelGenerator.GetLastGeneratedPrefab();
         startPosition = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+        SetCurrentPlayerSkin();
 
         // Increase max FPS to 60 (for every platform for now)
         Application.targetFrameRate = 60;
@@ -43,6 +48,17 @@ public class GameController : MonoBehaviour
             StartGame();
             this.enabled = false;
         }
+    }
+
+    // Updates current skin according to the saved settings
+    private void SetCurrentPlayerSkin()
+    {
+        int skinIndex = GameMachineControl.GetLastSkinIndex();
+        SkinData skin = storagePlayerData.GetIndexSkin(skinIndex);
+        AnimatorController animator = skin.GetAnimator();
+
+        // Select animator for the player
+        playerMovement.SetCurrentAnimator(animator);
     }
 
     public void GameDefeat()

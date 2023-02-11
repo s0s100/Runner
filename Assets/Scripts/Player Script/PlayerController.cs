@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEditor.Animations;
 
 public enum MoveDirection
 {
@@ -365,5 +366,10 @@ public class PlayerController : MonoBehaviour
         BoxCollider2D collider = transform.GetComponent<BoxCollider2D>();
         float yDiff = collider.size.y / 2;
         objTransform.transform.position -= Vector3.up * yDiff;
+    }
+
+    public void SetCurrentAnimator(AnimatorController animatorController)
+    {
+        animator.runtimeAnimatorController = animatorController as RuntimeAnimatorController;
     }
 }

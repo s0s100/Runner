@@ -63,7 +63,7 @@ public class GameMachineControl : MonoBehaviour
         UpdageCurSkin();
     }
 
-    private int GetLastSkinIndex()
+    public static int GetLastSkinIndex()
     {
         return PlayerPrefs.GetInt(LAST_SKIN_INDEX);
     }
