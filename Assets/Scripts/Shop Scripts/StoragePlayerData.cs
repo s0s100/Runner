@@ -33,4 +33,14 @@ public class StoragePlayerData : ScriptableObject
     {
         return skins;
     }
+
+    public SkinData GetIndexSkin(int index)
+    {
+        if (index < skins.Count)
+        {
+            return skins[index];
+        }
+
+        return null;
+    }
 }
