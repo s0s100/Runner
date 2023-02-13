@@ -11,11 +11,6 @@ public class SkinData :  IBuyable
     private static string ADDITIONAL_ANIMATOR_KEYWORD = "Animator";
     private static string ADDITIONAL_PREVIEW_KEYWORD = "Preview";
 
-    //[SerializeField]
-    //private AnimatorController skinPreview;
-    //[SerializeField]
-    //private AnimatorController skin;
-
     [SerializeField]
     private bool isOwned;
     [SerializeField]
