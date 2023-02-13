@@ -10,7 +10,7 @@ TagManager:
   - Obstacle
   - Decoration
   - Background
-  - StartPrefab
+  - Weapon
   layers:
   - Default
   - TransparentFX

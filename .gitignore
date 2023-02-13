@@ -116,3 +116,8 @@ API
 Training
 Blog
 About
+
+# Ignore Mesh Pro
+/Assets/External*Resources/TextMesh*Pro/
+Assets/External Resources/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Electronic Highway Sign SDF.asset
+Assets/External Resources/TextMesh Pro.meta

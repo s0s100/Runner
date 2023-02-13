@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718b87df6e8a9c749adba2f13c441799, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  fileName: Test.txt
+  weapons:
+  - isOwned: 1
+    weapon: {fileID: 0}
+    weaponPrice: 0
+  - isOwned: 0
+    weapon: {fileID: 0}
+    weaponPrice: 10
+  skins:
+  - isOwned: 1
+    skinName: Ninja
+    skinPrice: 0
+    pathToAnimators: Animations/Player Animators/NinjaAnimations
+  - isOwned: 1
+    skinName: Witch
+    skinPrice: 10
+    pathToAnimators: Animations/Witch Animations
+  - isOwned: 0
+    skinName: Zombie
+    skinPrice: 20
+    pathToAnimators: Animations/Zombie Animator/Zombie Animations
+  upgrades:
+  - curUpgradeStatus: 1
+    upgradeName: MaxHP
+    upgradePrice: 0a000000140000001e000000
+  - curUpgradeStatus: 0
+    upgradeName: Double Jump
+    upgradePrice: 32000000
+  - curUpgradeStatus: 0
+    upgradeName: Magnet
+    upgradePrice: 0a00000014000000
