@@ -26,13 +26,13 @@ MonoBehaviour:
     skinPrice: 0
     pathToAnimators: Animations/Player Animators/NinjaAnimations
   - isOwned: 1
-    skinName: Witch
+    skinName: FirstCharacter
     skinPrice: 10
-    pathToAnimators: Animations/Witch Animations
+    pathToAnimators: Animations/Player Animators/FirstCharacterAnimations
   - isOwned: 0
-    skinName: Zombie
+    skinName: Spartan
     skinPrice: 20
-    pathToAnimators: Animations/Zombie Animator/Zombie Animations
+    pathToAnimators: Animations/Player Animators/SpartanAnimations
   upgrades:
   - curUpgradeStatus: 1
     upgradeName: MaxHP

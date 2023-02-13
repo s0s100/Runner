@@ -35,11 +35,11 @@ public class SkinData :  IBuyable
 
     public AnimatorController GetPreview()
     {
-        string resultPreviewPath = Path.Combine(pathToAnimators, ADDITIONAL_PREVIEW_KEYWORD);
+        string resultPreviewName = skinName + ADDITIONAL_PREVIEW_KEYWORD;
+        string resultPreviewPath = Path.Combine(pathToAnimators, resultPreviewName);
         AnimatorController skinPreview = Resources.Load<AnimatorController>(resultPreviewPath);
 
         return skinPreview;
-        //return skinPreview;
     }
 
     public AnimatorController GetAnimator()
