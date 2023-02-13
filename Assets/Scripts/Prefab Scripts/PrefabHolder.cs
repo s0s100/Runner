@@ -7,7 +7,7 @@ public class PrefabHolder : MonoBehaviour
 {
     private GameController gameController;
 
-    private const float DESTRUCTION_TIME = 20.0f;
+    private const float DESTRUCTION_TIME = 30.0f;
 
     // X shift before required
     [SerializeField]
