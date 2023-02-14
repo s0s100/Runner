@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718b87df6e8a9c749adba2f13c441799, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  fileName: Test.txt
+  fileName: SaveFile.txt
   weapons:
   - isOwned: 1
     pathToWeapon: Weapon/TestPistol.prefab
@@ -22,17 +22,21 @@ MonoBehaviour:
     weaponPrice: 10
   skins:
   - isOwned: 1
-    skinName: Ninja
+    skinName: FirstCharacter
     skinPrice: 0
-    pathToAnimators: Animations/Player Animators/NinjaAnimations
+    pathToAnimators: Animations/Player Animators/FirstCharacterAnimations
   - isOwned: 1
-    skinName: Witch
-    skinPrice: 10
-    pathToAnimators: Animations/Witch Animations
-  - isOwned: 0
-    skinName: Zombie
+    skinName: Ninja
     skinPrice: 20
-    pathToAnimators: Animations/Zombie Animator/Zombie Animations
+    pathToAnimators: Animations/Player Animators/NinjaAnimations
+  - isOwned: 0
+    skinName: Robot
+    skinPrice: 50
+    pathToAnimators: Animations/Player Animators/RobotAnimations
+  - isOwned: 0
+    skinName: Spartan
+    skinPrice: 50
+    pathToAnimators: Animations/Player Animators/SpartanAnimations
   upgrades:
   - curUpgradeStatus: 1
     upgradeName: MaxHP

@@ -14,7 +14,10 @@ public class SceneController : MonoBehaviour
     private void Awake()
     {
         // Updage file before staring the scene
-        UpdateFile();
+        if (DevelopmentData.GetShouldUpdate())
+        {
+            UpdateFile();
+        }
     }
 
     public void StartGameScene()
