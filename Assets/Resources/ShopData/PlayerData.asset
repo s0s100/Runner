@@ -15,10 +15,10 @@ MonoBehaviour:
   fileName: Test.txt
   weapons:
   - isOwned: 1
-    weapon: {fileID: 0}
+    pathToWeapon: Weapon/TestPistol.prefab
     weaponPrice: 0
   - isOwned: 0
-    weapon: {fileID: 0}
+    pathToWeapon: Weapon/TestPistol.prefab
     weaponPrice: 10
   skins:
   - isOwned: 1

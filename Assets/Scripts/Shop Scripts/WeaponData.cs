@@ -8,14 +8,14 @@ public class WeaponData : IBuyable
     [SerializeField]
     private bool isOwned;
     [SerializeField]
-    private Weapon weapon;
+    private string pathToWeapon;
     [SerializeField]
     private int weaponPrice;
 
-    public WeaponData(bool isOwned, Weapon weapon, int weaponPrice)
+    public WeaponData(bool isOwned, string pathToWeapon, int weaponPrice)
     {
         this.isOwned = isOwned;
-        this.weapon = weapon;
+        this.pathToWeapon = pathToWeapon;
         this.weaponPrice = weaponPrice;
     }
 
@@ -38,6 +38,12 @@ public class WeaponData : IBuyable
         }
 
         return false;
+    }
+
+    public Weapon GetWeapon()
+    {
+        Weapon skinPreview = Resources.Load<Weapon>(pathToWeapon);
+        return skinPreview;
     }
 
     public int GetPrice()
