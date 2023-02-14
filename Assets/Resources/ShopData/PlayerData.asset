@@ -33,6 +33,10 @@ MonoBehaviour:
     skinName: Spartan
     skinPrice: 20
     pathToAnimators: Animations/Player Animators/SpartanAnimations
+  - isOwned: 0
+    skinName: Robot
+    skinPrice: 20
+    pathToAnimators: Animations/Player Animators/RobotAnimations
   upgrades:
   - curUpgradeStatus: 1
     upgradeName: MaxHP
