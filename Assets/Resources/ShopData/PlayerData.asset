@@ -37,6 +37,10 @@ MonoBehaviour:
     skinName: Robot
     skinPrice: 20
     pathToAnimators: Animations/Player Animators/RobotAnimations
+  - isOwned: 0
+    skinName: MadBax
+    skinPrice: 20
+    pathToAnimators: Animations/Player Animators/MadBaxAnimations
   upgrades:
   - curUpgradeStatus: 1
     upgradeName: MaxHP
