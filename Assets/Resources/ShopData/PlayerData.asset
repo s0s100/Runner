@@ -34,6 +34,10 @@ MonoBehaviour:
     skinPrice: 50
     pathToAnimators: Animations/Player Animators/RobotAnimations
   - isOwned: 0
+    skinName: MadBax
+    skinPrice: 20
+    pathToAnimators: Animations/Player Animators/MadBaxAnimations
+  - isOwned: 0
     skinName: Spartan
     skinPrice: 50
     pathToAnimators: Animations/Player Animators/SpartanAnimations
