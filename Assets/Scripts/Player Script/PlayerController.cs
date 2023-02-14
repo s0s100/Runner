@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
     // Dash
     private bool canDash = true;
+    private bool canDashCurrently = true;
     private float dashSpeed = 8.0f;
     private float dashStopCooldown = 0.3f;
     private float dashCooldown = 0.5f;
@@ -72,11 +73,25 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
+    public void EnableCurDash()
+    {
+        canDashCurrently = true;
+    }
+
+    public void DisableCurDash()
+    {
+        canDashCurrently = false;
+    }
+
     // Used when the player lands on the ground
     public void EnableJump()
     {
+        if (canDashCurrently)
+        {
+            canDash = true;
+        }
+
         canJump = true;
-        canDash = true;
         animator.SetBool("IsFalling", false);
         animator.SetBool("IsJumping", false);
     }
@@ -246,7 +261,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case MoveDirection.Right:
-                if (curDashCooldown <= 0.0f && canDash)
+                if (curDashCooldown <= 0.0f && canDash && canDashCurrently)
                 {
                     Dash();
                 }

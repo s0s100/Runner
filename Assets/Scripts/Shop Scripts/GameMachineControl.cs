@@ -43,7 +43,6 @@ public class GameMachineControl : MonoBehaviour
 
     public void ChooseLeftSkin()
     {
-        Debug.Log("Going to the left");
         if (curSkin == 0)
         {
             curSkin = skins.Count;
@@ -54,7 +53,6 @@ public class GameMachineControl : MonoBehaviour
 
     public void ChooseRightSkin()
     {
-        Debug.Log("Going to the right");
         curSkin++;
         if (curSkin ==  skins.Count)
         {

@@ -87,6 +87,14 @@ public class LevelGenerator : MonoBehaviour
         {
             // Decide which type of locations will be generated
             bool isCoinPrefab = Random.value < coinGenerationChance;
+
+            // Testing purpose
+            if (DevelopmentData.GetIsCoinType())
+            {
+                isCoinPrefab = true;
+            }
+
+            
             GameObject objectToGenerate;
             if (isCoinPrefab)
             {
@@ -130,6 +138,12 @@ public class LevelGenerator : MonoBehaviour
     {
         int size = prefabs.Length;
         int randomSelected = Random.Range(0, size);
+
+        // Testing purpose
+        if (DevelopmentData.GetNextGeneratedBlock())
+        {
+            randomSelected = size - 1;
+        }
 
         return prefabs[randomSelected];
     }

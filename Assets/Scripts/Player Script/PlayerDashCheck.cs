@@ -11,12 +11,12 @@ public class PlayerDashCheck : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerController>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            playerMovement.DisableDash();
+            playerMovement.DisableCurDash();
         }
     }
 
@@ -25,7 +25,7 @@ public class PlayerDashCheck : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            playerMovement.EnableDash();
+            playerMovement.EnableCurDash();
         }
     }
 }

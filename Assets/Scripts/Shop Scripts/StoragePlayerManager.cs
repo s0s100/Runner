@@ -22,8 +22,6 @@ public static class StoragePlayerManager
             string JSONdata = saveObj.ToJSON();
             File.WriteAllText(GetFullPath(), JSONdata);
 
-            Debug.Log("Save path: " + GetFullPath());
-
         } catch (FileNotFoundException e)
         {
             Debug.LogError(e);
@@ -38,7 +36,6 @@ public static class StoragePlayerManager
             {
                 string JSONdata = File.ReadAllText(GetFullPath());
                 JsonUtility.FromJsonOverwrite(JSONdata, saveObj);
-                Debug.Log("Load path: " + GetFullPath());
 
             } catch (SerializationException e)
             {
@@ -64,6 +61,6 @@ public static class StoragePlayerManager
 
     private static string GetDirectoryPath()
     {
-        return Path.Combine(Application.persistentDataPath, directoryPath); 
+        return Path.Combine(Application.persistentDataPath, directoryPath);
     }
 }

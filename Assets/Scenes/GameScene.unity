@@ -2026,7 +2026,7 @@ MonoBehaviour:
   generatedProjectiles: {fileID: 409410292}
   generatedAnimations: {fileID: 943088948}
   backgroundController: {fileID: 590038141}
-  playerPrefab: {fileID: 3713125059081945336, guid: 7d300235b653d461aafe3a6530e8f4d1, type: 3}
+  playerPrefab: {fileID: 9142231011957899327, guid: 03f14f413e60245209c86796ef7989d0, type: 3}
   biomeHolders:
   - {fileID: 3227328140635113850, guid: fa82c0c7496b1314eb9ae9aff83f2c6f, type: 3}
 --- !u!114 &590038138
