@@ -61,6 +61,6 @@ public static class StoragePlayerManager
 
     private static string GetDirectoryPath()
     {
-        return Path.Combine(Application.persistentDataPath, directoryPath); 
+        return Path.Combine(Application.persistentDataPath, directoryPath);
     }
 }
