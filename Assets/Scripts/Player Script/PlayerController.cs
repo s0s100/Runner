@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private GameController gameController;
     private LevelGenerator levelGenerator;
     private UIController uiController;
-    private Weapon weapon;
 
     // Mobile touch info
     private Vector2 startTouchPos;
@@ -52,11 +51,6 @@ public class PlayerController : MonoBehaviour
     // Fall
     private bool canFall = true;
     private float fallForce = 200.0f;
-
-    public void UpdateWeapon(Weapon newWeapon)
-    {
-        weapon = newWeapon;
-    }
 
     public bool IsMoveParticles()
     {
@@ -111,7 +105,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        weapon = GetComponentInChildren<Weapon>();
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
@@ -155,10 +148,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             return MoveDirection.Right;
-        } else
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            return MoveDirection.Middle;
         }
 
         return MoveDirection.None;
@@ -188,13 +177,6 @@ public class PlayerController : MonoBehaviour
             {
                 return directionResult;
             }
-        }
-
-        // Also track second touch for shooting with a second hand
-        bool doesSecondTouchStarted = Input.touchCount > 1;
-        if (doesSecondTouchStarted)
-        {
-            Attack();
         }
 
         return MoveDirection.None;
@@ -266,9 +248,6 @@ public class PlayerController : MonoBehaviour
                     Dash();
                 }
                 break;
-            case MoveDirection.Middle:
-                Attack();
-                break;
         }
     }
 
@@ -309,10 +288,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (weapon != null)
-        {
-            weapon.Shoot();
-        }
+        // Nothing for now
         animator.SetTrigger("IsAttacking");
     }
 

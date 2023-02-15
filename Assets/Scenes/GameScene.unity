@@ -2027,8 +2027,8 @@ MonoBehaviour:
   generatedAnimations: {fileID: 943088948}
   backgroundController: {fileID: 590038141}
   playerPrefab: {fileID: 9142231011957899327, guid: 03f14f413e60245209c86796ef7989d0, type: 3}
-  biomeHolders:
-  - {fileID: 3227328140635113850, guid: fa82c0c7496b1314eb9ae9aff83f2c6f, type: 3}
+  biomeData:
+  - {fileID: 11400000, guid: 9ba1c934e54c8c64c9a2eddbd6051034, type: 2}
 --- !u!114 &590038138
 MonoBehaviour:
   m_ObjectHideFlags: 0
