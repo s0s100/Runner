@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d4fe0f89e1f80c47a482bc8b01703e5
+guid: d44089b672928fc42831ea72c3506868
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1000
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -129,7 +129,70 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PixelManCharactersDodgeAttack 1_0
+      name: AttackEffect1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 960
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaaf59b5d386a164e8f1be14cbe1bc98
+      internalID: -2078107055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackEffect1_1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 960
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0746cb63aa7ae74c873070f30c67436
+      internalID: -783466443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackEffect1_2
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 960
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bf53bcb5f1d4154ea4e5224789b70e9
+      internalID: -823739243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackEffect1_3
       rect:
         serializedVersion: 2
         x: 0
@@ -143,14 +206,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6407b60a4c2988b41aa182d76f3f0271
-      internalID: 540364913
+      spriteID: 0427fbcf2d28da34fb11125bafd25eaa
+      internalID: 695378859
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelManCharactersDodgeAttack 1_1
+      name: AttackEffect1_4
       rect:
         serializedVersion: 2
         x: 320
@@ -164,14 +227,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07deddf0904c2274aa0ba88e22adec64
-      internalID: -1246320479
+      spriteID: 2ec05f60e7bd68642beff75040199ab3
+      internalID: 1323379146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelManCharactersDodgeAttack 1_2
+      name: AttackEffect1_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 640
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c51344bd01aa09b4e8513616ea665d6a
+      internalID: -265067852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackEffect1_6
       rect:
         serializedVersion: 2
         x: 0
@@ -185,14 +269,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6780dce577bdc3b4dae05b53ef2d0753
-      internalID: -1549025530
+      spriteID: 7ebea378125b7ba4c8ee004a6e2b6773
+      internalID: -689326944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelManCharactersDodgeAttack 1_3
+      name: AttackEffect1_7
       rect:
         serializedVersion: 2
         x: 320
@@ -206,14 +290,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f53426ecea709f4e9c9ec9ce86da378
-      internalID: 551218820
+      spriteID: a14f4e5e1f14ccd4497b1d44fbfb1a4a
+      internalID: -1751837432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelManCharactersDodgeAttack 1_4
+      name: AttackEffect1_8
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 320
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5057f5b792f07446a823afb4cf12535
+      internalID: 347855937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackEffect1_9
       rect:
         serializedVersion: 2
         x: 0
@@ -227,14 +332,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ceb7ed6fa3b451c4ca0db554717019a8
-      internalID: -995350995
+      spriteID: 8439004398dfb594786d7be1b1e3e760
+      internalID: -1483717191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelManCharactersDodgeAttack 1_5
+      name: AttackEffect1_10
       rect:
         serializedVersion: 2
         x: 320
@@ -248,8 +353,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d11a78b7e7ca134caf1789eaeaaf1c2
-      internalID: -1938189850
+      spriteID: 13b47e97b25005343bbd8cead839c921
+      internalID: -539035260
       vertices: []
       indices: 
       edges: []
@@ -265,12 +370,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PixelManCharactersDodgeAttack 1_5: -1938189850
-      PixelManCharactersDodgeAttack 1_2: -1549025530
-      PixelManCharactersDodgeAttack 1_1: -1246320479
-      PixelManCharactersDodgeAttack 1_4: -995350995
-      PixelManCharactersDodgeAttack 1_3: 551218820
-      PixelManCharactersDodgeAttack 1_0: 540364913
+      AttackEffect1_4: 1323379146
+      AttackEffect1_0: -2078107055
+      AttackEffect1_10: -539035260
+      AttackEffect1_5: -265067852
+      AttackEffect1_7: -1751837432
+      AttackEffect1_2: -823739243
+      AttackEffect1_1: -783466443
+      AttackEffect1_6: -689326944
+      AttackEffect1_3: 695378859
+      AttackEffect1_8: 347855937
+      AttackEffect1_9: -1483717191
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -286,12 +286,6 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsMoving", false);
     }
 
-    private void Attack()
-    {
-        // Nothing for now
-        animator.SetTrigger("IsAttacking");
-    }
-
     private void MovePlayer()
     {
         if (isMoving)
@@ -362,5 +356,11 @@ public class PlayerController : MonoBehaviour
     public void SetCurrentAnimator(AnimatorController animatorController)
     {
         animator.runtimeAnimatorController = animatorController as RuntimeAnimatorController;
+    }
+
+    public void Attack()
+    {
+        // Nothing for now
+        animator.SetTrigger("IsAttacking");
     }
 }
