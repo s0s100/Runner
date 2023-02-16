@@ -41,6 +41,10 @@ MonoBehaviour:
     skinName: Spartan
     skinPrice: 50
     pathToAnimators: Animations/Player Animators/SpartanAnimations
+  - isOwned: 0
+    skinName: Elianka
+    skinPrice: 50
+    pathToAnimators: Animations/Player Animators/EliankaAnimations
   upgrades:
   - curUpgradeStatus: 1
     upgradeName: MaxHP
