@@ -8,7 +8,7 @@ using UnityEditor.Animations;
 // Control general game states such as defeat and overall game speed
 public class GameController : MonoBehaviour
 {
-    private PrefabHolder startPosition;
+    private PrefabData startPosition;
     private PlayerController playerMovement;
     private CameraController cameraFollowPlayer;
     private LevelGenerator levelGenerator;
@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         uiController = GetComponent<UIController>();
         backgroundController = GetComponent<BackgroundController>();
         GameObject lastGeneratedPrefab = levelGenerator.GetLastGeneratedPrefab();
-        startPosition = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+        startPosition = lastGeneratedPrefab.GetComponent<PrefabData>();
         SetCurrentPlayerSkin();
 
         // Increase max FPS to 60 (for every platform for now)
@@ -98,8 +98,8 @@ public class GameController : MonoBehaviour
 
     private void ActivatePrefabDestruction()
     {
-        PrefabHolder[] prefabHolders = FindObjectsOfType<PrefabHolder>();
-        foreach (PrefabHolder prefabHolder in prefabHolders)
+        PrefabData[] prefabHolders = FindObjectsOfType<PrefabData>();
+        foreach (PrefabData prefabHolder in prefabHolders)
         {
             prefabHolder.LateDestroy();
         }
