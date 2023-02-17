@@ -80,9 +80,10 @@ public class PlayerDataScreen : MonoBehaviour
         ammoBar.fillAmount = 1.0f;
     }
 
-    public void SetAmmoCounter(int curAmmo, int maxAmmo)
+    public void SetAmmoCounter(float curAmmo, float maxAmmo)
     {
-        float result = (float)curAmmo / (float)maxAmmo;
+        float difference = curAmmo / maxAmmo;
+        float result = 1.0f - difference;
         ammoBar.fillAmount = result;
     }
 

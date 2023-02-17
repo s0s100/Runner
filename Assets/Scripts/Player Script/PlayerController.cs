@@ -21,12 +21,13 @@ public class PlayerController : MonoBehaviour
     private GameController gameController;
     private LevelGenerator levelGenerator;
     private UIController uiController;
+    private PlayerDataScreen playerDataScreen;
 
     // Mobile touch info
     private Vector2 startTouchPos;
     private bool isTrackingTouch;
 
-    // Particles
+    // Particles prefabs attached
     [SerializeField]
     private ParticleSystem footstepParticles;
     [SerializeField]
@@ -51,6 +52,16 @@ public class PlayerController : MonoBehaviour
     // Fall
     private bool canFall = true;
     private float fallForce = 200.0f;
+    private float slowedMovementCoef = 0.6f;
+
+    // Next action buffer
+    private MoveDirection savedAction = MoveDirection.None;
+    private float saveActionTime = 0.25f;
+    private float curSaveActionTime = 0.0f;
+
+    // Attack
+    private float attackCooldown = 2.0f;
+    private float curAttackCooldown = 0.0f;
 
     public bool IsMoveParticles()
     {
@@ -111,6 +122,7 @@ public class PlayerController : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
         uiController = FindObjectOfType<UIController>();
+        playerDataScreen = FindObjectOfType<PlayerDataScreen>();
         camera = Camera.main;
 
         moveSpeed = gameController.GetGameSpeed();
@@ -126,6 +138,7 @@ public class PlayerController : MonoBehaviour
             moveDir = GetAction();
         }
 
+        MakeStoredAction(); // Make action stored in a buffer 
         MakeAction(moveDir);
         MovePlayer();
         ReduceCooldowns();
@@ -158,6 +171,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.touchCount == 0)
         {
+            moveSpeed = gameController.GetGameSpeed();
             isTrackingTouch = false;
             AllowMovement();
         }
@@ -217,6 +231,14 @@ public class PlayerController : MonoBehaviour
         return MoveDirection.None;
     }
 
+    private void MakeStoredAction()
+    {
+        if (curSaveActionTime > 0.0f)
+        {
+            MakeAction(savedAction);
+        }
+    }
+
     private void MakeAction(MoveDirection moveDirection)
     {
         // If dashing nothing can be activated
@@ -228,26 +250,47 @@ public class PlayerController : MonoBehaviour
                 if (canJump)
                 {
                     Jump();
+                } else
+                {
+                    StoreAction(moveDirection);
                 }
                 break;
             case MoveDirection.Down:
                 if (canFall)
                 {
                     Fall();
+                } else
+                {
+                    StoreAction(moveDirection);
                 }
                 break;
             case MoveDirection.Left:
                 if (canJump)
                 {
                     StopPlayer();
+                } else
+                {
+                    SlowMovement();
                 }
                 break;
             case MoveDirection.Right:
                 if (curDashCooldown <= 0.0f && canDash && canDashCurrently)
                 {
                     Dash();
+                } else
+                {
+                    StoreAction(moveDirection);
                 }
                 break;
+        }
+    }
+
+    private void StoreAction(MoveDirection moveDirection)
+    {
+        if (curSaveActionTime <= 0.0f)
+        {
+            savedAction = moveDirection;
+            curSaveActionTime = saveActionTime;
         }
     }
 
@@ -258,10 +301,18 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {        
         Vector2 force = Vector2.up * jumpForce;
+        rigidbody.velocity = Vector3.zero;
         rigidbody.AddForce(force);
         DisableJump();
+
+        curSaveActionTime = 0.0f;
+    }
+
+    private void SlowMovement()
+    {
+        moveSpeed = gameController.GetGameSpeed() * slowedMovementCoef;
     }
 
     private void Fall()
@@ -270,6 +321,8 @@ public class PlayerController : MonoBehaviour
         rigidbody.AddForce(force);
         canFall = false;
         animator.SetBool("IsFalling", true);
+
+        curSaveActionTime = 0.0f;
     }
 
     private void Dash()
@@ -278,6 +331,8 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         curDashCooldown = dashCooldown;
         animator.SetBool("IsDashing", true);
+
+        curSaveActionTime = 0.0f;
     }
 
     private void StopPlayer()
@@ -309,7 +364,18 @@ public class PlayerController : MonoBehaviour
                 SetGravity(true);
                 animator.SetBool("IsDashing", false);
             }
+        }
+
+        if (curSaveActionTime >= 0.0f)
+        {
+            curSaveActionTime -= Time.deltaTime;
         } 
+
+        if (curAttackCooldown >= 0.0f)
+        {
+            playerDataScreen.SetAmmoCounter(curAttackCooldown, attackCooldown);
+            curAttackCooldown -= Time.deltaTime;
+        }
     }
 
     public void SetGravity(bool isEnabled)
@@ -360,7 +426,11 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        // Nothing for now
-        animator.SetTrigger("IsAttacking");
+        if (curAttackCooldown <= 0.0f)
+        {
+            animator.SetTrigger("IsAttacking");
+            curAttackCooldown = attackCooldown;
+            playerDataScreen.FillAmmoBar();
+        }
     }
 }

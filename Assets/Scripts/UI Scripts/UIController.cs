@@ -26,8 +26,6 @@ public class UIController : MonoBehaviour
 
     // Menu links
     [SerializeField]
-    private TMP_Text healthText;
-    [SerializeField]
     private GameObject gameMenu;
     [SerializeField]
     private GameObject pauseMenu;
@@ -112,11 +110,6 @@ public class UIController : MonoBehaviour
     {
         // startGameText.DeleteObject();
         startGameText.gameObject.SetActive(false);
-    }
-
-    public TMP_Text GetHealthText()
-    {
-        return healthText;
     }
 
     // Used to define if any GUI is below touch position
