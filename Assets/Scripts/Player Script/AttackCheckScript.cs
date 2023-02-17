@@ -17,11 +17,15 @@ public class AttackCheckScript : MonoBehaviour
         if (tag == "Enemy")
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.Damage();       
-            playerController.Attack();
 
-            Animator animator = GetComponent<Animator>();
-            animator.SetTrigger("IsAttacking");
+           if (enemy.GetCurHealth() > 0)
+           {
+               enemy.Damage();
+               playerController.Attack();
+
+               Animator animator = GetComponent<Animator>();
+               animator.SetTrigger("IsAttacking");
+           }
         }
     }
 }

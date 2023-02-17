@@ -21,12 +21,13 @@ public class PlayerController : MonoBehaviour
     private GameController gameController;
     private LevelGenerator levelGenerator;
     private UIController uiController;
+    private PlayerDataScreen playerDataScreen;
 
     // Mobile touch info
     private Vector2 startTouchPos;
     private bool isTrackingTouch;
 
-    // Particles
+    // Particles prefabs attached
     [SerializeField]
     private ParticleSystem footstepParticles;
     [SerializeField]
@@ -54,9 +55,13 @@ public class PlayerController : MonoBehaviour
     private float slowedMovementCoef = 0.6f;
 
     // Next action buffer
-    private MoveDirection savedAction;
+    private MoveDirection savedAction = MoveDirection.None;
     private float saveActionTime = 0.25f;
     private float curSaveActionTime = 0.0f;
+
+    // Attack
+    private float attackCooldown = 2.0f;
+    private float curAttackCooldown = 0.0f;
 
     public bool IsMoveParticles()
     {
@@ -117,6 +122,7 @@ public class PlayerController : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
         uiController = FindObjectOfType<UIController>();
+        playerDataScreen = FindObjectOfType<PlayerDataScreen>();
         camera = Camera.main;
 
         moveSpeed = gameController.GetGameSpeed();
@@ -364,6 +370,12 @@ public class PlayerController : MonoBehaviour
         {
             curSaveActionTime -= Time.deltaTime;
         } 
+
+        if (curAttackCooldown >= 0.0f)
+        {
+            playerDataScreen.SetAmmoCounter(curAttackCooldown, attackCooldown);
+            curAttackCooldown -= Time.deltaTime;
+        }
     }
 
     public void SetGravity(bool isEnabled)
@@ -414,7 +426,11 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        // Nothing for now
-        animator.SetTrigger("IsAttacking");
+        if (curAttackCooldown <= 0.0f)
+        {
+            animator.SetTrigger("IsAttacking");
+            curAttackCooldown = attackCooldown;
+            playerDataScreen.FillAmmoBar();
+        }
     }
 }
