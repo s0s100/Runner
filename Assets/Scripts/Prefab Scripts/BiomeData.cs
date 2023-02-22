@@ -10,6 +10,7 @@ public class BiomeData : ScriptableObject
     private static string PATH_TO_START_LOCATIONS = "StartLocations";
     private static string PATH_TO_LOCATIONS = "Locations";
     private static string PATH_TO_COIN_LOCATIONS = "CoinLocations";
+    private static string PATH_TO_BOSS_LOCATIONS = "BossLocations";
 
     [SerializeField]
     private string locationsGeneralPath;
@@ -19,6 +20,14 @@ public class BiomeData : ScriptableObject
 
     [SerializeField]
     private GameObject backgroundFront;
+
+    [SerializeField]
+    private GameObject bossObject;
+
+    public GameObject GetBossObject()
+    {
+        return bossObject;
+    }
 
     public string GetStartLocationsPath()
     {
@@ -35,6 +44,12 @@ public class BiomeData : ScriptableObject
     public string GetCoinLocationsPath()
     {
         string path = Path.Combine(locationsGeneralPath, PATH_TO_COIN_LOCATIONS);
+        return path;
+    }
+
+    public string GetBossLocationsPath()
+    {
+        string path = Path.Combine(locationsGeneralPath, PATH_TO_BOSS_LOCATIONS);
         return path;
     }
 

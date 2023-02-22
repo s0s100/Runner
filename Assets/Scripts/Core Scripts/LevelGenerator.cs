@@ -25,6 +25,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject[] definedPrefabs;
     private GameObject[] definedCoinPrefabs;
     private GameObject[] startPrefabs;
+    private GameObject[] bossPrefabs;
 
     // Generation parent objects
     [SerializeField]
@@ -43,12 +44,16 @@ public class LevelGenerator : MonoBehaviour
     private GameObject playerPrefab;
     [SerializeField]
     private BiomeData[] biomeData;
+
     
     // Biome selection
     private int curActiveBiome; // Biome holder index
 
     // Coin generation
     private float coinGenerationChance = 0.25f;
+
+    // Boss realization
+    private bool isBossStage = false;
 
     private void Awake()
     {
@@ -65,7 +70,13 @@ public class LevelGenerator : MonoBehaviour
 
     private void Update()
     {
-        GenerateLocation();
+        if (isBossStage)
+        {
+
+        } else
+        {
+            GenerateLocation();
+        }
     }
 
     private void GeneratePlayer()
@@ -132,6 +143,10 @@ public class LevelGenerator : MonoBehaviour
         // Also upload coin prefabs
         path = biome.GetCoinLocationsPath();
         definedCoinPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        // Add boss locations as well
+        path = biome.GetBossLocationsPath();
+        bossPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
     private GameObject SelectPrefab(GameObject[] prefabs)
@@ -225,5 +240,19 @@ public class LevelGenerator : MonoBehaviour
     public float GetGenerationDistance()
     {
         return generationDistance;
+    }
+
+    public void StartBossStage()
+    {
+        isBossStage = true;
+        CreateBoss();
+    }
+
+    private void CreateBoss()
+    {
+        GameObject boss = biomeData[curActiveBiome].GetBossObject();
+        GameObject createdBoss = Instantiate(boss);
+        createdBoss.transform.position = playerObject.transform.position + Vector3.right * generationDistance;
+        createdBoss.transform.parent = generatedEnemyParent.transform;
     }
 }
