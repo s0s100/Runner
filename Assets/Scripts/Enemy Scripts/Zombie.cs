@@ -24,6 +24,11 @@ public class Zombie : Enemy
         animator.SetTrigger("IsAwakening");
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     // Move towards player and don't fall
     protected override void Movement()
     {

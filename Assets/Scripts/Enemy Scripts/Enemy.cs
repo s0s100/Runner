@@ -22,9 +22,6 @@ public abstract class Enemy : MonoBehaviour
     protected float existanceTime = 10.0f;
 
     protected int health = 1;
-    protected float deathTime = 1.0f;
-
-
 
     protected virtual void Awake()
     {
