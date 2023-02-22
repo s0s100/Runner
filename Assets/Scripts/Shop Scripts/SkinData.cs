@@ -19,6 +19,8 @@ public class SkinData :  IBuyable
     private int skinPrice;
     [SerializeField]
     private string pathToAnimators;
+    [SerializeField]
+    private Color attackColor;
 
     public SkinData(bool isOwned, string skinName, int skinPrice, string pathToAnimators)
     {
@@ -75,5 +77,10 @@ public class SkinData :  IBuyable
     public bool IsBought()
     {
         return isOwned;
+    }
+
+    public Color GetColor()
+    {
+        return attackColor;
     }
 }

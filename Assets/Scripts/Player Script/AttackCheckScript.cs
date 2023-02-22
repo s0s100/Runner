@@ -5,10 +5,13 @@ using UnityEngine;
 public class AttackCheckScript : MonoBehaviour
 {
     private PlayerController playerController;
+    private SpriteRenderer attackRenderer;
 
     private void Start()
     {
         playerController = GetComponentInParent<PlayerController>();
+        attackRenderer = GetComponent<SpriteRenderer>();
+        attackRenderer.color = playerController.GetAttackColor();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
