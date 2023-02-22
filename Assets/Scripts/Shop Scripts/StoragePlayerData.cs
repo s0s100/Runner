@@ -40,4 +40,14 @@ public class StoragePlayerData : ScriptableObject
 
         return null;
     }
+
+    public Color GetAttackColor(int index)
+    {
+        if (index < skins.Count)
+        {
+            return skins[index].GetColor();
+        }
+
+        return Color.white;
+    }
 }

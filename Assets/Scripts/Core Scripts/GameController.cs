@@ -56,9 +56,13 @@ public class GameController : MonoBehaviour
         int skinIndex = GameMachineControl.GetLastSkinIndex();
         SkinData skin = storagePlayerData.GetIndexSkin(skinIndex);
         AnimatorController animator = skin.GetAnimator();
+        Color attackColor = storagePlayerData.GetAttackColor(skinIndex);
+
+        Debug.Log("Game controller " + attackColor);
 
         // Select animator for the player
         playerMovement.SetCurrentAnimator(animator);
+        playerMovement.SetAttackColor(attackColor);
     }
 
     public void GameDefeat()

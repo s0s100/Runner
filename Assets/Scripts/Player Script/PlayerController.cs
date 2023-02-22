@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     private float curSaveActionTime = 0.0f;
 
     // Attack
+    private Color attackColor;
     private float attackCooldown = 2.0f;
     private float curAttackCooldown = 0.0f;
 
@@ -422,6 +423,16 @@ public class PlayerController : MonoBehaviour
     public void SetCurrentAnimator(AnimatorController animatorController)
     {
         animator.runtimeAnimatorController = animatorController as RuntimeAnimatorController;
+    }
+    
+    public void SetAttackColor(Color color)
+    {
+        attackColor = color;
+    }
+
+    public Color GetAttackColor()
+    {
+        return attackColor;
     }
 
     public void Attack()

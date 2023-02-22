@@ -13,38 +13,37 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   fileName: SaveFile.txt
-  weapons:
-  - isOwned: 1
-    pathToWeapon: Weapon/TestPistol.prefab
-    weaponPrice: 0
-  - isOwned: 0
-    pathToWeapon: Weapon/TestPistol.prefab
-    weaponPrice: 10
   skins:
   - isOwned: 1
     skinName: FirstCharacter
     skinPrice: 0
     pathToAnimators: Animations/Player Animators/FirstCharacterAnimations
+    attackColor: {r: 0.13319732, g: 0.08962262, b: 1, a: 1}
   - isOwned: 1
     skinName: Ninja
     skinPrice: 20
     pathToAnimators: Animations/Player Animators/NinjaAnimations
+    attackColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   - isOwned: 0
     skinName: Robot
     skinPrice: 50
     pathToAnimators: Animations/Player Animators/RobotAnimations
+    attackColor: {r: 0, g: 0.103946924, b: 1, a: 1}
   - isOwned: 0
     skinName: MadBax
     skinPrice: 20
     pathToAnimators: Animations/Player Animators/MadBaxAnimations
+    attackColor: {r: 1, g: 0.020209312, b: 0, a: 1}
   - isOwned: 0
     skinName: Spartan
     skinPrice: 50
     pathToAnimators: Animations/Player Animators/SpartanAnimations
+    attackColor: {r: 1, g: 0.713418, b: 0, a: 1}
   - isOwned: 0
     skinName: Elianka
     skinPrice: 50
     pathToAnimators: Animations/Player Animators/EliankaAnimations
+    attackColor: {r: 0.10721412, g: 0.6509434, b: 0, a: 1}
   upgrades:
   - curUpgradeStatus: 1
     upgradeName: MaxHP
