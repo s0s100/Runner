@@ -58,8 +58,6 @@ public class GameController : MonoBehaviour
         AnimatorController animator = skin.GetAnimator();
         Color attackColor = storagePlayerData.GetAttackColor(skinIndex);
 
-        Debug.Log("Game controller " + attackColor);
-
         // Select animator for the player
         playerMovement.SetCurrentAnimator(animator);
         playerMovement.SetAttackColor(attackColor);
