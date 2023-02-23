@@ -25,6 +25,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject[] definedPrefabs;
     private GameObject[] definedCoinPrefabs;
     private GameObject[] startPrefabs;
+    private GameObject[] bossPrefabs;
 
     // Generation parent objects
     [SerializeField]
@@ -42,13 +43,17 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private GameObject playerPrefab;
     [SerializeField]
-    private BiomeHolder[] biomeHolders;
+    private BiomeData[] biomeData;
+
     
     // Biome selection
     private int curActiveBiome; // Biome holder index
 
     // Coin generation
     private float coinGenerationChance = 0.25f;
+
+    // Boss realization
+    private bool isBossStage = false;
 
     private void Awake()
     {
@@ -65,7 +70,13 @@ public class LevelGenerator : MonoBehaviour
 
     private void Update()
     {
-        GenerateLocation();
+        if (isBossStage)
+        {
+
+        } else
+        {
+            GenerateLocation();
+        }
     }
 
     private void GeneratePlayer()
@@ -76,7 +87,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateLocation()
     {
-        PrefabHolder lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+        PrefabData lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabData>();
         float lastPrefabX = lastGeneratedPrefab.transform.position.x;
         float lastPrefabY = lastGeneratedPrefab.transform.position.y;
 
@@ -104,7 +115,7 @@ public class LevelGenerator : MonoBehaviour
                 objectToGenerate = SelectPrefab(definedPrefabs);
             }
             
-            PrefabHolder newPrefabInfo = objectToGenerate.GetComponent<PrefabHolder>();
+            PrefabData newPrefabInfo = objectToGenerate.GetComponent<PrefabData>();
 
             // Calculate new prefab position prefab position
             float xNewPos = lastPrefabX + newPrefabInfo.XBefore;
@@ -124,14 +135,18 @@ public class LevelGenerator : MonoBehaviour
     }
 
     // Uploads basic and coin prefabs
-    private void UploadDefinedPrefabs(BiomeHolder biome)
+    private void UploadDefinedPrefabs(BiomeData biome)
     {
-        string path = biome.PrefabsPath;
+        string path = biome.GetLocationsPath();
         definedPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
 
         // Also upload coin prefabs
-        path = biome.CoinPrefabPath;
+        path = biome.GetCoinLocationsPath();
         definedCoinPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        // Add boss locations as well
+        path = biome.GetBossLocationsPath();
+        bossPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
     private GameObject SelectPrefab(GameObject[] prefabs)
@@ -158,7 +173,7 @@ public class LevelGenerator : MonoBehaviour
         // Centralize object according to x size
         if (isXShifting)
         {
-            PrefabHolder prefabHolder = lastGeneratedPrefab.GetComponent<PrefabHolder>();
+            PrefabData prefabHolder = lastGeneratedPrefab.GetComponent<PrefabData>();
             float xShift = prefabHolder.GetXSize() / 2;
             lastGeneratedPrefab.transform.position += xShift * Vector3.right;
         }
@@ -168,20 +183,20 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateStartLocation()
     {
-        string path = biomeHolders[curActiveBiome].StartPrefabsPath;
+        string path = biomeData[curActiveBiome].GetStartLocationsPath();
         GameObject[] startLocations = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
-
+        
         int locationSize = startLocations.Length;
         int randomIndex = Random.Range(0, locationSize);
-
+        
         CreatePrefab(startLocations[randomIndex], START_PREFAB_POSITION);
     }
 
     private void RandomizeCurBiome()
     {
-        curActiveBiome = Random.Range(0, biomeHolders.Length);
-        UploadDefinedPrefabs(biomeHolders[curActiveBiome]);
-        backgroundController.SetBiome(biomeHolders[curActiveBiome]);
+        curActiveBiome = Random.Range(0, biomeData.Length);
+        UploadDefinedPrefabs(biomeData[curActiveBiome]);
+        backgroundController.SetBiome(biomeData[curActiveBiome]);
     }
 
     public GameObject GetEnemyParent()
@@ -225,5 +240,19 @@ public class LevelGenerator : MonoBehaviour
     public float GetGenerationDistance()
     {
         return generationDistance;
+    }
+
+    public void StartBossStage()
+    {
+        isBossStage = true;
+        CreateBoss();
+    }
+
+    private void CreateBoss()
+    {
+        GameObject boss = biomeData[curActiveBiome].GetBossObject();
+        GameObject createdBoss = Instantiate(boss);
+        createdBoss.transform.position = playerObject.transform.position + Vector3.right * generationDistance;
+        createdBoss.transform.parent = generatedEnemyParent.transform;
     }
 }

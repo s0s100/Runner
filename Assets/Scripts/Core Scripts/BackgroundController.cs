@@ -11,7 +11,7 @@ public class BackgroundController : MonoBehaviour
     // Background images
     private GameObject backImage;
     private List<GameObject> frontsImages = new List<GameObject>();
-    private BiomeHolder curBiomeHolder;
+    private BiomeData curBiomeHolder;
     private GameController controller;
     private float frontYShift = 0; // Middle background Y shift
     private float frontMoveSpeed;
@@ -48,14 +48,14 @@ public class BackgroundController : MonoBehaviour
         }
     }
     
-    public void SetBiome(BiomeHolder newBiome)
+    public void SetBiome(BiomeData newBiome)
     {
         curBiomeHolder = newBiome;
         SetBackImage();
         SetFrontImage();
     }
 
-    public void UpdateBiome(BiomeHolder newBiome)
+    public void UpdateBiome(BiomeData newBiome)
     {
         curBiomeHolder = newBiome;
     }
@@ -77,7 +77,7 @@ public class BackgroundController : MonoBehaviour
     private void AddFrontImage()
     {
         GameObject newFront = null;
-        newFront = Instantiate(curBiomeHolder.BackgroundFront);
+        newFront = Instantiate(curBiomeHolder.GetBackgroundFront());
 
         newFront.transform.parent = backgroundParent.transform;
         if (frontsImages.Count == 0)
@@ -102,7 +102,7 @@ public class BackgroundController : MonoBehaviour
             Destroy(backImage);
         }
 
-        GameObject newBack = Instantiate(curBiomeHolder.BackgroundBack);
+        GameObject newBack = Instantiate(curBiomeHolder.GetBackgroundBack());
         newBack.transform.parent = backgroundParent.transform;
         newBack.transform.localPosition = new Vector2(0, 0);
         backImage = newBack;

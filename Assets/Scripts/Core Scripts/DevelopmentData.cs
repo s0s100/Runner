@@ -9,8 +9,6 @@ public static class DevelopmentData
     private static string SHOULD_UPDATE_PREF = "Should Update";
     private static string FIRST_GENERATED_BLOCK_PREF = "Is Last block";
     private static string IS_NEXT_BLOCK_COIN_PREF = "Is next block coin";
-
-    private static bool ShouldUpdate = true;
     
     // 0 is false, 1 is true, int player pref is used
     public static void SetShouldUpdate(bool isUpdating)

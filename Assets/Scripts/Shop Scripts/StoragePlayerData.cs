@@ -10,16 +10,13 @@ public class StoragePlayerData : ScriptableObject
     [SerializeField]
     private string fileName;
     [SerializeField]
-    private List<WeaponData> weapons;
-    [SerializeField]
     private List<SkinData> skins;
     [SerializeField]
     private List<UpgradeData> upgrades;
 
-    public StoragePlayerData(string fileName, List<WeaponData> weapons, List<SkinData> skins, List<UpgradeData> upgrades)
+    public StoragePlayerData(string fileName, List<SkinData> skins, List<UpgradeData> upgrades)
     {
         this.fileName = fileName;
-        this.weapons = weapons;
         this.skins = skins;
         this.upgrades = upgrades;
     }
@@ -42,5 +39,15 @@ public class StoragePlayerData : ScriptableObject
         }
 
         return null;
+    }
+
+    public Color GetAttackColor(int index)
+    {
+        if (index < skins.Count)
+        {
+            return skins[index].GetColor();
+        }
+
+        return Color.white;
     }
 }
