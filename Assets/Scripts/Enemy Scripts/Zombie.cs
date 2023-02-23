@@ -22,6 +22,7 @@ public class Zombie : Enemy
         animator = GetComponent<Animator>();
 
         animator.SetTrigger("IsAwakening");
+        Destroy(this.gameObject, existanceTime);
     }
 
     protected override void Update()

@@ -15,6 +15,7 @@ public class FlyingEnemy : Enemy
     {
         base.Awake();
         speed = gameController.GetGameSpeed(); // Same speed as a player
+        Destroy(this.gameObject, existanceTime);
     }
 
     public void SetSinMovement()

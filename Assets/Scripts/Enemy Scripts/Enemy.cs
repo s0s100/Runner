@@ -28,7 +28,6 @@ public abstract class Enemy : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        Destroy(this.gameObject, existanceTime); // Delete after
     }
     
     protected virtual void Update()
