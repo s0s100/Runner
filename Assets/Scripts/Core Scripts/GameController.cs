@@ -86,6 +86,7 @@ public class GameController : MonoBehaviour
         startPosition.LateDestroy();
         ActivateEveryEnemyGenerator();
         ActivatePrefabDestruction();
+        Time.timeScale = 1.0f;
     }
 
     // Not the best solution, for now..

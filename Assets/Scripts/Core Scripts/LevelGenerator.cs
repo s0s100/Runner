@@ -5,6 +5,13 @@ using UnityEditor;
 using System.IO;
 using System.Linq;
 
+public enum NextGeneratedBlockType
+{
+    Default,
+    Coin,
+    Boss
+}
+
 // Generates playable objects on the screen, contains information about current biome
 public class LevelGenerator : MonoBehaviour
 {
@@ -43,11 +50,13 @@ public class LevelGenerator : MonoBehaviour
     private GameObject playerPrefab;
     [SerializeField]
     private BiomeData[] biomeData;
-    
+
     // Biome selection
+    Dictionary<NextGeneratedBlockType, GameObject[]> enumToObjLinkage;
+    NextGeneratedBlockType nextBlockType;
     private int curActiveBiome; // Biome holder index
     private float coinGenerationChance = 0.25f;
-    private bool isBossStage = false;
+    private bool isBossFight = false;
 
     private void Awake()
     {
@@ -58,7 +67,10 @@ public class LevelGenerator : MonoBehaviour
     {
         GenerateFromLocations(startPrefabs, START_PREFAB_POSITION);
         GeneratePlayer();
+        PopulateLinkageDictionary();
+
         cameraObject = Camera.main;
+        nextBlockType = NextGeneratedBlockType.Default;
     }
 
     private void Update()
@@ -72,33 +84,30 @@ public class LevelGenerator : MonoBehaviour
         playerObject.transform.position = START_PLAYER_POSITION;
     }
 
+    private void DefineNextBlockType()
+    {
+        bool isCoinPrefab = Random.value < coinGenerationChance;
+        if (DevelopmentData.GetIsCoinType() || isCoinPrefab)
+        {
+            nextBlockType = NextGeneratedBlockType.Coin;
+        }
+
+        if (isBossFight)
+        {
+            nextBlockType = NextGeneratedBlockType.Boss;
+        }
+
+        nextBlockType = NextGeneratedBlockType.Default;
+    }
+
     private void GenerateLocation()
     {
 
         if (ShouldGenerate())
         {
-
-            // Check if coin locations generates automatically
-            bool isCoinPrefab;
-            if (DevelopmentData.GetIsCoinType())
-            {
-                isCoinPrefab = true;
-            } else
-            {
-                isCoinPrefab = Random.value < coinGenerationChance;
-            }
-            
-            GameObject objectToGenerate;
-            if (isCoinPrefab)
-            {
-                objectToGenerate = SelectPrefab(definedCoinPrefabs);
-            }  else 
-            {
-                objectToGenerate = SelectPrefab(definedPrefabs);
-            }
-
-            Vector2 generatedPos = GetNextGenerationLocation(objectToGenerate);
-            CreatePrefab(objectToGenerate, generatedPos);
+            DefineNextBlockType();
+            GameObject[] objectToGenerate = enumToObjLinkage[nextBlockType];
+            GenerateFromLocations(objectToGenerate);
         }
     }
 
@@ -160,6 +169,16 @@ public class LevelGenerator : MonoBehaviour
         bossPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
+    private void PopulateLinkageDictionary()
+    {
+        enumToObjLinkage = new Dictionary<NextGeneratedBlockType, GameObject[]>();
+        enumToObjLinkage.Add(NextGeneratedBlockType.Default, definedPrefabs);
+        enumToObjLinkage.Add(NextGeneratedBlockType.Coin, definedCoinPrefabs);
+        // enumToObjLinkage.Add(NextGeneratedBlockType.End, endPrefabs);
+        enumToObjLinkage.Add(NextGeneratedBlockType.Boss, bossPrefabs);
+        // enumToObjLinkage.Add(NextGeneratedBlockType.None, null);
+    }
+
     private GameObject SelectPrefab(GameObject[] prefabs)
     {
         int size = prefabs.Length;
@@ -197,7 +216,18 @@ public class LevelGenerator : MonoBehaviour
         int locationSize = gameObjects.Length;
         int randomIndex = Random.Range(0, locationSize);
         
-        CreatePrefab(gameObjects[randomIndex], START_PREFAB_POSITION);
+        CreatePrefab(gameObjects[randomIndex], pos);
+    }
+
+    private void GenerateFromLocations(GameObject[] gameObjects)
+    {
+        int locationSize = gameObjects.Length;
+        int randomIndex = Random.Range(0, locationSize);
+        GameObject nextLocation = gameObjects[randomIndex];
+        Vector2 generatedPos = GetNextGenerationLocation(nextLocation);
+        CreatePrefab(nextLocation, generatedPos);
+
+        Debug.Log(locationSize);
     }
 
     private void RandomizeCurBiome()
@@ -260,7 +290,10 @@ public class LevelGenerator : MonoBehaviour
 
     public void StartBossStage()
     {
-        isBossStage = true;
-        CreateBoss();
+        Debug.Log("Created end location");
+        GenerateFromLocations(endPrefabs);
+        isBossFight = true;
+        this.enabled = false;
+        Debug.Log("This is fine");
     }
 }

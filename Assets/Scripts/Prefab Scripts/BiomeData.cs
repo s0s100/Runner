@@ -10,8 +10,8 @@ public class BiomeData : ScriptableObject
     private static string PATH_TO_START_LOCATIONS = "StartLocations";
     private static string PATH_TO_LOCATIONS = "Locations";
     private static string PATH_TO_COIN_LOCATIONS = "CoinLocations";
-    private static string PATH_TO_BOSS_LOCATIONS = "EndLocations";
-    private static string PATH_TO_END_LOCATIONS = "BossLocations";
+    private static string PATH_TO_BOSS_LOCATIONS = "BossLocations";
+    private static string PATH_TO_END_LOCATIONS = "EndLocations";
 
     [SerializeField]
     private string locationsGeneralPath;
