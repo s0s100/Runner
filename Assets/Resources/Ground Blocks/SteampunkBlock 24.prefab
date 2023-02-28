@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5583178248906576967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e349597f02ed3554aaa1b85a6140f0e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 314b894f2027efd42b0ab3b2694277d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120,14 +120,14 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -2.3152392, y: -1.5550684}
-  - {x: -1.4096411, y: -1.5533454}
-  - {x: -0.94152224, y: -1.3276767}
-  - {x: 1.0942817, y: -1.3247774}
-  - {x: 2.333879, y: -1.5660576}
-  - {x: 2.325211, y: -2.5051167}
-  - {x: -2.299169, y: -2.502092}
-  - {x: -2.319172, y: -1.5473701}
+  - {x: -5.0866065, y: 0.8235267}
+  - {x: -3.3468754, y: 0.98367393}
+  - {x: -2.1977687, y: 1.3242491}
+  - {x: 2.836907, y: 1.3940238}
+  - {x: 5.440814, y: 1.0628875}
+  - {x: 5.4875975, y: -10.25763}
+  - {x: -5.320025, y: -10.244756}
+  - {x: -5.1327243, y: 0.85144174}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

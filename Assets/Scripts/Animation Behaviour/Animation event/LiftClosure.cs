@@ -24,13 +24,9 @@ public class LiftClosure : MonoBehaviour
 
     private IEnumerator SceneUpdate()
     {
-        Debug.Log("Called black!");
-
         uIController.IsBlackScreenInvisible(false);
         // After list closes call a black screening, update background, update player position and start generate boss blocks, after make screen white again
         yield return new WaitForSeconds(waitTime);
-
-        Debug.Log("Called unblack!");
 
         gameController.PrepareBossLocation();
         uIController.IsBlackScreenInvisible(true);

@@ -462,9 +462,6 @@ public class PlayerController : MonoBehaviour
 
         isMoving = true;
         isControllable = false;
-
-        // Also disable enemy generation
-        gameController.SetEveryEnemyGenerator(false);
     }
 
     // Called to completely stop player
@@ -479,5 +476,10 @@ public class PlayerController : MonoBehaviour
         this.enabled = true;
         isMoving = true;
         isControllable = true;
+    }
+
+    public void SetControllable(bool isControllable)
+    {
+        this.isControllable = isControllable;
     }
 }

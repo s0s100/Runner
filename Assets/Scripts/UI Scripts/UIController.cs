@@ -66,7 +66,7 @@ public class UIController : MonoBehaviour
         //gameMenu.SetActive(false);
         pauseMenuButton.gameObject.SetActive(false);
         pauseMenu.SetActive(true);
-        playerController.enabled = false;
+        playerController.SetControllable(false);
         Time.timeScale = 0.0f;
     }
 
@@ -74,7 +74,7 @@ public class UIController : MonoBehaviour
     {
         //gameMenu.SetActive(true);
         pauseMenuButton.gameObject.SetActive(true);
-        playerController.enabled = true;
+        playerController.SetControllable(true);
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }

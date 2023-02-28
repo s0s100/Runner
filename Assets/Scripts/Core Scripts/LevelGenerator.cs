@@ -22,6 +22,7 @@ public class LevelGenerator : MonoBehaviour
     private static readonly Vector2 START_PLAYER_POSITION = new Vector2(0.0f, 0.0f);
 
     // Scene objects
+    private GameController gameController;
     private GameObject playerObject;
     private Camera cameraObject;
 
@@ -70,6 +71,7 @@ public class LevelGenerator : MonoBehaviour
         PopulateLinkageDictionary();
 
         cameraObject = Camera.main;
+        gameController = FindObjectOfType<GameController>();
         nextBlockType = NextGeneratedBlockType.Default;
     }
 
@@ -291,6 +293,9 @@ public class LevelGenerator : MonoBehaviour
         GenerateFromLocations(endPrefabs);
         isBossFight = true;
         this.enabled = false;
+        
+        // Also disable enemy generation
+        gameController.SetEveryEnemyGenerator(false);
     }
 
     public void ResetPlayerAndLocationPositions()
