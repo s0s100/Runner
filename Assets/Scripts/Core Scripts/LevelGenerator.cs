@@ -5,13 +5,18 @@ using UnityEditor;
 using System.IO;
 using System.Linq;
 
+public enum NextGeneratedBlockType
+{
+    Default,
+    Coin,
+    Boss
+}
+
 // Generates playable objects on the screen, contains information about current biome
 public class LevelGenerator : MonoBehaviour
 {
     // Generation settings and prefabs folders
-    private const string BIOME_FOLDER_LOCATION = "Prefabs/Biomes";
-    private const string START_PREFABS_LOCATION = "Prefabs/Locations/DefinedStartLocations";
-    private const float generationDistance = 10.0f; // Distance from a camera center from which objects are generated
+    private const float generationDistance = 12.0f; // Distance from a camera center from which objects are generated
     private const float Y_CAMERA_SHIFT = 2.0f; //Prefab locaton + this const is the min Y-axis camera location
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -1.0f);
     private static readonly Vector2 START_PLAYER_POSITION = new Vector2(0.0f, 0.0f);
@@ -22,9 +27,10 @@ public class LevelGenerator : MonoBehaviour
 
     // Generation prefabs
     private GameObject lastGeneratedPrefab;
+    private GameObject[] startPrefabs;
     private GameObject[] definedPrefabs;
     private GameObject[] definedCoinPrefabs;
-    private GameObject[] startPrefabs;
+    private GameObject[] endPrefabs;
     private GameObject[] bossPrefabs;
 
     // Generation parent objects
@@ -45,38 +51,31 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private BiomeData[] biomeData;
 
-    
     // Biome selection
+    Dictionary<NextGeneratedBlockType, GameObject[]> enumToObjLinkage;
+    NextGeneratedBlockType nextBlockType;
     private int curActiveBiome; // Biome holder index
-
-    // Coin generation
     private float coinGenerationChance = 0.25f;
-
-    // Boss realization
-    private bool isBossStage = false;
+    private bool isBossFight = false;
 
     private void Awake()
     {
         RandomizeCurBiome();
-        startPrefabs = Resources.LoadAll(START_PREFABS_LOCATION, typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
     private void Start()
     {
-        GenerateStartLocation();
+        GenerateFromLocations(startPrefabs, START_PREFAB_POSITION);
         GeneratePlayer();
+        PopulateLinkageDictionary();
+
         cameraObject = Camera.main;
+        nextBlockType = NextGeneratedBlockType.Default;
     }
 
     private void Update()
     {
-        if (isBossStage)
-        {
-
-        } else
-        {
-            GenerateLocation();
-        }
+        GenerateLocation();
     }
 
     private void GeneratePlayer()
@@ -85,68 +84,99 @@ public class LevelGenerator : MonoBehaviour
         playerObject.transform.position = START_PLAYER_POSITION;
     }
 
+    private NextGeneratedBlockType DefineNextBlockType()
+    {
+        if (isBossFight)
+        {
+            return NextGeneratedBlockType.Boss;
+        }
+
+        bool isCoinPrefab = Random.value < coinGenerationChance;
+        if (DevelopmentData.GetIsCoinType() || isCoinPrefab)
+        {
+            return NextGeneratedBlockType.Coin;
+        }
+
+        return NextGeneratedBlockType.Default;
+    }
+
     private void GenerateLocation()
+    {
+
+        if (ShouldGenerate())
+        {
+            nextBlockType = DefineNextBlockType();
+            GameObject[] objectToGenerate = enumToObjLinkage[nextBlockType];
+            GenerateFromLocations(objectToGenerate);
+        }
+    }
+
+    private bool ShouldGenerate()
     {
         PrefabData lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabData>();
         float lastPrefabX = lastGeneratedPrefab.transform.position.x;
         float lastPrefabY = lastGeneratedPrefab.transform.position.y;
 
-        bool shouldGenerate = cameraObject.transform.position.x + generationDistance 
+        bool shouldGenerate = cameraObject.transform.position.x + generationDistance
             > lastPrefabX + (lastPrefabInfo.GetXSize() / 2);
 
-        if (shouldGenerate)
-        {
-            // Decide which type of locations will be generated
-            bool isCoinPrefab = Random.value < coinGenerationChance;
+        return shouldGenerate;
+    }
 
-            // Testing purpose
-            if (DevelopmentData.GetIsCoinType())
-            {
-                isCoinPrefab = true;
-            }
+    private Vector2 GetNextGenerationLocation(GameObject newGenerationObject)
+    {
+        PrefabData lastPrefabInfo = lastGeneratedPrefab.GetComponent<PrefabData>();
+        float lastPrefabX = lastGeneratedPrefab.transform.position.x;
+        float lastPrefabY = lastGeneratedPrefab.transform.position.y;
 
-            
-            GameObject objectToGenerate;
-            if (isCoinPrefab)
-            {
-                objectToGenerate = SelectPrefab(definedCoinPrefabs);
-            }  else
-            {
-                objectToGenerate = SelectPrefab(definedPrefabs);
-            }
-            
-            PrefabData newPrefabInfo = objectToGenerate.GetComponent<PrefabData>();
+        PrefabData newPrefabInfo = newGenerationObject.GetComponent<PrefabData>();
 
-            // Calculate new prefab position prefab position
-            float xNewPos = lastPrefabX + newPrefabInfo.XBefore;
-            xNewPos += (lastPrefabInfo.GetXSize() / 2);
-            xNewPos += lastPrefabInfo.GetXOffset();
-            xNewPos -= newPrefabInfo.GetXOffset();
+        float xNewPos = lastPrefabX + newPrefabInfo.XBefore;
+        xNewPos += (lastPrefabInfo.GetXSize() / 2);
+        xNewPos += lastPrefabInfo.GetXOffset();
+        xNewPos -= newPrefabInfo.GetXOffset();
 
-            float yNewPos = lastPrefabY - newPrefabInfo.YBefore;
-            yNewPos += lastPrefabInfo.GetYOffset();
-            yNewPos -= newPrefabInfo.GetYOffset();
-            yNewPos += lastPrefabInfo.YDiff;
+        float yNewPos = lastPrefabY - newPrefabInfo.YBefore;
+        yNewPos += lastPrefabInfo.GetYOffset();
+        yNewPos -= newPrefabInfo.GetYOffset();
+        yNewPos += lastPrefabInfo.YDiff;
 
-            Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
-
-            CreatePrefab(objectToGenerate, generatedPos);
-        }
+        Vector2 generatedPos = new Vector2(xNewPos, yNewPos);
+        return generatedPos;
     }
 
     // Uploads basic and coin prefabs
     private void UploadDefinedPrefabs(BiomeData biome)
     {
-        string path = biome.GetLocationsPath();
+        // Upload starting locations
+        string path = biome.GetStartLocationsPath();
+        startPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        // Upload default locations
+        path = biome.GetLocationsPath();
         definedPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
 
-        // Also upload coin prefabs
+        // Upload coin locations
         path = biome.GetCoinLocationsPath();
         definedCoinPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
 
-        // Add boss locations as well
+        // Upload ending locations
+        path = biome.GetEndLocationsPath();
+        endPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        // Upload boss locations
         path = biome.GetBossLocationsPath();
         bossPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
+    }
+
+    private void PopulateLinkageDictionary()
+    {
+        enumToObjLinkage = new Dictionary<NextGeneratedBlockType, GameObject[]>();
+        enumToObjLinkage.Add(NextGeneratedBlockType.Default, definedPrefabs);
+        enumToObjLinkage.Add(NextGeneratedBlockType.Coin, definedCoinPrefabs);
+        // enumToObjLinkage.Add(NextGeneratedBlockType.End, endPrefabs);
+        enumToObjLinkage.Add(NextGeneratedBlockType.Boss, bossPrefabs);
+        // enumToObjLinkage.Add(NextGeneratedBlockType.None, null);
     }
 
     private GameObject SelectPrefab(GameObject[] prefabs)
@@ -181,15 +211,21 @@ public class LevelGenerator : MonoBehaviour
         lastGeneratedPrefab.transform.parent = generatedObjectsParent.transform;
     }
 
-    private void GenerateStartLocation()
-    {
-        string path = biomeData[curActiveBiome].GetStartLocationsPath();
-        GameObject[] startLocations = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
-        
-        int locationSize = startLocations.Length;
+    private void GenerateFromLocations(GameObject[] gameObjects, Vector2 pos)
+    {        
+        int locationSize = gameObjects.Length;
         int randomIndex = Random.Range(0, locationSize);
         
-        CreatePrefab(startLocations[randomIndex], START_PREFAB_POSITION);
+        CreatePrefab(gameObjects[randomIndex], pos);
+    }
+
+    private void GenerateFromLocations(GameObject[] gameObjects)
+    {
+        int locationSize = gameObjects.Length;
+        int randomIndex = Random.Range(0, locationSize);
+        GameObject nextLocation = gameObjects[randomIndex];
+        Vector2 generatedPos = GetNextGenerationLocation(nextLocation);
+        CreatePrefab(nextLocation, generatedPos);
     }
 
     private void RandomizeCurBiome()
@@ -197,6 +233,14 @@ public class LevelGenerator : MonoBehaviour
         curActiveBiome = Random.Range(0, biomeData.Length);
         UploadDefinedPrefabs(biomeData[curActiveBiome]);
         backgroundController.SetBiome(biomeData[curActiveBiome]);
+    }
+
+    public void CreateBoss()
+    {
+        GameObject boss = biomeData[curActiveBiome].GetBossObject();
+        GameObject createdBoss = Instantiate(boss);
+        createdBoss.transform.position = playerObject.transform.position + Vector3.right * generationDistance;
+        createdBoss.transform.parent = generatedEnemyParent.transform;
     }
 
     public GameObject GetEnemyParent()
@@ -244,15 +288,36 @@ public class LevelGenerator : MonoBehaviour
 
     public void StartBossStage()
     {
-        isBossStage = true;
-        CreateBoss();
+        GenerateFromLocations(endPrefabs);
+        isBossFight = true;
+        this.enabled = false;
     }
 
-    private void CreateBoss()
+    public void ResetPlayerAndLocationPositions()
     {
-        GameObject boss = biomeData[curActiveBiome].GetBossObject();
-        GameObject createdBoss = Instantiate(boss);
-        createdBoss.transform.position = playerObject.transform.position + Vector3.right * generationDistance;
-        createdBoss.transform.parent = generatedEnemyParent.transform;
+        playerObject.transform.position = START_PLAYER_POSITION;
+
+        DeleteOldGroundBlocks();
+        DeleteEnemies();
+        backgroundController.SetBossBackground();
+        lastGeneratedPrefab = null;
+        GenerateFromLocations(bossPrefabs, START_PREFAB_POSITION);
+        this.enabled = true;
+    }
+
+    private void DeleteOldGroundBlocks()
+    {
+        foreach (Transform child in generatedObjectsParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    private void DeleteEnemies()
+    {
+        foreach (Transform child in generatedEnemyParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

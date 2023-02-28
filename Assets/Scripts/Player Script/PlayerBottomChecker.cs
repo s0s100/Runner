@@ -16,8 +16,16 @@ public class PlayerBottomChecker : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            playerMovement.EnableJump();
             playerMovement.CreateFallParticles();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        string tag = collision.gameObject.tag;
+        if (tag == "Ground" || tag == "Obstacle")
+        {
+            playerMovement.EnableJump();
         }
     }
 

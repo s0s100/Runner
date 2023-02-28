@@ -31,8 +31,9 @@ public class ScoreController : MonoBehaviour
         scoreText.text = curScore.ToString();
         playerDataScreen.UpdateScoreBar(curScore, MAX_BIOME_SCORE);
 
-        if (curScore >= MAX_BIOME_SCORE) {
-            Debug.Log("Created boss");
+        if (curScore >= MAX_BIOME_SCORE)
+        {
+            UpdateMaxScore();
             levelGenerator.StartBossStage();
             this.enabled = false;
         }

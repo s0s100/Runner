@@ -15,4 +15,6 @@ MonoBehaviour:
   locationsGeneralPath: Locations/SteampunkBiome
   backgroundBack: {fileID: 8200644036753557121, guid: 6a70e4ddc53a4284a87696be724f2dea, type: 3}
   backgroundFront: {fileID: 4462289253615067184, guid: 5e9554c7cb1b144458fcd05377b15dff, type: 3}
-  bossObject: {fileID: 3096167676935437063, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
+  bossBackgroundBack: {fileID: 8200644036753557121, guid: bd987ea5f3fcf7e469220ecbd544b4a5, type: 3}
+  bossBackgroundFront: {fileID: 4462289253615067184, guid: 47d46cdc9b5aab747a8f0a7ac6aa9163, type: 3}
+  bossObject: {fileID: 3655212633971917336, guid: bee20ae0441e3440bbf6fdf3579c1e8b, type: 3}

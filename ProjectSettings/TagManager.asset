@@ -8,9 +8,7 @@ TagManager:
   - Collectable
   - Enemy
   - Obstacle
-  - Decoration
   - Background
-  - Weapon
   layers:
   - Default
   - TransparentFX
