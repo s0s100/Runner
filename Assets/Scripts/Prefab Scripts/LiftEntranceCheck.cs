@@ -16,11 +16,9 @@ public class LiftEntranceCheck : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("LiftEntranceCheck called!");
         string tag = collision.gameObject.tag;
         if (tag == "Player")
         {
-            Debug.Log("Lift entrance called");
             liftEntrance.SetActive(true);
             gameController.SetLiftStop(this.transform.position.x);
         }

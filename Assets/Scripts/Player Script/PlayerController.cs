@@ -477,4 +477,9 @@ public class PlayerController : MonoBehaviour
         isMoving = true;
         isControllable = true;
     }
+
+    public void SetControllable(bool isControllable)
+    {
+        this.isControllable = isControllable;
+    }
 }
