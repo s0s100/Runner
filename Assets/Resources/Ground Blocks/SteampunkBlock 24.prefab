@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6949581533254342499}
   - component: {fileID: 1560606304442428532}
-  - component: {fileID: 3465991764317639622}
+  - component: {fileID: 8357022781554399634}
   m_Layer: 0
   m_Name: SteampunkBlock 24
   m_TagString: Ground
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3465991764317639622
-BoxCollider2D:
+--- !u!68 &8357022781554399634
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,16 +117,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02323258, y: -1.9412949}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
-    newSize: {x: 1.87, y: 5.08}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.6415834, y: 1.1469479}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
+  m_Points:
+  - {x: -2.3152392, y: -1.5550684}
+  - {x: -1.4096411, y: -1.5533454}
+  - {x: -0.94152224, y: -1.3276767}
+  - {x: 1.0942817, y: -1.3247774}
+  - {x: 2.333879, y: -1.5660576}
+  - {x: 2.325211, y: -2.5051167}
+  - {x: -2.299169, y: -2.502092}
+  - {x: -2.319172, y: -1.5473701}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

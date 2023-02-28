@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     // Move
     private float moveSpeed = 0.0f;
     private bool isMoving = false;
+    private bool isControllable = true;
 
     // Dash
     private bool canDash = true;
@@ -129,18 +130,23 @@ public class PlayerController : MonoBehaviour
         moveSpeed = gameController.GetGameSpeed();
         isMoving = false;
         enabled = false;
+        isControllable = true;
     }
 
     void Update()
     {
-        MoveDirection moveDir = GetPCAction();
-        if (moveDir == MoveDirection.None)
+        if (isControllable)
         {
-            moveDir = GetAction();
-        }
+            MoveDirection moveDir = GetPCAction();
+            if (moveDir == MoveDirection.None)
+            {
+                moveDir = GetAction();
+            }
 
-        MakeStoredAction(); // Make action stored in a buffer 
-        MakeAction(moveDir);
+            MakeStoredAction(); // Make action stored in a buffer 
+            MakeAction(moveDir);
+        }
+        
         MovePlayer();
         ReduceCooldowns();
     }
@@ -443,5 +449,32 @@ public class PlayerController : MonoBehaviour
             curAttackCooldown = attackCooldown;
             playerDataScreen.FillAmmoBar();
         }
+    }
+
+    // If player is not on the ground, make him fall and prevent player from movement
+    public void DisableControl()
+    {
+        if (!canJump)
+        {
+            curDashCooldown = 0.0f;
+            Fall();
+        }
+
+        isMoving = true;
+        isControllable = false;
+    }
+
+    // Called to completely stop player
+    public void FullStop()
+    {
+        animator.SetBool("IsMoving", false);
+        this.enabled = false;
+    }
+
+    public void EnablePlayerAndControls()
+    {
+        this.enabled = true;
+        isMoving = true;
+        isControllable = true;
     }
 }

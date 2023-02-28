@@ -122,4 +122,18 @@ public class GameController : MonoBehaviour
     {
         return isDefeated;
     }
+
+    public void SetLiftStop(float xPosition)
+    {
+        playerMovement.FullStop();
+        cameraFollowPlayer.SetStopPosition(xPosition);
+    }
+    
+    public void PrepareBossLocation()
+    {
+        levelGenerator.ResetPlayerAndLocationPositions();
+        cameraFollowPlayer.ResetCamera();
+        playerMovement.EnablePlayerAndControls();
+        levelGenerator.CreateBoss();
+    }
 }

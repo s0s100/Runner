@@ -16,6 +16,8 @@ public class BackgroundController : MonoBehaviour
     private float frontYShift = 0; // Middle background Y shift
     private float frontMoveSpeed;
 
+    private bool isBoss = false;
+
     private void Start()
     {
         controller = FindObjectOfType<GameController>();
@@ -44,15 +46,21 @@ public class BackgroundController : MonoBehaviour
 
         } else
         {
-            AddFrontImage();
+            if (!isBoss)
+            {
+                AddFrontImage(curBiomeHolder.GetBackgroundFront());
+            } else
+            {
+                AddFrontImage(curBiomeHolder.GetBossBackgroundFront());
+            }
         }
     }
     
     public void SetBiome(BiomeData newBiome)
     {
         curBiomeHolder = newBiome;
-        SetBackImage();
-        SetFrontImage();
+        SetBackImage(curBiomeHolder.GetBackgroundBack());
+        SetFrontImage(curBiomeHolder.GetBackgroundFront());
     }
 
     public void UpdateBiome(BiomeData newBiome)
@@ -60,7 +68,7 @@ public class BackgroundController : MonoBehaviour
         curBiomeHolder = newBiome;
     }
 
-    private void SetFrontImage()
+    private void SetFrontImage(GameObject frontImage)
     {
         if (frontsImages.Count > 0)
         {
@@ -71,13 +79,13 @@ public class BackgroundController : MonoBehaviour
             frontsImages.Clear();
         }
 
-        AddFrontImage();
+        AddFrontImage(frontImage);
     }
 
-    private void AddFrontImage()
+    private void AddFrontImage(GameObject frontObjectPrefab)
     {
         GameObject newFront = null;
-        newFront = Instantiate(curBiomeHolder.GetBackgroundFront());
+        newFront = Instantiate(frontObjectPrefab);
 
         newFront.transform.parent = backgroundParent.transform;
         if (frontsImages.Count == 0)
@@ -95,14 +103,14 @@ public class BackgroundController : MonoBehaviour
         frontsImages.Add(newFront);
     }
     
-    private void SetBackImage()
+    private void SetBackImage(GameObject backObjectPrefab)
     {
         if (backImage != null)
         {
             Destroy(backImage);
         }
 
-        GameObject newBack = Instantiate(curBiomeHolder.GetBackgroundBack());
+        GameObject newBack = Instantiate(backObjectPrefab);
         newBack.transform.parent = backgroundParent.transform;
         newBack.transform.localPosition = new Vector2(0, 0);
         backImage = newBack;
@@ -112,5 +120,22 @@ public class BackgroundController : MonoBehaviour
     {
         float result = obj.GetComponent<Collider2D>().bounds.size.x;
         return result;
+    }
+
+    public void SetZeroSpeed()
+    {
+        this.frontMoveSpeed = 0.0f;
+    }
+
+    public void ReturnDefaultSpeed()
+    {
+        this.frontMoveSpeed = controller.GetGameSpeed();
+    }
+
+    public void SetBossBackground()
+    {
+        isBoss = true;
+        SetBackImage(curBiomeHolder.GetBossBackgroundBack());
+        SetFrontImage(curBiomeHolder.GetBossBackgroundFront());
     }
 }

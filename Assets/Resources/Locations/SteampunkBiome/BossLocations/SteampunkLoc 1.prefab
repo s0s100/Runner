@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XBefore: 0
-  YBefore: 5
+  YBefore: 0
   YDiff: 0
 --- !u!61 &1493002681040572758
 BoxCollider2D:

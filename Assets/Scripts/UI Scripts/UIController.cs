@@ -36,6 +36,9 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Button pauseMenuButton;
 
+    [SerializeField]
+    private Animator blackScreen;
+
     // Score/coin/player controllers
     private ScoreController scoreController;
     private CoinController coinController;
@@ -154,5 +157,10 @@ public class UIController : MonoBehaviour
         coinsAddedText.text = "";
 
         scoreResultText.text = scoreController.GetScore().ToString();
+    }
+
+    public void IsBlackScreenInvisible(bool isInvisible)
+    {
+        blackScreen.SetBool("IsInvisible", isInvisible);
     }
 }

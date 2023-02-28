@@ -84,20 +84,20 @@ public class LevelGenerator : MonoBehaviour
         playerObject.transform.position = START_PLAYER_POSITION;
     }
 
-    private void DefineNextBlockType()
+    private NextGeneratedBlockType DefineNextBlockType()
     {
         bool isCoinPrefab = Random.value < coinGenerationChance;
         if (DevelopmentData.GetIsCoinType() || isCoinPrefab)
         {
-            nextBlockType = NextGeneratedBlockType.Coin;
+            return NextGeneratedBlockType.Coin;
         }
 
         if (isBossFight)
         {
-            nextBlockType = NextGeneratedBlockType.Boss;
+            return NextGeneratedBlockType.Boss;
         }
 
-        nextBlockType = NextGeneratedBlockType.Default;
+        return NextGeneratedBlockType.Default;
     }
 
     private void GenerateLocation()
@@ -105,7 +105,7 @@ public class LevelGenerator : MonoBehaviour
 
         if (ShouldGenerate())
         {
-            DefineNextBlockType();
+            nextBlockType = DefineNextBlockType();
             GameObject[] objectToGenerate = enumToObjLinkage[nextBlockType];
             GenerateFromLocations(objectToGenerate);
         }
@@ -226,8 +226,6 @@ public class LevelGenerator : MonoBehaviour
         GameObject nextLocation = gameObjects[randomIndex];
         Vector2 generatedPos = GetNextGenerationLocation(nextLocation);
         CreatePrefab(nextLocation, generatedPos);
-
-        Debug.Log(locationSize);
     }
 
     private void RandomizeCurBiome()
@@ -237,7 +235,7 @@ public class LevelGenerator : MonoBehaviour
         backgroundController.SetBiome(biomeData[curActiveBiome]);
     }
 
-    private void CreateBoss()
+    public void CreateBoss()
     {
         GameObject boss = biomeData[curActiveBiome].GetBossObject();
         GameObject createdBoss = Instantiate(boss);
@@ -290,10 +288,36 @@ public class LevelGenerator : MonoBehaviour
 
     public void StartBossStage()
     {
-        Debug.Log("Created end location");
         GenerateFromLocations(endPrefabs);
         isBossFight = true;
         this.enabled = false;
-        Debug.Log("This is fine");
+    }
+
+    public void ResetPlayerAndLocationPositions()
+    {
+        playerObject.transform.position = START_PLAYER_POSITION;
+
+        DeleteOldGroundBlocks();
+        DeleteEnemies();
+        backgroundController.SetBossBackground();
+        lastGeneratedPrefab = null;
+        GenerateFromLocations(bossPrefabs, START_PREFAB_POSITION);
+        this.enabled = true;
+    }
+
+    private void DeleteOldGroundBlocks()
+    {
+        foreach (Transform child in generatedObjectsParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    private void DeleteEnemies()
+    {
+        foreach (Transform child in generatedEnemyParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }
