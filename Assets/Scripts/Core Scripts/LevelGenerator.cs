@@ -86,15 +86,15 @@ public class LevelGenerator : MonoBehaviour
 
     private NextGeneratedBlockType DefineNextBlockType()
     {
+        if (isBossFight)
+        {
+            return NextGeneratedBlockType.Boss;
+        }
+
         bool isCoinPrefab = Random.value < coinGenerationChance;
         if (DevelopmentData.GetIsCoinType() || isCoinPrefab)
         {
             return NextGeneratedBlockType.Coin;
-        }
-
-        if (isBossFight)
-        {
-            return NextGeneratedBlockType.Boss;
         }
 
         return NextGeneratedBlockType.Default;
