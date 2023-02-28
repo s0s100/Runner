@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private static Vector2 DEFAULT_POSITION = new Vector3(0.0f, 0.0f, Z_CAMERA_DISTANCE);
+
     private const float Z_CAMERA_DISTANCE = -10.0f;
     private const float MIN_Y_DIST_REQUIRED = 0.2f; // Distance between player and camera required to move camera
     private const float DEFAULT_CAMERA_ACCELERATION = 0.0025f;
@@ -11,16 +13,21 @@ public class CameraController : MonoBehaviour
     private const float Y_SHIFT_BETWEEN_PLAYER = 0.5f; // Difference between camera center and player
 
     private GameObject player;
+    private BackgroundController backgroundController;
     private GameController gameController;
     private LevelGenerator levelGenerator;
 
     private float xSpeed;
     private float ySpeed;
 
+    // Position to stop camera at
+    private float xStopPosition = float.MaxValue;
+
     void Start()
     {
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
+        backgroundController = FindObjectOfType<BackgroundController>();
         player = levelGenerator.GetPlayer();
 
         xSpeed = gameController.GetGameSpeed();
@@ -29,7 +36,21 @@ public class CameraController : MonoBehaviour
     
     void FixedUpdate()
     {
-        Movement();
+        if (!ShouldStopCamera())
+        {
+            Movement();
+        }
+    }
+
+    private bool ShouldStopCamera()
+    {
+        if (transform.position.x >= xStopPosition)
+        {
+            backgroundController.SetZeroSpeed();
+            return true;            
+        }
+
+        return false;
     }
 
     private void Movement()
@@ -66,6 +87,17 @@ public class CameraController : MonoBehaviour
             ySpeed = 0;
             return transform.position.y;
         }
-        
+    }
+
+    // Move camera to specified position and stop camera
+    public void SetStopPosition(float xPosition)
+    {
+        xStopPosition = xPosition;
+    }
+
+    public void ResetCamera()
+    {
+        transform.position = DEFAULT_POSITION;
+        xStopPosition = float.MaxValue;
     }
 }

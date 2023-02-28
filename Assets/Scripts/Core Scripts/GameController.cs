@@ -84,17 +84,18 @@ public class GameController : MonoBehaviour
         backgroundController.enabled = true;
         uiController.DisableStartGameText();
         startPosition.LateDestroy();
-        ActivateEveryEnemyGenerator();
+        SetEveryEnemyGenerator(true);
         ActivatePrefabDestruction();
+        Time.timeScale = 1.0f;
     }
 
     // Not the best solution, for now..
-    private void ActivateEveryEnemyGenerator()
+    public void SetEveryEnemyGenerator(bool isActive)
     {
         EnemyGenerator[] generators = FindObjectsOfType<EnemyGenerator>();
         foreach (EnemyGenerator generator in generators)
         {
-            generator.enabled = true;
+            generator.enabled = isActive;
         }
     }
 
@@ -120,5 +121,19 @@ public class GameController : MonoBehaviour
     public bool IsDefeated()
     {
         return isDefeated;
+    }
+
+    public void SetLiftStop(float xPosition)
+    {
+        playerMovement.FullStop();
+        cameraFollowPlayer.SetStopPosition(xPosition);
+    }
+    
+    public void PrepareBossLocation()
+    {
+        levelGenerator.ResetPlayerAndLocationPositions();
+        cameraFollowPlayer.ResetCamera();
+        playerMovement.EnablePlayerAndControls();
+        levelGenerator.CreateBoss();
     }
 }
