@@ -8,7 +8,10 @@ public class SceneController : MonoBehaviour
 {
     [SerializeField]
     private StoragePlayerData playerData;
+    [SerializeField]
+    private Animator blackScreen;
 
+    private const float LOAD_TIME = 1.0f;
     private const int GAME_SCENE_NUMBER = 1;
 
     private void Awake()
@@ -23,6 +26,15 @@ public class SceneController : MonoBehaviour
     public void StartGameScene()
     {
         Time.timeScale = 1.0f;
+        StartCoroutine(lateStartGame());
+    }
+
+    private IEnumerator lateStartGame()
+    {
+        blackScreen.SetBool("IsInvisible", false);
+
+        yield return new WaitForSeconds(LOAD_TIME);
+
         SceneManager.LoadScene(GAME_SCENE_NUMBER);
     }
 
