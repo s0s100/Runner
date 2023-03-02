@@ -51,6 +51,9 @@ public class LazerGenerator : MonoBehaviour
         {
             curLazerWidth -= lazerIncreasementSpeed * Time.deltaTime;
             lineRenderer.startWidth = curLazerWidth;
+        } else
+        {
+            curLazerWidth = 0.0f;
         }
     }
 

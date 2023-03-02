@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BossAction
+public enum SteampunkBossAction
 {
-    
+    LazerPlayer,
+    LazerArea,
+    LazerTop,
+    MeeleAttack
 }
 
-public class Boss : Enemy
+public class SteampunkBoss : Enemy
 {
+    [SerializeField]
+    private GameObject lazerObject;
+    [SerializeField]
+    private GameObject fallGenerationObjects;
+
     protected override void Awake()
     {
         base.Awake();
