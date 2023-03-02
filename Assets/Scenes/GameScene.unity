@@ -1999,6 +1999,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81b1d932f4f18e459df21f660d8d500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftDeathZone: {fileID: 267061656}
+  rightDeathZone: {fileID: 2023734572}
+  bottomDeathZone: {fileID: 1598832236}
 --- !u!1 &590038134
 GameObject:
   m_ObjectHideFlags: 0

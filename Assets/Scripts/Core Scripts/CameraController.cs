@@ -5,12 +5,20 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private static Vector2 DEFAULT_POSITION = new Vector3(0.0f, 0.0f, Z_CAMERA_DISTANCE);
+    private static float DEATH_ZONE_SHIFT = 0.5f;
 
     private const float Z_CAMERA_DISTANCE = -10.0f;
     private const float MIN_Y_DIST_REQUIRED = 0.2f; // Distance between player and camera required to move camera
     private const float DEFAULT_CAMERA_ACCELERATION = 0.0025f;
     private const float CAMERA_SPEED_LIMIT = 0.1f;
     private const float Y_SHIFT_BETWEEN_PLAYER = 0.5f; // Difference between camera center and player
+
+    [SerializeField]
+    private GameObject leftDeathZone;
+    [SerializeField]
+    private GameObject rightDeathZone;
+    [SerializeField]
+    private GameObject bottomDeathZone;
 
     private GameObject player;
     private BackgroundController backgroundController;
@@ -32,6 +40,8 @@ public class CameraController : MonoBehaviour
 
         xSpeed = gameController.GetGameSpeed();
         enabled = false;
+
+        SetDeathZones();
     }
     
     void FixedUpdate()
@@ -87,6 +97,20 @@ public class CameraController : MonoBehaviour
             ySpeed = 0;
             return transform.position.y;
         }
+    }
+
+    private void SetDeathZones()
+    {
+        Vector2 bottomLeftCorner = WindowBorderController.GetBottomLeftPosition(Camera.main);
+        Vector2 leftPosition = new Vector2(bottomLeftCorner.x - DEATH_ZONE_SHIFT, this.transform.position.y);
+        leftDeathZone.transform.position = leftPosition;
+
+        Vector2 bottomPosition = new Vector2(this.transform.position.x, bottomLeftCorner.y - DEATH_ZONE_SHIFT);
+        bottomDeathZone.transform.position = bottomPosition;
+
+        Vector2 topRightCorner = WindowBorderController.GetTopRightPosition(Camera.main);
+        Vector2 rightPosition = new Vector2(topRightCorner.x + DEATH_ZONE_SHIFT, this.transform.position.y);
+        rightDeathZone.transform.position = rightPosition;
     }
 
     // Move camera to specified position and stop camera
