@@ -68,7 +68,7 @@ public class LazerGenerator : MonoBehaviour
         lineRenderer.SetPosition(1, endPos);
     }
 
-    private Vector3 CalculateEndPosition(Vector3 startPosition, Vector3 direction)
+    private Vector3 CalculateEndPosition(Vector2 startPosition, Vector2 direction)
     {
         // If doesn't hit anything set value to MAX_LAZER_LENGTH, otherwise to hit position
         float hitDistance = MAX_LAZER_LENGTH;
@@ -76,7 +76,7 @@ public class LazerGenerator : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(startPosition, direction);
         bool hitStatus = hit.collider != null && (hit.collider.tag == "Ground" || hit.collider.tag == "Player");
         if (hitStatus) { hitDistance = hit.distance; }
-        Vector3 resultPosition = startPosition + direction * hitDistance;
+        Vector2 resultPosition = startPosition + direction * hitDistance;
 
         if (hitStatus) {
             HitActivity(resultPosition);

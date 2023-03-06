@@ -56,7 +56,7 @@ Material:
     m_Floats:
     - _LazerSpeed: -5
     - _LazerThinckness: 50
-    - _LazerTransparancy: 8
+    - _LazerTransparancy: 10
     m_Colors:
-    - _LazerColor: {r: 0, g: 0.083628535, b: 1.3913776, a: 1}
+    - _LazerColor: {r: 0.20507877, g: 0.93011117, b: 0.06847818, a: 1}
   m_BuildTextureStacks: []
