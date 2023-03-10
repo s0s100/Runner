@@ -38,7 +38,6 @@ public class SteampunkBossIDLE : StateMachineBehaviour
 
     private void RandomMeeleAttack(Animator animator)
     {
-        Debug.Log("Meele Attack");
         bool isFist = Random.value < 0.5f;
         if (isFist)
         {
@@ -52,7 +51,6 @@ public class SteampunkBossIDLE : StateMachineBehaviour
 
     private void RandomLazerAttack(Animator animator)
     {
-        Debug.Log("Lazer Attack");
         bool isLazerFront = Random.value < 0.5f;
         if (isLazerFront)
         {

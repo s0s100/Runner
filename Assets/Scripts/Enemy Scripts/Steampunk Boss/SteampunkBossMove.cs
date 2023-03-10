@@ -5,7 +5,7 @@ using UnityEngine;
 public class SteampunkBossMove : StateMachineBehaviour
 {
     // Shift between camera center location and boss location
-    private static float Y_SHIFT = -1.5f;
+    private static float Y_SHIFT = 0.0f;
     private static float X_SHIFT = 5.0f;
     private static float MIN_REQUIRED_DIST = 0.1f;
     
