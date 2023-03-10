@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerBottomChecker : MonoBehaviour
 {
-    //private const float TIME_BETWEEN_FALL_PARTICLES = 0.5f;
-    //private float curFallTimeParticles = 0.0f;
-
     private PlayerController playerMovement;
 
     private void Awake()
@@ -14,20 +11,11 @@ public class PlayerBottomChecker : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerController>();
     }
 
-    //private void Update()
-    //{
-    //    if (curFallTimeParticles > 0.0f)
-    //    {
-    //        curFallTimeParticles -= Time.deltaTime;
-    //    }
-    //}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            //if (curFallTimeParticles <= 0.0f)
             {
                 playerMovement.CreateFallParticles();
             }
@@ -48,7 +36,6 @@ public class PlayerBottomChecker : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            //curFallTimeParticles = TIME_BETWEEN_FALL_PARTICLES;
             playerMovement.DisableJump();
         }
     }

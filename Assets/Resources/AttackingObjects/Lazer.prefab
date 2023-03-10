@@ -51,6 +51,8 @@ MonoBehaviour:
   lazerStart: {fileID: 5546773883178472899}
   lineRenderer: {fileID: 5200807741242483501}
   lazerEnd: {fileID: 1423648241576084807}
+  startParticles: {fileID: 2326944147561021220}
+  endParticles: {fileID: 9183189983367311264}
 --- !u!1 &1326395980043249004
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +264,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a26898e2723ec0345bd4d2c85645d275, type: 3}
+--- !u!198 &2326944147561021220 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3050877170084050547, guid: a26898e2723ec0345bd4d2c85645d275, type: 3}
+  m_PrefabInstance: {fileID: 728478957895747927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4849372926558630375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5282860057029343408, guid: a26898e2723ec0345bd4d2c85645d275, type: 3}
@@ -341,5 +348,10 @@ GameObject:
 --- !u!4 &2051291802973544803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5282860057029343408, guid: 0d2ede30612361a4abc8d8947c410694, type: 3}
+  m_PrefabInstance: {fileID: 6136112975657687507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &9183189983367311264 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3050877170084050547, guid: 0d2ede30612361a4abc8d8947c410694, type: 3}
   m_PrefabInstance: {fileID: 6136112975657687507}
   m_PrefabAsset: {fileID: 0}
