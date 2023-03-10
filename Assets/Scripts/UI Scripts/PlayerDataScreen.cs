@@ -102,7 +102,11 @@ public class PlayerDataScreen : MonoBehaviour
 
     public void UpdateScoreBar(int curScore, int maxScore)
     {
-        float result = (float)curScore / (float)maxScore;
-        scoreBar.fillAmount = result;
+        // Useless check after
+        if (maxScore != 0)
+        {
+            float result = (float)curScore / (float)maxScore;
+            scoreBar.fillAmount = result;
+        }
     }
 }

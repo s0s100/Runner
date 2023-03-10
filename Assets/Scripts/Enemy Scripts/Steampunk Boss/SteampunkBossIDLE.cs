@@ -24,10 +24,8 @@ public class SteampunkBossIDLE : StateMachineBehaviour
         {
             GameObject bossObject = animator.gameObject.transform.parent.gameObject;
 
-            Debug.Log("");
-
             bool isClose = (bossObject.transform.position - playerObject.transform.position).magnitude < MIN_MEELE_ATTACK_DIST;
-            Debug.Log("Is " + (bossObject.transform.position - playerObject.transform.position).magnitude + " <" + MIN_MEELE_ATTACK_DIST + " = " + isClose);
+            // Debug.Log("Is " + (bossObject.transform.position - playerObject.transform.position).magnitude + " <" + MIN_MEELE_ATTACK_DIST + " = " + isClose);
             if (isClose)
             {
                 RandomMeeleAttack(animator);
@@ -40,7 +38,6 @@ public class SteampunkBossIDLE : StateMachineBehaviour
 
     private void RandomMeeleAttack(Animator animator)
     {
-        Debug.Log("Meele Attack");
         bool isFist = Random.value < 0.5f;
         if (isFist)
         {
@@ -54,7 +51,6 @@ public class SteampunkBossIDLE : StateMachineBehaviour
 
     private void RandomLazerAttack(Animator animator)
     {
-        Debug.Log("Lazer Attack");
         bool isLazerFront = Random.value < 0.5f;
         if (isLazerFront)
         {

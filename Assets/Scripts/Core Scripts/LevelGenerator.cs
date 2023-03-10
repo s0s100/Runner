@@ -308,6 +308,7 @@ public class LevelGenerator : MonoBehaviour
         lastGeneratedPrefab = null;
         GenerateFromLocations(bossPrefabs, START_PREFAB_POSITION);
         this.enabled = true;
+        backgroundController.ReturnDefaultSpeed();
     }
 
     private void DeleteOldGroundBlocks()
