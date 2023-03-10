@@ -8,6 +8,9 @@ public class SteampunkParentLazer : MonoBehaviour
     [SerializeField]
     private LazerGenerator lazerGenerator;
 
+    [SerializeField]
+    private GameObject handAttackZone;
+
     public void ActivateLazer()
     {
         lazerGenerator.Activate();
@@ -16,5 +19,15 @@ public class SteampunkParentLazer : MonoBehaviour
     public void DeactivateLazer()
     {
         lazerGenerator.Deactivate();
+    }
+
+    public void EnableFistAttack()
+    {
+        handAttackZone.SetActive(true);
+    }
+
+    public void DisableFistAttack()
+    {
+        handAttackZone.SetActive(false);
     }
 }

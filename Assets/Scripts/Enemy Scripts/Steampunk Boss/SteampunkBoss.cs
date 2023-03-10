@@ -2,24 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteampunkBoss : MonoBehaviour
+public class SteampunkBoss : Enemy
 {
-    private float speed;
-    private GameController gameController;
+    private static int STARTING_HEALTH = 10;
 
-    private void Awake()
+    protected override void Awake()
     {
-        gameController = FindObjectOfType<GameController>();
+        base.Awake();
+        health = STARTING_HEALTH;
+        animator = transform.GetChild(0).GetComponent<Animator>();
         speed = gameController.GetGameSpeed();
     }
 
-    private void Update()
-    {
-        Movement();
-    }
-
-    private void Movement()
+    protected override void Movement()
     {
         this.transform.position += speed * Vector3.right * Time.deltaTime;
+    }
+
+    public override void Damage()
+    {
+        health--;
+        SetDamageAnimation();
+
+        if (health <= 0)
+        {
+            Kill();
+        }
+    }
+
+    private void SetDamageAnimation()
+    {
+        bool isAttackOne = Random.value < 0.5f;
+        if (isAttackOne)
+        {
+            animator.SetTrigger("IsDamaged1");
+        } else
+        {
+            animator.SetTrigger("IsDamaged2");
+        }
     }
 }

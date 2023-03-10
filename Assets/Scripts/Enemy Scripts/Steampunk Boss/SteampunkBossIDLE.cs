@@ -38,15 +38,16 @@ public class SteampunkBossIDLE : StateMachineBehaviour
 
     private void RandomMeeleAttack(Animator animator)
     {
-        bool isFist = Random.value < 0.5f;
-        if (isFist)
-        {
-            animator.SetTrigger("HandAttack");
-        } else
-        {
-            animator.SetTrigger("FireAttack");
-        }
-        
+        animator.SetTrigger("HandAttack");
+        //bool isFist = Random.value < 0.5f;
+        //if (isFist)
+        //{
+        //    animator.SetTrigger("HandAttack");
+        //} else
+        //{
+        //    animator.SetTrigger("FireAttack");
+        //}
+
     }
 
     private void RandomLazerAttack(Animator animator)

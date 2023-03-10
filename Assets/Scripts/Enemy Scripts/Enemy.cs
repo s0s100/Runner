@@ -50,7 +50,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public void Damage()
+    public virtual void Damage()
     {
         health--;
         DamageAnimation();
@@ -81,8 +81,6 @@ public abstract class Enemy : MonoBehaviour
     {
         return health;
     }
-
-
 
     // Makes object red-blinking if invulnerable
     private void InvulnerabilityControl()
