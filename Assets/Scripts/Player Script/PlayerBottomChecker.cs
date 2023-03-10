@@ -16,7 +16,9 @@ public class PlayerBottomChecker : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Ground" || tag == "Obstacle")
         {
-            playerMovement.CreateFallParticles();
+            {
+                playerMovement.CreateFallParticles();
+            }
         }
     }
 

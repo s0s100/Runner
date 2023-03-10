@@ -10,6 +10,7 @@ public enum MoveDirection
 
 public class PlayerController : MonoBehaviour
 {
+    private const float REQUIRED_FALL_SPEED_FALL_PARTICLES = 0.5f;
     private const float DEFAULT_GRAVITY_SCALE = 1.0f;
     private const float MAX_TOUCH_VECTOR_MAGNITUDE = 50.0f;
 
@@ -411,12 +412,15 @@ public class PlayerController : MonoBehaviour
 
     public void CreateFallParticles()
     {
-        GameObject tracksParticles = Instantiate(fallParticlesObject);
-        tracksParticles.transform.position = transform.position;
-        AddColliderDifference(tracksParticles.transform);
+        if (-rigidbody.velocity.y > REQUIRED_FALL_SPEED_FALL_PARTICLES)
+        {
+            GameObject tracksParticles = Instantiate(fallParticlesObject);
+            tracksParticles.transform.position = transform.position;
+            AddColliderDifference(tracksParticles.transform);
 
-        GameObject levelParent = levelGenerator.GetAnimationParent();
-        tracksParticles.transform.parent = levelParent.transform;
+            GameObject levelParent = levelGenerator.GetAnimationParent();
+            tracksParticles.transform.parent = levelParent.transform;
+        }
     }
 
     private void AddColliderDifference(Transform objTransform)

@@ -14,10 +14,20 @@ public class LazerGenerator : MonoBehaviour
     private LineRenderer lineRenderer;
     [SerializeField]
     private GameObject lazerEnd;
+    [SerializeField]
+    private ParticleSystem startParticles;
+    [SerializeField]
+    private ParticleSystem endParticles;
 
     private float curLazerWidth = 0.0f;
     private float maxLazerWidth = 1.0f;
-    private float lazerIncreasementSpeed = 1.5f;
+    private float lazerIncreasementSpeed = 3.0f;
+
+    private void Start()
+    {
+        startParticles = lazerStart.GetComponent<ParticleSystem>();
+        endParticles = lazerEnd.GetComponent<ParticleSystem>();
+    }
 
     private void Update()
     {
@@ -33,7 +43,6 @@ public class LazerGenerator : MonoBehaviour
     private void GenerateLazer()
     {
         SetLazerPositions();
-        lazerStart.GetComponent<ParticleSystem>().Play();
 
         if (curLazerWidth < maxLazerWidth)
         {
@@ -43,16 +52,15 @@ public class LazerGenerator : MonoBehaviour
     }
 
     private void StopLazerGeneration()
-    {
-        lazerStart.GetComponent<ParticleSystem>().Stop();
-        lazerEnd.GetComponent<ParticleSystem>().Stop();
-
+    {       
         if (curLazerWidth > 0.0f)
         {
             curLazerWidth -= lazerIncreasementSpeed * Time.deltaTime;
             lineRenderer.startWidth = curLazerWidth;
         } else
         {
+
+            lineRenderer.enabled = false;
             curLazerWidth = 0.0f;
         }
     }
@@ -73,13 +81,17 @@ public class LazerGenerator : MonoBehaviour
         // If doesn't hit anything set value to MAX_LAZER_LENGTH, otherwise to hit position
         float hitDistance = MAX_LAZER_LENGTH;
 
+        Physics2D.queriesHitTriggers = false;
         RaycastHit2D hit = Physics2D.Raycast(startPosition, direction);
+        Physics2D.queriesHitTriggers = true;
+
         bool hitStatus = hit.collider != null && (hit.collider.tag == "Ground" || hit.collider.tag == "Player");
         if (hitStatus) { hitDistance = hit.distance; }
         Vector2 resultPosition = startPosition + direction * hitDistance;
 
         if (hitStatus) {
             HitActivity(resultPosition);
+            CheckPlayerDamage(hit);
         } else
         {
             HitDisable();
@@ -95,14 +107,26 @@ public class LazerGenerator : MonoBehaviour
 
     private void HitActivity(Vector2 hitPosition)
     {
-        lazerEnd.GetComponent<ParticleSystem>().Play();
+        ParticleSystem particles = lazerEnd.GetComponent<ParticleSystem>();
+
+        if (!particles.isPlaying)
+        {
+            particles.Play();
+        }
+
         lazerEnd.transform.rotation = lazerStart.transform.rotation;
         lazerEnd.transform.position = hitPosition;
     }
 
     private void HitDisable()
     {
-        lazerEnd.GetComponent<ParticleSystem>().Pause();
+        ParticleSystem particles = lazerEnd.GetComponent<ParticleSystem>();
+
+        if (!particles.isPlaying)
+        {
+            particles.Play();
+        }
+        lazerEnd.GetComponent<ParticleSystem>().Stop();
     }
 
     private void CheckPlayerDamage(RaycastHit2D hit)
@@ -121,6 +145,9 @@ public class LazerGenerator : MonoBehaviour
         if (isActive == false)
         {
             isActive = true;
+
+            lineRenderer.enabled = true;
+            lazerStart.GetComponent<ParticleSystem>().Play();
         }
     }
 
@@ -130,6 +157,9 @@ public class LazerGenerator : MonoBehaviour
         {
             isActive = false;
 
+            lineRenderer.enabled = false;
+            lazerStart.GetComponent<ParticleSystem>().Stop();
+            HitDisable();
         }
     }
 }

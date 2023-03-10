@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
     protected GameController gameController;
     protected Animator animator;
     protected float speed;
-    protected float existanceTime = 10.0f;
+    protected float existanceTime = 20.0f;
 
     protected int health = 1;
 
