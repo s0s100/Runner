@@ -5,10 +5,10 @@ using UnityEngine;
 // Defines next possible step
 public class SteampunkBossIDLE : StateMachineBehaviour
 {
-    private static float MIN_MEELE_ATTACK_DIST = 2.0f;
+    private static float MIN_MEELE_ATTACK_DIST = 3.0f;
 
     private float curTime = 0.0f;
-    private float decisionTime = 2.0f;
+    private float decisionTime = 1.0f;
     private GameObject playerObject;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)

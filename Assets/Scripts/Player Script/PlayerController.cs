@@ -447,12 +447,17 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        if (curAttackCooldown <= 0.0f)
+        if (CanAttack())
         {
             animator.SetTrigger("IsAttacking");
             curAttackCooldown = attackCooldown;
             playerDataScreen.FillAmmoBar();
         }
+    }
+
+    public bool CanAttack()
+    {
+        return curAttackCooldown <= 0.0f;
     }
 
     // If player is not on the ground, make him fall and prevent player from movement
