@@ -1159,6 +1159,7 @@ GameObject:
   - component: {fileID: 506563461}
   - component: {fileID: 506563460}
   - component: {fileID: 506563459}
+  - component: {fileID: 506563464}
   m_Layer: 5
   m_Name: ShopLight
   m_TagString: Untagged
@@ -1286,6 +1287,26 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &506563464
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506563457}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23d19aeb29b655d4ba2c99a50e9f9c0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &512198863 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1980130943128598117, guid: 8c94127bb7a213645be715ad2f8c6f8b, type: 3}
@@ -1548,7 +1569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2030659342387106753, guid: ec64ebbbb8500134ebdc55e87c4e31af, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6817681306764508830, guid: ec64ebbbb8500134ebdc55e87c4e31af, type: 3}
       propertyPath: m_Pivot.x
@@ -1654,7 +1675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &953346334
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3360,12 +3381,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 953346334}
   - {fileID: 2110659045}
   - {fileID: 1375862579}
   - {fileID: 1129223217}
   - {fileID: 1256339609}
   - {fileID: 227541993}
-  - {fileID: 953346334}
   - {fileID: 1409906336}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -3552,6 +3573,7 @@ GameObject:
   - component: {fileID: 1822925797}
   - component: {fileID: 1822925796}
   - component: {fileID: 1822925795}
+  - component: {fileID: 1822925800}
   m_Layer: 5
   m_Name: ShopSign
   m_TagString: Untagged
@@ -3679,6 +3701,26 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &1822925800
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822925793}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9df78e8bfa922a5478d5fdf78c02b4c9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1856512204
 GameObject:
   m_ObjectHideFlags: 0
@@ -3873,6 +3915,7 @@ GameObject:
   - component: {fileID: 1977129026}
   - component: {fileID: 1977129025}
   - component: {fileID: 1977129024}
+  - component: {fileID: 1977129029}
   m_Layer: 5
   m_Name: CarRedLight
   m_TagString: Untagged
@@ -4000,6 +4043,26 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &1977129029
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977129022}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 84e829a14318f0b49ae2588c8490bf77, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &2076121601
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,6 +4210,7 @@ GameObject:
   - component: {fileID: 2092688420}
   - component: {fileID: 2092688419}
   - component: {fileID: 2092688418}
+  - component: {fileID: 2092688423}
   m_Layer: 5
   m_Name: CarInside
   m_TagString: Untagged
@@ -4274,6 +4338,26 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &2092688423
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092688416}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba7ead78615032d4db119cea904fd8cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &2110659044
 GameObject:
   m_ObjectHideFlags: 0

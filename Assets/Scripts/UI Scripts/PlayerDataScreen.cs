@@ -76,8 +76,11 @@ public class PlayerDataScreen : MonoBehaviour
     {
         curHealth--;
 
-        Animator animator = hearthImages[curHealth].GetComponent<Animator>();
-        animator.SetTrigger("LoseHearth");
+        if (curHealth >= 0)
+        {
+            Animator animator = hearthImages[curHealth].GetComponent<Animator>();
+            animator.SetTrigger("LoseHearth");
+        }
     }
 
     public void GetHeart()
