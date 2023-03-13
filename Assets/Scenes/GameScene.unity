@@ -2151,6 +2151,7 @@ MonoBehaviour:
   ammoBar: {fileID: 1635267254}
   emptyHand: {fileID: 21300000, guid: 93a9c56a675d1654995f6486530a0d1f, type: 3}
   scoreBar: {fileID: 1275131997}
+  barText: {fileID: 953913552}
   hearthImages:
   - {fileID: 1210707315}
   - {fileID: 857979315}

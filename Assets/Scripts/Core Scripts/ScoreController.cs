@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    private static int MAX_BIOME_SCORE = 0;
+    private static int MAX_BIOME_SCORE = 100;
     private static string MAX_SCORE_STORAGE = "MaxScore";
 
     private new Camera camera;
@@ -26,17 +26,23 @@ public class ScoreController : MonoBehaviour
 
     private void Update()
     {
-        float travelledDistance = camera.transform.position.x;
-        curScore = (int) (travelledDistance * 10);
-        scoreText.text = curScore.ToString();
-        playerDataScreen.UpdateScoreBar(curScore, MAX_BIOME_SCORE);
-
         if (curScore >= MAX_BIOME_SCORE)
         {
             UpdateMaxScore();
             levelGenerator.StartBossStage();
             this.enabled = false;
+        } else
+        {
+            ModifyScore();
         }
+    }
+
+    private void ModifyScore()
+    {
+        float travelledDistance = camera.transform.position.x;
+        curScore = (int)(travelledDistance * 10);
+        scoreText.text = curScore.ToString();
+        playerDataScreen.UpdateScoreBar(curScore, MAX_BIOME_SCORE);
     }
 
     public int GetScore()

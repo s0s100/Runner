@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 // Displays player data on the main screen
 public class PlayerDataScreen : MonoBehaviour
 {
-    // Weapon info
-    private float ammoPercentage; // Between 0 and 1
+    private const string BOSS_HEALTH_TEXT = "Boss health";
 
     [SerializeField]
     private Image weaponIcon;
@@ -17,6 +17,8 @@ public class PlayerDataScreen : MonoBehaviour
     private Sprite emptyHand;
     [SerializeField]
     private Image scoreBar;
+    [SerializeField]
+    private TMP_Text barText;
 
     // Health info
     private int curHealth;
@@ -24,6 +26,20 @@ public class PlayerDataScreen : MonoBehaviour
 
     [SerializeField]
     private Image[] hearthImages;
+
+    // Boss state transition
+    private float curTransitionTime = 0.0f;
+    private float transitionTime = 1.0f;
+    private Color bossStageColor = new Color(0.7f, 0.3f, 0.3f, 1.0f);
+
+    private void Update()
+    {
+        if (curTransitionTime > 0.0f)
+        {
+            scoreBar.color = Color.Lerp(scoreBar.color, bossStageColor, curTransitionTime);
+            curTransitionTime -= Time.deltaTime;
+        }
+    }
 
     public void SetMaxHealth(int maxHealth)
     {
@@ -108,5 +124,17 @@ public class PlayerDataScreen : MonoBehaviour
             float result = (float)curScore / (float)maxScore;
             scoreBar.fillAmount = result;
         }
+    }
+
+    public void UpdateScoreBar(float proportion)
+    {
+        scoreBar.fillAmount = proportion;
+    }
+
+    // Used to display boss health
+    public void SetToBossState()
+    {
+        curTransitionTime = transitionTime;
+        barText.text = BOSS_HEALTH_TEXT;
     }
 }

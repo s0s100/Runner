@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SteampunkBoss : Enemy
 {
+    PlayerDataScreen dataScreen;
+
     private static int STARTING_HEALTH = 10;
 
     protected override void Awake()
@@ -12,6 +14,12 @@ public class SteampunkBoss : Enemy
         health = STARTING_HEALTH;
         animator = transform.GetChild(0).GetComponent<Animator>();
         speed = gameController.GetGameSpeed();
+    }
+
+    private void Start()
+    {
+        dataScreen = FindObjectOfType<PlayerDataScreen>();
+        NotifyDataScreen();
     }
 
     protected override void Movement()
@@ -23,6 +31,7 @@ public class SteampunkBoss : Enemy
     {
         health--;
         SetDamageAnimation();
+        UpdateHealthBar();
 
         if (health <= 0)
         {
@@ -40,5 +49,21 @@ public class SteampunkBoss : Enemy
         {
             animator.SetTrigger("IsDamaged2");
         }
+    }
+
+    private void NotifyDataScreen()
+    {
+        dataScreen.SetToBossState();
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        dataScreen.UpdateScoreBar(GetHealthProportion());
+    }
+
+    private float GetHealthProportion()
+    {
+        return (float) health / (float) STARTING_HEALTH;
     }
 }
