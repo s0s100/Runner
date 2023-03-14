@@ -6,7 +6,10 @@ public class SteampunkBoss : Enemy
 {
     PlayerDataScreen dataScreen;
 
-    private static int STARTING_HEALTH = 10;
+    private const int STARTING_HEALTH = 4;
+    private const float REQUIRED_PLAYER_Y_DIFFERENCE = 1.0f;
+
+    private GameObject player;
 
     protected override void Awake()
     {
@@ -18,6 +21,7 @@ public class SteampunkBoss : Enemy
 
     private void Start()
     {
+        player = FindObjectOfType<LevelGenerator>().GetPlayer();
         dataScreen = FindObjectOfType<PlayerDataScreen>();
         NotifyDataScreen();
     }
@@ -25,6 +29,22 @@ public class SteampunkBoss : Enemy
     protected override void Movement()
     {
         this.transform.position += speed * Vector3.right * Time.deltaTime;
+        FollowPlayerYPosition();
+    }
+
+    private void FollowPlayerYPosition()
+    {
+        float playerYPos = player.transform.position.y;
+        float bossYPos = this.transform.position.y;
+
+        if (playerYPos + REQUIRED_PLAYER_Y_DIFFERENCE + SteampunkBossMove.Y_SHIFT <  bossYPos)
+        {
+            // Move boss in Y direction in half of Move speed
+            transform.position += Vector3.down * speed * Time.deltaTime / 2;
+        } else if (playerYPos - REQUIRED_PLAYER_Y_DIFFERENCE + SteampunkBossMove.Y_SHIFT > bossYPos)
+        {
+            transform.position += Vector3.up * speed * Time.deltaTime / 2;
+        }
     }
 
     public override void Damage()

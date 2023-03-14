@@ -5,8 +5,8 @@ using UnityEngine;
 public class SteampunkBossMove : StateMachineBehaviour
 {
     // Shift between camera center location and boss location
-    private static float Y_SHIFT = -0.5f;
-    private static float X_SHIFT = 5.0f;
+    public static float Y_SHIFT = -0.5f;
+    public static float X_SHIFT = 5.0f;
     private static float MIN_REQUIRED_DIST = 0.1f;
     
     private float bossSpeed = 5.0f;
@@ -33,8 +33,6 @@ public class SteampunkBossMove : StateMachineBehaviour
         }
         else
         {
-            // Switch to IDLE
-            Debug.Log("Switching to IDLE");
             animator.SetTrigger("IsMoved");
         }
     }

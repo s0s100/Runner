@@ -30,4 +30,9 @@ public class SteampunkParentLazer : MonoBehaviour
     {
         handAttackZone.SetActive(false);
     }
+
+    public void FinishCurrentLevel()
+    {
+        Debug.Log("Congrats! You won!");
+    }
 }
