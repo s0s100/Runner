@@ -530,4 +530,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(PUSH_WAIT_BEFORE_CONTROL);
         EnablePlayerAndControls();
     }
+
+    public void MakeQuickShift(float shiftDistance)
+    {
+        transform.position -= Vector3.right * shiftDistance;
+    }
 }

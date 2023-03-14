@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteampunkParentLazer : MonoBehaviour
+public class SteampunkAnimatorControl : MonoBehaviour
 {
     // Lazer can't see parent object scripts
     [SerializeField]
@@ -10,6 +10,9 @@ public class SteampunkParentLazer : MonoBehaviour
 
     [SerializeField]
     private GameObject handAttackZone;
+
+    [SerializeField]
+    private EdgeCollider2D collider2D;
 
     public void ActivateLazer()
     {
@@ -34,5 +37,12 @@ public class SteampunkParentLazer : MonoBehaviour
     public void FinishCurrentLevel()
     {
         Debug.Log("Congrats! You won!");
+    }
+
+    // Called upon boss death
+    public void DisableColliderDamage()
+    {
+        collider2D.enabled = false;
+        handAttackZone.SetActive(false);
     }
 }

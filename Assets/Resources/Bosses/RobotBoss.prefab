@@ -698,7 +698,7 @@ PrefabInstance:
       addedObject: {fileID: 7059473715684026462}
     - targetCorrespondingSourceObject: {fileID: 2904306882043091932, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2514057564463671647}
+      addedObject: {fileID: 7748304438440332574}
   m_SourcePrefab: {fileID: 100100000, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
 --- !u!4 &4658306613311199779 stripped
 Transform:
@@ -724,6 +724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lazerGenerator: {fileID: 8771991196856965084}
   handAttackZone: {fileID: 8811462521907788599}
+  collider2D: {fileID: 7059473715684026462}
 --- !u!1 &5968500248134410907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2904306882043091932, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
@@ -780,7 +781,7 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &2514057564463671647
+--- !u!114 &7748304438440332574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -789,9 +790,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5968500248134410907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b86f83d6dcb128c4886995d0a847f097, type: 3}
+  m_Script: {fileID: 11500000, guid: 9338ed87f96891b479b181bd7bb043a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shiftDistance: 1
 --- !u!4 &6041723871658526319 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2973210536997764904, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
