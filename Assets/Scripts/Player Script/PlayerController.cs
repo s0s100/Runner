@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private const float REQUIRED_FALL_SPEED_FALL_PARTICLES = 0.5f;
     private const float DEFAULT_GRAVITY_SCALE = 1.0f;
     private const float MAX_TOUCH_VECTOR_MAGNITUDE = 50.0f;
+    private const float PUSH_WAIT_BEFORE_CONTROL = 0.75f;
 
     // Attached objects
     private new Camera camera;
@@ -65,6 +66,11 @@ public class PlayerController : MonoBehaviour
     private Color attackColor;
     private float attackCooldown = 2.0f;
     private float curAttackCooldown = 0.0f;
+
+    // Played pushed
+    private float xPushForce = 0.0f;
+    private float yPushForce = 0.0f;
+    private float curPushTime = 0.0f;
 
     public bool IsMoveParticles()
     {
@@ -147,7 +153,7 @@ public class PlayerController : MonoBehaviour
             MakeStoredAction(); // Make action stored in a buffer 
             MakeAction(moveDir);
         }
-        
+
         MovePlayer();
         ReduceCooldowns();
     }
@@ -157,7 +163,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             return MoveDirection.Up;
-        } else 
+        } else
         if (Input.GetKeyDown(KeyCode.S))
         {
             return MoveDirection.Down;
@@ -309,7 +315,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump()
-    {        
+    {
         Vector2 force = Vector2.up * jumpForce;
         rigidbody.velocity = Vector3.zero;
         rigidbody.AddForce(force);
@@ -360,6 +366,12 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += Vector3.right * dashSpeed * Time.deltaTime;
         }
+
+        if (curPushTime > 0.0f)
+        {
+            transform.position += Vector3.right * xPushForce * Time.deltaTime;
+            transform.position -= Vector3.up * yPushForce * Time.deltaTime;
+        }
     }
 
     private void ReduceCooldowns()
@@ -377,12 +389,17 @@ public class PlayerController : MonoBehaviour
         if (curSaveActionTime >= 0.0f)
         {
             curSaveActionTime -= Time.deltaTime;
-        } 
+        }
 
         if (curAttackCooldown >= 0.0f)
         {
             playerDataScreen.SetAmmoCounter(curAttackCooldown, attackCooldown);
             curAttackCooldown -= Time.deltaTime;
+        }
+
+        if (curPushTime > 0.0f)
+        {
+            curPushTime -= Time.deltaTime;
         }
     }
 
@@ -434,7 +451,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.runtimeAnimatorController = animatorController as RuntimeAnimatorController;
     }
-    
+
     public void SetAttackColor(Color color)
     {
         attackColor = color;
@@ -490,5 +507,27 @@ public class PlayerController : MonoBehaviour
     public void SetControllable(bool isControllable)
     {
         this.isControllable = isControllable;
+    }
+
+    private void CreatePush(float xForce, float yForce)
+    {
+        curPushTime = PUSH_WAIT_BEFORE_CONTROL;
+        xPushForce = xForce;
+        yPushForce = yForce;
+    }
+
+    public void PushPlayerBack(float xForce, float yForce)
+    {
+        CreatePush(xForce, yForce);
+        DisableControl();
+        StartCoroutine(ReturnControl());
+
+        Debug.Log("I got pushed!");
+    }
+
+    private IEnumerator ReturnControl()
+    {
+        yield return new WaitForSeconds(PUSH_WAIT_BEFORE_CONTROL);
+        EnablePlayerAndControls();
     }
 }

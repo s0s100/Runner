@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5133446216556417229}
   - component: {fileID: 2761772084108813996}
-  - component: {fileID: 6344678699202838763}
+  - component: {fileID: 8297038529922354755}
   m_Layer: 0
   m_Name: HandDamageZone
   m_TagString: Untagged
@@ -117,12 +117,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8811462521907788599}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: 1.73, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.75631607, w: 0.6542065}
+  m_LocalPosition: {x: 1.08, y: -2.27, z: 1}
+  m_LocalScale: {x: 1.5057515, y: 1.5057514, z: 1.5057517}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4658306613311199779}
+  m_Father: {fileID: 6041723871658526319}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2761772084108813996
@@ -157,7 +157,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.5538759, y: 0.21997058}
+  m_Offset: {x: 1.84099, y: 0.097455025}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -168,9 +168,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.3797607, y: 2.8501675}
+  m_Size: {x: 3.4570491, y: 3.0951986}
   m_EdgeRadius: 0
---- !u!114 &6344678699202838763
+--- !u!114 &8297038529922354755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,9 +179,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8811462521907788599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43a96feda24485b4ca9335e6b8173b77, type: 3}
+  m_Script: {fileID: 11500000, guid: d7f71d80140a9ac488a5d893bb9abff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xPushForce: -4
+  yPushForce: -4
 --- !u!1001 &4860595944338378297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -681,7 +683,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4197308457403229028, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
       insertIndex: 0
       addedObject: {fileID: 6851017937907201304}
-    - targetCorrespondingSourceObject: {fileID: 4197308457403229028, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2973210536997764904, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5133446216556417229}
     m_AddedComponents:
@@ -790,6 +792,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86f83d6dcb128c4886995d0a847f097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6041723871658526319 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2973210536997764904, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
+  m_PrefabInstance: {fileID: 8834502136760334663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6817834556511705932 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2596224626090844683, guid: b8a0a1528642743d69122dded026f9ac, type: 3}

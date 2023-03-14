@@ -8,8 +8,8 @@ public class PlayerHealthScript : MonoBehaviour
     private const float MIN_SPRITE_TRANSPARENCY = 0.5f;
     private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;    
 
-    private int maxHealth = 3;
-    private int curHealth = 3;
+    private int maxHealth = 5;
+    private int curHealth = 5;
     private float invulnerabilityTime = 1.0f;
     private float curInvulnerability = 0.0f;
     private bool isIncreasingTransparency = false;

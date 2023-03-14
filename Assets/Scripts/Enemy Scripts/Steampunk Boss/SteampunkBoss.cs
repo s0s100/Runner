@@ -6,7 +6,7 @@ public class SteampunkBoss : Enemy
 {
     PlayerDataScreen dataScreen;
 
-    private const int STARTING_HEALTH = 4;
+    private const int STARTING_HEALTH = 10;
     private const float REQUIRED_PLAYER_Y_DIFFERENCE = 1.0f;
 
     private GameObject player;
