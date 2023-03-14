@@ -7,8 +7,6 @@ public class LiftClosure : MonoBehaviour
     private GameController gameController;
     private UIController uIController;
 
-    private float waitTime = 1.5f;
-
     private void Awake()
     {
         gameController = FindObjectOfType<GameController>();
@@ -24,7 +22,7 @@ public class LiftClosure : MonoBehaviour
 
     private IEnumerator SceneUpdate()
     {
-        uIController.IsBlackScreenInvisible(false);
+        float waitTime = uIController.IsBlackScreenInvisible(false);
         // After list closes call a black screening, update background, update player position and start generate boss blocks, after make screen white again
         yield return new WaitForSeconds(waitTime);
 
