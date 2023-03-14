@@ -14,14 +14,14 @@ public class AttackCheckScript : MonoBehaviour
         attackRenderer.color = playerController.GetAttackColor();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         string tag = collision.tag;
         if (tag == "Enemy")
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
 
-           if (enemy.GetCurHealth() > 0)
+           if (enemy.GetCurHealth() > 0 && playerController.CanAttack())
            {
                enemy.Damage();
                playerController.Attack();

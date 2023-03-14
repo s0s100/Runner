@@ -93,7 +93,7 @@ public class LazerGenerator : MonoBehaviour
             HitActivity(resultPosition);
             CheckPlayerDamage(hit);
         } else
-        {
+        {   
             HitDisable();
         }
 

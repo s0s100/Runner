@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 // Also update responsible for displaying result score /coins
 public class UIController : MonoBehaviour
 {
+    private const float BLACK_SCREEN_TRANSITION_TIME = 1.5f;
     private const float TIME_BEFORE_LATE_GAME_PAUSE = 1.0f;
     private const int MAIN_MENU_SCENE_NUMBER = 0;
     private const int GAME_SCENE_NUMBER = 1;
@@ -109,6 +110,12 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene(MAIN_MENU_SCENE_NUMBER);
     }
 
+    public void StartNewLevel()
+    {
+        // For now
+        RestartGame();
+    }
+
     public void DisableStartGameText()
     {
         // startGameText.DeleteObject();
@@ -159,8 +166,9 @@ public class UIController : MonoBehaviour
         scoreResultText.text = scoreController.GetScore().ToString();
     }
 
-    public void IsBlackScreenInvisible(bool isInvisible)
+    public float IsBlackScreenInvisible(bool isInvisible)
     {
         blackScreen.SetBool("IsInvisible", isInvisible);
+        return BLACK_SCREEN_TRANSITION_TIME;
     }
 }
