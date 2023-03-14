@@ -26,17 +26,23 @@ public class ScoreController : MonoBehaviour
 
     private void Update()
     {
-        float travelledDistance = camera.transform.position.x;
-        curScore = (int) (travelledDistance * 10);
-        scoreText.text = curScore.ToString();
-        playerDataScreen.UpdateScoreBar(curScore, MAX_BIOME_SCORE);
-
         if (curScore >= MAX_BIOME_SCORE)
         {
             UpdateMaxScore();
             levelGenerator.StartBossStage();
             this.enabled = false;
+        } else
+        {
+            ModifyScore();
         }
+    }
+
+    private void ModifyScore()
+    {
+        float travelledDistance = camera.transform.position.x;
+        curScore = (int)(travelledDistance * 10);
+        scoreText.text = curScore.ToString();
+        playerDataScreen.UpdateScoreBar(curScore, MAX_BIOME_SCORE);
     }
 
     public int GetScore()

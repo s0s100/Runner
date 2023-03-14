@@ -5,10 +5,10 @@ using UnityEngine;
 // Defines next possible step
 public class SteampunkBossIDLE : StateMachineBehaviour
 {
-    private static float MIN_MEELE_ATTACK_DIST = 2.0f;
+    private static float MIN_MEELE_ATTACK_DIST = 3.0f;
 
     private float curTime = 0.0f;
-    private float decisionTime = 2.0f;
+    private float decisionTime = 1.0f;
     private GameObject playerObject;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -38,15 +38,16 @@ public class SteampunkBossIDLE : StateMachineBehaviour
 
     private void RandomMeeleAttack(Animator animator)
     {
-        bool isFist = Random.value < 0.5f;
-        if (isFist)
-        {
-            animator.SetTrigger("HandAttack");
-        } else
-        {
-            animator.SetTrigger("FireAttack");
-        }
-        
+        animator.SetTrigger("HandAttack");
+        //bool isFist = Random.value < 0.5f;
+        //if (isFist)
+        //{
+        //    animator.SetTrigger("HandAttack");
+        //} else
+        //{
+        //    animator.SetTrigger("FireAttack");
+        //}
+
     }
 
     private void RandomLazerAttack(Animator animator)
