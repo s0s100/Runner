@@ -79,6 +79,7 @@ public class UIController : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }
+
     public void RestartGame()
     {
         Time.timeScale = 1.0f;
@@ -110,10 +111,10 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene(MAIN_MENU_SCENE_NUMBER);
     }
 
-    public void StartNewLevel()
+    public void StartNextLevel()
     {
-        // For now
-        RestartGame();
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(GAME_SCENE_NUMBER);
     }
 
     public void DisableStartGameText()

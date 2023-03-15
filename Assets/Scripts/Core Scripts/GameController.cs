@@ -8,12 +8,16 @@ using UnityEditor.Animations;
 // Control general game states such as defeat and overall game speed
 public class GameController : MonoBehaviour
 {
+    private const string LAST_LEVEL_COINS = "Previous coins";
+
     private PrefabData startPosition;
     private PlayerController playerMovement;
     private CameraController cameraFollowPlayer;
     private LevelGenerator levelGenerator;
     private UIController uiController;
     private BackgroundController backgroundController;
+    private CoinController coinController;
+    private ScoreController scoreController;
 
     private bool isGameRunning = false;
     private bool isDefeated = false;
@@ -27,10 +31,14 @@ public class GameController : MonoBehaviour
     void Start()
     {
         playerMovement = FindObjectOfType<PlayerController>();
+        coinController = FindObjectOfType<CoinController>();
         cameraFollowPlayer = FindObjectOfType<CameraController>();
+
+        scoreController = GetComponent<ScoreController>();
         levelGenerator = GetComponent<LevelGenerator>();
         uiController = GetComponent<UIController>();
         backgroundController = GetComponent<BackgroundController>();
+
         GameObject lastGeneratedPrefab = levelGenerator.GetLastGeneratedPrefab();
         startPosition = lastGeneratedPrefab.GetComponent<PrefabData>();
         SetCurrentPlayerSkin();
@@ -135,5 +143,12 @@ public class GameController : MonoBehaviour
         cameraFollowPlayer.ResetCamera();
         playerMovement.EnablePlayerAndControls();
         levelGenerator.CreateBoss();
+    }
+
+    public void StartNextLevel()
+    {
+        scoreController.SaveScoreForNextRound();
+        coinController.SaveForNextLevelCoins();
+        uiController.StartNextLevel();
     }
 }

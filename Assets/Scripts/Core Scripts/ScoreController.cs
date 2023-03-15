@@ -5,8 +5,9 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    private static int MAX_BIOME_SCORE = 0;
+    private static int MAX_BIOME_SCORE = 100;
     private static string MAX_SCORE_STORAGE = "MaxScore";
+    private static string LAST_LEVEL_SCORE_STORAGE = "LastLevelScore";
 
     private new Camera camera;
     private PlayerDataScreen playerDataScreen;
@@ -16,12 +17,13 @@ public class ScoreController : MonoBehaviour
     [SerializeField]
     private TMP_Text scoreText;
     
-    
     private void Start()
-    {
+    {  
         playerDataScreen = FindObjectOfType<PlayerDataScreen>();
         levelGenerator = GetComponent<LevelGenerator>();
         camera = Camera.main;
+
+        curScore = GetLastRoundScore();
     }
 
     private void Update()
@@ -64,5 +66,18 @@ public class ScoreController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int GetLastRoundScore()
+    {
+        int result = PlayerPrefs.GetInt(LAST_LEVEL_SCORE_STORAGE);
+        PlayerPrefs.SetInt(LAST_LEVEL_SCORE_STORAGE, 0);
+
+        return result;
+    }
+
+    public void SaveScoreForNextRound()
+    {
+        PlayerPrefs.SetInt(LAST_LEVEL_SCORE_STORAGE, curScore);
     }
 }
