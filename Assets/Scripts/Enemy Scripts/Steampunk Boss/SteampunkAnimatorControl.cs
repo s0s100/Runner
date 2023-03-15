@@ -12,11 +12,14 @@ public class SteampunkAnimatorControl : MonoBehaviour
     [SerializeField]
     private EdgeCollider2D bossDamageCollider;
 
+    private Animator animator;
+
     private UIController uiController;
     private GameController gameController;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         uiController = FindObjectOfType<UIController>();
         gameController = FindObjectOfType<GameController>();
     }
@@ -58,5 +61,11 @@ public class SteampunkAnimatorControl : MonoBehaviour
     {
         bossDamageCollider.enabled = false;
         handAttackZone.SetActive(false);
+    }
+
+    public void DisableDamageAnimation()
+    {
+        animator.ResetTrigger("IsDamaged1");
+        animator.ResetTrigger("IsDamaged2");
     }
 }
