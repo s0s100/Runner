@@ -26,6 +26,8 @@ public class SceneController : MonoBehaviour
     public void StartGameScene()
     {
         Time.timeScale = 1.0f;
+        GameController.ResetSpeedModifier();
+        ScoreController.ResetLastRoundScore();
         StartCoroutine(lateStartGame());
     }
 

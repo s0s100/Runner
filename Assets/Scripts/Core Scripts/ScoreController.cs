@@ -13,6 +13,7 @@ public class ScoreController : MonoBehaviour
     private PlayerDataScreen playerDataScreen;
     private LevelGenerator levelGenerator;
     private int curScore;
+    private int curRequiredScore;
 
     [SerializeField]
     private TMP_Text scoreText;
@@ -23,12 +24,14 @@ public class ScoreController : MonoBehaviour
         levelGenerator = GetComponent<LevelGenerator>();
         camera = Camera.main;
 
-        curScore = GetLastRoundScore();
+        curRequiredScore = (int) (MAX_BIOME_SCORE * GameController.GetSpeedModifier());
+
+        Debug.Log("Score[" + curScore + "]  RequiredScore[" + curRequiredScore + "] SavedScore[" + GetLastRoundScore() + "]");
     }
 
     private void Update()
     {
-        if (curScore >= MAX_BIOME_SCORE)
+        if (curScore >= curRequiredScore)
         {
             UpdateMaxScore();
             levelGenerator.StartBossStage();
@@ -44,7 +47,7 @@ public class ScoreController : MonoBehaviour
         float travelledDistance = camera.transform.position.x;
         curScore = (int)(travelledDistance * 10);
         scoreText.text = curScore.ToString();
-        playerDataScreen.UpdateScoreBar(curScore, MAX_BIOME_SCORE);
+        playerDataScreen.UpdateScoreBar(curScore, curRequiredScore);
     }
 
     public int GetScore()
@@ -59,7 +62,8 @@ public class ScoreController : MonoBehaviour
     
     public bool UpdateMaxScore()
     {
-        if (curScore > GetMaxScore())
+        float scoreCheck = curScore + GetLastRoundScore();
+        if (scoreCheck > GetMaxScore())
         {
             PlayerPrefs.SetInt(MAX_SCORE_STORAGE ,curScore);
             return true;
@@ -71,13 +75,20 @@ public class ScoreController : MonoBehaviour
     public int GetLastRoundScore()
     {
         int result = PlayerPrefs.GetInt(LAST_LEVEL_SCORE_STORAGE);
-        PlayerPrefs.SetInt(LAST_LEVEL_SCORE_STORAGE, 0);
 
         return result;
     }
 
     public void SaveScoreForNextRound()
     {
-        PlayerPrefs.SetInt(LAST_LEVEL_SCORE_STORAGE, curScore);
+        int prevScore = PlayerPrefs.GetInt(LAST_LEVEL_SCORE_STORAGE);
+        prevScore += curScore;
+
+        PlayerPrefs.SetInt(LAST_LEVEL_SCORE_STORAGE, prevScore);
+    }
+
+    public static void ResetLastRoundScore()
+    {
+        PlayerPrefs.SetInt(LAST_LEVEL_SCORE_STORAGE, 0);
     }
 }

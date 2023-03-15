@@ -16,6 +16,7 @@ public class CoinController : MonoBehaviour
     private void Start()
     {
         coinsThisRound = GetLastLevelCoins();
+        Debug.Log("Coins[" + coinsThisRound + "]  TotalCoins[" + GetTotalAmount() + "]");
     }
 
     public void AddCoin()

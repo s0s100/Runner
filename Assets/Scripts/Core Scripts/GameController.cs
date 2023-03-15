@@ -8,7 +8,8 @@ using UnityEditor.Animations;
 // Control general game states such as defeat and overall game speed
 public class GameController : MonoBehaviour
 {
-    private const string LAST_LEVEL_COINS = "Previous coins";
+    private const string SPEED_MODIFIER_STORAGE = "Speed modifier";
+    private static float SPEED_MODIFIER_INCREMENT = 1.0f; // If it is equal to 0.1, it will become 110% after first level
 
     private PrefabData startPosition;
     private PlayerController playerMovement;
@@ -21,11 +22,18 @@ public class GameController : MonoBehaviour
 
     private bool isGameRunning = false;
     private bool isDefeated = false;
+
     [SerializeField]
     private float moveSpeeed = 2.0f;
 
     [SerializeField]
     private StoragePlayerData storagePlayerData;
+
+    private void Awake()
+    {
+        UpdateSpeedUsingModifier();
+        Debug.Log("Speed[" + moveSpeeed + "]  Modifier[" + GetSpeedModifier() + "]");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -149,6 +157,29 @@ public class GameController : MonoBehaviour
     {
         scoreController.SaveScoreForNextRound();
         coinController.SaveForNextLevelCoins();
+        IncreaseSpeedModifier();
         uiController.StartNextLevel();
+    }
+
+    public static void ResetSpeedModifier()
+    {
+        PlayerPrefs.SetFloat(SPEED_MODIFIER_STORAGE, 1.0f);
+    }
+
+    public void IncreaseSpeedModifier()
+    {
+        float curModifier = PlayerPrefs.GetFloat(SPEED_MODIFIER_STORAGE);
+        curModifier += SPEED_MODIFIER_INCREMENT;
+        PlayerPrefs.SetFloat(SPEED_MODIFIER_STORAGE, curModifier);
+    }
+
+    public static float GetSpeedModifier()
+    {  
+        return PlayerPrefs.GetFloat(SPEED_MODIFIER_STORAGE);
+    }
+
+    public void UpdateSpeedUsingModifier()
+    {
+        moveSpeeed *= GetSpeedModifier();
     }
 }
