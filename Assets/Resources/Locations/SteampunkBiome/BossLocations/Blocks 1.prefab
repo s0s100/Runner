@@ -1181,7 +1181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6949581533254342499, guid: 3868b2e2d8c6d42ab830b8a8a8cd8366, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.17
+      value: 10.16
       objectReference: {fileID: 0}
     - target: {fileID: 6949581533254342499, guid: 3868b2e2d8c6d42ab830b8a8a8cd8366, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1709,6 +1709,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: fdeadbd6e14474517bc8e9a9cf6b27f2, type: 3}
+    - target: {fileID: 3465991764317639622, guid: f1fd8e4afa23e4617a649785729ee0c3, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465991764317639622, guid: f1fd8e4afa23e4617a649785729ee0c3, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5583178248906576967, guid: f1fd8e4afa23e4617a649785729ee0c3, type: 3}
       propertyPath: m_Name
       value: Bl 8

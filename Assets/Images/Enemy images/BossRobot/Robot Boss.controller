@@ -55,7 +55,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FireAttack
-  m_Speed: 0.8
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 498776098908823359}
@@ -69,7 +69,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0686942209ab44109b94cb9c15ad880b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6a404d0d15f0b41888a6fb79dda6a18a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
