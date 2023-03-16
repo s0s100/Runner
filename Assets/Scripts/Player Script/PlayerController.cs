@@ -521,8 +521,6 @@ public class PlayerController : MonoBehaviour
         CreatePush(xForce, yForce);
         DisableControl();
         StartCoroutine(ReturnControl());
-
-        Debug.Log("I got pushed!");
     }
 
     private IEnumerator ReturnControl()

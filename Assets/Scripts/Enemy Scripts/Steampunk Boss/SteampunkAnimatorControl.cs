@@ -12,11 +12,16 @@ public class SteampunkAnimatorControl : MonoBehaviour
     [SerializeField]
     private EdgeCollider2D bossDamageCollider;
 
+    private Animator animator;
+
     private UIController uiController;
+    private GameController gameController;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         uiController = FindObjectOfType<UIController>();
+        gameController = FindObjectOfType<GameController>();
     }
 
     public void ActivateLazer()
@@ -48,7 +53,7 @@ public class SteampunkAnimatorControl : MonoBehaviour
     {
         float waitTime = uiController.IsBlackScreenInvisible(false);
         yield return new WaitForSeconds(waitTime);
-        uiController.StartNewLevel();
+        gameController.StartNextLevel();
     }
 
     // Called upon boss death
@@ -56,5 +61,11 @@ public class SteampunkAnimatorControl : MonoBehaviour
     {
         bossDamageCollider.enabled = false;
         handAttackZone.SetActive(false);
+    }
+
+    public void DisableDamageAnimation()
+    {
+        animator.ResetTrigger("IsDamaged1");
+        animator.ResetTrigger("IsDamaged2");
     }
 }

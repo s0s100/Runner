@@ -6,11 +6,18 @@ using TMPro;
 public class CoinController : MonoBehaviour
 {
     private static string COIN_STORAGE = "TotalCoinAmount";
+    private static string LAST_LEVEL_COIN_STORAGE = "LastLevelCoins";
 
     [SerializeField]
     private TMP_Text coinText;
     private int coinsAdded = 0;
     private int coinsThisRound = 0;
+
+    private void Start()
+    {
+        coinsThisRound = GetLastLevelCoins();
+        Debug.Log("Coins[" + coinsThisRound + "]  TotalCoins[" + GetTotalAmount() + "]");
+    }
 
     public void AddCoin()
     {
@@ -46,5 +53,18 @@ public class CoinController : MonoBehaviour
     public int GetCoinsAdded()
     {
         return coinsAdded;
+    }
+
+    public int GetLastLevelCoins()
+    {
+        int result = PlayerPrefs.GetInt(LAST_LEVEL_COIN_STORAGE);
+        PlayerPrefs.SetInt(LAST_LEVEL_COIN_STORAGE, 0);
+
+        return result;
+    }
+
+    public void SaveForNextLevelCoins()
+    {
+        PlayerPrefs.SetInt(LAST_LEVEL_COIN_STORAGE, coinsThisRound);
     }
 }
