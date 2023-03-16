@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
 
     private const float Z_CAMERA_DISTANCE = -10.0f;
     private const float MIN_Y_DIST_REQUIRED = 0.2f; // Distance between player and camera required to move camera
-    private const float DEFAULT_CAMERA_ACCELERATION = 0.0025f;
+    private const float DEFAULT_CAMERA_ACCELERATION = 0.004f;
     private const float CAMERA_SPEED_LIMIT = 0.1f;
     private const float Y_SHIFT_BETWEEN_PLAYER = 0.5f; // Difference between camera center and player
 
@@ -82,6 +82,7 @@ public class CameraController : MonoBehaviour
 
         bool isSpeedChanging = (transform.position.y >= minY || camPlayerDiff > 0)
          && Mathf.Abs(camPlayerDiff) > MIN_Y_DIST_REQUIRED;
+
         if (isSpeedChanging)
         {
             ySpeed += DEFAULT_CAMERA_ACCELERATION * camPlayerDiff;
