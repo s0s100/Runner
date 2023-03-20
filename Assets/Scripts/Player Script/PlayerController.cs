@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     // Dash
     private bool canDash = true;
-    private bool canDashCurrently = true;
+    private bool IsNotBlocked = true;
     private float dashSpeed = 8.0f;
     private float dashStopCooldown = 0.3f;
     private float dashCooldown = 0.5f;
@@ -89,18 +89,18 @@ public class PlayerController : MonoBehaviour
 
     public void EnableCurDash()
     {
-        canDashCurrently = true;
+        IsNotBlocked = true;
     }
 
     public void DisableCurDash()
     {
-        canDashCurrently = false;
+        IsNotBlocked = false;
     }
 
     // Used when the player lands on the ground
     public void EnableJump()
     {
-        if (canDashCurrently)
+        if (IsNotBlocked)
         {
             canDash = true;
         }
@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case MoveDirection.Right:
-                if (curDashCooldown <= 0.0f && canDash && canDashCurrently)
+                if (curDashCooldown <= 0.0f && canDash && IsNotBlocked)
                 {
                     Dash();
                 } else
@@ -357,7 +357,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (isMoving)
+        if (isMoving && IsNotBlocked)
         {
             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
         }
