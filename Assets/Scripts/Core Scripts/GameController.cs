@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
         // Increase max FPS to 60 (for every platform for now)
         Application.targetFrameRate = 60;
     }
-    
+
     void Update()
     {
         bool isLegit = Input.anyKey || (Input.touchCount > 0 && !uiController.ShouldDiscardSwipe(Input.touches[0].position));
@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour
         playerMovement.FullStop();
         cameraFollowPlayer.SetStopPosition(xPosition);
     }
-    
+
     public void PrepareBossLocation()
     {
         levelGenerator.ResetPlayerAndLocationPositions();
@@ -174,7 +174,7 @@ public class GameController : MonoBehaviour
     }
 
     public static float GetSpeedModifier()
-    {  
+    {
         return PlayerPrefs.GetFloat(SPEED_MODIFIER_STORAGE);
     }
 

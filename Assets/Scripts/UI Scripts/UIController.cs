@@ -84,6 +84,8 @@ public class UIController : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         coinController.StoreCoins();
+        GameController.ResetSpeedModifier();
+        ScoreController.ResetLastRoundScore();
         SceneManager.LoadScene(GAME_SCENE_NUMBER);
     }
 
