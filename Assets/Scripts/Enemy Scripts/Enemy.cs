@@ -83,7 +83,7 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // Makes object red-blinking if invulnerable
-    private void InvulnerabilityControl()
+    protected void InvulnerabilityControl()
     {
         if (curInvulnerability > 0.0f)
         {
