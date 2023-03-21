@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    private static int MAX_BIOME_SCORE = 100;
+    private static int MAX_BIOME_SCORE = 1000;
     private static string MAX_SCORE_STORAGE = "MaxScore";
     private static string LAST_LEVEL_SCORE_STORAGE = "LastLevelScore";
 
