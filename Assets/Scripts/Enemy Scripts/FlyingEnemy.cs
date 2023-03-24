@@ -14,7 +14,6 @@ public class FlyingEnemy : Enemy
     protected override void Awake()
     {
         base.Awake();
-        speed = gameController.GetGameSpeed(); // Same speed as a player
         Destroy(this.gameObject, existanceTime);
     }
 
@@ -40,7 +39,6 @@ public class FlyingEnemy : Enemy
         else
         {
             speedIncrement = (Vector3.left * speed) * Time.deltaTime; // Result speed equal to player speed x2
-
         }
 
         // Y movement
