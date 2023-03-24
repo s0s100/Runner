@@ -32,6 +32,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject[] definedPrefabs;
     private GameObject[] definedCoinPrefabs;
     private GameObject[] endPrefabs;
+    private GameObject[] startBossPrefabs;
     private GameObject[] bossPrefabs;
 
     // Generation parent objects
@@ -165,6 +166,10 @@ public class LevelGenerator : MonoBehaviour
         // Upload ending locations
         path = biome.GetEndLocationsPath();
         endPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        // Upload start boss locations
+        path = biome.GetBossStartLocationsPath();
+        startBossPrefabs = Resources.LoadAll(path, typeof(GameObject)).Cast<GameObject>().ToArray();
 
         // Upload boss locations
         path = biome.GetBossLocationsPath();
@@ -306,7 +311,7 @@ public class LevelGenerator : MonoBehaviour
         DeleteEnemies();
         backgroundController.SetBossBackground();
         lastGeneratedPrefab = null;
-        GenerateFromLocations(bossPrefabs, START_PREFAB_POSITION);
+        GenerateFromLocations(startBossPrefabs, START_PREFAB_POSITION);
         this.enabled = true;
         backgroundController.ReturnDefaultSpeed();
     }
