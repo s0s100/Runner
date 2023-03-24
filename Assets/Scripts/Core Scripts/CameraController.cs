@@ -27,6 +27,7 @@ public class CameraController : MonoBehaviour
 
     private float xSpeed;
     private float ySpeed;
+    private float cameraOffset = 0.0f;
 
     // Position to stop camera at
     private float xStopPosition = float.MaxValue;
@@ -78,7 +79,8 @@ public class CameraController : MonoBehaviour
     private float CalculateYPos()
     {
         float minY = levelGenerator.GetMinYPos();
-        float camPlayerDiff = player.transform.position.y - transform.position.y + Y_SHIFT_BETWEEN_PLAYER;
+        float camPlayerDiff = player.transform.position.y - transform.position.y 
+            + Y_SHIFT_BETWEEN_PLAYER + cameraOffset;
 
         bool isSpeedChanging = (transform.position.y >= minY || camPlayerDiff > 0)
          && Mathf.Abs(camPlayerDiff) > MIN_Y_DIST_REQUIRED;
@@ -124,5 +126,15 @@ public class CameraController : MonoBehaviour
     {
         transform.position = DEFAULT_POSITION;
         xStopPosition = float.MaxValue;
+    }
+
+    public void SetCameraOffset(float offset)
+    {
+        this.cameraOffset = offset;
+    }
+
+    public void ZeroCameraOffset()
+    {
+        this.cameraOffset = 0.0f;
     }
 }
