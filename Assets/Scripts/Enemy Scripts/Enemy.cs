@@ -28,6 +28,8 @@ public abstract class Enemy : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        this.speed = gameController.GetGameSpeed();
     }
     
     protected virtual void Update()

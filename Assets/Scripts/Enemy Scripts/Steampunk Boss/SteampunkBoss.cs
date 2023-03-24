@@ -16,7 +16,6 @@ public class SteampunkBoss : Enemy
         base.Awake();
         health = STARTING_HEALTH;
         animator = transform.GetChild(0).GetComponent<Animator>();
-        speed = gameController.GetGameSpeed();
     }
 
     private void Start()
