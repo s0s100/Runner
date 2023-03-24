@@ -56,8 +56,7 @@ public class SteampunkAnimatorControl : MonoBehaviour
         gameController.StartNextLevel();
     }
 
-    // Called upon boss death
-    public void DisableColliderDamage()
+    public void BossDeath()
     {
         bossDamageCollider.enabled = false;
         handAttackZone.SetActive(false);
