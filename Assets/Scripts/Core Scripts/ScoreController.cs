@@ -30,7 +30,7 @@ public class ScoreController : MonoBehaviour
 
         curRequiredScore = (int) (maxBiomeScore * GameController.GetSpeedModifier());
 
-        Debug.Log("Score[" + curScore + "]  RequiredScore[" + curRequiredScore + "] SavedScore[" + GetLastRoundScore() + "]");
+        // Debug.Log("Score[" + curScore + "]  RequiredScore[" + curRequiredScore + "] SavedScore[" + GetLastRoundScore() + "]");
     }
 
     private void Update()

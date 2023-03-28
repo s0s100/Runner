@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         UpdateSpeedUsingModifier();
-        Debug.Log("Speed[" + moveSpeeed + "]  Modifier[" + GetSpeedModifier() + "]");
+        // Debug.Log("Speed[" + moveSpeeed + "]  Modifier[" + GetSpeedModifier() + "]");
     }
 
     // Start is called before the first frame update
