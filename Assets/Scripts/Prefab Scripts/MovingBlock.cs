@@ -56,6 +56,5 @@ public class MovingBlock : MonoBehaviour
     private void AddVelocityToPlayer(GameObject playerObject)
     {
         playerObject.transform.position += moveVector;
-        Debug.Log("Added velocity to player");
     }
 }

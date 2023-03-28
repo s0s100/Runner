@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -103,6 +105,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1408,70 +1434,69 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Like2_0: 808455572
+      Like2_1: -61033205
+      Like2_10: -1651659214
+      Like2_11: 1466984816
+      Like2_12: -1911495300
+      Like2_13: -1652759814
+      Like2_14: -55446498
+      Like2_15: -2099332934
+      Like2_16: 1482794840
+      Like2_17: -2127835882
+      Like2_18: -1860542009
+      Like2_19: -1287911279
+      Like2_2: 1402178818
+      Like2_20: 1824486873
+      Like2_21: -807642238
+      Like2_22: -1825991848
+      Like2_23: -1646760753
+      Like2_24: -1743141701
+      Like2_25: -809604972
+      Like2_26: 677973819
+      Like2_27: -1183947304
+      Like2_28: 850057659
+      Like2_29: 1782181515
+      Like2_3: 15150465
+      Like2_30: 1396766153
+      Like2_31: 603513002
+      Like2_32: -2109482024
       Like2_33: 704126776
       Like2_34: 2023113239
-      Like2_12: -1911495300
-      Like2_10: -1651659214
-      Like2_27: -1183947304
-      Like2_40: 1601661499
-      Like2_43: -1622382957
-      Like2_15: -2099332934
-      Like2_46: -163837922
-      Like2_6: 1408739531
-      Like2_2: 1402178818
-      Like2_60: -2144160488
-      Like2_13: -1652759814
+      Like2_35: 1759894141
+      Like2_36: -2076583075
       Like2_37: 1956950679
       Like2_38: -1490104243
-      Like2_58: -1000896617
-      Like2_11: 1466984816
-      Like2_8: -1400843006
-      Like2_59: 1731080857
-      Like2_14: -55446498
-      Like2_29: 1782181515
-      Like2_7: 1339190546
-      Like2_19: -1287911279
-      Like2_56: 46233576
-      Like2_36: -2076583075
-      Like2_16: 1482794840
-      Like2_9: 123121208
-      Like2_51: 1122702620
       Like2_39: 843496218
-      Like2_30: 1396766153
-      Like2_48: -826023313
-      Like2_26: 677973819
-      Like2_52: 1759702389
-      Like2_20: 1824486873
-      Like2_44: 337724679
-      Like2_25: -809604972
-      Like2_50: 340879111
-      Like2_1: -61033205
-      Like2_3: 15150465
-      Like2_42: 1181165141
-      Like2_0: 808455572
-      Like2_47: 1634239969
       Like2_4: 1817419298
-      Like2_53: -424563751
-      Like2_23: -1646760753
-      Like2_17: -2127835882
+      Like2_40: 1601661499
       Like2_41: 1371887196
-      Like2_31: 603513002
-      Like2_24: -1743141701
-      Like2_55: -887034553
-      Like2_35: 1759894141
-      Like2_32: -2109482024
-      Like2_5: -1166528158
-      Like2_18: -1860542009
-      Like2_22: -1825991848
-      Like2_54: -1188320098
-      Like2_28: 850057659
-      Like2_49: 231842136
+      Like2_42: 1181165141
+      Like2_43: -1622382957
+      Like2_44: 337724679
       Like2_45: -1211562852
+      Like2_46: -163837922
+      Like2_47: 1634239969
+      Like2_48: -826023313
+      Like2_49: 231842136
+      Like2_5: -1166528158
+      Like2_50: 340879111
+      Like2_51: 1122702620
+      Like2_52: 1759702389
+      Like2_53: -424563751
+      Like2_54: -1188320098
+      Like2_55: -887034553
+      Like2_56: 46233576
       Like2_57: -609881630
-      Like2_21: -807642238
-  spritePackingTag: 
+      Like2_58: -1000896617
+      Like2_59: 1731080857
+      Like2_6: 1408739531
+      Like2_60: -2144160488
+      Like2_7: 1339190546
+      Like2_8: -1400843006
+      Like2_9: 123121208
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
