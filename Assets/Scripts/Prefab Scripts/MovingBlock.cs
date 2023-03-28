@@ -6,6 +6,7 @@ public class MovingBlock : MonoBehaviour
 {
     private float curSpeed = 0.0f;
     private Vector3 moveVector = Vector3.zero;
+    private float creationTime;
 
     [SerializeField]
     private bool isXMovement = true;
@@ -19,6 +20,11 @@ public class MovingBlock : MonoBehaviour
     [SerializeField]
     private float sinTimeShift = 0.0f;
 
+    private void Awake()
+    {
+        creationTime = Time.time;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,7 +34,7 @@ public class MovingBlock : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        curSpeed = sinCoef * Mathf.Sin(Time.time * timeCoef + sinTimeShift);
+        curSpeed = sinCoef * Mathf.Sin((Time.time - creationTime) * timeCoef + sinTimeShift);
 
         if (isXMovement)
         {
