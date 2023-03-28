@@ -70,9 +70,9 @@ public class EnemyGenerator : MonoBehaviour
             // Reverse enemy if possible
             if (isReversed)
             {
-                FlyingEnemy witchControl = newEnemy.GetComponent<FlyingEnemy>();
-                witchControl.SetLeftToRightMovement();
-                witchControl.SetSinMovement();
+                FlyingEnemy EnemyControl = newEnemy.GetComponent<FlyingEnemy>();
+                EnemyControl.SetLeftToRightMovement();
+                EnemyControl.SetSinMovement();
                 newEnemy.transform.Rotate(0.0f, 180.0f, 0.0f); // Rotate to make her move in the other direction
             }
 

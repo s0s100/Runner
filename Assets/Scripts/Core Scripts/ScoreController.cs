@@ -4,8 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class ScoreController : MonoBehaviour
-{
-    private static int MAX_BIOME_SCORE = 100;
+{    
     private static string MAX_SCORE_STORAGE = "MaxScore";
     private static string LAST_LEVEL_SCORE_STORAGE = "LastLevelScore";
 
@@ -17,14 +16,19 @@ public class ScoreController : MonoBehaviour
 
     [SerializeField]
     private TMP_Text scoreText;
-    
+
+    [Space(50)]
+    [Header("Score before boss")]
+    [SerializeField]
+    private int maxBiomeScore = 1000;
+
     private void Start()
     {  
         playerDataScreen = FindObjectOfType<PlayerDataScreen>();
         levelGenerator = GetComponent<LevelGenerator>();
         camera = Camera.main;
 
-        curRequiredScore = (int) (MAX_BIOME_SCORE * GameController.GetSpeedModifier());
+        curRequiredScore = (int) (maxBiomeScore * GameController.GetSpeedModifier());
 
         Debug.Log("Score[" + curScore + "]  RequiredScore[" + curRequiredScore + "] SavedScore[" + GetLastRoundScore() + "]");
     }

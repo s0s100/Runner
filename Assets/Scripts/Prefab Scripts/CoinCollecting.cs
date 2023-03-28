@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CoinCollecting : MonoBehaviour
 {
+    [SerializeField]
+    private int quantity = 1;
+
     private CoinController coinController;
-    private const float TIME_BEFORE_DELETE = 0.5f;
     private Animator animator;
 
     private void Start()
@@ -21,8 +23,12 @@ public class CoinCollecting : MonoBehaviour
         if (objectTag == "Player")
         {
             animator.SetTrigger("IsTaken");
-            coinController.AddCoin();
-            Destroy(this.gameObject, TIME_BEFORE_DELETE);
+            coinController.AddCoins(quantity);
         }
+    }
+
+    private void ExterimateCoin()
+    {
+        Destroy(this.gameObject);
     }
 }
