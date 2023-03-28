@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -103,6 +105,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1408,70 +1434,69 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Like_21: -229829336
-      Like_30: 1839032557
-      Like_16: 1647179956
-      Like_37: 1798266856
-      Like_40: 2099937472
-      Like_54: 1221623839
-      Like_52: 1143979660
-      Like_6: 1569919112
-      Like_24: 717224074
-      Like_12: 2133161506
+      Like_0: 2016240936
+      Like_1: -2108115629
       Like_10: -187496835
-      Like_38: 1983949249
-      Like_41: 232522755
+      Like_11: -1266340242
+      Like_12: 2133161506
+      Like_13: 1438258151
+      Like_14: 752030961
+      Like_15: 52433960
+      Like_16: 1647179956
+      Like_17: 1725304145
+      Like_18: 849597254
+      Like_19: -2065137676
+      Like_2: 717896430
+      Like_20: -2145690762
+      Like_21: -229829336
+      Like_22: 988982651
+      Like_23: 1184545719
+      Like_24: 717224074
+      Like_25: -2112901786
+      Like_26: 1393672975
+      Like_27: -1877187710
       Like_28: -1102940684
+      Like_29: 712000663
+      Like_3: -63031122
+      Like_30: 1839032557
+      Like_31: 1371630063
+      Like_32: -1929506294
+      Like_33: 1616869283
+      Like_34: 1850262852
+      Like_35: -2058892970
       Like_36: 119712215
+      Like_37: 1798266856
+      Like_38: 1983949249
+      Like_39: -1272415434
+      Like_4: 975192037
+      Like_40: 2099937472
+      Like_41: 232522755
+      Like_42: 2107136976
+      Like_43: 910945835
+      Like_44: 1920146247
+      Like_45: 1868629311
+      Like_46: -698923450
+      Like_47: 1516549469
+      Like_48: 1721840147
+      Like_49: -1805609808
+      Like_5: -289095652
+      Like_50: 1655825659
+      Like_51: 371612837
+      Like_52: 1143979660
+      Like_53: 1905705827
+      Like_54: 1221623839
+      Like_55: -1821472926
+      Like_56: 952955883
+      Like_57: 949263134
+      Like_58: 894886115
+      Like_59: 714852060
+      Like_6: 1569919112
+      Like_60: -434288081
       Like_7: -2065461039
       Like_8: 397316442
-      Like_25: -2112901786
-      Like_43: 910945835
-      Like_58: 894886115
-      Like_49: -1805609808
-      Like_0: 2016240936
-      Like_17: 1725304145
-      Like_50: 1655825659
-      Like_34: 1850262852
-      Like_3: -63031122
-      Like_44: 1920146247
-      Like_29: 712000663
-      Like_46: -698923450
-      Like_45: 1868629311
-      Like_23: 1184545719
-      Like_55: -1821472926
       Like_9: -838516480
-      Like_48: 1721840147
-      Like_14: 752030961
-      Like_2: 717896430
-      Like_27: -1877187710
-      Like_18: 849597254
-      Like_39: -1272415434
-      Like_60: -434288081
-      Like_4: 975192037
-      Like_59: 714852060
-      Like_35: -2058892970
-      Like_31: 1371630063
-      Like_51: 371612837
-      Like_5: -289095652
-      Like_53: 1905705827
-      Like_20: -2145690762
-      Like_19: -2065137676
-      Like_47: 1516549469
-      Like_57: 949263134
-      Like_22: 988982651
-      Like_11: -1266340242
-      Like_33: 1616869283
-      Like_56: 952955883
-      Like_1: -2108115629
-      Like_42: 2107136976
-      Like_32: -1929506294
-      Like_13: 1438258151
-      Like_26: 1393672975
-      Like_15: 52433960
-  spritePackingTag: 
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
