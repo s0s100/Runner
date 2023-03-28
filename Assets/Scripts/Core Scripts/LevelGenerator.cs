@@ -53,6 +53,11 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private BiomeData[] biomeData;
 
+    [Space(50)]
+    [Header("Location to generate infinitely")]
+    [SerializeField]
+    private GameObject onlyBlockToGenerate = null; // Used to test one specified block
+
     // Biome selection
     Dictionary<NextGeneratedBlockType, GameObject[]> enumToObjLinkage;
     NextGeneratedBlockType nextBlockType;
@@ -95,7 +100,7 @@ public class LevelGenerator : MonoBehaviour
         }
 
         bool isCoinPrefab = Random.value < coinGenerationChance;
-        if (DevelopmentData.GetIsCoinType() || isCoinPrefab)
+        if (isCoinPrefab)
         {
             return NextGeneratedBlockType.Coin;
         }
@@ -108,9 +113,16 @@ public class LevelGenerator : MonoBehaviour
 
         if (ShouldGenerate())
         {
-            nextBlockType = DefineNextBlockType();
-            GameObject[] objectToGenerate = enumToObjLinkage[nextBlockType];
-            GenerateFromLocations(objectToGenerate);
+            if (onlyBlockToGenerate == null) 
+            {
+                nextBlockType = DefineNextBlockType();
+                GameObject[] objectToGenerate = enumToObjLinkage[nextBlockType];
+                GenerateFromLocations(objectToGenerate);
+            } else
+            {
+                Vector2 generatedPos = GetNextGenerationLocation(onlyBlockToGenerate);
+                CreatePrefab(onlyBlockToGenerate, generatedPos);
+            }
         }
     }
 
@@ -190,12 +202,6 @@ public class LevelGenerator : MonoBehaviour
     {
         int size = prefabs.Length;
         int randomSelected = Random.Range(0, size);
-
-        // Testing purpose
-        if (DevelopmentData.GetNextGeneratedBlock())
-        {
-            randomSelected = size - 1;
-        }
 
         return prefabs[randomSelected];
     }
@@ -331,4 +337,6 @@ public class LevelGenerator : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+
+    
 }
