@@ -2074,6 +2074,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 9142231011957899327, guid: 03f14f413e60245209c86796ef7989d0, type: 3}
   biomeData:
   - {fileID: 11400000, guid: 9ba1c934e54c8c64c9a2eddbd6051034, type: 2}
+  onlyBlockToGenerate: {fileID: 0}
 --- !u!114 &590038138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2087,6 +2088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1114774467}
+  maxBiomeScore: 1000
 --- !u!114 &590038139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6147,7 +6149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2030659342387106753, guid: ec64ebbbb8500134ebdc55e87c4e31af, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6817681306764508830, guid: ec64ebbbb8500134ebdc55e87c4e31af, type: 3}
       propertyPath: m_Pivot.x

@@ -722,6 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b4543f2ca503147bafd3f5e17acd1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diamondObject: {fileID: 6873047573850515854, guid: e5a0122c79423f74f8cf21bfa9ef0051, type: 3}
   lazerGenerator: {fileID: 8771991196856965084}
   handAttackZone: {fileID: 8811462521907788599}
   bossDamageCollider: {fileID: 7059473715684026462}
