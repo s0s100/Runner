@@ -7,7 +7,9 @@ public class PrefabData : MonoBehaviour
 {
     private GameController gameController;
 
-    private const float DESTRUCTION_TIME = 35.0f;
+    [SerializeField]
+    [Header("Default value is 30 seconds")]
+    private float destructionTime = 30.0f;
 
     // X shift before required
     [SerializeField]
@@ -27,7 +29,7 @@ public class PrefabData : MonoBehaviour
 
         if (gameController.IsGameRunning())
         {
-            Destroy(gameObject, DESTRUCTION_TIME);
+            Destroy(gameObject, destructionTime);
         }
     }
 
@@ -48,6 +50,6 @@ public class PrefabData : MonoBehaviour
 
     public void LateDestroy()
     {
-        Destroy(gameObject, DESTRUCTION_TIME);
+        Destroy(gameObject, destructionTime);
     }
 }
