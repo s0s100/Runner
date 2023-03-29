@@ -8,9 +8,10 @@ public class DroneController : Enemy
 
     private PlayerController playerObject;
 
-    private void Start()
+    protected override void Awake()
     {
-        playerObject = FindObjectOfType<PlayerController>();
+        base.Awake();
+        Destroy(this.gameObject, existanceTime);
     }
 
     protected override void Update()
@@ -20,6 +21,11 @@ public class DroneController : Enemy
 
     protected override void Movement()
     {
-        this.transform.position += Vector3.right * speed * Time.deltaTime;
+        transform.position += speed * Vector3.right * Time.deltaTime;
+    }
+
+    private void Start()
+    {
+        playerObject = FindObjectOfType<PlayerController>();
     }
 }

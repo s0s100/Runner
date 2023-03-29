@@ -20,6 +20,8 @@ public class MovingBlock : MonoBehaviour
     [SerializeField]
     private float sinTimeShift = 0.0f;
 
+    private GameObject attachedPlayer = null;
+
     private void Awake()
     {
         creationTime = Time.time;
@@ -48,19 +50,33 @@ public class MovingBlock : MonoBehaviour
     private void Movement()
     {
         this.transform.position += moveVector;
+
+        // If any player is on the collision move him as well
+        if (attachedPlayer != null)
+        {
+            AddVelocityToPlayer(attachedPlayer);
+        }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             GameObject playerObject = collision.gameObject;
-            AddVelocityToPlayer(playerObject);
+            attachedPlayer = playerObject;
         }   
     }
 
-    private void AddVelocityToPlayer(GameObject playerObject)
+    private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            attachedPlayer = null;
+        }
+    }
+
+    private void AddVelocityToPlayer(GameObject playerObject)
+    {        
         playerObject.transform.position += moveVector;
     }
 }

@@ -2123,7 +2123,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 9142231011957899327, guid: 03f14f413e60245209c86796ef7989d0, type: 3}
   biomeData:
   - {fileID: 11400000, guid: 9ba1c934e54c8c64c9a2eddbd6051034, type: 2}
-  onlyBlockToGenerate: {fileID: 0}
+  onlyBlockToGenerate: {fileID: 2750305688557298751, guid: 74e33e16968014a6da7183fc6017eedd, type: 3}
 --- !u!114 &590038138
 MonoBehaviour:
   m_ObjectHideFlags: 0

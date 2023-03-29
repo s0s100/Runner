@@ -18,6 +18,7 @@ public class EnemyGenerator : MonoBehaviour
     private float yEnemyMaxDist = 4.0f;
     [SerializeField]
     private float currentEnemyGenerationTime = 15.0f;
+
     private float generationDistance;
 
     private void Start()
@@ -47,37 +48,27 @@ public class EnemyGenerator : MonoBehaviour
         else
         {
             currentEnemyGenerationTime = enemyGenerationTime;
-            
-            bool isReversed = Random.value > 0.5f; // Returns random bool
-            bool isSinMoving = Random.value > 0.75f;
-
-            float xDist;
-            if (isReversed)
-            {
-                xDist = -generationDistance + this.transform.position.x;
-            }
-            else
-            {
-                xDist = generationDistance + this.transform.position.x;
-            }
-
-            float yDist = Random.Range(yEnemyMinDist, yEnemyMaxDist);
-            yDist += this.transform.position.y;
-
-            Vector2 witchPos = new Vector2(xDist, yDist);
-            GameObject newEnemy = Instantiate(enemyObject);
-
-            // Reverse enemy if possible
-            if (isReversed)
-            {
-                FlyingEnemy EnemyControl = newEnemy.GetComponent<FlyingEnemy>();
-                EnemyControl.SetLeftToRightMovement();
-                EnemyControl.SetSinMovement();
-                newEnemy.transform.Rotate(0.0f, 180.0f, 0.0f); // Rotate to make her move in the other direction
-            }
-
-            newEnemy.transform.position = witchPos;
-            newEnemy.transform.parent = generatedEnemyParent.transform;
+            CreateEnemy();            
         }
+    }
+
+    private void CreateEnemy()
+    {
+        bool isReversed = Random.value > 0.5f;
+
+        float xDist;
+        if (isReversed) xDist = -generationDistance + this.transform.position.x;
+        else            xDist = generationDistance + this.transform.position.x;
+
+        float yDist = Random.Range(yEnemyMinDist, yEnemyMaxDist);
+        yDist += this.transform.position.y;
+
+        Vector2 enemyPos = new Vector2(xDist, yDist);
+        GameObject newEnemy = Instantiate(enemyObject, enemyPos, Quaternion.identity);
+
+        // newEnemy.transform.position = enemyPos;
+        newEnemy.transform.parent = generatedEnemyParent.transform;
+
+        Debug.Log("Generated: " + enemyObject.name);
     }
 }

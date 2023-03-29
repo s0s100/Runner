@@ -19,17 +19,26 @@ public abstract class Enemy : MonoBehaviour
     protected GameController gameController;
     protected Animator animator;
     protected float speed;
-    protected float existanceTime = 20.0f;
+    protected float existanceTime = 30.0f;
 
     protected int health = 1;
 
     protected virtual void Awake()
     {
         gameController = FindObjectOfType<GameController>();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-
         this.speed = gameController.GetGameSpeed();
+
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        }
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
     }
     
     protected virtual void Update()

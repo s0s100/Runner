@@ -16,7 +16,7 @@ public class SceneController : MonoBehaviour
 
     private void Awake()
     {
-        UpdateFile();
+        // UpdateFile();
     }
 
     public void StartGameScene()
