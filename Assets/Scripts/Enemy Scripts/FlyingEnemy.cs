@@ -10,11 +10,36 @@ public class FlyingEnemy : Enemy
     private bool isSinMoving = false;
     private float sinMoveAmplitude = 2.0f;
     private float sinMoveTimeCoef = 2.0f;
+    private float destroyUponDeath = 5.0f;
 
     protected override void Awake()
     {
         base.Awake();
         Destroy(this.gameObject, existanceTime);
+        CheckMoveDirection();
+    }
+
+    private void CheckMoveDirection()
+    {
+        bool isChangingDirection = this.transform.position.x < 
+            Camera.main.transform.position.x;
+        if (isChangingDirection)
+        {
+            SetLeftToRightMovement();
+        }
+    }
+
+    private void Start()
+    {
+        DefineIfSin();
+    }
+
+    private void DefineIfSin()
+    {
+        if (Random.value > 0.5f)
+        {
+            SetSinMovement();
+        }
     }
 
     public void SetSinMovement()
@@ -26,6 +51,7 @@ public class FlyingEnemy : Enemy
     {
         leftToRightMovement = true;
         speed = gameController.GetGameSpeed() * 2;
+        this.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
     protected override void Movement()
@@ -67,5 +93,6 @@ public class FlyingEnemy : Enemy
     {
         base.Kill();
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        Destroy(this.gameObject, destroyUponDeath);
     }
 }
