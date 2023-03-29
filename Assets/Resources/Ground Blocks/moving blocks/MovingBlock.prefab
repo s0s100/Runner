@@ -144,6 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isXMovement: 1
-  sinCoef: 8
-  timeCoef: 4
+  sinCoef: 3
+  timeCoef: 1.5
   sinTimeShift: 0
