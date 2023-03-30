@@ -68,12 +68,12 @@ public class LevelGenerator : MonoBehaviour
     private void Awake()
     {
         RandomizeCurBiome();
+        GeneratePlayer();
     }
 
     private void Start()
     {
         GenerateFromLocations(startPrefabs, START_PREFAB_POSITION);
-        GeneratePlayer();
         PopulateLinkageDictionary();
 
         cameraObject = Camera.main;
