@@ -6,6 +6,8 @@ public class SteampunkAnimatorControl : MonoBehaviour
 {
     // Lazer can't see parent object scripts
     [SerializeField]
+    private Animator screenAnimator;
+    [SerializeField]
     private LazerGenerator lazerGenerator;
     [SerializeField]
     private GameObject handAttackZone;
@@ -66,5 +68,9 @@ public class SteampunkAnimatorControl : MonoBehaviour
     {
         animator.ResetTrigger("IsDamaged1");
         animator.ResetTrigger("IsDamaged2");
+    }
+    public void MakeScreenRed()
+    {
+        screenAnimator.SetBool("IsRedScreen", true);
     }
 }
