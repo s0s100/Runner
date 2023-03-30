@@ -454,12 +454,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetAttackColor(Color color)
     {
-        attackColor = color;
-    }
-
-    public Color GetAttackColor()
-    {
-        return attackColor;
+        AttackCheckScript attackCheckScript = GetComponentInChildren<AttackCheckScript>();
+        attackCheckScript.SetAttackColor(color);
     }
 
     public void Attack()
