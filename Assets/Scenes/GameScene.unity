@@ -2067,6 +2067,7 @@ GameObject:
   - component: {fileID: 590038140}
   - component: {fileID: 590038141}
   - component: {fileID: 590038142}
+  - component: {fileID: 590038143}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -2209,6 +2210,20 @@ MonoBehaviour:
   - {fileID: 2029474730}
   - {fileID: 483307259}
   - {fileID: 1892631958}
+--- !u!114 &590038143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590038134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e676160831ca847b5136f42c98eada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 347480653}
+  levelGenerator: {fileID: 590038137}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -6199,7 +6214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2030659342387106753, guid: ec64ebbbb8500134ebdc55e87c4e31af, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6817681306764508830, guid: ec64ebbbb8500134ebdc55e87c4e31af, type: 3}
       propertyPath: m_Pivot.x
