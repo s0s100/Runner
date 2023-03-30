@@ -36,7 +36,7 @@ public class MovingBlock : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        curSpeed = sinCoef * Mathf.Sin((Time.time - creationTime) * timeCoef + sinTimeShift);
+        curSpeed = sinCoef * Mathf.Sin((Time.time - creationTime) * timeCoef + ((sinTimeShift * Mathf.PI) / 180));
 
         if (isXMovement)
         {
@@ -67,7 +67,7 @@ public class MovingBlock : MonoBehaviour
         }   
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -76,7 +76,7 @@ public class MovingBlock : MonoBehaviour
     }
 
     private void AddVelocityToPlayer(GameObject playerObject)
-    {        
+    {
         playerObject.transform.position += moveVector;
     }
 }

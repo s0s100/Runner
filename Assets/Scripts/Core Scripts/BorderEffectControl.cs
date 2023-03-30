@@ -29,8 +29,6 @@ public class BorderEffectControl : MonoBehaviour
     private void Update()
     {
         Vector3 screenPos = Camera.main.WorldToViewportPoint(playerObject.transform.position);
-        Debug.Log("ScreenPos: " + screenPos);
-
         CheckPos(screenPos);
     }
 
@@ -48,8 +46,7 @@ public class BorderEffectControl : MonoBehaviour
         {
             effectCoefficient = (MIN_REQUIRED_DIFFERENCE - screenPos.y) / MIN_REQUIRED_DIFFERENCE;
         }
-
-        Debug.Log("Effect coefficient: " + effectCoefficient);
+        
         SetVolumeEffect(effectCoefficient);
     }
 

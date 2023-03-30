@@ -11,7 +11,6 @@ public class AttackCheckScript : MonoBehaviour
     {
         playerController = GetComponentInParent<PlayerController>();
         attackRenderer = GetComponent<SpriteRenderer>();
-        attackRenderer.color = playerController.GetAttackColor();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -30,5 +29,10 @@ public class AttackCheckScript : MonoBehaviour
                animator.SetTrigger("IsAttacking");
            }
         }
+    }
+
+    public void SetAttackColor(Color color)
+    {
+        this.attackRenderer.color = color;
     }
 }
