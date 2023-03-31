@@ -73,4 +73,14 @@ public class SteampunkAnimatorControl : MonoBehaviour
     {
         screenAnimator.SetBool("IsRedScreen", true);
     }
+
+    public void EnableScreen()
+    {
+        screenAnimator.SetBool("IsActive", true);
+    }
+
+    public void DisableScreen()
+    {
+        screenAnimator.SetBool("IsActive", false);
+    }
 }

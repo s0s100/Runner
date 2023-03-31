@@ -8069,6 +8069,13 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: EnableScreen
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.9166666
     functionName: ActivateLazer
     data: 
@@ -8078,6 +8085,13 @@ AnimationClip:
     messageOptions: 0
   - time: 3.9833333
     functionName: DeactivateLazer
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.5
+    functionName: DisableScreen
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

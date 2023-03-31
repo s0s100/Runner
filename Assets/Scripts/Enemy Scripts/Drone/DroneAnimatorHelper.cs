@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IWasCreatedToDeleteParent : MonoBehaviour
+public class DroneAnimatorHelper : MonoBehaviour
 {
     public void DeleteParent()
     {
