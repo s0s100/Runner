@@ -458,10 +458,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 267061656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb026d14224eae34197c8eeb96761f66, type: 3}
+  m_Script: {fileID: 11500000, guid: d7f71d80140a9ac488a5d893bb9abff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 590038136}
+  xPushForce: 3
+  yPushForce: -5
 --- !u!1 &287319414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,7 +2139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1114774467}
-  maxBiomeScore: 0
+  maxBiomeScore: 1000
 --- !u!114 &590038139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4796,7 +4797,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 24, y: 0.5}
+  m_Size: {x: 50, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &1598832239
 MonoBehaviour:
@@ -5640,7 +5641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2023734573}
   - component: {fileID: 2023734575}
-  - component: {fileID: 2023734574}
+  - component: {fileID: 2023734576}
   m_Layer: 0
   m_Name: RightPlayerLoseZone
   m_TagString: Untagged
@@ -5663,19 +5664,6 @@ Transform:
   m_Father: {fileID: 209898437}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2023734574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023734572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb026d14224eae34197c8eeb96761f66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameController: {fileID: 590038136}
 --- !u!61 &2023734575
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5721,6 +5709,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 12}
   m_EdgeRadius: 0
+--- !u!114 &2023734576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023734572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f71d80140a9ac488a5d893bb9abff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xPushForce: -3
+  yPushForce: -5
 --- !u!114 &2029474730 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5360110599553793473, guid: 16918be501101014780fd160932be04e, type: 3}
