@@ -24,13 +24,16 @@ public class Wire : MonoBehaviour
     [SerializeField]
     private Color wireColorEnd = Color.blue;
     [SerializeField]
-    private float segmentLength = 0.25f;
+    private float segmentLength = 0.5f;
     [SerializeField]
-    private int numOfSegments = 35;
+    private int numOfSegments = 20;
     [SerializeField]
     private float wireWidth = 0.1f;
     [SerializeField]
-    private const int constrainIterNumber = 50;
+    private int constrainIterNumber = 20;
+
+    [SerializeField]
+    private Vector2 connectedObjShift = Vector2.zero;
 
     [SerializeField]
     private GameObject connectedObj;
@@ -53,12 +56,14 @@ public class Wire : MonoBehaviour
     private void SetWire()
     {
         Vector3 wireStartPoint = this.transform.position;
+        Vector3 wireEndPoint = connectedObj.transform.position;
+        Vector3 difference = (wireStartPoint - wireEndPoint) / numOfSegments;
 
         for (int i = 0; i < numOfSegments; i++)
         {
             WireSegment newWireSegment = new WireSegment(wireStartPoint);
             wireSegments.Add(newWireSegment);
-            wireStartPoint.y -= segmentLength;
+            wireStartPoint -= difference;
         }
     }
 
@@ -86,7 +91,7 @@ public class Wire : MonoBehaviour
     {
         Vector2 gravityDirection = new Vector2(0.0f, -1.0f);
 
-        for (int i = 1; i < numOfSegments; i++)
+        for (int i = 0; i < numOfSegments; i++)
         {
             WireSegment segment = wireSegments[i];
             Vector2 velocity = segment.posNew - segment.posOld;
@@ -102,14 +107,8 @@ public class Wire : MonoBehaviour
 
     private void ApplyConstraint()
     {
-        WireSegment firstSegment = wireSegments[0];
-        WireSegment lastSegment = wireSegments[numOfSegments -1];
-
-        firstSegment.posNew = this.transform.position;
-        lastSegment.posNew = connectedObj.transform.position;
-
-        wireSegments[0] = firstSegment;
-        wireSegments[numOfSegments - 1] = lastSegment;
+        SetFirstPosition();
+        SetLastPosition();
 
         for (int i = 0; i < numOfSegments - 1; i++)
         {
@@ -154,5 +153,19 @@ public class Wire : MonoBehaviour
         }
 
         lineRenderer.SetPositions(wirePositions);
+    }
+
+    private void SetFirstPosition()
+    {
+        WireSegment firstSegment = wireSegments[0];
+        firstSegment.posNew = this.transform.position;
+        wireSegments[0] = firstSegment;
+    }
+
+    private void SetLastPosition()
+    {
+        WireSegment lastSegment = wireSegments[numOfSegments - 1];
+        lastSegment.posNew = connectedObj.transform.position;
+        wireSegments[numOfSegments - 1] = lastSegment;
     }
 }
