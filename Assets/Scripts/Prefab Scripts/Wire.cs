@@ -16,18 +16,24 @@ public struct WireSegment
 
 public class Wire : MonoBehaviour
 {
-    private const int CONSTRAIN_ITER_NUMBER = 50;
-
     private LineRenderer lineRenderer;
     private List<WireSegment> wireSegments = new List<WireSegment>();
-    private Color wireColorStart = Color.black;
-    private Color wireColorEnd = Color.blue;
-    private float segmentLength = 0.25f;
-    private int numOfSegments = 35;
-    private float wireWidth = 0.1f;
 
-    //[SerializeField]
-    //private GameObject connectedObj;
+    [SerializeField]
+    private Color wireColorStart = Color.black;
+    [SerializeField]
+    private Color wireColorEnd = Color.blue;
+    [SerializeField]
+    private float segmentLength = 0.25f;
+    [SerializeField]
+    private int numOfSegments = 35;
+    [SerializeField]
+    private float wireWidth = 0.1f;
+    [SerializeField]
+    private const int constrainIterNumber = 50;
+
+    [SerializeField]
+    private GameObject connectedObj;
 
     private void Start()
     {
@@ -70,7 +76,7 @@ public class Wire : MonoBehaviour
     {
         ApplyVelocity();
 
-        for (int i = 0; i < CONSTRAIN_ITER_NUMBER; i++)
+        for (int i = 0; i < constrainIterNumber; i++)
         {
             ApplyConstraint();
         }
@@ -97,9 +103,13 @@ public class Wire : MonoBehaviour
     private void ApplyConstraint()
     {
         WireSegment firstSegment = wireSegments[0];
+        WireSegment lastSegment = wireSegments[numOfSegments -1];
 
         firstSegment.posNew = this.transform.position;
+        lastSegment.posNew = connectedObj.transform.position;
+
         wireSegments[0] = firstSegment;
+        wireSegments[numOfSegments - 1] = lastSegment;
 
         for (int i = 0; i < numOfSegments - 1; i++)
         {
