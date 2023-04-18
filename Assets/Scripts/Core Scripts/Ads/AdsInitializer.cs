@@ -19,7 +19,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 
     void Awake()
     {
-        Debug.Log("Awake was called");
+        Debug.Log("Initializar awake was called");
 
         defineCurGameID();
 

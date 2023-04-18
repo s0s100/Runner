@@ -17,10 +17,16 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     void Awake()
     {
+        Debug.Log("Rewarded ads awake was called!");
+
         defineCurUnitId();
 
         //Disable the button until the ad is ready to show:
         showAdButton.interactable = false;
+
+        // For now
+        LoadAd();
+        OnUnityAdsAdLoaded(adUnitId);
     }
 
     private void defineCurUnitId()
@@ -65,6 +71,11 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         Advertisement.Show(adUnitId, this);
     }
 
+    public void EnableButton()
+    {
+        showAdButton.interactable = true;
+    }
+
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
     {
@@ -76,6 +87,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         {
             Debug.Log("Unity Ads Rewarded Ad Is Not Completed");
         }
+
+        EnableButton();
     }
 
     // Implement Load and Show Listener error callbacks:
