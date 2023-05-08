@@ -23,8 +23,10 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
         //Disable the button until the ad is ready to show:
         showAdButton.interactable = false;
+    }
 
-        // For now
+    public void InitializeRewardAd()
+    {
         LoadAd();
         OnUnityAdsAdLoaded(adUnitId);
     }
