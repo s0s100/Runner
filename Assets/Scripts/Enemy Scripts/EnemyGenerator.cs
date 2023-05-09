@@ -69,6 +69,6 @@ public class EnemyGenerator : MonoBehaviour
         // newEnemy.transform.position = enemyPos;
         newEnemy.transform.parent = generatedEnemyParent.transform;
 
-        Debug.Log("Generated: " + enemyObject.name);
+        // Debug.Log("Generated: " + enemyObject.name);
     }
 }

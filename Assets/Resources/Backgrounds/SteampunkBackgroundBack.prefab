@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1371143392525836361}
   - component: {fileID: 3147442741380578657}
   - component: {fileID: 6300673265560886718}
-  - component: {fileID: -6430366470463560975}
   m_Layer: 0
   m_Name: SteampunkBackgroundBack
   m_TagString: Untagged
@@ -140,7 +139,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8200644036753557121}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 766b872e3650bee44a8c62b91a25d5c0, type: 3}
   m_Name: 
@@ -150,23 +149,6 @@ MonoBehaviour:
   yEnemyMinDist: -2
   yEnemyMaxDist: 4
   currentEnemyGenerationTime: 6
---- !u!114 &-6430366470463560975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8200644036753557121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 766b872e3650bee44a8c62b91a25d5c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyObject: {fileID: 7146692188781452076, guid: 25227fb237e934644b1e79149b5d2c50, type: 3}
-  enemyGenerationTime: 10
-  yEnemyMinDist: -2
-  yEnemyMaxDist: 4
-  currentEnemyGenerationTime: 5
 --- !u!1001 &748174301573097778
 PrefabInstance:
   m_ObjectHideFlags: 0
