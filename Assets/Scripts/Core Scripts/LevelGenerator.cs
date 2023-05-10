@@ -320,6 +320,13 @@ public class LevelGenerator : MonoBehaviour
         GenerateFromLocations(startBossPrefabs, START_PREFAB_POSITION);
         this.enabled = true;
         backgroundController.ReturnDefaultSpeed();
+
+        // Also notify analytics
+        AnalyticsController analyticsController = AnalyticsController.instance;
+        if (analyticsController != null)
+        {
+            analyticsController.BossReached();
+        }
     }
 
     private void DeleteOldGroundBlocks()
