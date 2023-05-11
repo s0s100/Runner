@@ -23,7 +23,6 @@ public class AnalyticsController : MonoBehaviour
         try
         {
             await UnityServices.InitializeAsync();
-            
         }
         catch (ConsentCheckException e)
         {
@@ -31,18 +30,31 @@ public class AnalyticsController : MonoBehaviour
         }
     }
 
+    // Pass event name as parameter as an option :|
     public void BossReached()
     {
-        //if (UnityServices.State == 0)
-        //{
-        Debug.Log(UnityServices.State.ToString());
-        string speedModifier = GameController.GetSpeedModifier().ToString();
-        Debug.Log("Speed modifier: " + speedModifier);
-        //AnalyticsResult analyticsResult = Analytics.CustomEvent("bossReached" + speedModifier);
-        AnalyticsService.Instance.CustomData("bossReached");
-        AnalyticsService.Instance.Flush();
+        if (UnityServices.State == ServicesInitializationState.Initialized)
+        {
+            AnalyticsService.Instance.CustomData("bossReached");
+            AnalyticsService.Instance.Flush();
+        }
+    }
 
-        // Debug.Log("Boss reached with status: " + analyticsResult.ToString());
-        //}
+    public void BossKilled()
+    {
+        if (UnityServices.State == ServicesInitializationState.Initialized)
+        {
+            AnalyticsService.Instance.CustomData("bossKilled");
+            AnalyticsService.Instance.Flush();
+        }
+    }
+
+    public void LevelLoaded()
+    {
+        if (UnityServices.State == ServicesInitializationState.Initialized)
+        {
+            AnalyticsService.Instance.CustomData("levelLoaded");
+            AnalyticsService.Instance.Flush();
+        }
     }
 }
