@@ -58,7 +58,11 @@ public class SteampunkAnimatorControl : MonoBehaviour
         gameController.StartNextLevel();
 
         // Notify event system as well
-
+        AnalyticsController analyticsController = AnalyticsController.instance;
+        if (analyticsController != null)
+        {
+            analyticsController.BossKilled();
+        }
     }
 
     public void BossDeath()

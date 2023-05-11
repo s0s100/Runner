@@ -7,6 +7,21 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 {
     // private readonly string gameToken = "f1bf3e7a-6c1d-43f0-8cb1-8772445002ee";
 
+    public static AdsInitializer instance;
+    public static AdsInitializer Instance { get { return instance; } }
+
+    AdsInitializer()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     [SerializeField]
     private string androidGameId = "5234309";
     [SerializeField]
@@ -19,7 +34,11 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 
     void Awake()
     {
-        Debug.Log("Initializar awake was called");
+        // Debug.Log("Initializar awake was called");
+        if (instance != null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
 
         defineCurGameID();
 
@@ -43,7 +62,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 
     public void OnInitializationComplete()
     {
-        Debug.Log("OnInitializationComplete");
+        // Debug.Log("OnInitializationComplete");
         // throw new System.NotImplementedException();
     }
 

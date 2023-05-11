@@ -13,13 +13,25 @@ public class AnalyticsController : MonoBehaviour
 
     AnalyticsController()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        } else
+        {
+            // Destroy(this.gameObject);
+        }
+    }
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     async void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
-
         try
         {
             await UnityServices.InitializeAsync();

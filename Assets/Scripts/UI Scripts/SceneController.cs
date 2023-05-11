@@ -34,6 +34,12 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(LOAD_TIME);
 
         SceneManager.LoadScene(GAME_SCENE_NUMBER);
+
+        AnalyticsController analyticsController = AnalyticsController.instance;
+        if (analyticsController != null)
+        {
+            analyticsController.LevelLoaded();
+        }
     }
 
     public void ExitApplication()

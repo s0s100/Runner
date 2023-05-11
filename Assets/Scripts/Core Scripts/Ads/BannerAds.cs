@@ -19,12 +19,12 @@ public class BannerAds : MonoBehaviour
     private string androidAdUnitId = "Banner_Android";
     [SerializeField] 
     private string iosAdUnitId = "Banner_iOS";
-
+     
     private string adUnitId = null;
 
     void Start()
     {
-        defineCurUnitId();
+        DefineCurUnitId();
 
         // Disable the button until an ad is ready to show:
         showBannerButton.interactable = false;
@@ -36,8 +36,18 @@ public class BannerAds : MonoBehaviour
         // Configure the Load Banner button to call the LoadBanner() method when clicked:
         loadBannerButton.onClick.AddListener(LoadBanner);
         loadBannerButton.interactable = true;
+
+        StartCoroutine(PrepareBannerAd());
     }
-    private void defineCurUnitId()
+
+    private IEnumerator PrepareBannerAd()
+    {
+        yield return null;
+        LoadBanner();
+        ShowBannerAd();
+    }
+
+    private void DefineCurUnitId()
     {
 #if UNITY_IOS
         adUnitId = iosAdUnitId;
