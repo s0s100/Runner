@@ -16,10 +16,6 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
         {
             instance = this;
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     [SerializeField]
@@ -35,9 +31,12 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     void Awake()
     {
         // Debug.Log("Initializar awake was called");
-        if (instance != null)
+        if (instance == this)
         {
             DontDestroyOnLoad(this.gameObject);
+        } else
+        {
+            Destroy(this.gameObject);
         }
 
         defineCurGameID();

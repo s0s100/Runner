@@ -16,17 +16,18 @@ public class AnalyticsController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        } else
-        {
-            // Destroy(this.gameObject);
         }
     }
 
     private void Awake()
     {
-        if (instance != null)
+        // Well, not the best solution...
+        if (instance == this)
         {
             DontDestroyOnLoad(this.gameObject);
+        } else
+        {
+            Destroy(this.gameObject);
         }
     }
 

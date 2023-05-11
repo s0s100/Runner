@@ -25,6 +25,9 @@ public class SceneController : MonoBehaviour
         GameController.ResetSpeedModifier();
         ScoreController.ResetLastRoundScore();
         StartCoroutine(lateStartGame());
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.HideBannerAd();
     }
 
     private IEnumerator lateStartGame()

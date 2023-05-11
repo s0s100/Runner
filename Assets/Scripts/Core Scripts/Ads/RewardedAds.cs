@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] 
-    private Button showAdButton;
+    //[SerializeField] 
+    //private Button showAdButton;
     [SerializeField] 
     private string androidAdUnitId = "Rewarded_Android";
     [SerializeField] 
@@ -15,14 +15,23 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     private string adUnitId = null;
 
+    private bool isLoaded = false;
+
     void Awake()
     {
         Debug.Log("Rewarded ads awake was called!");
 
         defineCurUnitId();
 
+        StartCoroutine(PrepareRewardedAds());
         //Disable the button until the ad is ready to show:
-        showAdButton.interactable = false;
+        //showAdButton.interactable = false;
+    }
+
+    private IEnumerator PrepareRewardedAds()
+    {
+        yield return null;
+        InitializeRewardAd();
     }
 
     public void InitializeRewardAd()
@@ -57,10 +66,11 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
         if (adUnitId.Equals(this.adUnitId))
         {
+            isLoaded = true;
             // Configure the button to call the ShowAd() method when clicked:
-            showAdButton.onClick.AddListener(this.ShowAd);
+            //showAdButton.onClick.AddListener(this.ShowAd);
             // Enable the button for users to click:
-            showAdButton.interactable = true;
+            //showAdButton.interactable = true;
         }
     }
 
@@ -68,14 +78,17 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     public void ShowAd()
     {
         // Disable the button:
-        showAdButton.interactable = false;
+        //showAdButton.interactable = false;
         // Then show the ad:
-        Advertisement.Show(adUnitId, this);
+        if (isLoaded)
+        {
+            Advertisement.Show(adUnitId, this);
+        }
     }
 
     public void EnableButton()
     {
-        showAdButton.interactable = true;
+        //showAdButton.interactable = true;
     }
 
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
@@ -112,6 +125,6 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     void OnDestroy()
     {
         // Clean up the button listeners:
-        showAdButton.onClick.RemoveAllListeners();
+        //showAdButton.onClick.RemoveAllListeners();
     }
 }

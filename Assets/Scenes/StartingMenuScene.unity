@@ -410,7 +410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &50289146
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1315,9 +1315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549cfda222ba567418b9fb8dda70e7b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadBannerButton: {fileID: 2064084689}
-  showBannerButton: {fileID: 730925879}
-  hideBannerButton: {fileID: 1754575798}
   bannerPosition: 4
   androidAdUnitId: Banner_Android
   iosAdUnitId: Banner_iOS
@@ -1333,7 +1330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079d80aa62f8dcc44a28013b5e1cc218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAdButton: {fileID: 2043932438}
   androidAdUnitId: Rewarded_Android
   iosAdUnitId: Rewarded_iOS
 --- !u!114 &423979515
@@ -2239,7 +2235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &913274739
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3093,17 +3089,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256339608}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1569743404}
-  m_RootOrder: 6
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 231.0668, y: -76.852}
+  m_AnchoredPosition: {x: 231.06677, y: -76.852005}
   m_SizeDelta: {x: 35.4989, y: -316.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1256339611
@@ -3149,7 +3145,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1256339612}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423979514}
+        m_TargetAssemblyTypeName: RewardedAds, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1856512206}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: Test
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1256339612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3569,8 +3589,8 @@ RectTransform:
   - {fileID: 2110659045}
   - {fileID: 1375862579}
   - {fileID: 1129223217}
-  - {fileID: 1256339609}
   - {fileID: 227541993}
+  - {fileID: 1256339609}
   - {fileID: 50289146}
   - {fileID: 913274739}
   - {fileID: 2004293952}
@@ -4535,7 +4555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2004293952
 RectTransform:
   m_ObjectHideFlags: 0
