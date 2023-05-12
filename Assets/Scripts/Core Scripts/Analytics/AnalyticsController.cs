@@ -11,19 +11,11 @@ public class AnalyticsController : MonoBehaviour
 
     public static AnalyticsController Instance { get { return instance; } }
 
-    AnalyticsController()
+    private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-        }
-    }
-
-    private void Awake()
-    {
-        // Well, not the best solution...
-        if (instance == this)
-        {
             DontDestroyOnLoad(this.gameObject);
         } else
         {

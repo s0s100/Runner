@@ -116,6 +116,14 @@ public class BannerAds : MonoBehaviour
         Advertisement.Banner.Hide();
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        if (SceneController.MENU_SCENE_NUMBER == level)
+        {
+            ShowBannerAd();
+        }
+    }
+
     void OnBannerClicked() { }
     void OnBannerShown() { }
     void OnBannerHidden() { }

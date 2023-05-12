@@ -10,14 +10,6 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     public static AdsInitializer instance;
     public static AdsInitializer Instance { get { return instance; } }
 
-    AdsInitializer()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
-
     [SerializeField]
     private string androidGameId = "5234309";
     [SerializeField]
@@ -30,11 +22,12 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 
     void Awake()
     {
-        // Debug.Log("Initializar awake was called");
-        if (instance == this)
+        if (instance == null)
         {
+            instance = this;
             DontDestroyOnLoad(this.gameObject);
-        } else
+        }
+        else
         {
             Destroy(this.gameObject);
         }

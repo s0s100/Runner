@@ -12,7 +12,8 @@ public class SceneController : MonoBehaviour
     private Animator blackScreen;
 
     private const float LOAD_TIME = 1.0f;
-    private const int GAME_SCENE_NUMBER = 1;
+    public const int MENU_SCENE_NUMBER = 0;
+    public const int GAME_SCENE_NUMBER = 1;
 
     private void Awake()
     {
@@ -63,5 +64,11 @@ public class SceneController : MonoBehaviour
     public StoragePlayerData GetPlayerData()
     {
         return playerData;
+    }
+
+    public void ShowAdvertisements()
+    {
+        RewardedAds rewardedAds = AdsInitializer.instance.gameObject.GetComponent<RewardedAds>();
+        rewardedAds.ShowAd();
     }
 }
