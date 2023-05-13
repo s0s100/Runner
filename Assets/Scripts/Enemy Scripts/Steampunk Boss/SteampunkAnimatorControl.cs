@@ -56,6 +56,13 @@ public class SteampunkAnimatorControl : MonoBehaviour
         float waitTime = uiController.IsBlackScreenInvisible(false);
         yield return new WaitForSeconds(waitTime);
         gameController.StartNextLevel();
+
+        // Notify event system as well
+        AnalyticsController analyticsController = AnalyticsController.instance;
+        if (analyticsController != null)
+        {
+            analyticsController.BossKilled();
+        }
     }
 
     public void BossDeath()
