@@ -69,6 +69,9 @@ public class UIController : MonoBehaviour
         pauseMenu.SetActive(true);
         playerController.SetControllable(false);
         Time.timeScale = 0.0f;
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.ShowBannerAd(); 
     }
 
     public void ResumeGame()
@@ -78,6 +81,10 @@ public class UIController : MonoBehaviour
         playerController.SetControllable(true);
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.HideBannerAd();
+
     }
 
     public void RestartGame()
