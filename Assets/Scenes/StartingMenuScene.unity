@@ -4299,6 +4299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1856512205}
   - component: {fileID: 1856512206}
+  - component: {fileID: 1856512207}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -4335,6 +4336,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 009461ed415b9c940b605c6212cb9acd, type: 2}
   blackScreen: {fileID: 738812295}
+--- !u!114 &1856512207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856512204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc2c5199e141af4eb72a2701e78d80f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinText: {fileID: 0}
 --- !u!1 &1977129022
 GameObject:
   m_ObjectHideFlags: 0
