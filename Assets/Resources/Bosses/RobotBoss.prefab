@@ -1232,6 +1232,10 @@ MonoBehaviour:
   lazerGenerator: {fileID: 8771991196856965084}
   handAttackZone: {fileID: 8811462521907788599}
   bossDamageCollider: {fileID: 7059473715684026462}
+  wires:
+  - {fileID: 3567565161967060465}
+  - {fileID: 8574609088699257057}
+  - {fileID: 1348182038270994895}
 --- !u!1 &5968500248134410907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2904306882043091932, guid: b8a0a1528642743d69122dded026f9ac, type: 3}

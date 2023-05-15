@@ -1333,6 +1333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   androidAdUnitId: Rewarded_Android
   iosAdUnitId: Rewarded_iOS
+  rewardAmount: 10
 --- !u!114 &423979515
 MonoBehaviour:
   m_ObjectHideFlags: 0
