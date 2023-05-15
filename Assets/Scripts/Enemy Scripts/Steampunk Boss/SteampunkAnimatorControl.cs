@@ -90,4 +90,29 @@ public class SteampunkAnimatorControl : MonoBehaviour
     {
         screenAnimator.SetBool("IsActive", false);
     }
+
+    public void activateHandAttackScreen ()
+    {
+        screenAnimator.SetTrigger("HandAttack");
+    }
+
+    public void Damage1Screen()
+    {
+        screenAnimator.SetTrigger("Damage1");
+    }
+
+    public void Damage2Screen()
+    {
+        screenAnimator.SetTrigger("Damage2");
+    }
+
+    public void FireBombingScreen()
+    {
+        screenAnimator.SetTrigger("FireBombing");
+    }
+
+    public void DeathScreen()
+    {
+        screenAnimator.SetTrigger("Death");
+    }
 }

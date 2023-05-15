@@ -2140,7 +2140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1114774467}
-  maxBiomeScore: 1000
+  maxBiomeScore: 0
 --- !u!114 &590038139
 MonoBehaviour:
   m_ObjectHideFlags: 0
