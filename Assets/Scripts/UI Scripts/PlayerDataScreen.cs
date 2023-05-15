@@ -89,7 +89,7 @@ public class PlayerDataScreen : MonoBehaviour
         {
             curHealth++;
 
-            Animator animator = hearthImages[curHealth].GetComponent<Animator>();
+            Animator animator = hearthImages[curHealth - 1].GetComponent<Animator>();
             animator.SetTrigger("RestoreHearth");
         }
     }

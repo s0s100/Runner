@@ -76,7 +76,7 @@ public class PowerUp : MonoBehaviour
     {
         if (collision.tag == "Player" && !isDisappearing)
         {
-            PowerUpUse();
+            PowerUpUse(collision.gameObject);
             LateDestroy();
         }
     }
@@ -88,7 +88,7 @@ public class PowerUp : MonoBehaviour
         isDisappearing = true;
     }
 
-    protected virtual void PowerUpUse()
+    protected virtual void PowerUpUse(GameObject playerObject)
     {
         Debug.Log("Virtual not implemented method");
     }

@@ -9,7 +9,7 @@ public class PlayerHealthScript : MonoBehaviour
     private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;    
 
     private int maxHealth = 5;
-    private int curHealth = 5;
+    private int curHealth = 3;
     private float invulnerabilityTime = 1.0f;
     private float curInvulnerability = 0.0f;
     private bool isIncreasingTransparency = false;
@@ -84,6 +84,15 @@ public class PlayerHealthScript : MonoBehaviour
         {
             curInvulnerability -= Time.deltaTime;
             InvulnerabilityDisplaying();
+        }
+    }
+
+    public void GetHealth()
+    {
+        if (curHealth < maxHealth)
+        {
+            curHealth++;
+            playerDataScreen.GetHeart();
         }
     }
 

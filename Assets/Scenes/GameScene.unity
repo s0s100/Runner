@@ -5686,11 +5686,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1893238274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b31d309310455428e6fb4761f97030, type: 3}
+  m_Script: {fileID: 11500000, guid: f54f3d1033cf1e74aa378a9788c6a219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   disappearanceTime: 1
-  disappearanceMoveSpeed: 1
+  disappearanceMoveSpeed: 2
   background: {fileID: 1908484245}
   sinMoveSpeed: 1
   sinCoef: 0.1
