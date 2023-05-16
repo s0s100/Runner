@@ -7,7 +7,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 {
     // private readonly string gameToken = "f1bf3e7a-6c1d-43f0-8cb1-8772445002ee";
 
-    public static AdsInitializer instance;
+    public static AdsInitializer instance = null;
     public static AdsInitializer Instance { get { return instance; } }
 
     [SerializeField]
