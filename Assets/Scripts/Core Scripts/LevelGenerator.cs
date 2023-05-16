@@ -289,6 +289,11 @@ public class LevelGenerator : MonoBehaviour
         return playerObject;
     }
 
+    //public void SetGeneratedPrefabParent(GameObject gameObject)
+    //{
+    //    gameObject.transform.parent = generatedObjectsParent.transform;
+    //} 
+
     public void SetProjectileParent(GameObject newObject)
     {
         newObject.transform.parent = generatedProjectiles.transform;

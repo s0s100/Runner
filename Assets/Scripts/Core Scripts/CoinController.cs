@@ -19,6 +19,18 @@ public class CoinController : MonoBehaviour
         // Debug.Log("Coins[" + coinsThisRound + "]  TotalCoins[" + GetTotalAmount() + "]");
     }
 
+    public static void AddNewCoins(int amount)
+    {
+        int curAmount = PlayerPrefs.GetInt(COIN_STORAGE);
+        curAmount += amount;
+        PlayerPrefs.SetInt(COIN_STORAGE, curAmount);
+    }
+
+    public static int GetCurAmount()
+    {
+        return PlayerPrefs.GetInt(COIN_STORAGE);
+    }
+
     public void AddCoin()
     {
         coinsThisRound++;

@@ -17,6 +17,9 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     private bool isLoaded = false;
 
+    [SerializeField]
+    private int rewardAmount = 10;
+
     void Awake()
     {
         Debug.Log("Rewarded ads awake was called!");
@@ -97,7 +100,10 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         if (adUnitId.Equals(this.adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
+
             // Grant a reward.
+            CoinController.AddNewCoins(rewardAmount);
+
         } else
         {
             Debug.Log("Unity Ads Rewarded Ad Is Not Completed");

@@ -16,6 +16,8 @@ public struct WireSegment
 
 public class Wire : MonoBehaviour
 {
+    private const float DESTRUCTION_TIME = 5.0f;
+
     private LineRenderer lineRenderer;
     private List<WireSegment> wireSegments = new List<WireSegment>();
 
@@ -165,7 +167,17 @@ public class Wire : MonoBehaviour
     private void SetLastPosition()
     {
         WireSegment lastSegment = wireSegments[numOfSegments - 1];
-        lastSegment.posNew = connectedObj.transform.position;
+        if (connectedObj != null)
+        {
+            lastSegment.posNew = connectedObj.transform.position;
+        }
         wireSegments[numOfSegments - 1] = lastSegment;
+    }
+
+    public void UnattachAndDestroyWire()
+    {
+        connectedObj = null;
+
+        Destroy(this.gameObject, DESTRUCTION_TIME);
     }
 }
