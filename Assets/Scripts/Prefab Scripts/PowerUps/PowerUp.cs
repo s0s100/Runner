@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
+    private const float EXISTENCE_TIME = 45.0f;
+
     private float creationTime;
     private bool isDisappearing = false;
     private float disappearanceSpeed;
@@ -25,6 +27,7 @@ public class PowerUp : MonoBehaviour
 
     private void Awake()
     {
+        Destroy(this.gameObject, EXISTENCE_TIME);
         creationTime = Time.time;
     }
 
