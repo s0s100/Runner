@@ -118,6 +118,7 @@ public class SteampunkAnimatorControl : MonoBehaviour
     public void DeathScreen()
     {
         screenAnimator.SetTrigger("Death");
+    }
         
     public void UnattachWires()
     {
