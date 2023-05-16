@@ -86,8 +86,6 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Kill()
     {
         animator.SetBool("IsKilled", true);
-
-
     }
 
     public int GetCurHealth()

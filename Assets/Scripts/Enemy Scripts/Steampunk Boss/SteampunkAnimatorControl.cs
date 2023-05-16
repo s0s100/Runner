@@ -19,6 +19,9 @@ public class SteampunkAnimatorControl : MonoBehaviour
     private UIController uiController;
     private GameController gameController;
 
+    [SerializeField]
+    private Wire[] wires;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -69,6 +72,7 @@ public class SteampunkAnimatorControl : MonoBehaviour
     {
         bossDamageCollider.enabled = false;
         handAttackZone.SetActive(false);
+        UnattachWires();
     }
 
     public void DisableDamageAnimation()
@@ -90,7 +94,7 @@ public class SteampunkAnimatorControl : MonoBehaviour
     {
         screenAnimator.SetBool("IsActive", false);
     }
-
+    
     public void activateHandAttackScreen ()
     {
         screenAnimator.SetTrigger("HandAttack");
@@ -114,5 +118,12 @@ public class SteampunkAnimatorControl : MonoBehaviour
     public void DeathScreen()
     {
         screenAnimator.SetTrigger("Death");
+        
+    public void UnattachWires()
+    {
+        foreach (Wire wire in wires)
+        {
+            wire.UnattachAndDestroyWire();
+        }
     }
 }

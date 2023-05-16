@@ -70,8 +70,11 @@ public class UIController : MonoBehaviour
         playerController.SetControllable(false);
         Time.timeScale = 0.0f;
 
-        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
-        bannerAds.ShowBannerAd(); 
+        GameObject bannerAdsObject = AdsInitializer.instance.gameObject;
+        if (bannerAdsObject != null)
+        {
+            bannerAdsObject.GetComponent<BannerAds>().ShowBannerAd();
+        }
     }
 
     public void ResumeGame()
