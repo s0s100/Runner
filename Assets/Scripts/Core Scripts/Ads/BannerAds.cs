@@ -54,7 +54,7 @@ public class BannerAds : MonoBehaviour
 #elif UNITY_ANDROID
         adUnitId = androidAdUnitId;
 #elif UNITY_EDITOR
-        gameId = iosAdUnitId; // For now
+        adUnitId = iosAdUnitId; // For now
 #endif
     }
 

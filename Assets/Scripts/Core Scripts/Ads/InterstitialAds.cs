@@ -24,7 +24,7 @@ public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
 #elif UNITY_ANDROID
         adUnitId = androidAdUnitId;
 #elif UNITY_EDITOR
-        gameId = iosAdUnitId; // For now
+        adUnitId = iosAdUnitId; // For now
 #endif
     }
 
