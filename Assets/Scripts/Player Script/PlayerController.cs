@@ -8,6 +8,11 @@ public enum MoveDirection
     None, Up, Down, Left, Right, Middle
 }
 
+public enum PowerUpEffect
+{
+    None, DoubleJump
+}
+
 public class PlayerController : MonoBehaviour
 {
     private const float REQUIRED_FALL_SPEED_FALL_PARTICLES = 0.5f;
@@ -49,7 +54,10 @@ public class PlayerController : MonoBehaviour
     private float curDashCooldown = 0.0f;
 
     // Jump
+    private float timeBetweenJumps = 0.5f;
+    private bool canDoubleJump = false;
     private bool canJump = true;
+    private float timeBeforeJump = 0.0f;
     private float jumpForce = 400.0f;
 
     // Fall
@@ -71,6 +79,10 @@ public class PlayerController : MonoBehaviour
     private float xPushForce = 0.0f;
     private float yPushForce = 0.0f;
     private float curPushTime = 0.0f;
+
+    // Power up
+    PowerUpEffect powerUpEffect = PowerUpEffect.None;
+    private float powerUpDuration = 0.0f;
 
     public bool IsMoveParticles()
     {
@@ -105,15 +117,32 @@ public class PlayerController : MonoBehaviour
             canDash = true;
         }
 
+        if (powerUpEffect == PowerUpEffect.DoubleJump)
+        {
+            canDoubleJump = true;
+        }
+
         canJump = true;
         animator.SetBool("IsFalling", false);
         animator.SetBool("IsJumping", false);
     }
 
-    // Used when the player falls off the land
+    // Used when the player falls off the land or used a jump
     public void DisableJump()
     {
-        canJump = false;
+        //Debug.Log("2: Can jump: " + canJump + " , canDoubleJump: " + canDoubleJump + " , timeBeforeJump: " + timeBeforeJump + " , Cur effect: " + powerUpEffect.ToString() +
+        //            " , duration: " + powerUpDuration);
+
+        if (canDoubleJump)
+        {
+            timeBeforeJump = timeBetweenJumps;
+            canDoubleJump = false;
+            canJump = true;
+        } else if (timeBeforeJump < 0)
+        {
+            canJump = false;
+        }
+        
         canFall = true;
         animator.SetBool("IsJumping", true);
     }
@@ -245,6 +274,19 @@ public class PlayerController : MonoBehaviour
         return MoveDirection.None;
     }
 
+    private void UpdatePowerUpState()
+    {
+        if (powerUpDuration > 0)
+        {
+            powerUpDuration -= Time.deltaTime;
+            if (powerUpDuration <= 0)
+            {
+                powerUpEffect = PowerUpEffect.None;
+                canDoubleJump = false;
+            }
+        }
+    }
+
     private void MakeStoredAction()
     {
         if (curSaveActionTime > 0.0f)
@@ -261,7 +303,10 @@ public class PlayerController : MonoBehaviour
         switch (moveDirection)
         {
             case MoveDirection.Up:
-                if (canJump)
+                //Debug.Log("1: Can jump: " + canJump + " , canDoubleJump: " + canDoubleJump + " , timeBeforeJump: " + timeBeforeJump + " , Cur effect: " + powerUpEffect.ToString() +
+                //    " , duration: " + powerUpDuration);
+
+                if (canJump && timeBeforeJump <= 0.0f)
                 {
                     Jump();
                 } else
@@ -334,6 +379,7 @@ public class PlayerController : MonoBehaviour
         Vector2 force = Vector2.down * fallForce;
         rigidbody.AddForce(force);
         canFall = false;
+        canJump = false;
         animator.SetBool("IsFalling", true);
 
         curSaveActionTime = 0.0f;
@@ -401,6 +447,13 @@ public class PlayerController : MonoBehaviour
         {
             curPushTime -= Time.deltaTime;
         }
+
+        if (timeBetweenJumps > 0)
+        {
+            timeBeforeJump -= Time.deltaTime;   
+        }
+
+        UpdatePowerUpState();
     }
 
     public void SetGravity(bool isEnabled)
@@ -528,5 +581,19 @@ public class PlayerController : MonoBehaviour
     public void MakeQuickShift(float shiftDistance)
     {
         transform.position -= Vector3.right * shiftDistance;
+    }
+
+    public void AllowDoubleJump(float duration)
+    {
+        powerUpDuration = duration;
+        powerUpEffect = PowerUpEffect.DoubleJump;
+
+        if (canJump)
+        {
+            canDoubleJump = true;
+        } else
+        {
+            canJump = true;
+        }
     }
 }

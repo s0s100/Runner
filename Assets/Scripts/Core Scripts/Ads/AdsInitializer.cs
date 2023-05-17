@@ -36,7 +36,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
-            Debug.Log("Initializing ads!");
+            // Debug.Log("Initializing ads!");
             Advertisement.Initialize(gameId, testMode, this);
         }
     }

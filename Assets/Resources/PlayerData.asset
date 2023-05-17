@@ -51,6 +51,3 @@ MonoBehaviour:
   - curUpgradeStatus: 0
     upgradeName: Double Jump
     upgradePrice: 32000000
-  - curUpgradeStatus: 0
-    upgradeName: Magnet
-    upgradePrice: 0a00000014000000
