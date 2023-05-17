@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
     // Power up
     PowerUpEffect powerUpEffect = PowerUpEffect.None;
     private float powerUpDuration = 0.0f;
+    private float maxPowerUpDuration = 0.0f;
 
     public bool IsMoveParticles()
     {
@@ -281,6 +282,8 @@ public class PlayerController : MonoBehaviour
             powerUpDuration -= Time.deltaTime;
             if (powerUpDuration <= 0)
             {
+                playerDataScreen.SetAmmoCounter(curAttackCooldown, attackCooldown);
+                playerDataScreen.SetEmptyHandIcon();
                 powerUpEffect = PowerUpEffect.None;
                 canDoubleJump = false;
             }
@@ -437,10 +440,17 @@ public class PlayerController : MonoBehaviour
             curSaveActionTime -= Time.deltaTime;
         }
 
-        if (curAttackCooldown >= 0.0f)
+        // Show time between attacks, if powerup is used show it instead
+        if (powerUpEffect != PowerUpEffect.None)
         {
-            playerDataScreen.SetAmmoCounter(curAttackCooldown, attackCooldown);
-            curAttackCooldown -= Time.deltaTime;
+            playerDataScreen.SetAmmoCounter((maxPowerUpDuration - powerUpDuration), maxPowerUpDuration);    
+        } else 
+        {
+            if (curAttackCooldown >= 0.0f)
+            {
+                playerDataScreen.SetAmmoCounter(curAttackCooldown, attackCooldown);
+                curAttackCooldown -= Time.deltaTime;
+            }
         }
 
         if (curPushTime > 0.0f)
@@ -583,10 +593,13 @@ public class PlayerController : MonoBehaviour
         transform.position -= Vector3.right * shiftDistance;
     }
 
-    public void AllowDoubleJump(float duration)
+    public void AllowDoubleJump(float duration, Sprite newSprite, Color color)
     {
         powerUpDuration = duration;
+        maxPowerUpDuration = duration;
         powerUpEffect = PowerUpEffect.DoubleJump;
+        playerDataScreen.UpdateWeaponImage(newSprite);
+        playerDataScreen.SetIndicatorColor(color);
 
         if (canJump)
         {

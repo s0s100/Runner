@@ -2053,71 +2053,6 @@ MonoBehaviour:
   leftDeathZone: {fileID: 267061656}
   rightDeathZone: {fileID: 2023734572}
   bottomDeathZone: {fileID: 1598832236}
---- !u!1001 &540537561
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.698112
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.6981745
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 591720968479189563, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2279755627323737099, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_Name
-      value: PowerUpCreator
-      objectReference: {fileID: 0}
-    - target: {fileID: 2279755627323737099, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: aac4739dbcd611942bfb46fb6bd68f1c, type: 3}
 --- !u!1 &590038134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,6 +2203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIcon: {fileID: 1292134688}
   ammoBar: {fileID: 1635267254}
+  defaultAmmoBarColor: {r: 0.5568628, g: 0.08627451, b: 0.52156866, a: 1}
   emptyHand: {fileID: 21300000, guid: 93a9c56a675d1654995f6486530a0d1f, type: 3}
   scoreBar: {fileID: 1275131997}
   barText: {fileID: 953913552}
@@ -2410,9 +2346,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 865471818356691907, guid: a47fa6fff6551e740b79b01ad4cb0ac0, type: 3}
+      propertyPath: indicatorColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1293784685044467761, guid: a47fa6fff6551e740b79b01ad4cb0ac0, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1293784685044467761, guid: a47fa6fff6551e740b79b01ad4cb0ac0, type: 3}
       propertyPath: m_LocalPosition.x

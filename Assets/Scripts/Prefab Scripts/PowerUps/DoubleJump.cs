@@ -9,7 +9,7 @@ public class DoubleJump : PowerUp
         float duration = 10.0f; // For now
 
         PlayerController controller = playerObject.GetComponent<PlayerController>();
-        controller.AllowDoubleJump(duration);
+        controller.AllowDoubleJump(duration, GetImageSprite(), GetIndicatorColor());
         //PlayerHealthScript healthScript = playerObject.GetComponent<PlayerHealthScript>();
         //healthScript.GetHealth();
     }
