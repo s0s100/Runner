@@ -1880,13 +1880,14 @@ GameObject:
   - component: {fileID: 708462787}
   - component: {fileID: 708462786}
   - component: {fileID: 708462785}
+  - component: {fileID: 708462791}
   m_Layer: 5
   m_Name: ADVstranger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &708462785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1907,7 +1908,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a5f2e1ef682597943be2872fc8be7874, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44a8e3c7883abe34489da34a0b3e049c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2007,6 +2008,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 700, y: 269.76242}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &708462791
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708462784}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 307ea9108dcf19147ada448552a07a36, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &730925877
 GameObject:
   m_ObjectHideFlags: 0
