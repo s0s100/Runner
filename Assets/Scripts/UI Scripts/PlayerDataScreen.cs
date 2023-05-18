@@ -14,6 +14,8 @@ public class PlayerDataScreen : MonoBehaviour
     [SerializeField]
     private Image ammoBar;
     [SerializeField]
+    private Color defaultAmmoBarColor;
+    [SerializeField]
     private Sprite emptyHand;
     [SerializeField]
     private Image scoreBar;
@@ -116,7 +118,13 @@ public class PlayerDataScreen : MonoBehaviour
         if (weaponIcon != null)
         {
             weaponIcon.sprite = emptyHand;
+            SetIndicatorColor(defaultAmmoBarColor);
         }
+    }
+
+    public void SetIndicatorColor(Color color)
+    {
+        ammoBar.color = color;
     }
 
     public void UpdateScoreBar(int curScore, int maxScore)

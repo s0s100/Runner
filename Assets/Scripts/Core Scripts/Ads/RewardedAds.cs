@@ -22,7 +22,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     void Awake()
     {
-        Debug.Log("Rewarded ads awake was called!");
+        // Debug.Log("Rewarded ads awake was called!");
 
         defineCurUnitId();
 
@@ -58,14 +58,14 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Debug.Log("Loading Ad: " + adUnitId);
+        // Debug.Log("Loading Ad: " + adUnitId);
         Advertisement.Load(adUnitId, this);
     }
 
     // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
-        Debug.Log("Ad Loaded: " + adUnitId);
+        // Debug.Log("Ad Loaded: " + adUnitId);
 
         if (adUnitId.Equals(this.adUnitId))
         {
@@ -99,7 +99,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     {
         if (adUnitId.Equals(this.adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("Unity Ads Rewarded Ad Completed");
+            Debug.Log("Received specified amount of coins");
 
             // Grant a reward.
             CoinController.AddNewCoins(rewardAmount);

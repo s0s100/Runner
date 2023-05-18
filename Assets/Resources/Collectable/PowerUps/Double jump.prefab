@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6251817326637042987}
   - component: {fileID: 4986059475183203510}
   m_Layer: 0
-  m_Name: Extra Lift back
+  m_Name: Double jump back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6088247992136975705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.55, y: 0.75, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
-  m_Sprite: {fileID: 21300000, guid: b2a7e3ff8ed70fd46ad765abd0d868d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5f84defa9c031641bb14474de30a69f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 1293784685044467761}
   - component: {fileID: 8364687096087337797}
   - component: {fileID: 3945199212493133422}
-  - component: {fileID: 8771480248606112247}
+  - component: {fileID: 865471818356691907}
   m_Layer: 0
-  m_Name: Extra Life
+  m_Name: Double jump
   m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7393881380603874279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.64, y: 1.53, z: 0}
+  m_LocalPosition: {x: 2.698112, y: 2.6981745, z: 0}
   m_LocalScale: {x: 0.04, y: 0.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -160,7 +160,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 687b37c5e71d9874cb270a67a302836c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b693a238a49bf14383fccd1f996b5e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -216,7 +216,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 18.582005, y: 17.102238}
   m_EdgeRadius: 0
---- !u!114 &8771480248606112247
+--- !u!114 &865471818356691907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,10 +225,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7393881380603874279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54f3d1033cf1e74aa378a9788c6a219, type: 3}
+  m_Script: {fileID: 11500000, guid: 668107cbc464bed4b9e5d77442638b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indicatorColor: {r: 0.4156863, g: 0.21176472, b: 0.8000001, a: 1}
+  indicatorColor: {r: 0.454902, g: 0.8745099, b: 0.9725491, a: 1}
   disappearanceTime: 1
   disappearanceMoveSpeed: 2
   background: {fileID: 6088247992136975705}

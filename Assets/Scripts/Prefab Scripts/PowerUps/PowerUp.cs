@@ -10,6 +10,10 @@ public class PowerUp : MonoBehaviour
     private bool isDisappearing = false;
     private float disappearanceSpeed;
 
+    // Visual effect
+    [SerializeField]
+    private Color indicatorColor;
+
     [SerializeField]
     private float disappearanceTime = 1.0f;
     [SerializeField]
@@ -40,7 +44,6 @@ public class PowerUp : MonoBehaviour
         {
             Disappearance();
         }
-        
     }
 
     private void Disappearance()
@@ -94,5 +97,16 @@ public class PowerUp : MonoBehaviour
     protected virtual void PowerUpUse(GameObject playerObject)
     {
         Debug.Log("Virtual not implemented method");
+    }
+
+    public Sprite GetImageSprite()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        return spriteRenderer.sprite;
+    }
+
+    public Color GetIndicatorColor()
+    {
+        return indicatorColor;
     }
 }

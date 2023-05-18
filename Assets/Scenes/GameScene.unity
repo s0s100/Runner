@@ -2203,6 +2203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIcon: {fileID: 1292134688}
   ammoBar: {fileID: 1635267254}
+  defaultAmmoBarColor: {r: 0.5568628, g: 0.08627451, b: 0.52156866, a: 1}
   emptyHand: {fileID: 21300000, guid: 93a9c56a675d1654995f6486530a0d1f, type: 3}
   scoreBar: {fileID: 1275131997}
   barText: {fileID: 953913552}
