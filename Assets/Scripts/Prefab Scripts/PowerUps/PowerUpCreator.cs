@@ -11,12 +11,18 @@ public class PowerUpCreator : MonoBehaviour
     {
         GameObject[] powerUps = Resources.LoadAll(POWER_UP_PATH, typeof(GameObject)).Cast<GameObject>().ToArray();
         int selectedPowerUp = Random.Range(0, powerUps.Length);
-
         GameObject generatedPowerUp = powerUps[selectedPowerUp];
-        generatedPowerUp.transform.position = gameObject.transform.position;
-        Instantiate(generatedPowerUp);
 
-        // FindObjectOfType<LevelGenerator>().SetGeneratedPrefabParent(generatedPowerUp);
+        // Get parent if it exists
+        if (this.transform.parent != null)
+        {
+            Vector3 parentPosition = transform.parent.position + transform.localPosition;
+            GameObject newObject = Instantiate(generatedPowerUp, parentPosition, Quaternion.identity);
+            newObject.transform.SetParent(transform.parent);
+        } else
+        {
+            Instantiate(generatedPowerUp, transform.position, Quaternion.identity);
+        }
 
         Destroy(this.gameObject);
     }
