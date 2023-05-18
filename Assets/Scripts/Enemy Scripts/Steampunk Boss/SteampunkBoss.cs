@@ -6,7 +6,8 @@ public class SteampunkBoss : Enemy
 {
     PlayerDataScreen dataScreen;
 
-    private const int STARTING_HEALTH = 4;
+    [SerializeField]
+    private int startingHealth = 10;
     private const float REQUIRED_PLAYER_Y_DIFFERENCE = 1.0f;
 
     private GameObject player;
@@ -14,7 +15,7 @@ public class SteampunkBoss : Enemy
     protected override void Awake()
     {
         base.Awake();
-        health = STARTING_HEALTH;
+        health = startingHealth;
         animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
@@ -83,6 +84,6 @@ public class SteampunkBoss : Enemy
 
     private float GetHealthProportion()
     {
-        return (float) health / (float) STARTING_HEALTH;
+        return (float) health / (float) startingHealth;
     }
 }

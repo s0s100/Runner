@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemObject: {fileID: 3655212633971917336}
+  startingHealth: 10
 --- !u!61 &7291423073603368822
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1182,6 +1183,10 @@ PrefabInstance:
     - target: {fileID: 4197308457403229028, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529086910824616617, guid: b8a0a1528642743d69122dded026f9ac, type: 3}
+      propertyPath: m_Name
+      value: Screen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

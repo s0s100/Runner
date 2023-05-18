@@ -80,10 +80,6 @@ public class SteampunkAnimatorControl : MonoBehaviour
         animator.ResetTrigger("IsDamaged1");
         animator.ResetTrigger("IsDamaged2");
     }
-    public void MakeScreenRed()
-    {
-        screenAnimator.SetBool("IsRedScreen", true);
-    }
 
     public void EnableScreen()
     {
@@ -95,7 +91,7 @@ public class SteampunkAnimatorControl : MonoBehaviour
         screenAnimator.SetBool("IsActive", false);
     }
     
-    public void activateHandAttackScreen ()
+    public void ActivateHandAttackScreen ()
     {
         screenAnimator.SetTrigger("HandAttack");
     }
