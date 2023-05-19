@@ -17,7 +17,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     private bool isLoaded = false;
 
-    private static int rewardAmount = 10;
+    private static int rewardAmount = 20;
 
     public static int GetRewardAmount()
     {
@@ -107,7 +107,10 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
             // Grant a reward.
             CoinController.AddNewCoins(rewardAmount);
+            // Also update coin text in the main menu
 
+            TextCoinSetter textCoinSetter = FindObjectOfType<TextCoinSetter>();
+            textCoinSetter.UpdateCoinText();
         } else
         {
             Debug.Log("Unity Ads Rewarded Ad Is Not Completed");
