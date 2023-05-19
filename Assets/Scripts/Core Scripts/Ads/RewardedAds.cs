@@ -17,8 +17,12 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     private bool isLoaded = false;
 
-    [SerializeField]
-    private int rewardAmount = 10;
+    private static int rewardAmount = 10;
+
+    public static int GetRewardAmount()
+    {
+        return rewardAmount;
+    }
 
     void Awake()
     {
