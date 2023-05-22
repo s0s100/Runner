@@ -111,6 +111,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
             TextCoinSetter textCoinSetter = FindObjectOfType<TextCoinSetter>();
             textCoinSetter.UpdateCoinText();
+            textCoinSetter.MakeAdditionTextNotification(rewardAmount);
         } else
         {
             Debug.Log("Unity Ads Rewarded Ad Is Not Completed");
