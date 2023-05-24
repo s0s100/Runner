@@ -15,6 +15,10 @@ public enum PowerUpEffect
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject disappearingDiamond;
+    private Vector3 dissapearingDiamondPosition = new (0.0f, 0.5f, 0.0f);
+
     private const float REQUIRED_FALL_SPEED_FALL_PARTICLES = 0.5f;
     private const float DEFAULT_GRAVITY_SCALE = 1.0f;
     private const float MAX_TOUCH_VECTOR_MAGNITUDE = 50.0f;
@@ -608,5 +612,16 @@ public class PlayerController : MonoBehaviour
         {
             canJump = true;
         }
+    }
+
+    public void CreateDisappearingDiamond()
+    {
+        GameObject newDiamond = Instantiate(disappearingDiamond);
+        newDiamond.transform.SetParent(this.transform);
+        newDiamond.transform.localPosition = dissapearingDiamondPosition;
+
+        Debug.Log("I was called!");
+        Debug.Log(newDiamond.transform.position);
+        Debug.Log(newDiamond.transform.localPosition);
     }
 }
