@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystemObject: {fileID: 3655212633971917336}
-  startingHealth: 10
+  startingHealth: 5
 --- !u!61 &7291423073603368822
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -59,13 +59,6 @@ public class SteampunkAnimatorControl : MonoBehaviour
         float waitTime = uiController.IsBlackScreenInvisible(false);
         yield return new WaitForSeconds(waitTime);
         gameController.StartNextLevel();
-
-        // Notify event system as well
-        AnalyticsController analyticsController = AnalyticsController.instance;
-        if (analyticsController != null)
-        {
-            analyticsController.BossKilled();
-        }
     }
 
     public void BossDeath()
@@ -73,6 +66,20 @@ public class SteampunkAnimatorControl : MonoBehaviour
         bossDamageCollider.enabled = false;
         handAttackZone.SetActive(false);
         UnattachWires();
+
+        // Notify event system as well
+        AnalyticsController analyticsController = AnalyticsController.instance;
+        if (analyticsController != null)
+        {
+            analyticsController.BossKilled();
+        }
+
+        // Also add coins and coin animation
+        CoinController coinController = FindObjectOfType<CoinController>();
+        coinController.AddCoins(SteampunkBoss.REWARD_AMOUNT);
+
+        PlayerController playerController = FindObjectOfType<PlayerController>();
+        playerController.CreateDisappearingDiamond();
     }
 
     public void DisableDamageAnimation()
