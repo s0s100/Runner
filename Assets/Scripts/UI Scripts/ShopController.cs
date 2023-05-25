@@ -1,22 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
-    public void Test()
+    private SceneController sceneController;
+    private List<SkinData> skins;
+    private int curSkin;
+
+    [SerializeField]
+    private Image skinImage;
+
+    private void Start()
     {
-        Debug.Log("Button was clicked");
+        sceneController = FindObjectOfType<SceneController>();
+        skins = sceneController.GetPlayerData().GetSkinList();
+
+        if (skins.Count > 0)
+        {
+            curSkin = 0;
+            UpdageCurSkin();
+        }
+        else
+        {
+            throw new System.Exception("Empty skin list");
+        }
     }
 
-    public void Test1()
+    public void UpdageCurSkin()
     {
-        Debug.Log("Button was clicked 1");
+        Animator anim = skinImage.GetComponent<Animator>();
+        anim.runtimeAnimatorController = skins[curSkin].GetPreview() as RuntimeAnimatorController;
     }
 
-    public void Test2()
+    public void ChooseLeftSkin()
     {
-        Debug.Log("Button was clicked 2");
+        if (curSkin == 0)
+        {
+            curSkin = skins.Count;
+        }
+        curSkin--;
+        UpdageCurSkin();
+    }
+
+    public void ChooseRightSkin()
+    {
+        curSkin++;
+        if (curSkin == skins.Count)
+        {
+            curSkin = 0;
+        }
+        UpdageCurSkin();
     }
 }
 

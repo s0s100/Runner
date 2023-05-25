@@ -34,7 +34,7 @@ MonoBehaviour:
     skinPrice: 20
     pathToAnimators: Animations/Player Animators/MadBaxAnimations
     attackColor: {r: 0.5849056, g: 0.40630856, b: 0, a: 1}
-  - isOwned: 0
+  - isOwned: 1
     skinName: Spartan
     skinPrice: 50
     pathToAnimators: Animations/Player Animators/SpartanAnimations
