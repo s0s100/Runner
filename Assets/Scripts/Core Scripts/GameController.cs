@@ -69,8 +69,10 @@ public class GameController : MonoBehaviour
     // Updates current skin according to the saved settings
     private void SetCurrentPlayerSkin()
     {
-        int skinIndex = GameMachineControl.GetLastSkinIndex();
-        SkinData skin = storagePlayerData.GetIndexSkin(skinIndex);
+        int skinIndex = SkinDisplayControl.GetLastSkinIndex();
+        // SkinData skin = storagePlayerData.GetIndexSkin(skinIndex);
+        SkinData skin = storagePlayerData.GetBoughtIndexSkin(skinIndex);
+
         AnimatorController animator = skin.GetAnimator();
         Color attackColor = storagePlayerData.GetAttackColor(skinIndex);
 
@@ -182,6 +184,4 @@ public class GameController : MonoBehaviour
     {
         moveSpeeed *= GetSpeedModifier();
     }
-
-
 }

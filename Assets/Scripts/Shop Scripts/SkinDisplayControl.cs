@@ -4,7 +4,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameMachineControl : MonoBehaviour
+public class SkinDisplayControl : MonoBehaviour
 {
     private static string LAST_SKIN_INDEX = "LastSkinIndex";
 
@@ -18,7 +18,7 @@ public class GameMachineControl : MonoBehaviour
     private void Start()
     {
         sceneController = FindObjectOfType<SceneController>();
-        skins = sceneController.GetPlayerData().GetSkinList();
+        SelectShownSkins();
 
         // For now this solution, after save selected skin ID
         int lastSkinIndex = GetLastSkinIndex();
@@ -30,6 +30,12 @@ public class GameMachineControl : MonoBehaviour
         {
             throw new System.Exception("Empty skin list");
         }
+    }
+
+    // Shows skins
+    private void SelectShownSkins()
+    {
+        skins = sceneController.GetPlayerData().GetBoughtSkins();
     }
 
     public void UpdageCurSkin()

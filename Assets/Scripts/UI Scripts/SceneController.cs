@@ -68,7 +68,11 @@ public class SceneController : MonoBehaviour
 
     public void ShowAdvertisements()
     {
-        RewardedAds rewardedAds = AdsInitializer.instance.gameObject.GetComponent<RewardedAds>();
-        rewardedAds.ShowAd();
+        // RewardedAds rewardedAds = AdsInitializer.instance.gameObject.GetComponent<RewardedAds>();
+        // rewardedAds.ShowAd();
+
+        PopUpMenuController popUpMenu = FindObjectOfType<PopUpMenuController>();
+        string popUpText = "Would you like to watch advertisement to receive " + RewardedAds.GetRewardAmount() + " coins?";
+        popUpMenu.ActivatePopUpMenu(popUpText);
     }
 }

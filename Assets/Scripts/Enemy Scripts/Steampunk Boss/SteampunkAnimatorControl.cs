@@ -56,6 +56,13 @@ public class SteampunkAnimatorControl : MonoBehaviour
 
     private IEnumerator BlackScreening()
     {
+        // Notify event system as well
+        AnalyticsController analyticsController = AnalyticsController.instance;
+        if (analyticsController != null)
+        {
+            analyticsController.BossKilled();
+        }
+
         float waitTime = uiController.IsBlackScreenInvisible(false);
         yield return new WaitForSeconds(waitTime);
         gameController.StartNextLevel();
@@ -66,13 +73,6 @@ public class SteampunkAnimatorControl : MonoBehaviour
         bossDamageCollider.enabled = false;
         handAttackZone.SetActive(false);
         UnattachWires();
-
-        // Notify event system as well
-        AnalyticsController analyticsController = AnalyticsController.instance;
-        if (analyticsController != null)
-        {
-            analyticsController.BossKilled();
-        }
 
         // Also add coins and coin animation
         CoinController coinController = FindObjectOfType<CoinController>();
