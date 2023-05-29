@@ -184,6 +184,4 @@ public class GameController : MonoBehaviour
     {
         moveSpeeed *= GetSpeedModifier();
     }
-
-
 }
