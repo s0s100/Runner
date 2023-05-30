@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ShopController : MonoBehaviour
 {
     private SceneController sceneController;
+    private ItemDescriptionPanel itemDescription;
     private List<SkinData> skins;
     private int curSkin;
 
@@ -16,6 +17,7 @@ public class ShopController : MonoBehaviour
     private void Start()
     {
         sceneController = FindObjectOfType<SceneController>();
+        itemDescription = GetComponentInChildren<ItemDescriptionPanel>();
         skins = sceneController.GetPlayerData().GetSkinList();
 
         if (skins.Count > 0)
@@ -43,6 +45,7 @@ public class ShopController : MonoBehaviour
         }
         curSkin--;
         UpdageCurSkin();
+        SkinTouched();
     }
 
     public void ChooseRightSkin()
@@ -53,6 +56,11 @@ public class ShopController : MonoBehaviour
             curSkin = 0;
         }
         UpdageCurSkin();
+        SkinTouched();
+    }
+
+    public void SkinTouched()
+    {
+        itemDescription.UpdateItemDescription(skins[curSkin]);
     }
 }
-

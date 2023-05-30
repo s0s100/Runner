@@ -83,4 +83,9 @@ public class SkinData :  IBuyable
     {
         return attackColor;
     }
+
+    public string GetName()
+    {
+        return skinName;
+    }
 }

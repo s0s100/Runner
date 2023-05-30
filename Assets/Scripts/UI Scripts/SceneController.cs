@@ -72,7 +72,8 @@ public class SceneController : MonoBehaviour
         // rewardedAds.ShowAd();
 
         PopUpMenuController popUpMenu = FindObjectOfType<PopUpMenuController>();
-        string popUpText = "Would you like to watch advertisement to receive " + RewardedAds.GetRewardAmount() + " coins?";
+        string popUpText = "Would you like to watch advertisement to receive " 
+            + RewardedAds.GetRewardAmount() + " coins?";
         popUpMenu.ActivatePopUpMenu(popUpText);
     }
 }
