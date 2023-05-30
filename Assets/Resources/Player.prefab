@@ -541,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faefbe6a15da540409ddaf0f87fc9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disappearingDiamond: {fileID: 5744484080785859563, guid: 873eed5ba1add9641a036ededaafdf3d, type: 3}
   footstepParticles: {fileID: 2891468531068279765}
   fallParticlesObject: {fileID: 5149513476182381338, guid: f2943b2a0f303f14fa3454f4c5a7e96d, type: 3}
 --- !u!114 &5413667401708629114
