@@ -32,6 +32,11 @@ public class ItemDescriptionPanel : MonoBehaviour
         canvas.enabled = false;
     }
 
+    public void HidePanel()
+    {
+        canvas.enabled = false;
+    }
+
     public void UpdateItemDescription(SkinData skinData)
     {
         if (skinData == null)
@@ -43,7 +48,7 @@ public class ItemDescriptionPanel : MonoBehaviour
         canvas.enabled = true;
 
         itemName.text = skinData.GetName();
-        itemDescription.text = "We did it chat!";
+        itemDescription.text = skinData.GetDescription();
         
         // Check if not bought
         if (skinData.IsBought())
