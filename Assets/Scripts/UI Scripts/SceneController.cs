@@ -10,15 +10,12 @@ public class SceneController : MonoBehaviour
     private StoragePlayerData playerData;
     [SerializeField]
     private Animator blackScreen;
+    [SerializeField]
+    private ShopController shopController;
 
     private const float LOAD_TIME = 1.0f;
     public const int MENU_SCENE_NUMBER = 0;
     public const int GAME_SCENE_NUMBER = 1;
-
-    private void Awake()
-    {
-        // UpdateFile();
-    }
 
     public void StartGameScene()
     {
@@ -72,7 +69,13 @@ public class SceneController : MonoBehaviour
         // rewardedAds.ShowAd();
 
         PopUpMenuController popUpMenu = FindObjectOfType<PopUpMenuController>();
-        string popUpText = "Would you like to watch advertisement to receive " + RewardedAds.GetRewardAmount() + " coins?";
+        string popUpText = "Would you like to watch advertisement to receive " 
+            + RewardedAds.GetRewardAmount() + " coins?";
         popUpMenu.ActivatePopUpMenu(popUpText);
+    }
+
+    public void OpenShop()
+    {
+        shopController.gameObject.SetActive(true);
     }
 }

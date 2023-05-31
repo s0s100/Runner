@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
+    [SerializeField]
+    private ItemDescriptionPanel itemDescription;
+
     private SceneController sceneController;
     private List<SkinData> skins;
     private int curSkin;
@@ -22,6 +25,7 @@ public class ShopController : MonoBehaviour
         {
             curSkin = 0;
             UpdageCurSkin();
+            DisplayData();
         }
         else
         {
@@ -43,6 +47,7 @@ public class ShopController : MonoBehaviour
         }
         curSkin--;
         UpdageCurSkin();
+        DisplayData();
     }
 
     public void ChooseRightSkin()
@@ -53,6 +58,11 @@ public class ShopController : MonoBehaviour
             curSkin = 0;
         }
         UpdageCurSkin();
+        DisplayData();
+    }
+
+    public void DisplayData()
+    {
+        itemDescription.ShowSkinDescription(skins[curSkin]);
     }
 }
-

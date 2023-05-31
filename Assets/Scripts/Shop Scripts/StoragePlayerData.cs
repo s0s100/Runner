@@ -28,7 +28,6 @@ public class StoragePlayerData : ScriptableObject
 
     public List<SkinData> GetSkinList()
     {
-        Debug.Log("Get skins size: " + skins.Count);
         return skins;
     }
 
@@ -54,15 +53,11 @@ public class StoragePlayerData : ScriptableObject
             }
         }
 
-        Debug.Log("Get bought skins size: " + result.Count);
-
         return result;
     }
 
     public SkinData GetBoughtIndexSkin(int index)
     {
-        Debug.Log("Get bought skin with index: " + index);
-
         int i = 0;
         foreach (SkinData skin in skins)
         {
@@ -70,7 +65,6 @@ public class StoragePlayerData : ScriptableObject
             {
                 if (index == i)
                 {
-                    Debug.Log("Found bought skin with index!");
                     return skin;
 
                 }

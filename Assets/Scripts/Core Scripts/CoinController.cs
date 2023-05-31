@@ -26,11 +26,6 @@ public class CoinController : MonoBehaviour
         PlayerPrefs.SetInt(COIN_STORAGE, curAmount);
     }
 
-    public static int GetCurAmount()
-    {
-        return PlayerPrefs.GetInt(COIN_STORAGE);
-    }
-
     public void AddCoin()
     {
         coinsThisRound++;
