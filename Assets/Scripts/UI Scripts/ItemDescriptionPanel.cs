@@ -73,14 +73,10 @@ public class ItemDescriptionPanel : MonoBehaviour
         buyButton.interactable = true;
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() => BuySkin(skinData));
-        //buyButton.onClick.AddListener(TestButton);
-        Debug.Log("In Button functionality is set!");
     }
 
     private void BuySkin(SkinData skinData)
     {
-        Debug.Log("I was called 1 !");
-
         int curCoins = CoinController.GetTotalAmount();
         skinData.Buy(curCoins);
 
