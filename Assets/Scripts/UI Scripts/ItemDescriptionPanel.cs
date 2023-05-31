@@ -23,21 +23,19 @@ public class ItemDescriptionPanel : MonoBehaviour
     private Sprite notUpgradedImage;
     [SerializeField]
     private Sprite upgradedImage;
-
-    private Canvas canvas;
+    
+    private SkinDisplayControl skinDisplayControl;
+    private SceneController sceneController;
+    private TextCoinSetter textCoinSetter;
 
     private void Start()
     {
-        canvas = GetComponent<Canvas>();
-        canvas.enabled = false;
+        skinDisplayControl = FindObjectOfType<SkinDisplayControl>();
+        textCoinSetter = FindObjectOfType<TextCoinSetter>();
+        sceneController = FindObjectOfType<SceneController>();
     }
 
-    public void HidePanel()
-    {
-        canvas.enabled = false;
-    }
-
-    public void UpdateItemDescription(SkinData skinData)
+    public void ShowSkinDescription(SkinData skinData)
     {
         if (skinData == null)
         {
@@ -45,25 +43,64 @@ public class ItemDescriptionPanel : MonoBehaviour
             return;
         }
 
-        canvas.enabled = true;
-
         itemName.text = skinData.GetName();
         itemDescription.text = skinData.GetDescription();
         
         // Check if not bought
         if (skinData.IsBought())
         {
-            buyButtonCoinImage.enabled = false;
-            itemPrice.text = "Sold";
-            buyButton.interactable = false;
+            DisableBuyButton();
             SetCurrentUpgrades(1, 1);
         } else
         {
             buyButtonCoinImage.enabled = true;
             itemPrice.text = skinData.GetPrice().ToString();
-            buyButton.interactable = true;
+
+            if (skinData.CanBuy(CoinController.GetTotalAmount()))
+            {
+                SetSkinBuyOnClick(skinData);
+            } else
+            {
+                buyButton.interactable = false;
+            }
+
             SetCurrentUpgrades(0, 1);
         }
+    }
+
+    private void SetSkinBuyOnClick(SkinData skinData)
+    {
+        buyButton.interactable = true;
+        buyButton.onClick.RemoveAllListeners();
+        buyButton.onClick.AddListener(() => BuySkin(skinData));
+        //buyButton.onClick.AddListener(TestButton);
+        Debug.Log("In Button functionality is set!");
+    }
+
+    private void BuySkin(SkinData skinData)
+    {
+        Debug.Log("I was called 1 !");
+
+        int curCoins = CoinController.GetTotalAmount();
+        skinData.Buy(curCoins);
+
+        sceneController.SaveFile();
+        CoinController.AddNewCoins(-skinData.GetPrice());
+        textCoinSetter.MakeRemovalTextNotification(skinData.GetPrice());
+        textCoinSetter.UpdateCoinText();
+
+        DisableBuyButton();
+        SetCurrentUpgrades(1, 1);
+
+        skinDisplayControl.ChooseShownSkins();
+    }
+
+    private void DisableBuyButton()
+    {
+        buyButton.onClick.RemoveAllListeners();
+        buyButtonCoinImage.enabled = false;
+        itemPrice.text = "Sold";
+        buyButton.interactable = false;
     }
 
     private void SetCurrentUpgrades(int curUpgrageLevel, int maxUpgradeLevel)

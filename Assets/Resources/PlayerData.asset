@@ -20,33 +20,33 @@ MonoBehaviour:
     pathToAnimators: Animations/Player Animators/BobAnimations
     description: Basic dude called Bob
     attackColor: {r: 0, g: 0.10813923, b: 0.745283, a: 1}
-  - isOwned: 1
-    skinName: Ninja
-    skinPrice: 20
-    pathToAnimators: Animations/Player Animators/NinjaAnimations
-    description: Arrived from temple to sharpen his skills
-    attackColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
   - isOwned: 0
     skinName: Robot
-    skinPrice: 50
+    skinPrice: 500
     pathToAnimators: Animations/Player Animators/RobotAnimations
     description: 010101110101
     attackColor: {r: 0.08788714, g: 0.48543438, b: 0.745283, a: 1}
   - isOwned: 0
+    skinName: Ninja
+    skinPrice: 1000
+    pathToAnimators: Animations/Player Animators/NinjaAnimations
+    description: Arrived from temple to sharpen his skills
+    attackColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+  - isOwned: 0
     skinName: MadBax
-    skinPrice: 20
+    skinPrice: 1000
     pathToAnimators: Animations/Player Animators/MadBaxAnimations
     description: I am a bit mad... So what?
     attackColor: {r: 0.5849056, g: 0.40630856, b: 0, a: 1}
-  - isOwned: 1
+  - isOwned: 0
     skinName: Spartan
-    skinPrice: 50
+    skinPrice: 5000
     pathToAnimators: Animations/Player Animators/SpartanAnimations
     description: Left 299 soldiers to help you
     attackColor: {r: 0.6981132, g: 0.58115184, b: 0, a: 1}
   - isOwned: 0
     skinName: Elianka
-    skinPrice: 50
+    skinPrice: 10000
     pathToAnimators: Animations/Player Animators/EliankaAnimations
     description: Did you ever heard about Nibiru?
     attackColor: {r: 0.11675909, g: 0.6132076, b: 0.03760237, a: 1}

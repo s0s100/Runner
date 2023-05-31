@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
-    private SceneController sceneController;
+    [SerializeField]
     private ItemDescriptionPanel itemDescription;
+
+    private SceneController sceneController;
     private List<SkinData> skins;
     private int curSkin;
 
@@ -17,13 +19,13 @@ public class ShopController : MonoBehaviour
     private void Start()
     {
         sceneController = FindObjectOfType<SceneController>();
-        itemDescription = GetComponentInChildren<ItemDescriptionPanel>();
         skins = sceneController.GetPlayerData().GetSkinList();
 
         if (skins.Count > 0)
         {
             curSkin = 0;
             UpdageCurSkin();
+            DisplayData();
         }
         else
         {
@@ -45,7 +47,7 @@ public class ShopController : MonoBehaviour
         }
         curSkin--;
         UpdageCurSkin();
-        SkinTouched();
+        DisplayData();
     }
 
     public void ChooseRightSkin()
@@ -56,11 +58,11 @@ public class ShopController : MonoBehaviour
             curSkin = 0;
         }
         UpdageCurSkin();
-        SkinTouched();
+        DisplayData();
     }
 
-    public void SkinTouched()
+    public void DisplayData()
     {
-        itemDescription.UpdateItemDescription(skins[curSkin]);
+        itemDescription.ShowSkinDescription(skins[curSkin]);
     }
 }

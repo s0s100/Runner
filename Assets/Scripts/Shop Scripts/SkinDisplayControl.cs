@@ -18,6 +18,11 @@ public class SkinDisplayControl : MonoBehaviour
     private void Start()
     {
         sceneController = FindObjectOfType<SceneController>();
+        ChooseShownSkins();
+    }
+
+    public void ChooseShownSkins()
+    {
         SelectShownSkins();
 
         // For now this solution, after save selected skin ID
@@ -26,7 +31,8 @@ public class SkinDisplayControl : MonoBehaviour
         {
             curSkin = lastSkinIndex;
             UpdageCurSkin();
-        } else
+        }
+        else
         {
             throw new System.Exception("Empty skin list");
         }

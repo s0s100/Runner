@@ -17,7 +17,7 @@ public class TextCoinSetter : MonoBehaviour
     public void UpdateCoinText()
     {
         TMP_Text textBox = GetComponent<TMP_Text>();
-        textBox.text = CoinController.GetCurAmount().ToString();
+        textBox.text = CoinController.GetTotalAmount().ToString();
     }
 
     public void MakeAdditionTextNotification(int coinAmount)
