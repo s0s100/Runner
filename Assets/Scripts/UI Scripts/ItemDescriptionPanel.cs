@@ -27,9 +27,11 @@ public class ItemDescriptionPanel : MonoBehaviour
     private SkinDisplayControl skinDisplayControl;
     private SceneController sceneController;
     private TextCoinSetter textCoinSetter;
+    private PopUpMenuController popUpMenuController;
 
     private void Start()
     {
+        popUpMenuController = FindObjectOfType<PopUpMenuController>();
         skinDisplayControl = FindObjectOfType<SkinDisplayControl>();
         textCoinSetter = FindObjectOfType<TextCoinSetter>();
         sceneController = FindObjectOfType<SceneController>();
@@ -72,7 +74,13 @@ public class ItemDescriptionPanel : MonoBehaviour
     {
         buyButton.interactable = true;
         buyButton.onClick.RemoveAllListeners();
-        buyButton.onClick.AddListener(() => BuySkin(skinData));
+        buyButton.onClick.AddListener(() => SetBuyButton(skinData));
+    }
+
+    private void SetBuyButton(SkinData skinData)
+    {
+        Button acceptButton = popUpMenuController.ActivateShopPopUpMenu("Are you sure you want it?");
+        acceptButton.onClick.AddListener(() => BuySkin(skinData));
     }
 
     private void BuySkin(SkinData skinData)

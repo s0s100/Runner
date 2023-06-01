@@ -30,11 +30,28 @@ public class PopUpMenuController : MonoBehaviour
         acceptButton.onClick.RemoveAllListeners();
     }
 
-    public void ActivatePopUpMenu(string menuText)
+    public void ActivateAdsPopUpMenu(string menuText)
     {
         SetAdsAcceptButton();
         popUpText.text = menuText;
         popUpCanvas.enabled = true;
+    }
+
+    // Returns reference to the buy button
+    public Button ActivateShopPopUpMenu(string menuText)
+    {
+        popUpText.text = menuText;
+        popUpCanvas.enabled = true;
+        acceptButton.onClick.AddListener(SetShopAcceptButton);
+
+        return acceptButton;
+    }
+
+    // Sets basic functionality to the button
+    public void SetShopAcceptButton()
+    {
+        popUpCanvas.enabled = false;
+        acceptButton.onClick.RemoveAllListeners();
     }
 
     private void SetAdsAcceptButton()
