@@ -25,7 +25,7 @@ public class ShopController : MonoBehaviour
         {
             curSkin = 0;
             UpdageCurSkin();
-            DisplayData();
+            DisplaySkinData();
         }
         else
         {
@@ -47,7 +47,7 @@ public class ShopController : MonoBehaviour
         }
         curSkin--;
         UpdageCurSkin();
-        DisplayData();
+        DisplaySkinData();
     }
 
     public void ChooseRightSkin()
@@ -58,11 +58,17 @@ public class ShopController : MonoBehaviour
             curSkin = 0;
         }
         UpdageCurSkin();
-        DisplayData();
+        DisplaySkinData();
     }
 
-    public void DisplayData()
+    public void DisplaySkinData()
     {
         itemDescription.ShowSkinDescription(skins[curSkin]);
+    }
+
+    public void DisplayJumpData()
+    {
+        UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("Double Jump");
+        itemDescription.ShowUpgradeDescription(upgrade);
     }
 }

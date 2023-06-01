@@ -78,4 +78,15 @@ public class SceneController : MonoBehaviour
     {
         shopController.gameObject.SetActive(true);
     }
+
+    public void AddMoney()
+    {
+        int quantity = 1000;
+
+        CoinController.AddNewCoins(quantity);
+
+        TextCoinSetter coinSetter = FindObjectOfType<TextCoinSetter>();
+        coinSetter.MakeAdditionTextNotification(quantity);
+        coinSetter.UpdateCoinText();
+    }
 }

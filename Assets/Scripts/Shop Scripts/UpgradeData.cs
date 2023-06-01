@@ -10,20 +10,22 @@ public class UpgradeData : IBuyable
     [SerializeField]
     private string upgradeName;
     [SerializeField]
-    private List<int> upgradePrice;
+    private string upgradeDescription;
+    [SerializeField]
+    private List<int> upgradePrices;
 
     public UpgradeData(int curUpgradeStatus, string upgradeName, List<int> upgradePrice)
     {
         this.curUpgradeStatus = curUpgradeStatus;
         this.upgradeName = upgradeName;
-        this.upgradePrice = upgradePrice;
+        this.upgradePrices = upgradePrice;
     }
 
     public int Buy(int curMoney)
     {
         if (CanBuy(curMoney))
         {
-            curMoney -= upgradePrice[curUpgradeStatus];
+            curMoney -= upgradePrices[curUpgradeStatus];
             curUpgradeStatus++;
         }
 
@@ -32,7 +34,7 @@ public class UpgradeData : IBuyable
 
     public bool CanBuy(int curMoney)
     {
-        if (curMoney >= upgradePrice[curUpgradeStatus] && curUpgradeStatus < upgradePrice.Count)
+        if (curMoney >= upgradePrices[curUpgradeStatus] && curUpgradeStatus < upgradePrices.Count)
         {
             return true;
         }
@@ -42,18 +44,36 @@ public class UpgradeData : IBuyable
 
     public int GetPrice()
     {
-        return upgradePrice[curUpgradeStatus];
+        return upgradePrices[curUpgradeStatus];
     }
 
     public bool IsBought()
     {
-        if (curUpgradeStatus < upgradePrice.Count)
+        if (curUpgradeStatus < upgradePrices.Count)
         {
             return false;
         }
 
         return true;
     }
-    
 
+    public string GetName()
+    {
+        return upgradeName;
+    }
+
+    public int GetUpgradeStatus()
+    {
+        return curUpgradeStatus;
+    }
+
+    public int GetMaxUpgradeStatus()
+    {
+        return upgradePrices.Count;
+    }
+    
+    public string GetDescription()
+    {
+        return upgradeDescription;
+    }
 }

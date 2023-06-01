@@ -14,6 +14,19 @@ public class StoragePlayerData : ScriptableObject
     [SerializeField]
     private List<UpgradeData> upgrades;
 
+    public UpgradeData GetUpgradeData(string upgradeName)
+    {
+        foreach (UpgradeData upgrade in upgrades)
+        {
+            if (upgrade.GetName().Equals(upgradeName))
+            {
+                return upgrade;
+            }
+        }
+
+        return null;
+    }
+
     public StoragePlayerData(string fileName, List<SkinData> skins, List<UpgradeData> upgrades)
     {
         this.fileName = fileName;

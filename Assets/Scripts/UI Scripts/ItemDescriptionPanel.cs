@@ -37,6 +37,72 @@ public class ItemDescriptionPanel : MonoBehaviour
         sceneController = FindObjectOfType<SceneController>();
     }
 
+    // Why did I implement interface if I didn't use it? :\
+    public void ShowUpgradeDescription(UpgradeData upgradeData)
+    {
+        if (upgradeData == null)
+        {
+            Debug.Log("Upgrade does not exist");
+            return;
+        }
+
+        itemName.text = upgradeData.GetName();
+        itemDescription.text = upgradeData.GetDescription();
+
+        UpdateUpgradeDescription(upgradeData);
+    }
+
+    public void SetUpgradeBuyOnClick(UpgradeData upgradeData)
+    {
+        buyButton.interactable = true;
+        buyButton.onClick.RemoveAllListeners();
+        buyButton.onClick.AddListener(() => SetBuyButtonOnClick(upgradeData));
+    }
+
+    public void SetBuyButtonOnClick(UpgradeData upgradeData)
+    {
+        Button acceptButton = popUpMenuController.ActivateShopPopUpMenu("Are you sure you want it?");
+        acceptButton.onClick.AddListener(() => BuyUpgrade(upgradeData));
+    }
+
+    private void UpdateUpgradeDescription(UpgradeData upgradeData)
+    {
+        if (upgradeData.IsBought())
+        {
+            DisableBuyButton();
+        }
+        else
+        {
+            buyButtonCoinImage.enabled = true;
+            itemPrice.text = upgradeData.GetPrice().ToString();
+
+            if (upgradeData.CanBuy(CoinController.GetTotalAmount()))
+            {
+                SetUpgradeBuyOnClick(upgradeData);
+            }
+            else
+            {
+                buyButton.interactable = false;
+            }
+        }
+
+        SetCurrentUpgrades(upgradeData.GetUpgradeStatus(),
+                upgradeData.GetMaxUpgradeStatus());
+    }
+
+    private void BuyUpgrade(UpgradeData upgradeData)
+    {
+        CoinController.AddNewCoins(-upgradeData.GetPrice());
+        textCoinSetter.MakeRemovalTextNotification(upgradeData.GetPrice());
+        textCoinSetter.UpdateCoinText();
+
+        int curCoins = CoinController.GetTotalAmount();
+        upgradeData.Buy(curCoins);
+        sceneController.SaveFile();
+
+        UpdateUpgradeDescription(upgradeData);
+    }
+
     public void ShowSkinDescription(SkinData skinData)
     {
         if (skinData == null)
@@ -74,10 +140,10 @@ public class ItemDescriptionPanel : MonoBehaviour
     {
         buyButton.interactable = true;
         buyButton.onClick.RemoveAllListeners();
-        buyButton.onClick.AddListener(() => SetBuyButton(skinData));
+        buyButton.onClick.AddListener(() => SetBuyButtonOnClick(skinData));
     }
 
-    private void SetBuyButton(SkinData skinData)
+    private void SetBuyButtonOnClick(SkinData skinData)
     {
         Button acceptButton = popUpMenuController.ActivateShopPopUpMenu("Are you sure you want it?");
         acceptButton.onClick.AddListener(() => BuySkin(skinData));
@@ -87,8 +153,8 @@ public class ItemDescriptionPanel : MonoBehaviour
     {
         int curCoins = CoinController.GetTotalAmount();
         skinData.Buy(curCoins);
-
         sceneController.SaveFile();
+
         CoinController.AddNewCoins(-skinData.GetPrice());
         textCoinSetter.MakeRemovalTextNotification(skinData.GetPrice());
         textCoinSetter.UpdateCoinText();
