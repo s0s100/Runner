@@ -71,11 +71,22 @@ public class SceneController : MonoBehaviour
         PopUpMenuController popUpMenu = FindObjectOfType<PopUpMenuController>();
         string popUpText = "Would you like to watch advertisement to receive " 
             + RewardedAds.GetRewardAmount() + " coins?";
-        popUpMenu.ActivatePopUpMenu(popUpText);
+        popUpMenu.ActivateAdsPopUpMenu(popUpText);
     }
 
     public void OpenShop()
     {
         shopController.gameObject.SetActive(true);
+    }
+
+    public void AddMoney()
+    {
+        int quantity = 1000;
+
+        CoinController.AddNewCoins(quantity);
+
+        TextCoinSetter coinSetter = FindObjectOfType<TextCoinSetter>();
+        coinSetter.MakeAdditionTextNotification(quantity);
+        coinSetter.UpdateCoinText();
     }
 }

@@ -20,19 +20,19 @@ MonoBehaviour:
     pathToAnimators: Animations/Player Animators/BobAnimations
     description: Basic dude called Bob
     attackColor: {r: 0, g: 0.10813923, b: 0.745283, a: 1}
-  - isOwned: 0
+  - isOwned: 1
     skinName: Robot
     skinPrice: 500
     pathToAnimators: Animations/Player Animators/RobotAnimations
     description: 010101110101
     attackColor: {r: 0.08788714, g: 0.48543438, b: 0.745283, a: 1}
-  - isOwned: 0
+  - isOwned: 1
     skinName: Ninja
     skinPrice: 1000
     pathToAnimators: Animations/Player Animators/NinjaAnimations
     description: Arrived from temple to sharpen his skills
     attackColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
-  - isOwned: 0
+  - isOwned: 1
     skinName: MadBax
     skinPrice: 1000
     pathToAnimators: Animations/Player Animators/MadBaxAnimations
@@ -52,8 +52,10 @@ MonoBehaviour:
     attackColor: {r: 0.11675909, g: 0.6132076, b: 0.03760237, a: 1}
   upgrades:
   - curUpgradeStatus: 1
-    upgradeName: MaxHP
-    upgradePrice: 0a000000140000001e000000
-  - curUpgradeStatus: 0
     upgradeName: Double Jump
-    upgradePrice: 32000000
+    upgradeDescription: Increases jump duration
+    upgradePrices: 0a0000003200000064000000f4010000
+  - curUpgradeStatus: 0
+    upgradeName: MaxHP
+    upgradeDescription: Increases max hp
+    upgradePrices: 64000000f4010000e8030000
