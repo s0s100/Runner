@@ -71,4 +71,16 @@ public class ShopController : MonoBehaviour
         UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("Double Jump");
         itemDescription.ShowUpgradeDescription(upgrade);
     }
+
+    public void DisplayHealthData()
+    {
+        UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("MaxHP");
+        itemDescription.ShowUpgradeDescription(upgrade);
+    }
+
+    public void DisplayAttackSpeedData()
+    {
+        UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("Attack Speed");
+        itemDescription.ShowUpgradeDescription(upgrade);
+    }
 }
