@@ -184,4 +184,9 @@ public class GameController : MonoBehaviour
     {
         moveSpeeed *= GetSpeedModifier();
     }
+
+    public UpgradeData GetUpgradeData(string upgradeName)
+    {
+        return storagePlayerData.GetUpgradeData(upgradeName);
+    }
 }

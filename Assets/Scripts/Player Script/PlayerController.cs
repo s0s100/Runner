@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     // Attack
     private Color attackColor;
-    private float attackCooldown = 2.0f;
+    private float attackCooldown = 5.0f;
     private float curAttackCooldown = 0.0f;
 
     // Played pushed
@@ -168,6 +168,7 @@ public class PlayerController : MonoBehaviour
         playerDataScreen = FindObjectOfType<PlayerDataScreen>();
         camera = Camera.main;
 
+        SetStartingAttackSpeed();
         moveSpeed = gameController.GetGameSpeed();
         isMoving = false;
         enabled = false;
@@ -619,9 +620,15 @@ public class PlayerController : MonoBehaviour
         GameObject newDiamond = Instantiate(disappearingDiamond);
         newDiamond.transform.SetParent(this.transform);
         newDiamond.transform.localPosition = dissapearingDiamondPosition;
+    }
 
-        Debug.Log("I was called!");
-        Debug.Log(newDiamond.transform.position);
-        Debug.Log(newDiamond.transform.localPosition);
+    private void SetStartingAttackSpeed()
+    {
+        UpgradeData upgradeData = gameController.GetUpgradeData("Attack Speed");
+        int upgradeLevel = upgradeData.GetUpgradeStatus();
+        if (upgradeLevel != 0)
+        {
+            attackCooldown = 2.0f;
+        }
     }
 }
