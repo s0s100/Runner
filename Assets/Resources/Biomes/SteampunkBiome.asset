@@ -18,3 +18,4 @@ MonoBehaviour:
   bossBackgroundBack: {fileID: 8200644036753557121, guid: bd987ea5f3fcf7e469220ecbd544b4a5, type: 3}
   bossBackgroundFront: {fileID: 4462289253615067184, guid: 47d46cdc9b5aab747a8f0a7ac6aa9163, type: 3}
   bossObject: {fileID: 3655212633971917336, guid: bee20ae0441e3440bbf6fdf3579c1e8b, type: 3}
+  biomeMusic: {fileID: 8300000, guid: 001beaf022104a748b5fb17cc15532fa, type: 3}

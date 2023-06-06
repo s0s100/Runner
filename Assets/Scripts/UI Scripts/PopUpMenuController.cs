@@ -28,6 +28,8 @@ public class PopUpMenuController : MonoBehaviour
     {
         popUpCanvas.enabled = false;
         acceptButton.onClick.RemoveAllListeners();
+
+        AudioController.instance.MaxMusicVolume();
     }
 
     public void ActivateAdsPopUpMenu(string menuText)
@@ -35,6 +37,7 @@ public class PopUpMenuController : MonoBehaviour
         SetAdsAcceptButton();
         popUpText.text = menuText;
         popUpCanvas.enabled = true;
+        AudioController.instance.ReducedMusicVolume();
     }
 
     // Returns reference to the buy button
@@ -43,6 +46,7 @@ public class PopUpMenuController : MonoBehaviour
         popUpText.text = menuText;
         popUpCanvas.enabled = true;
         acceptButton.onClick.AddListener(SetShopAcceptButton);
+        AudioController.instance.ReducedMusicVolume();
 
         return acceptButton;
     }
@@ -66,5 +70,7 @@ public class PopUpMenuController : MonoBehaviour
 
         popUpCanvas.enabled = false;
         acceptButton.onClick.RemoveAllListeners();
+
+        AudioController.instance.PauseMusic();
     }
 }

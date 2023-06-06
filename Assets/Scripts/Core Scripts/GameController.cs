@@ -89,6 +89,8 @@ public class GameController : MonoBehaviour
         backgroundController.enabled = false;
         playerMovement.SetGravity(true);
         uiController.GameDefeatMenu();
+
+        AudioController.instance.ReducedMusicVolume();
     }
 
     private void StartGame()

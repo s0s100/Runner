@@ -64,10 +64,7 @@ public class SceneController : MonoBehaviour
     }
 
     public void ShowAdvertisements()
-    {
-        // RewardedAds rewardedAds = AdsInitializer.instance.gameObject.GetComponent<RewardedAds>();
-        // rewardedAds.ShowAd();
-
+    {   
         PopUpMenuController popUpMenu = FindObjectOfType<PopUpMenuController>();
         string popUpText = "Would you like to watch advertisement to receive " 
             + RewardedAds.GetRewardAmount() + " coins?";
@@ -77,6 +74,13 @@ public class SceneController : MonoBehaviour
     public void OpenShop()
     {
         shopController.gameObject.SetActive(true);
+        AudioController.instance.ReducedMusicVolume();
+    }
+
+    public void CloseShop()
+    {
+        shopController.gameObject.SetActive(false);
+        AudioController.instance.MaxMusicVolume();
     }
 
     public void AddMoney()

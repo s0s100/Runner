@@ -118,6 +118,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         }
 
         EnableButton();
+
+        AudioController.instance.ResumeMusic();
     }
 
     // Implement Load and Show Listener error callbacks:
@@ -129,6 +131,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
+        AudioController.instance.ResumeMusic();
+
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
         // Use the error details to determine whether to try to load another ad.
     }
