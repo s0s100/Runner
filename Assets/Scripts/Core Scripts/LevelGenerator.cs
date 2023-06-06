@@ -246,6 +246,13 @@ public class LevelGenerator : MonoBehaviour
         curActiveBiome = Random.Range(0, biomeData.Length);
         UploadDefinedPrefabs(biomeData[curActiveBiome]);
         backgroundController.SetBiome(biomeData[curActiveBiome]);
+        PlayBiomeMusic();
+    }
+
+    private void PlayBiomeMusic()
+    {
+        AudioClip biomeMusic = biomeData[curActiveBiome].GetBiomeMusic();
+        AudioController.instance.PlaySpecifiedMusic(biomeMusic);
     }
 
     public void CreateBoss()

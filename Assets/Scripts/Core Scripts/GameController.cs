@@ -89,6 +89,8 @@ public class GameController : MonoBehaviour
         backgroundController.enabled = false;
         playerMovement.SetGravity(true);
         uiController.GameDefeatMenu();
+
+        AudioController.instance.ReducedMusicVolume();
     }
 
     private void StartGame()
@@ -183,5 +185,10 @@ public class GameController : MonoBehaviour
     public void UpdateSpeedUsingModifier()
     {
         moveSpeeed *= GetSpeedModifier();
+    }
+
+    public UpgradeData GetUpgradeData(string upgradeName)
+    {
+        return storagePlayerData.GetUpgradeData(upgradeName);
     }
 }
