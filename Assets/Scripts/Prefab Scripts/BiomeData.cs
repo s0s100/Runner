@@ -32,6 +32,9 @@ public class BiomeData : ScriptableObject
     [SerializeField]
     private GameObject bossObject;
 
+    [SerializeField]
+    private AudioClip biomeMusic;
+
     public GameObject GetBossObject()
     {
         return bossObject;
@@ -91,5 +94,10 @@ public class BiomeData : ScriptableObject
     public GameObject GetBossBackgroundFront()
     {
         return bossBackgroundFront;
+    }
+
+    public AudioClip GetBiomeMusic()
+    {
+        return biomeMusic;
     }
 }

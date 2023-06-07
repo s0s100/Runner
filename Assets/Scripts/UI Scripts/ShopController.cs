@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
+    [SerializeField]
+    private ItemDescriptionPanel itemDescription;
+
     private SceneController sceneController;
     private List<SkinData> skins;
     private int curSkin;
@@ -22,6 +25,7 @@ public class ShopController : MonoBehaviour
         {
             curSkin = 0;
             UpdageCurSkin();
+            DisplaySkinData();
         }
         else
         {
@@ -43,6 +47,7 @@ public class ShopController : MonoBehaviour
         }
         curSkin--;
         UpdageCurSkin();
+        DisplaySkinData();
     }
 
     public void ChooseRightSkin()
@@ -53,6 +58,29 @@ public class ShopController : MonoBehaviour
             curSkin = 0;
         }
         UpdageCurSkin();
+        DisplaySkinData();
+    }
+
+    public void DisplaySkinData()
+    {
+        itemDescription.ShowSkinDescription(skins[curSkin]);
+    }
+
+    public void DisplayJumpData()
+    {
+        UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("Double Jump");
+        itemDescription.ShowUpgradeDescription(upgrade);
+    }
+
+    public void DisplayHealthData()
+    {
+        UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("MaxHP");
+        itemDescription.ShowUpgradeDescription(upgrade);
+    }
+
+    public void DisplayAttackSpeedData()
+    {
+        UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("Attack Speed");
+        itemDescription.ShowUpgradeDescription(upgrade);
     }
 }
-

@@ -6,10 +6,11 @@ using UnityEngine;
 public class PlayerHealthScript : MonoBehaviour
 {
     private const float MIN_SPRITE_TRANSPARENCY = 0.5f;
-    private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;    
+    private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;
+    private const int STARTING_HEALTH = 2;
 
-    private int maxHealth = 5;
-    private int curHealth = 3;
+    private int maxHealth = 2;
+    private int curHealth = 2;
     private float invulnerabilityTime = 1.0f;
     private float curInvulnerability = 0.0f;
     private bool isIncreasingTransparency = false;
@@ -32,6 +33,16 @@ public class PlayerHealthScript : MonoBehaviour
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         uiController = FindObjectOfType<UIController>();
         playerDataScreen = FindObjectOfType<PlayerDataScreen>();
+
+        SetStartingHealth();
+    }
+
+    private void SetStartingHealth()
+    {
+        UpgradeData upgradeData = gameController.GetUpgradeData("MaxHP");
+        int upgradeLevel = upgradeData.GetUpgradeStatus();
+        maxHealth = STARTING_HEALTH + upgradeLevel;
+        curHealth = maxHealth;
 
         playerDataScreen.SetMaxHealth(maxHealth);
         playerDataScreen.SetCurHealth(curHealth);

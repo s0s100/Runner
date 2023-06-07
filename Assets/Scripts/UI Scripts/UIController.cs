@@ -75,6 +75,8 @@ public class UIController : MonoBehaviour
         {
             bannerAdsObject.GetComponent<BannerAds>().ShowBannerAd();
         }
+
+        AudioController.instance.ReducedMusicVolume();
     }
 
     public void ResumeGame()
@@ -88,6 +90,7 @@ public class UIController : MonoBehaviour
         BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
         bannerAds.HideBannerAd();
 
+        AudioController.instance.MaxMusicVolume();
     }
 
     public void RestartGame()

@@ -10,15 +10,12 @@ public class SceneController : MonoBehaviour
     private StoragePlayerData playerData;
     [SerializeField]
     private Animator blackScreen;
+    [SerializeField]
+    private ShopController shopController;
 
     private const float LOAD_TIME = 1.0f;
     public const int MENU_SCENE_NUMBER = 0;
     public const int GAME_SCENE_NUMBER = 1;
-
-    private void Awake()
-    {
-        // UpdateFile();
-    }
 
     public void StartGameScene()
     {
@@ -67,12 +64,33 @@ public class SceneController : MonoBehaviour
     }
 
     public void ShowAdvertisements()
-    {
-        // RewardedAds rewardedAds = AdsInitializer.instance.gameObject.GetComponent<RewardedAds>();
-        // rewardedAds.ShowAd();
-
+    {   
         PopUpMenuController popUpMenu = FindObjectOfType<PopUpMenuController>();
-        string popUpText = "Would you like to watch advertisement to receive " + RewardedAds.GetRewardAmount() + " coins?";
-        popUpMenu.ActivatePopUpMenu(popUpText);
+        string popUpText = "Would you like to watch advertisement to receive " 
+            + RewardedAds.GetRewardAmount() + " coins?";
+        popUpMenu.ActivateAdsPopUpMenu(popUpText);
+    }
+
+    public void OpenShop()
+    {
+        shopController.gameObject.SetActive(true);
+        AudioController.instance.ReducedMusicVolume();
+    }
+
+    public void CloseShop()
+    {
+        shopController.gameObject.SetActive(false);
+        AudioController.instance.MaxMusicVolume();
+    }
+
+    public void AddMoney()
+    {
+        int quantity = 1000;
+
+        CoinController.AddNewCoins(quantity);
+
+        TextCoinSetter coinSetter = FindObjectOfType<TextCoinSetter>();
+        coinSetter.MakeAdditionTextNotification(quantity);
+        coinSetter.UpdateCoinText();
     }
 }
