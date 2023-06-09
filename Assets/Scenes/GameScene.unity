@@ -785,31 +785,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 330465039}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1980663022}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &330465039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2075,7 +2051,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeeed: 2
   storagePlayerData: {fileID: 11400000, guid: 009461ed415b9c940b605c6212cb9acd, type: 2}
-  defeatSound: {fileID: 8300000, guid: fd1158288664cc746badc936ff82abdd, type: 3}
 --- !u!114 &590038137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,6 +2121,7 @@ MonoBehaviour:
   startGameText: {fileID: 1818866905}
   pauseMenuButton: {fileID: 689798822}
   blackScreen: {fileID: 2695618116249202259}
+  defeatSound: {fileID: 8300000, guid: fd1158288664cc746badc936ff82abdd, type: 3}
 --- !u!114 &590038141
 MonoBehaviour:
   m_ObjectHideFlags: 0

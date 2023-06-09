@@ -29,9 +29,6 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private StoragePlayerData storagePlayerData;
 
-    [SerializeField]
-    private AudioClip defeatSound;
-
     private void Awake()
     {
         UpdateSpeedUsingModifier();
@@ -92,10 +89,6 @@ public class GameController : MonoBehaviour
         backgroundController.enabled = false;
         playerMovement.SetGravity(true);
         uiController.GameDefeatMenu();
-
-        AudioController.instance.ReducedMusicVolume();
-
-        AudioController.instance.PlayEffect(defeatSound, Camera.main.transform.position);
     }
 
     private void StartGame()
