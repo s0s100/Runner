@@ -5,6 +5,11 @@ using UnityEngine;
 // Health and condition controller
 public class PlayerHealthScript : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip damagedSound;
+    [SerializeField]
+    private AudioClip dethSound;
+
     private const float MIN_SPRITE_TRANSPARENCY = 0.5f;
     private const float TRANSPARENCY_CHANGE_INCREMENT = 5.0f;
     private const int STARTING_HEALTH = 2;
@@ -70,7 +75,11 @@ public class PlayerHealthScript : MonoBehaviour
             if (curHealth == 0)
             {
                 gameController.GameDefeat();
+                AudioController.instance.PlayEffect(dethSound, transform.position);
                 PlayerKillAnimation();
+            } else
+            {
+                AudioController.instance.PlayEffect(damagedSound, transform.position);
             }
         }
     }

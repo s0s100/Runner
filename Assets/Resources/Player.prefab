@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400c19d4855feff4d84fe9be477ab981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  landingSound: {fileID: 8300000, guid: d0a54592fa5c317489574d07f76ae7db, type: 3}
 --- !u!1 &2947349239947050360
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,13 +542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faefbe6a15da540409ddaf0f87fc9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagedSound: {fileID: 0}
-  dethSound: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: a9ea299768cfa154181bae71e98292aa, type: 3}
   jumpSound: {fileID: 8300000, guid: 2661175a77231b44394f60f12e44ab6e, type: 3}
-  fallSound: {fileID: 0}
-  dashSound: {fileID: 0}
-  landingSound: {fileID: 0}
+  fallSound: {fileID: 8300000, guid: d8fd6675f9eea6c4b8e15621fc847ca2, type: 3}
+  dashSound: {fileID: 8300000, guid: d8fd6675f9eea6c4b8e15621fc847ca2, type: 3}
   disappearingDiamond: {fileID: 5744484080785859563, guid: 873eed5ba1add9641a036ededaafdf3d, type: 3}
   footstepParticles: {fileID: 2891468531068279765}
   fallParticlesObject: {fileID: 5149513476182381338, guid: f2943b2a0f303f14fa3454f4c5a7e96d, type: 3}
@@ -563,6 +561,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0697cad650164564499c8bc2d1bfa485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagedSound: {fileID: 8300000, guid: 6ef5ef09b6f7551418eff2b762c6483f, type: 3}
+  dethSound: {fileID: 8300000, guid: 8d1904bd5003189429583455e4ade525, type: 3}
   bloodObject: {fileID: 7258122383890266956, guid: 66f26b3028e8b9742a3df9586e5f1a75, type: 3}
 --- !u!1001 &8022653069982140617
 PrefabInstance:

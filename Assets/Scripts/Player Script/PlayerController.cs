@@ -16,10 +16,6 @@ public enum PowerUpEffect
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip damagedSound;
-    [SerializeField]
-    private AudioClip dethSound;
-    [SerializeField]
     private AudioClip attackSound;
 
     [SerializeField]
@@ -28,8 +24,6 @@ public class PlayerController : MonoBehaviour
     private AudioClip fallSound;
     [SerializeField]
     private AudioClip dashSound;
-    [SerializeField]
-    private AudioClip landingSound;
 
     [SerializeField]
     private GameObject disappearingDiamond;
@@ -421,6 +415,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsDashing", true);
 
         curSaveActionTime = 0.0f;
+
+        AudioController.instance.PlayEffect(dashSound, transform.position);
     }
 
     private void StopPlayer()
@@ -553,6 +549,8 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("IsAttacking");
             curAttackCooldown = attackCooldown;
             playerDataScreen.FillAmmoBar();
+
+            AudioController.instance.PlayEffect(attackSound, transform.position);
         }
     }
 
