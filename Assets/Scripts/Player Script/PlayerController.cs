@@ -16,6 +16,22 @@ public enum PowerUpEffect
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
+    private AudioClip damagedSound;
+    [SerializeField]
+    private AudioClip dethSound;
+    [SerializeField]
+    private AudioClip attackSound;
+
+    [SerializeField]
+    private AudioClip jumpSound;
+    [SerializeField]
+    private AudioClip fallSound;
+    [SerializeField]
+    private AudioClip dashSound;
+    [SerializeField]
+    private AudioClip landingSound;
+
+    [SerializeField]
     private GameObject disappearingDiamond;
     private Vector3 dissapearingDiamondPosition = new (0.0f, 0.5f, 0.0f);
 
@@ -375,6 +391,8 @@ public class PlayerController : MonoBehaviour
         DisableJump();
 
         curSaveActionTime = 0.0f;
+
+        AudioController.instance.PlayEffect(jumpSound, transform.position);
     }
 
     private void SlowMovement()
@@ -391,6 +409,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsFalling", true);
 
         curSaveActionTime = 0.0f;
+
+        AudioController.instance.PlayEffect(fallSound, transform.position);
     }
 
     private void Dash()

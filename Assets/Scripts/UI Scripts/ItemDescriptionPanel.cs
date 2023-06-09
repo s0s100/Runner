@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class ItemDescriptionPanel : MonoBehaviour
 {
     [SerializeField]
+    private AudioClip purchaseSound;
+
+    [SerializeField]
     private Image[] upgradeLevels;
     [SerializeField]
     private TMP_Text itemName;
@@ -101,6 +104,9 @@ public class ItemDescriptionPanel : MonoBehaviour
         sceneController.SaveFile();
 
         UpdateUpgradeDescription(upgradeData);
+
+        AudioController.instance.PlayButtonClick();
+        AudioController.instance.PlayUIEffect(purchaseSound);
     }
 
     public void ShowSkinDescription(SkinData skinData)
@@ -163,6 +169,8 @@ public class ItemDescriptionPanel : MonoBehaviour
         SetCurrentUpgrades(1, 1);
 
         skinDisplayControl.ChooseShownSkins();
+
+        AudioController.instance.PlayButtonClick();
     }
 
     private void DisableBuyButton()

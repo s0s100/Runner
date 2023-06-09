@@ -2075,6 +2075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeeed: 2
   storagePlayerData: {fileID: 11400000, guid: 009461ed415b9c940b605c6212cb9acd, type: 2}
+  defeatSound: {fileID: 8300000, guid: fd1158288664cc746badc936ff82abdd, type: 3}
 --- !u!114 &590038137
 MonoBehaviour:
   m_ObjectHideFlags: 0

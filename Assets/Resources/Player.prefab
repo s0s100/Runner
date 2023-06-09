@@ -541,6 +541,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faefbe6a15da540409ddaf0f87fc9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagedSound: {fileID: 0}
+  dethSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 2661175a77231b44394f60f12e44ab6e, type: 3}
+  fallSound: {fileID: 0}
+  dashSound: {fileID: 0}
+  landingSound: {fileID: 0}
   disappearingDiamond: {fileID: 5744484080785859563, guid: 873eed5ba1add9641a036ededaafdf3d, type: 3}
   footstepParticles: {fileID: 2891468531068279765}
   fallParticlesObject: {fileID: 5149513476182381338, guid: f2943b2a0f303f14fa3454f4c5a7e96d, type: 3}

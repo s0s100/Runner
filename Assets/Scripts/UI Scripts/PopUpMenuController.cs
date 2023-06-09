@@ -29,6 +29,7 @@ public class PopUpMenuController : MonoBehaviour
         popUpCanvas.enabled = false;
         acceptButton.onClick.RemoveAllListeners();
 
+        AudioController.instance.PlayButtonClick();
         AudioController.instance.MaxMusicVolume();
     }
 
@@ -71,6 +72,7 @@ public class PopUpMenuController : MonoBehaviour
         popUpCanvas.enabled = false;
         acceptButton.onClick.RemoveAllListeners();
 
+        AudioController.instance.PlayButtonClick();
         AudioController.instance.PauseMusic();
     }
 }
