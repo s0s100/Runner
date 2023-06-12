@@ -8,8 +8,8 @@ public class AudioController : MonoBehaviour
     public static AudioController instance;
     public static AudioController Instance { get { return instance; } }
 
-    private const float DEFAULT_MUSIC_VOLUME = 1.0f;
-    private const float DEFAULT_REDUCED_MUSIC_VOLUME = 0.5f;
+    private const float DEFAULT_MUSIC_VOLUME = 0.8f;
+    private const float DEFAULT_REDUCED_MUSIC_VOLUME = 0.4f;
 
     [SerializeField]
     private AudioSource musicSource;

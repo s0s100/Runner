@@ -2,8 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SteampunkAnimatorControl : MonoBehaviour
 {
+    private const float DEFAULT_SOUND_VOLUME = 0.5f;
+
+    [SerializeField]
+    private AudioClip apperanceSound;
+    [SerializeField]
+    private AudioClip fistHitSound;
+    [SerializeField]
+    private AudioClip lazerSound;
+    [SerializeField]
+    private AudioClip damagedSound;
+    [SerializeField]
+    private AudioClip dethSound;
+
     // Lazer can't see parent object scripts
     [SerializeField]
     private Animator screenAnimator;
@@ -18,6 +32,7 @@ public class SteampunkAnimatorControl : MonoBehaviour
 
     private UIController uiController;
     private GameController gameController;
+    private AudioSource audioSource;
 
     [SerializeField]
     private Wire[] wires;
@@ -27,21 +42,68 @@ public class SteampunkAnimatorControl : MonoBehaviour
         animator = GetComponent<Animator>();
         uiController = FindObjectOfType<UIController>();
         gameController = FindObjectOfType<GameController>();
+        audioSource = GetComponent<AudioSource>();
+
+        AppearanceSound();
+    }
+
+    private void AppearanceSound()
+    {
+        audioSource.volume = DEFAULT_SOUND_VOLUME;
+        audioSource.loop = false;
+        audioSource.clip = apperanceSound;
+        audioSource.Play();
+    }
+
+    private void FistAttackSound()
+    {
+        audioSource.loop = false;
+        audioSource.clip = fistHitSound;
+        audioSource.Play();
+    }
+
+    private void ActivateLazerSound()
+    {
+        audioSource.loop = true;
+        audioSource.clip = lazerSound;
+        audioSource.Play();
+    }
+
+    private void DeactivateLazerSound()
+    {
+        audioSource.Stop();
+    }
+
+    private void ActivateDamagedSound()
+    {
+        audioSource.loop = false;
+        audioSource.clip = damagedSound;
+        audioSource.Play();
+    }
+
+    private void ActivateDethSound()
+    {
+        audioSource.loop = false;
+        audioSource.clip = dethSound;
+        audioSource.Play();
     }
 
     public void ActivateLazer()
     {
         lazerGenerator.Activate();
+        ActivateLazerSound();
     }
 
     public void DeactivateLazer()
     {
         lazerGenerator.Deactivate();
+        DeactivateLazerSound();
     }
 
     public void EnableFistAttack()
     {
         handAttackZone.SetActive(true);
+        FistAttackSound();
     }
 
     public void DisableFistAttack()
@@ -80,6 +142,8 @@ public class SteampunkAnimatorControl : MonoBehaviour
 
         PlayerController playerController = FindObjectOfType<PlayerController>();
         playerController.CreateDisappearingDiamond();
+
+        ActivateDethSound();
     }
 
     public void DisableDamageAnimation()
@@ -106,11 +170,13 @@ public class SteampunkAnimatorControl : MonoBehaviour
     public void Damage1Screen()
     {
         screenAnimator.SetTrigger("Damage1");
+        ActivateDamagedSound();
     }
 
     public void Damage2Screen()
     {
         screenAnimator.SetTrigger("Damage2");
+        ActivateDamagedSound();
     }
 
     public void FireBombingScreen()
