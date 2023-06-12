@@ -170,7 +170,7 @@ public class ItemDescriptionPanel : MonoBehaviour
 
         skinDisplayControl.ChooseShownSkins();
 
-        AudioController.instance.PlayButtonClick();
+        AudioController.instance.PlayUIEffect(purchaseSound);
     }
 
     private void DisableBuyButton()

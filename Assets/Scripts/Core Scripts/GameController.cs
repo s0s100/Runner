@@ -9,7 +9,7 @@ using UnityEditor.Animations;
 public class GameController : MonoBehaviour
 {
     private const string SPEED_MODIFIER_STORAGE = "Speed modifier";
-    private static float SPEED_MODIFIER_INCREMENT = 1.0f; // If it is equal to 0.1, it will become 110% after first level
+    private static float SPEED_MODIFIER_INCREMENT = 0.1f; // If it is equal to 0.1, it will become 110% after first level
 
     private PrefabData startPosition;
     private PlayerController playerMovement;

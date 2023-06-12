@@ -145,10 +145,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyObject: {fileID: 3799535159409124182, guid: 54021811f0db2564d8d160f1d917e06a, type: 3}
-  enemyGenerationTime: 2
-  yEnemyMinDist: -2
+  enemyGenerationTime: 5
+  yEnemyMinDist: -4
   yEnemyMaxDist: 4
-  currentEnemyGenerationTime: 0
+  currentEnemyGenerationTime: 5
 --- !u!1001 &748174301573097778
 PrefabInstance:
   m_ObjectHideFlags: 0
