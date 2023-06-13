@@ -56,7 +56,7 @@ public class AudioController : MonoBehaviour
 
     public bool GetMusicSoundStatus()
     {
-        int savedIntStatus = PlayerPrefs.GetInt(PLAYER_PFEFS_MUSIC_STATUS);
+        int savedIntStatus = PlayerPrefs.GetInt(PLAYER_PFEFS_MUSIC_STATUS, 1);
         if (savedIntStatus == 1)
         {
             return true;
