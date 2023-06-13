@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicatorColor: {r: 0.454902, g: 0.8745099, b: 0.9725491, a: 1}
+  collectionSound: {fileID: 8300000, guid: a4c6be042a98b6d4d91a53e6f73be784, type: 3}
   disappearanceTime: 1
   disappearanceMoveSpeed: 2
   background: {fileID: 6088247992136975705}

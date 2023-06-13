@@ -15,6 +15,9 @@ public class PowerUp : MonoBehaviour
     private Color indicatorColor;
 
     [SerializeField]
+    private AudioClip collectionSound;
+
+    [SerializeField]
     private float disappearanceTime = 1.0f;
     [SerializeField]
     private float disappearanceMoveSpeed = 2.0f;
@@ -83,6 +86,7 @@ public class PowerUp : MonoBehaviour
         if (collision.tag == "Player" && !isDisappearing)
         {
             PowerUpUse(collision.gameObject);
+            AudioController.instance.PlayEffect(collectionSound, transform.position);
             LateDestroy();
         }
     }

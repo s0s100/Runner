@@ -60,6 +60,8 @@ public class SkinDisplayControl : MonoBehaviour
             curSkin = skins.Count;
         }
         curSkin--;
+
+        AudioController.instance.PlayButtonClickTwo();
         UpdageCurSkin();
     }
 
@@ -70,6 +72,8 @@ public class SkinDisplayControl : MonoBehaviour
         {
             curSkin = 0;
         }
+
+        AudioController.instance.PlayButtonClickTwo();
         UpdageCurSkin();
     }
 

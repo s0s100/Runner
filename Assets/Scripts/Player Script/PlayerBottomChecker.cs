@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerBottomChecker : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip landingSound;
+
     private PlayerController playerMovement;
 
     private void Awake()
@@ -18,6 +21,7 @@ public class PlayerBottomChecker : MonoBehaviour
         {
             {
                 playerMovement.CreateFallParticles();
+                AudioController.instance.PlayEffect(landingSound, transform.position);
             }
         }
     }

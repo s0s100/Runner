@@ -267,7 +267,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 972900301}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
-        m_MethodName: DisplaySkinData
+        m_MethodName: ClickSkinUpdate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -581,10 +581,10 @@ RectTransform:
   m_Father: {fileID: 934246074}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.118750006, y: 0.7084103}
-  m_AnchorMax: {x: 0.41250002, y: 0.8387052}
-  m_AnchoredPosition: {x: -164.21, y: 24.7364}
-  m_SizeDelta: {x: 206.13, y: 22.6808}
+  m_AnchorMin: {x: 0, y: 0.47300002}
+  m_AnchorMax: {x: 0.4893708, y: 0.6863492}
+  m_AnchoredPosition: {x: 0.22924805, y: 1.4235001}
+  m_SizeDelta: {x: 0.4586029, y: 0.26950073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44746608
 MonoBehaviour:
@@ -698,7 +698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &50289146
 RectTransform:
   m_ObjectHideFlags: 0
@@ -840,7 +840,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57743276}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -849,10 +849,10 @@ RectTransform:
   m_Father: {fileID: 934246074}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.118750006, y: 0.7084103}
-  m_AnchorMax: {x: 0.41250002, y: 0.8387052}
-  m_AnchoredPosition: {x: -164.59943, y: 74.274895}
-  m_SizeDelta: {x: 206.91032, y: 36.20777}
+  m_AnchorMin: {x: 0, y: 0.735}
+  m_AnchorMax: {x: 0.4893708, y: 1}
+  m_AnchoredPosition: {x: 0.94921875, y: -0.8019104}
+  m_SizeDelta: {x: 1.8983307, y: 1.6038513}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &57743278
 MonoBehaviour:
@@ -1658,8 +1658,9 @@ GameObject:
   - component: {fileID: 227541996}
   - component: {fileID: 227541995}
   - component: {fileID: 227541994}
+  - component: {fileID: 227541997}
   m_Layer: 5
-  m_Name: SettingsButton
+  m_Name: MusicEnableButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1728,7 +1729,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 227541995}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &227541995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1767,6 +1780,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227541992}
   m_CullTransparentMesh: 1
+--- !u!114 &227541997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227541992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc3c39272924724582eb47aadd4dd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enabledMusic: {fileID: 21300000, guid: 4edf61a5e930b5e4f8d3860971c9e075, type: 3}
+  disabledMusic: {fileID: 21300000, guid: 029893d6fbf547e48bfc6864b8fbf38d, type: 3}
 --- !u!1 &364064433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2122,6 +2149,7 @@ GameObject:
   - component: {fileID: 423979518}
   - component: {fileID: 423979519}
   - component: {fileID: 423979520}
+  - component: {fileID: 423979521}
   m_Layer: 0
   m_Name: BetweenSceensController
   m_TagString: Untagged
@@ -2226,8 +2254,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdbba3c9eab127459fa809e4d6ec158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicSource: {fileID: 423979520}
+  uiSource: {fileID: 423979521}
+  buttonClick: {fileID: 8300000, guid: f9db13a9a383cee41bc782c3385cbeaf, type: 3}
+  buttonClickTwo: {fileID: 8300000, guid: 09295ec91fe40c144bab761a2534abca, type: 3}
   menuMusic: {fileID: 8300000, guid: 1765b94a44e0e6d479440e4ceac2ce38, type: 3}
 --- !u!82 &423979520
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423979512}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &423979521
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3966,7 +4094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &913274739
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4234,10 +4362,10 @@ RectTransform:
   m_Father: {fileID: 972900298}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0.11625001, y: 0.34829488}
+  m_AnchorMax: {x: 0.71500003, y: 0.8438207}
+  m_AnchoredPosition: {x: 1.4185181, y: -0.20899963}
+  m_SizeDelta: {x: 3.124115, y: 1.5700073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &950686565
 PrefabInstance:
@@ -5680,7 +5808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1239569457
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7315,7 +7443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.10625, y: 0.08400001}
   m_AnchorMax: {x: 0.73625004, y: 0.34829488}
-  m_AnchoredPosition: {x: 0.8642578, y: -0.37304688}
+  m_AnchoredPosition: {x: 0.8642578, y: -0.37298584}
   m_SizeDelta: {x: -1.7285, y: -0.7461}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1735693332
@@ -7338,6 +7466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1658ccb3782adfc4bbe9239b1a56e081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  purchaseSound: {fileID: 8300000, guid: 096218b883b6169469c7b0ea22c6fe8d, type: 3}
   upgradeLevels:
   - {fileID: 1496344288}
   - {fileID: 606234272}
@@ -7729,10 +7858,10 @@ RectTransform:
   m_Father: {fileID: 934246074}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.118750006, y: 0.7084103}
-  m_AnchorMax: {x: 0.41250002, y: 0.8387052}
-  m_AnchoredPosition: {x: 82.014366, y: 74.27487}
-  m_SizeDelta: {x: 202.139, y: 36.2077}
+  m_AnchorMin: {x: 0.51662916, y: 0.735}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.37573242, y: -0.49499512}
+  m_SizeDelta: {x: 1.2484894, y: -2.9900055}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1779849648
 MonoBehaviour:

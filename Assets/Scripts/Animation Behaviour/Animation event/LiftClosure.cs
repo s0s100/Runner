@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LiftClosure : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip closingSound;
+
     private GameController gameController;
     private UIController uIController;
 
@@ -18,6 +21,7 @@ public class LiftClosure : MonoBehaviour
     public void UploadBossLocation()
     {
         StartCoroutine(SceneUpdate());
+        AudioController.instance.PlayEffect(closingSound, transform.position);
     }
 
     private IEnumerator SceneUpdate()

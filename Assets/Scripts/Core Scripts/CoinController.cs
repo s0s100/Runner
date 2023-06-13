@@ -21,7 +21,7 @@ public class CoinController : MonoBehaviour
 
     public static void AddNewCoins(int amount)
     {
-        int curAmount = PlayerPrefs.GetInt(COIN_STORAGE);
+        int curAmount = PlayerPrefs.GetInt(COIN_STORAGE, 0);
         curAmount += amount;
         PlayerPrefs.SetInt(COIN_STORAGE, curAmount);
     }
@@ -41,7 +41,7 @@ public class CoinController : MonoBehaviour
     // TODO: Set coin number to zero and add it to global variable
     public void StoreCoins()
     {
-        int curAmount = PlayerPrefs.GetInt(COIN_STORAGE);
+        int curAmount = PlayerPrefs.GetInt(COIN_STORAGE, 0);
         PlayerPrefs.SetInt(COIN_STORAGE, curAmount + coinsThisRound);
         coinsAdded = coinsThisRound;
         coinsThisRound = 0;
@@ -54,7 +54,7 @@ public class CoinController : MonoBehaviour
 
     public static int GetTotalAmount()
     {
-        return PlayerPrefs.GetInt(COIN_STORAGE);
+        return PlayerPrefs.GetInt(COIN_STORAGE, 0);
     }
 
     public int GetCoinsAdded()
@@ -64,7 +64,7 @@ public class CoinController : MonoBehaviour
 
     public int GetLastLevelCoins()
     {
-        int result = PlayerPrefs.GetInt(LAST_LEVEL_COIN_STORAGE);
+        int result = PlayerPrefs.GetInt(LAST_LEVEL_COIN_STORAGE, 0);
         PlayerPrefs.SetInt(LAST_LEVEL_COIN_STORAGE, 0);
 
         return result;

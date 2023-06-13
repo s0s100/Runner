@@ -40,6 +40,9 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Animator blackScreen;
 
+    [SerializeField]
+    private AudioClip defeatSound;
+
     // Score/coin/player controllers
     private ScoreController scoreController;
     private CoinController coinController;
@@ -77,6 +80,7 @@ public class UIController : MonoBehaviour
         }
 
         AudioController.instance.ReducedMusicVolume();
+        AudioController.instance.PlayButtonClick();
     }
 
     public void ResumeGame()
@@ -91,6 +95,7 @@ public class UIController : MonoBehaviour
         bannerAds.HideBannerAd();
 
         AudioController.instance.MaxMusicVolume();
+        AudioController.instance.PlayButtonClick();
     }
 
     public void RestartGame()
@@ -100,6 +105,8 @@ public class UIController : MonoBehaviour
         GameController.ResetSpeedModifier();
         ScoreController.ResetLastRoundScore();
         SceneManager.LoadScene(GAME_SCENE_NUMBER);
+
+        AudioController.instance.PlayButtonClick();
     }
 
     public void GameDefeatMenu()
@@ -108,6 +115,9 @@ public class UIController : MonoBehaviour
         gameMenu.SetActive(false);
         coinController.StoreCoins();
         StartCoroutine(LateGameStop());
+
+        AudioController.instance.PauseMusic();
+        AudioController.instance.PlayEffect(defeatSound, Camera.main.transform.position);
     }
 
     private IEnumerator LateGameStop()
@@ -124,6 +134,8 @@ public class UIController : MonoBehaviour
         coinController.StoreCoins();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(MAIN_MENU_SCENE_NUMBER);
+
+        AudioController.instance.PlayButtonClick();
     }
 
     public void StartNextLevel()

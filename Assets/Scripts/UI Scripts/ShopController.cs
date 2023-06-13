@@ -48,6 +48,8 @@ public class ShopController : MonoBehaviour
         curSkin--;
         UpdageCurSkin();
         DisplaySkinData();
+
+        AudioController.instance.PlayButtonClickTwo();
     }
 
     public void ChooseRightSkin()
@@ -59,9 +61,18 @@ public class ShopController : MonoBehaviour
         }
         UpdageCurSkin();
         DisplaySkinData();
+
+        AudioController.instance.PlayButtonClickTwo();
     }
 
-    public void DisplaySkinData()
+    public void ClickSkinUpdate()
+    {
+        DisplaySkinData();
+
+        AudioController.instance.PlayButtonClickTwo();
+    }
+
+    private void DisplaySkinData()
     {
         itemDescription.ShowSkinDescription(skins[curSkin]);
     }
@@ -70,17 +81,23 @@ public class ShopController : MonoBehaviour
     {
         UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("Double Jump");
         itemDescription.ShowUpgradeDescription(upgrade);
+
+        AudioController.instance.PlayButtonClickTwo();
     }
 
     public void DisplayHealthData()
     {
         UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("MaxHP");
         itemDescription.ShowUpgradeDescription(upgrade);
+
+        AudioController.instance.PlayButtonClickTwo();
     }
 
     public void DisplayAttackSpeedData()
     {
         UpgradeData upgrade = sceneController.GetPlayerData().GetUpgradeData("Attack Speed");
         itemDescription.ShowUpgradeDescription(upgrade);
+
+        AudioController.instance.PlayButtonClickTwo();
     }
 }
