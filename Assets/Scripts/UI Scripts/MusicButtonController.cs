@@ -24,7 +24,6 @@ public class MusicButtonController : MonoBehaviour
     {
         bool status = AudioController.instance.GetMusicSoundStatus();
 
-        Debug.Log("Status in button : " + status);
         if (status)
         {
             SetDisableSound();
