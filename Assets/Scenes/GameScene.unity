@@ -714,9 +714,10 @@ GameObject:
   - component: {fileID: 330465037}
   - component: {fileID: 330465040}
   - component: {fileID: 330465039}
+  - component: {fileID: 330465041}
   - component: {fileID: 330465038}
   m_Layer: 5
-  m_Name: SettingsButton
+  m_Name: MusicButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,6 +825,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330465036}
   m_CullTransparentMesh: 1
+--- !u!114 &330465041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330465036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc3c39272924724582eb47aadd4dd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enabledMusic: {fileID: 21300000, guid: 4edf61a5e930b5e4f8d3860971c9e075, type: 3}
+  disabledMusic: {fileID: 21300000, guid: 029893d6fbf547e48bfc6864b8fbf38d, type: 3}
 --- !u!1 &347480651
 GameObject:
   m_ObjectHideFlags: 0
