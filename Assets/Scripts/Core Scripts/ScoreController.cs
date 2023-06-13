@@ -61,7 +61,7 @@ public class ScoreController : MonoBehaviour
 
     public static int GetMaxScore()
     {
-        return PlayerPrefs.GetInt(MAX_SCORE_STORAGE);
+        return PlayerPrefs.GetInt(MAX_SCORE_STORAGE, 0);
     }
     
     public bool UpdateMaxScore()
