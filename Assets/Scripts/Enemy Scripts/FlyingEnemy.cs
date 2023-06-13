@@ -2,8 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class FlyingEnemy : Enemy
 {
+    private const float DEFAULT_SOUND_VOLUME = 0.05f;
+
+    [SerializeField]
+    private AudioClip flyingSound;
+
+    [SerializeField]
+    private AudioClip flyDeth;
+
+    private AudioSource audioSource;
+
     // Sin() function movement (cos() acceleration coz of derivative)
     // y = A*sin(xtC)
     private bool leftToRightMovement = false;
@@ -15,6 +26,7 @@ public class FlyingEnemy : Enemy
     protected override void Awake()
     {
         base.Awake();
+        audioSource = GetComponent<AudioSource>();
         Destroy(this.gameObject, existanceTime);
         CheckMoveDirection();
     }
@@ -32,6 +44,22 @@ public class FlyingEnemy : Enemy
     private void Start()
     {
         DefineIfSin();
+        StartAudioSounds();
+    }
+
+    private void StartAudioSounds()
+    {
+        audioSource.volume = DEFAULT_SOUND_VOLUME;
+        audioSource.loop = true;
+        audioSource.clip = flyingSound;
+        audioSource.Play();
+    }
+
+    private void StartDethSounds()
+    {
+        audioSource.clip = flyDeth;
+        audioSource.loop = false;
+        audioSource.Play();
     }
 
     private void DefineIfSin()
@@ -94,5 +122,6 @@ public class FlyingEnemy : Enemy
         base.Kill();
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         Destroy(this.gameObject, destroyUponDeath);
+        StartDethSounds();
     }
 }

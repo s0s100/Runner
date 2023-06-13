@@ -7,6 +7,9 @@ public class CoinCollecting : MonoBehaviour
     [SerializeField]
     private int quantity = 1;
 
+    [SerializeField]
+    private AudioClip collectionSound;
+
     private CoinController coinController;
     private Animator animator;
 
@@ -24,6 +27,7 @@ public class CoinCollecting : MonoBehaviour
         {
             animator.SetTrigger("IsTaken");
             coinController.AddCoins(quantity);
+            AudioController.instance.PlayEffect(collectionSound, transform.position);
         }
     }
 

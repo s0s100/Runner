@@ -26,6 +26,8 @@ public class SceneController : MonoBehaviour
 
         BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
         bannerAds.HideBannerAd();
+
+        AudioController.instance.PlayButtonClick();
     }
 
     private IEnumerator lateStartGame()
@@ -69,18 +71,21 @@ public class SceneController : MonoBehaviour
         string popUpText = "Would you like to watch advertisement to receive " 
             + RewardedAds.GetRewardAmount() + " coins?";
         popUpMenu.ActivateAdsPopUpMenu(popUpText);
+        AudioController.instance.PlayButtonClick();
     }
 
     public void OpenShop()
     {
         shopController.gameObject.SetActive(true);
         AudioController.instance.ReducedMusicVolume();
+        AudioController.instance.PlayButtonClick();
     }
 
     public void CloseShop()
     {
         shopController.gameObject.SetActive(false);
         AudioController.instance.MaxMusicVolume();
+        AudioController.instance.PlayButtonClick();
     }
 
     public void AddMoney()

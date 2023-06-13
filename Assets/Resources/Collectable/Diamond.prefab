@@ -4984,3 +4984,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quantity: 10
+  collectionSound: {fileID: 8300000, guid: 13e2bb90164651f4d9a3250cdd7a4190, type: 3}
