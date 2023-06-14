@@ -42,7 +42,7 @@ public class FirstLaunchChecker : MonoBehaviour
         PlayerPrefs.DeleteKey(IS_FIRST_LAUNCH_PREF);
     }
 
-    private void ShowTutorial()
+    public void ShowTutorial()
     {
         Instantiate(tutorialWindow);
     }
