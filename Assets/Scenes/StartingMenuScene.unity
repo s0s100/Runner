@@ -8871,6 +8871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641ec1b6b73bf0e48918858e77097e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialWindow: {fileID: 2672503130819695036, guid: dfb1b7c43ab600648a350b651220eead, type: 3}
 --- !u!1 &1865610247
 GameObject:
   m_ObjectHideFlags: 0
@@ -9071,7 +9072,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1856512208}
-        m_TargetAssemblyTypeName: FirstTimeChecker, Assembly-CSharp
+        m_TargetAssemblyTypeName: FirstLaunchChecker, Assembly-CSharp
         m_MethodName: ResetFirstLaunch
         m_Mode: 1
         m_Arguments:

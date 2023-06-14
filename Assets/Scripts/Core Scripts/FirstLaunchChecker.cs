@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstTimeChecker : MonoBehaviour
+public class FirstLaunchChecker : MonoBehaviour
 {
     private const string IS_FIRST_LAUNCH_PREF = "FirstLaunch";
+
+    [SerializeField]
+    private GameObject tutorialWindow;
 
     private void Awake()
     {
@@ -41,6 +44,6 @@ public class FirstTimeChecker : MonoBehaviour
 
     private void ShowTutorial()
     {
-        // TODO: ...
+        Instantiate(tutorialWindow);
     }
 }
