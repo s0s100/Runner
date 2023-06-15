@@ -36,6 +36,9 @@ public class Tutorial : MonoBehaviour
     {
         frontImage[curImage].enabled = false;
         curImage++;
+
+        AudioController.instance.PlayButtonClickTwo();
+
         if (frontImage.Length > curImage)
         {
 
