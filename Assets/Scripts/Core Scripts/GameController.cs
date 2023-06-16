@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEditor.Animations;
+// using UnityEditor.Animations;
 
 // Control general game states such as defeat and overall game speed
 public class GameController : MonoBehaviour
@@ -70,14 +68,12 @@ public class GameController : MonoBehaviour
     private void SetCurrentPlayerSkin()
     {
         int skinIndex = SkinDisplayControl.GetLastSkinIndex();
-        // SkinData skin = storagePlayerData.GetIndexSkin(skinIndex);
         SkinData skin = storagePlayerData.GetBoughtIndexSkin(skinIndex);
-
-        AnimatorController animator = skin.GetAnimator();
+        RuntimeAnimatorController runtimeAnimatorController = skin.GetRuntimeAnimator();
         Color attackColor = storagePlayerData.GetAttackColor(skinIndex);
 
         // Select animator for the player
-        playerMovement.SetCurrentAnimator(animator);
+        playerMovement.SetCurrentAnimator(runtimeAnimatorController);
         playerMovement.SetAttackColor(attackColor);
     }
 

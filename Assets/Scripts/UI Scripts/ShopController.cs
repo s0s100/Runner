@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +35,7 @@ public class ShopController : MonoBehaviour
     public void UpdageCurSkin()
     {
         Animator anim = skinImage.GetComponent<Animator>();
-        anim.runtimeAnimatorController = skins[curSkin].GetPreview() as RuntimeAnimatorController;
+        anim.runtimeAnimatorController = skins[curSkin].GetPreviewRuntimeAnimator();
     }
 
     public void ChooseLeftSkin()

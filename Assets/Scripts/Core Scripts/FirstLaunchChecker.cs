@@ -14,12 +14,7 @@ public class FirstLaunchChecker : MonoBehaviour
         bool isFirst = IsFirstLaunch();
         if (isFirst)
         {
-            Debug.Log("It is a first launch");
             ShowTutorial();
-        } else
-        {
-
-            Debug.Log("It is not a first launch");
         }
     }
 
@@ -38,7 +33,6 @@ public class FirstLaunchChecker : MonoBehaviour
 
     public void ResetFirstLaunch()
     {
-        Debug.Log("Resetting first launch");
         PlayerPrefs.DeleteKey(IS_FIRST_LAUNCH_PREF);
     }
 

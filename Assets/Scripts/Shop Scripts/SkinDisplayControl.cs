@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,7 +49,8 @@ public class SkinDisplayControl : MonoBehaviour
         PlayerPrefs.SetInt(LAST_SKIN_INDEX, curSkin);
 
         Animator anim = skinImage.GetComponent<Animator>();
-        anim.runtimeAnimatorController = skins[curSkin].GetPreview() as RuntimeAnimatorController;
+        SkinData skin = skins[curSkin];
+        anim.runtimeAnimatorController = skin.GetPreviewRuntimeAnimator();
     }
 
     public void ChooseLeftSkin()
