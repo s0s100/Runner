@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEditor.Animations;
 
 public enum MoveDirection
 {
@@ -531,9 +530,9 @@ public class PlayerController : MonoBehaviour
         objTransform.transform.position -= Vector3.up * yDiff;
     }
 
-    public void SetCurrentAnimator(AnimatorController animatorController)
+    public void SetCurrentAnimator(RuntimeAnimatorController animatorController)
     {
-        animator.runtimeAnimatorController = animatorController as RuntimeAnimatorController;
+        animator.runtimeAnimatorController = animatorController;
     }
 
     public void SetAttackColor(Color color)

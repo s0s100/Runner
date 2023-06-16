@@ -24,8 +24,6 @@ public class PowerUp : MonoBehaviour
     [SerializeField]
     private GameObject background;
     [SerializeField]
-    private float sinMoveSpeed = 1.0f;
-    [SerializeField]
     private float sinCoef = 0.1f;
     [SerializeField]
     private float timeCoef = 2.0f;

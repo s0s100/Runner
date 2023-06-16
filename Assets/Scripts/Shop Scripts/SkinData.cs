@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor.Animations;
 using UnityEngine;
 
 [System.Serializable]
@@ -32,22 +31,25 @@ public class SkinData :  IBuyable
         this.pathToAnimators = pathToAnimators;
     }
 
-    public AnimatorController GetPreview()
+    public RuntimeAnimatorController GetPreviewRuntimeAnimator()
     {
         string resultPreviewName = skinName + ADDITIONAL_PREVIEW_KEYWORD;
         string resultPreviewPath = Path.Combine(pathToAnimators, resultPreviewName);
-        AnimatorController skinPreview = Resources.Load<AnimatorController>(resultPreviewPath);
+        // Animator skinPreview = Resources.Load<Animator>(resultPreviewPath);
+        RuntimeAnimatorController runtimeAnimator = Resources.Load<RuntimeAnimatorController>(resultPreviewPath);
 
-        return skinPreview;
+        //return skinPreview.runtimeAnimatorController;
+        return runtimeAnimator;
     }
 
-    public AnimatorController GetAnimator()
+    public RuntimeAnimatorController GetRuntimeAnimator()
     {
         string resultSkinName = skinName + ADDITIONAL_ANIMATOR_KEYWORD;
         string resultPreviewPath = Path.Combine(pathToAnimators, resultSkinName);
-        AnimatorController skinPreview = Resources.Load<AnimatorController>(resultPreviewPath);
+        // Animator skinPreview = Resources.Load<Animator>(resultPreviewPath);
+        RuntimeAnimatorController runtimeAnimator = Resources.Load<RuntimeAnimatorController>(resultPreviewPath);
 
-        return skinPreview;
+        return runtimeAnimator;
     }
 
     public int Buy(int curMoney)
