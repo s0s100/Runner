@@ -107,6 +107,9 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene(GAME_SCENE_NUMBER);
 
         AudioController.instance.PlayButtonClick();
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.HideBannerAd();
     }
 
     public void GameDefeatMenu()
