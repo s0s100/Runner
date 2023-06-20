@@ -63,7 +63,7 @@ MonoBehaviour:
   destructionTime: 30
   XBefore: 3
   YBefore: 0
-  YDiff: -1.5
+  YDiff: 0
 --- !u!61 &1493002681040572758
 BoxCollider2D:
   m_ObjectHideFlags: 0
