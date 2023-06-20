@@ -22,21 +22,21 @@ public class SceneController : MonoBehaviour
         Time.timeScale = 1.0f;
         GameController.ResetSpeedModifier();
         ScoreController.ResetLastRoundScore();
-        StartCoroutine(lateStartGame());
-
-        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
-        bannerAds.HideBannerAd();
+        StartCoroutine(LateStartGame());
 
         AudioController.instance.PlayButtonClick();
     }
 
-    private IEnumerator lateStartGame()
+    private IEnumerator LateStartGame()
     {
         blackScreen.SetBool("IsInvisible", false);
 
         yield return new WaitForSeconds(LOAD_TIME);
 
         SceneManager.LoadScene(GAME_SCENE_NUMBER);
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.HideBannerAd();
 
         AnalyticsController analyticsController = AnalyticsController.instance;
         if (analyticsController != null)
@@ -79,6 +79,9 @@ public class SceneController : MonoBehaviour
         shopController.gameObject.SetActive(true);
         AudioController.instance.ReducedMusicVolume();
         AudioController.instance.PlayButtonClick();
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.HideBannerAd();
     }
 
     public void CloseShop()
@@ -86,6 +89,9 @@ public class SceneController : MonoBehaviour
         shopController.gameObject.SetActive(false);
         AudioController.instance.MaxMusicVolume();
         AudioController.instance.PlayButtonClick();
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.ShowBannerAd();
     }
 
     public void AddMoney()

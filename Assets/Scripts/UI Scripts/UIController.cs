@@ -118,6 +118,9 @@ public class UIController : MonoBehaviour
 
         AudioController.instance.PauseMusic();
         AudioController.instance.PlayEffect(defeatSound, Camera.main.transform.position);
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.ShowBannerAd();
     }
 
     private IEnumerator LateGameStop()

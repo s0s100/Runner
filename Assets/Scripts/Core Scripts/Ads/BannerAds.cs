@@ -21,6 +21,7 @@ public class BannerAds : MonoBehaviour
     private string iosAdUnitId = "Banner_iOS";
      
     private string adUnitId = null;
+    private bool showingAd = true;
 
     void Start()
     {
@@ -44,7 +45,10 @@ public class BannerAds : MonoBehaviour
     {
         yield return null;
         LoadBanner();
-        ShowBannerAd();
+        if (showingAd)
+        {
+            ShowBannerAd();
+        }
     }
 
     private void DefineCurUnitId()
@@ -108,13 +112,30 @@ public class BannerAds : MonoBehaviour
         // Show the loaded Banner Ad Unit:
         Advertisement.Banner.Show(adUnitId, options);
     }
+    //public void ShowBannerAd(string whereAndWhy)
+    //{
+    //    Debug.Log("Showing banner at: " + whereAndWhy);
+
+    //    // Show the loaded Banner Ad Unit:
+    //    ShowBannerAd();
+    //}
 
     // Implement a method to call when the Hide Banner button is clicked:
     public void HideBannerAd()
     {
+        showingAd = false;
+
         // Hide the banner:
         Advertisement.Banner.Hide();
     }
+
+    //public void HideBannerAd(string whereAndWhy)
+    //{
+    //    Debug.Log("Hiding banner at: " + whereAndWhy);
+
+    //    // Hide the banner:
+    //    HideBannerAd();
+    //}
 
     private void OnLevelWasLoaded(int level)
     {
