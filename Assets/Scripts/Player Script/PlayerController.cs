@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using TMPro;
 
 public enum MoveDirection
 {
@@ -632,11 +633,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void CreateDisappearingDiamond()
+    public void CreateDisappearingDiamond(int reward)
     {
         GameObject newDiamond = Instantiate(disappearingDiamond);
         newDiamond.transform.SetParent(this.transform);
         newDiamond.transform.localPosition = dissapearingDiamondPosition;
+
+        string rewardString = "+" + reward.ToString();
+        newDiamond.GetComponentInChildren<TMP_Text>().text = rewardString; 
+
+        // Also add coins and coin animation
+        CoinController coinController = FindObjectOfType<CoinController>();
+        coinController.AddCoins(reward);
     }
 
     private void SetStartingAttackSpeed()

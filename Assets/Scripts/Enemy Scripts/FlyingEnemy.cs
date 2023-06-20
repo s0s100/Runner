@@ -6,6 +6,7 @@ using UnityEngine;
 public class FlyingEnemy : Enemy
 {
     private const float DEFAULT_SOUND_VOLUME = 0.02f;
+    public static int REWARD_AMOUNT = 2;
 
     [SerializeField]
     private AudioClip flyingSound;
@@ -123,5 +124,8 @@ public class FlyingEnemy : Enemy
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         Destroy(this.gameObject, destroyUponDeath);
         StartDethSounds();
+
+        PlayerController playerController = FindObjectOfType<PlayerController>();
+        playerController.CreateDisappearingDiamond(REWARD_AMOUNT);
     }
 }
