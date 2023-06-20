@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class FlyingEnemy : Enemy
 {
-    private const float DEFAULT_SOUND_VOLUME = 0.05f;
+    private const float DEFAULT_SOUND_VOLUME = 0.02f;
 
     [SerializeField]
     private AudioClip flyingSound;

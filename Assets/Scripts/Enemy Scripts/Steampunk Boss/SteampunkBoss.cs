@@ -6,7 +6,7 @@ public class SteampunkBoss : Enemy
 {
     PlayerDataScreen dataScreen;
 
-    public static int REWARD_AMOUNT = 10;
+    public static int REWARD_AMOUNT = 25;
 
     [SerializeField]
     private int startingHealth = 10;
