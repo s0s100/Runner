@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BannerAds : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class BannerAds : MonoBehaviour
     private string adUnitId = null;
     private bool showingAd = true;
 
-    void Start()
+    void Awake()
     {
         DefineCurUnitId();
 
@@ -101,6 +102,8 @@ public class BannerAds : MonoBehaviour
     // Implement a method to call when the Show Banner button is clicked:
     public void ShowBannerAd()
     {
+        Debug.Log("Show function was called!");
+
         // Set up options to notify the SDK of show events:
         BannerOptions options = new BannerOptions
         {
@@ -123,6 +126,8 @@ public class BannerAds : MonoBehaviour
     // Implement a method to call when the Hide Banner button is clicked:
     public void HideBannerAd()
     {
+        Debug.Log("Hide function was called!");
+
         showingAd = false;
 
         // Hide the banner:
@@ -139,8 +144,14 @@ public class BannerAds : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
+        Debug.Log("Current level OnLevelWasLoaded: " + level);
         if (SceneController.MENU_SCENE_NUMBER == level)
         {
+            if (!Advertisement.Banner.isLoaded)
+            {
+                Debug.Log("Banner is not loaded");
+            }
+            
             ShowBannerAd();
         }
     }
