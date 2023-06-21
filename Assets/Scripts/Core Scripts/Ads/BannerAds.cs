@@ -102,7 +102,7 @@ public class BannerAds : MonoBehaviour
     // Implement a method to call when the Show Banner button is clicked:
     public void ShowBannerAd()
     {
-        Debug.Log("Show function was called!");
+        //Debug.Log("Show function was called!");
 
         // Set up options to notify the SDK of show events:
         BannerOptions options = new BannerOptions
@@ -126,7 +126,7 @@ public class BannerAds : MonoBehaviour
     // Implement a method to call when the Hide Banner button is clicked:
     public void HideBannerAd()
     {
-        Debug.Log("Hide function was called!");
+        //Debug.Log("Hide function was called!");
 
         showingAd = false;
 
@@ -144,13 +144,13 @@ public class BannerAds : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        Debug.Log("Current level OnLevelWasLoaded: " + level);
+        // Debug.Log("Current level OnLevelWasLoaded: " + level);
         if (SceneController.MENU_SCENE_NUMBER == level)
         {
-            if (!Advertisement.Banner.isLoaded)
-            {
-                Debug.Log("Banner is not loaded");
-            }
+            //if (!Advertisement.Banner.isLoaded)
+            //{
+            //    Debug.Log("Banner is not loaded");
+            //}
             
             ShowBannerAd();
         }
