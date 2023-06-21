@@ -12,8 +12,8 @@ public class UIController : MonoBehaviour
 {
     private const float BLACK_SCREEN_TRANSITION_TIME = 1.5f;
     private const float TIME_BEFORE_LATE_GAME_PAUSE = 1.0f;
-    private const int MAIN_MENU_SCENE_NUMBER = 0;
-    private const int GAME_SCENE_NUMBER = 1;
+    //private const int MAIN_MENU_SCENE_NUMBER = 0;
+    //private const int GAME_SCENE_NUMBER = 1;
 
     // Defeat fields
     [SerializeField]
@@ -104,7 +104,7 @@ public class UIController : MonoBehaviour
         coinController.StoreCoins();
         GameController.ResetSpeedModifier();
         ScoreController.ResetLastRoundScore();
-        SceneManager.LoadScene(GAME_SCENE_NUMBER);
+        SceneManager.LoadScene(SceneController.GAME_SCENE_NUMBER);
 
         AudioController.instance.PlayButtonClick();
 
@@ -139,7 +139,7 @@ public class UIController : MonoBehaviour
     {
         coinController.StoreCoins();
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(MAIN_MENU_SCENE_NUMBER);
+        SceneManager.LoadScene(SceneController.MENU_SCENE_NUMBER);
 
         AudioController.instance.PlayButtonClick();
     }
@@ -147,7 +147,7 @@ public class UIController : MonoBehaviour
     public void StartNextLevel()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(GAME_SCENE_NUMBER);
+        SceneManager.LoadScene(SceneController.GAME_SCENE_NUMBER);
     }
 
     public void DisableStartGameText()
