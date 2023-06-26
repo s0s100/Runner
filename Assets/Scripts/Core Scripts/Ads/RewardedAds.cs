@@ -17,7 +17,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     private bool isLoaded = false;
 
-    private static int rewardAmount = 20;
+    private static int rewardAmount = 25;
 
     public static int GetRewardAmount()
     {
