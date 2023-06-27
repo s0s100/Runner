@@ -97,13 +97,13 @@ public class ItemDescriptionPanel : MonoBehaviour
         Debug.Log("Upgrade is bought, " + upgradeData.GetUpgradeStatus().ToString() + "level out of " +
             upgradeData.GetMaxUpgradeStatus().ToString() + " levels");
 
-        CoinController.AddNewCoins(-upgradeData.GetPrice());
-        textCoinSetter.MakeRemovalTextNotification(upgradeData.GetPrice());
-        textCoinSetter.UpdateCoinText();
-
         int curCoins = CoinController.GetTotalAmount();
         upgradeData.Buy(curCoins);
         sceneController.SaveFile();
+
+        CoinController.AddNewCoins(-upgradeData.GetPrice());
+        textCoinSetter.MakeRemovalTextNotification(upgradeData.GetPrice());
+        textCoinSetter.UpdateCoinText();
 
         UpdateUpgradeDescription(upgradeData);
 
