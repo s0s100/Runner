@@ -17,6 +17,11 @@ public class SceneController : MonoBehaviour
     public const int MENU_SCENE_NUMBER = 0;
     public const int GAME_SCENE_NUMBER = 1;
 
+    private void Update()
+    {
+        UpdateFile();
+    }
+
     public void StartGameScene()
     {
         Time.timeScale = 1.0f;

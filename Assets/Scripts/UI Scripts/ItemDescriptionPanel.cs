@@ -102,6 +102,7 @@ public class ItemDescriptionPanel : MonoBehaviour
         int curCoins = CoinController.GetTotalAmount();
         upgradeData.Buy(curCoins);
         sceneController.SaveFile();
+        sceneController.UpdateFile();
 
         UpdateUpgradeDescription(upgradeData);
 
@@ -160,6 +161,7 @@ public class ItemDescriptionPanel : MonoBehaviour
         int curCoins = CoinController.GetTotalAmount();
         skinData.Buy(curCoins);
         sceneController.SaveFile();
+        sceneController.UpdateFile();
 
         CoinController.AddNewCoins(-skinData.GetPrice());
         textCoinSetter.MakeRemovalTextNotification(skinData.GetPrice());
