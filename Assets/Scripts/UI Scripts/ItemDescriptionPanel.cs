@@ -98,12 +98,12 @@ public class ItemDescriptionPanel : MonoBehaviour
             upgradeData.GetMaxUpgradeStatus().ToString() + " levels");
 
         int curCoins = CoinController.GetTotalAmount();
-        upgradeData.Buy(curCoins);
-        sceneController.SaveFile();
-
         CoinController.AddNewCoins(-upgradeData.GetPrice());
         textCoinSetter.MakeRemovalTextNotification(upgradeData.GetPrice());
         textCoinSetter.UpdateCoinText();
+
+        upgradeData.Buy(curCoins);
+        sceneController.SaveFile();
 
         UpdateUpgradeDescription(upgradeData);
 
