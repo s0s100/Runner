@@ -14,11 +14,12 @@ public static class StoragePlayerManager
     {
         if (!DirectoryExists())
         {
+            Debug.Log("Created directory at the path:" + GetDirectoryPath());
             Directory.CreateDirectory(GetDirectoryPath());
         }
-
         try
         {
+            Debug.Log("Saving data file");
             string JSONdata = saveObj.ToJSON();
             File.WriteAllText(GetFullPath(), JSONdata);
 
@@ -34,6 +35,7 @@ public static class StoragePlayerManager
         {
             try
             {
+                Debug.Log("Loading data file");
                 string JSONdata = File.ReadAllText(GetFullPath());
                 JsonUtility.FromJsonOverwrite(JSONdata, saveObj);
 
@@ -41,6 +43,9 @@ public static class StoragePlayerManager
             {
                 Debug.LogError(e);
             }
+        } else
+        {
+            Debug.Log("Storage player data does not exist");
         }
     }
 
