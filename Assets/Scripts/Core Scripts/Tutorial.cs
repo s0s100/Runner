@@ -39,7 +39,7 @@ public class Tutorial : MonoBehaviour
 
         if (frontImage.Length > curImage)
         {
-            Debug.Log("Showing hint number: " + curImage);
+            // Debug.Log("Showing hint number: " + curImage);
             frontImage[curImage].enabled = true;
         } else
         {
