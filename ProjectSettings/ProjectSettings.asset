@@ -79,7 +79,7 @@ PlayerSettings:
   macRetinaSupport: 1
   runInBackground: 0
   captureSingleScreen: 0
-  muteOtherAudioSources: 0
+  muteOtherAudioSources: 1
   Prepare IOS For Recording: 0
   Force IOS Speakers When Recording: 0
   deferSystemGesturesMode: 0
@@ -156,12 +156,12 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.IvanWizardovsstudio.MultiverseRift
     Standalone: com.IvanWizardov-s-studio.Multiverse-Rift
-    iPhone: com.IvanWizardov-s-studio.Multiverse-Rift
+    iPhone: com.Ivan-Wizardovs-Studio.Multiverse-Rift
   buildNumber:
     Standalone: 0
     iPhone: 0
     tvOS: 0
-  overrideDefaultApplicationIdentifier: 0
+  overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 0
@@ -777,7 +777,7 @@ PlayerSettings:
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
-  selectedPlatform: 3
+  selectedPlatform: 2
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1

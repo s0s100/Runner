@@ -23,10 +23,14 @@ public class UpgradeData : IBuyable
 
     public int Buy(int curMoney)
     {
+        Debug.Log("Trying to buy skin!");
+
         if (CanBuy(curMoney))
         {
             curMoney -= upgradePrices[curUpgradeStatus];
             curUpgradeStatus++;
+
+            Debug.Log("Bought and upgraded status!");
         }
 
         return curMoney;

@@ -107,6 +107,16 @@ public class PlayerHealthScript : MonoBehaviour
         }
     }
 
+    public bool IsMaxHealth()
+    {
+        if (curHealth >= maxHealth)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public void GetHealth()
     {
         if (curHealth < maxHealth)

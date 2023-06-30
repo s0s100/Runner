@@ -71,12 +71,12 @@ public class AudioController : MonoBehaviour
 
         if (status)
         {
-            Debug.Log("Status: " + status + " and playing");
+            // Debug.Log("Status: " + status + " and playing");
             musicSource.Play();
             PlayerPrefs.SetInt(PLAYER_PFEFS_MUSIC_STATUS, 1);
         } else
         {
-            Debug.Log("Status: " + status + " and pausing");
+            // Debug.Log("Status: " + status + " and pausing");
             musicSource.Pause();
             PlayerPrefs.SetInt(PLAYER_PFEFS_MUSIC_STATUS, 0);
         }

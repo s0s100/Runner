@@ -136,12 +136,8 @@ public class SteampunkAnimatorControl : MonoBehaviour
         handAttackZone.SetActive(false);
         UnattachWires();
 
-        // Also add coins and coin animation
-        CoinController coinController = FindObjectOfType<CoinController>();
-        coinController.AddCoins(SteampunkBoss.REWARD_AMOUNT);
-
         PlayerController playerController = FindObjectOfType<PlayerController>();
-        playerController.CreateDisappearingDiamond();
+        playerController.CreateDisappearingDiamond(SteampunkBoss.REWARD_AMOUNT);
 
         ActivateDethSound();
     }

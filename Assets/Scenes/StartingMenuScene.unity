@@ -698,7 +698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &50289146
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2349,7 +2349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   androidGameId: 5234309
   iosGameId: 5234308
-  testMode: 1
+  testMode: 0
 --- !u!4 &423979517
 Transform:
   m_ObjectHideFlags: 0
@@ -3288,8 +3288,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -46.19995, y: -52.599976}
-  m_SizeDelta: {x: 201, y: 50}
+  m_AnchoredPosition: {x: -48.884, y: -53.4618}
+  m_SizeDelta: {x: 210.57, y: 52.8727}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &577311124
 MonoBehaviour:
@@ -3311,7 +3311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 9999
+  m_text: 99999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a237115ff6dc33249a99a70495ed8eda, type: 2}
   m_sharedMaterial: {fileID: 7421205063794504422, guid: a237115ff6dc33249a99a70495ed8eda, type: 2}
@@ -3374,7 +3374,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 8.22419, y: -8.971802, z: 0, w: -6.3551025}
+  m_margin: {x: -0.39401245, y: -8.971802, z: 0, w: -6.3551025}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4229,7 +4229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &913274739
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6462,7 +6462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 21.799988, y: -143.49997}
+  m_AnchoredPosition: {x: 36.7, y: -142.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1354449156

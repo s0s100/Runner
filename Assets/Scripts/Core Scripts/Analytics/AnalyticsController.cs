@@ -62,4 +62,13 @@ public class AnalyticsController : MonoBehaviour
             AnalyticsService.Instance.Flush();
         }
     }
+
+    public void ReachedThousandCoins()
+    {
+        if (UnityServices.State == ServicesInitializationState.Initialized)
+        {
+            AnalyticsService.Instance.CustomData("reachedThousandCoins");
+            AnalyticsService.Instance.Flush();
+        }
+    }
 }

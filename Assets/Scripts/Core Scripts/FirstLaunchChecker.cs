@@ -15,6 +15,10 @@ public class FirstLaunchChecker : MonoBehaviour
         if (isFirst)
         {
             ShowTutorial();
+        } else
+        {
+            BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+            bannerAds.ShowBannerAd();
         }
     }
 
@@ -39,5 +43,8 @@ public class FirstLaunchChecker : MonoBehaviour
     public void ShowTutorial()
     {
         Instantiate(tutorialWindow);
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.HideBannerAd();
     }
 }
