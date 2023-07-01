@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour
 
         // Increase max FPS to 60 (for every platform for now)
         Application.targetFrameRate = 60;
+        // QualitySettings.vSyncCount = 2;
     }
 
     void Update()
