@@ -13,7 +13,7 @@ public enum NextGeneratedBlockType
 public class LevelGenerator : MonoBehaviour
 {
     // Generation settings and prefabs folders
-    private const float generationDistance = 15.0f; // Distance from a camera center from which objects are generated
+    private const float generationDistance = 18.0f; // Distance from a camera center from which objects are generated
     private const float Y_CAMERA_SHIFT = 2.0f; //Prefab locaton + this const is the min Y-axis camera location
     private static readonly Vector2 START_PREFAB_POSITION = new Vector2(0.0f, -1.0f);
     private static readonly Vector2 START_PLAYER_POSITION = new Vector2(0.0f, 0.0f);

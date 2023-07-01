@@ -89,7 +89,6 @@ public class PowerUp : MonoBehaviour
     private void LateDestroy()
     {
         Destroy(this.gameObject, disappearanceTime);
-        disappearanceSpeed = 1 / disappearanceTime;
         isDisappearing = true;
     }
 

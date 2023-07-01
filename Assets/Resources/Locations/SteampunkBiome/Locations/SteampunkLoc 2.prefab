@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72c4a338d4ae234fbfffc01ea308b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionTime: 30
+  destructionTime: 35
   XBefore: 3
   YBefore: -0.5
   YDiff: -0.5

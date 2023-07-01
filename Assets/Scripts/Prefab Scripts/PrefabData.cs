@@ -6,8 +6,8 @@ public class PrefabData : MonoBehaviour
     private GameController gameController;
 
     [SerializeField]
-    [Header("Default value is 30 seconds")]
-    private float destructionTime = 30.0f;
+    [Header("Default value is 35 seconds")]
+    private float destructionTime = 35.0f;
 
     // X shift before required
     [SerializeField]
