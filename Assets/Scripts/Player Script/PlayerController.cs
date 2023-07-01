@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private const float REQUIRED_FALL_SPEED_FALL_PARTICLES = 0.5f;
     private const float DEFAULT_GRAVITY_SCALE = 1.0f;
-    private const float MAX_TOUCH_VECTOR_MAGNITUDE = 50.0f;
+    private const float MAX_TOUCH_VECTOR_MAGNITUDE = 100.0f;
     private const float PUSH_WAIT_BEFORE_CONTROL = 0.75f;
 
     // Attached objects
@@ -184,12 +184,13 @@ public class PlayerController : MonoBehaviour
     {
         if (isControllable)
         {
-            MoveDirection moveDir = GetPCAction();
-            if (moveDir == MoveDirection.None)
-            {
-                moveDir = GetAction();
-            }
+            //MoveDirection moveDir = GetPCAction();
+            //if (moveDir == MoveDirection.None)
+            //{
+            //    moveDir = GetAction();
+            //}
 
+            MoveDirection moveDir = GetAction();
             MakeStoredAction(); // Make action stored in a buffer 
             MakeAction(moveDir);
         }
