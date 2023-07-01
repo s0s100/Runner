@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SteampunkBoss : Enemy
 {
     PlayerDataScreen dataScreen;
 
-    public static int REWARD_AMOUNT = 10;
+    public static int REWARD_AMOUNT = 20;
 
     [SerializeField]
     private int startingHealth = 10;

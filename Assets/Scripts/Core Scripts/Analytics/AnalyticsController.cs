@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
-using UnityEngine.Analytics;
 
 public class AnalyticsController : MonoBehaviour
 {
@@ -59,6 +56,15 @@ public class AnalyticsController : MonoBehaviour
         if (UnityServices.State == ServicesInitializationState.Initialized)
         {
             AnalyticsService.Instance.CustomData("levelLoaded");
+            AnalyticsService.Instance.Flush();
+        }
+    }
+
+    public void ReachedThousandCoins()
+    {
+        if (UnityServices.State == ServicesInitializationState.Initialized)
+        {
+            AnalyticsService.Instance.CustomData("reachedThousandCoins");
             AnalyticsService.Instance.Flush();
         }
     }

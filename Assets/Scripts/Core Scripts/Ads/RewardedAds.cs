@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
-using UnityEngine.UI;
 
 public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -17,7 +15,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     private bool isLoaded = false;
 
-    private static int rewardAmount = 20;
+    private static int rewardAmount = 25;
 
     public static int GetRewardAmount()
     {

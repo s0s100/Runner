@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,11 +21,9 @@ public class Tutorial : MonoBehaviour
 
         if (frontImage.Length > 0)
         {
-            Debug.Log("Showing hint number: " + curImage);
             frontImage[0].enabled = true;
         } else
         {
-            Debug.Log("No image to display in tutorial!");
             NextTutorial();
         }
     }
@@ -41,8 +37,7 @@ public class Tutorial : MonoBehaviour
 
         if (frontImage.Length > curImage)
         {
-
-            Debug.Log("Showing hint number: " + curImage);
+            // Debug.Log("Showing hint number: " + curImage);
             frontImage[curImage].enabled = true;
         } else
         {
@@ -53,6 +48,9 @@ public class Tutorial : MonoBehaviour
     private void SkipTutorial()
     {
         Destroy(this.gameObject);
+
+        BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+        bannerAds.ShowBannerAd();
     }
 
     private void NextTutorial()
@@ -62,10 +60,11 @@ public class Tutorial : MonoBehaviour
             Instantiate(nextTutorial);
         } else
         {
-            Debug.Log("No other tutorial available!");
+            // Debug.Log("No other tutorial available!");
+            BannerAds bannerAds = AdsInitializer.instance.gameObject.GetComponent<BannerAds>();
+            bannerAds.ShowBannerAd();
         }
 
-        
         Destroy(this.gameObject);
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUp : MonoBehaviour
@@ -8,7 +6,6 @@ public class PowerUp : MonoBehaviour
 
     private float creationTime;
     private bool isDisappearing = false;
-    private float disappearanceSpeed;
 
     // Visual effect
     [SerializeField]

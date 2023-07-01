@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,12 +38,11 @@ public class ItemDescriptionPanel : MonoBehaviour
         sceneController = FindObjectOfType<SceneController>();
     }
 
-    // Why did I implement interface if I didn't use it? :\
     public void ShowUpgradeDescription(UpgradeData upgradeData)
     {
         if (upgradeData == null)
         {
-            Debug.Log("Upgrade does not exist");
+            // Debug.Log("Upgrade does not exist");
             return;
         }
 
@@ -95,11 +92,14 @@ public class ItemDescriptionPanel : MonoBehaviour
 
     private void BuyUpgrade(UpgradeData upgradeData)
     {
+        //Debug.Log("Upgrade is bought, " + upgradeData.GetUpgradeStatus().ToString() + "level out of " +
+        //    upgradeData.GetMaxUpgradeStatus().ToString() + " levels");
+
+        int curCoins = CoinController.GetTotalAmount();
         CoinController.AddNewCoins(-upgradeData.GetPrice());
         textCoinSetter.MakeRemovalTextNotification(upgradeData.GetPrice());
         textCoinSetter.UpdateCoinText();
 
-        int curCoins = CoinController.GetTotalAmount();
         upgradeData.Buy(curCoins);
         sceneController.SaveFile();
 
@@ -113,7 +113,7 @@ public class ItemDescriptionPanel : MonoBehaviour
     {
         if (skinData == null)
         {
-            Debug.Log("Skin does not exist");
+            //Debug.Log("Skin does not exist");
             return;
         }
 
@@ -157,6 +157,8 @@ public class ItemDescriptionPanel : MonoBehaviour
 
     private void BuySkin(SkinData skinData)
     {
+        // Debug.Log("Skin is bought");
+
         int curCoins = CoinController.GetTotalAmount();
         skinData.Buy(curCoins);
         sceneController.SaveFile();

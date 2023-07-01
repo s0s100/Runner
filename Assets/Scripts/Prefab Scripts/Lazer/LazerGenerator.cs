@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LazerGenerator : MonoBehaviour
@@ -14,20 +12,10 @@ public class LazerGenerator : MonoBehaviour
     private LineRenderer lineRenderer;
     [SerializeField]
     private GameObject lazerEnd;
-    [SerializeField]
-    private ParticleSystem startParticles;
-    [SerializeField]
-    private ParticleSystem endParticles;
 
     private float curLazerWidth = 0.0f;
     private float maxLazerWidth = 1.0f;
     private float lazerIncreasementSpeed = 3.0f;
-
-    private void Start()
-    {
-        startParticles = lazerStart.GetComponent<ParticleSystem>();
-        endParticles = lazerEnd.GetComponent<ParticleSystem>();
-    }
 
     private void Update()
     {
