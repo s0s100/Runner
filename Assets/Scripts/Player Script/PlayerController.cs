@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
 using TMPro;
 
@@ -35,9 +34,7 @@ public class PlayerController : MonoBehaviour
     private const float PUSH_WAIT_BEFORE_CONTROL = 0.75f;
 
     // Attached objects
-    private new Camera camera;
     private new Rigidbody2D rigidbody;
-    private new BoxCollider2D collider;
     private Animator animator;
     private GameController gameController;
     private LevelGenerator levelGenerator;
@@ -170,13 +167,11 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        collider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
         uiController = FindObjectOfType<UIController>();
         playerDataScreen = FindObjectOfType<PlayerDataScreen>();
-        camera = Camera.main;
 
         SetStartingAttackSpeed();
         moveSpeed = gameController.GetGameSpeed();

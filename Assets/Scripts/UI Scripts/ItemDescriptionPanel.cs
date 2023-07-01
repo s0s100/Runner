@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,7 +42,7 @@ public class ItemDescriptionPanel : MonoBehaviour
     {
         if (upgradeData == null)
         {
-            Debug.Log("Upgrade does not exist");
+            // Debug.Log("Upgrade does not exist");
             return;
         }
 
@@ -94,8 +92,8 @@ public class ItemDescriptionPanel : MonoBehaviour
 
     private void BuyUpgrade(UpgradeData upgradeData)
     {
-        Debug.Log("Upgrade is bought, " + upgradeData.GetUpgradeStatus().ToString() + "level out of " +
-            upgradeData.GetMaxUpgradeStatus().ToString() + " levels");
+        //Debug.Log("Upgrade is bought, " + upgradeData.GetUpgradeStatus().ToString() + "level out of " +
+        //    upgradeData.GetMaxUpgradeStatus().ToString() + " levels");
 
         int curCoins = CoinController.GetTotalAmount();
         CoinController.AddNewCoins(-upgradeData.GetPrice());
@@ -115,7 +113,7 @@ public class ItemDescriptionPanel : MonoBehaviour
     {
         if (skinData == null)
         {
-            Debug.Log("Skin does not exist");
+            //Debug.Log("Skin does not exist");
             return;
         }
 
@@ -159,7 +157,7 @@ public class ItemDescriptionPanel : MonoBehaviour
 
     private void BuySkin(SkinData skinData)
     {
-        Debug.Log("Skin is bought");
+        // Debug.Log("Skin is bought");
 
         int curCoins = CoinController.GetTotalAmount();
         skinData.Buy(curCoins);

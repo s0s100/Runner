@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Health and condition controller
@@ -20,7 +18,6 @@ public class PlayerHealthScript : MonoBehaviour
     private float curInvulnerability = 0.0f;
     private bool isIncreasingTransparency = false;
 
-    private UIController uiController;
     private LevelGenerator levelGenerator;
     private GameController gameController;
     private SpriteRenderer playerSpriteRenderer;
@@ -36,7 +33,6 @@ public class PlayerHealthScript : MonoBehaviour
         animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        uiController = FindObjectOfType<UIController>();
         playerDataScreen = FindObjectOfType<PlayerDataScreen>();
 
         SetStartingHealth();
