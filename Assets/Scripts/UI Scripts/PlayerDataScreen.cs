@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +30,7 @@ public class PlayerDataScreen : MonoBehaviour
     // Boss state transition
     private float curTransitionTime = 0.0f;
     private float transitionTime = 1.0f;
-    private Color bossStageColor = new Color(0.7f, 0.3f, 0.3f, 1.0f);
+    private Color bossStageColor = new(0.7f, 0.3f, 0.3f, 1.0f);
 
     private void Update()
     {

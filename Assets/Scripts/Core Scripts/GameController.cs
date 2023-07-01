@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-// using UnityEditor.Animations;
 
 // Control general game states such as defeat and overall game speed
 public class GameController : MonoBehaviour

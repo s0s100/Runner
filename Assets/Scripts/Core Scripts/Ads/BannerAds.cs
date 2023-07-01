@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class BannerAds : MonoBehaviour
 {
@@ -159,12 +156,4 @@ public class BannerAds : MonoBehaviour
     void OnBannerClicked() { }
     void OnBannerShown() { }
     void OnBannerHidden() { }
-
-    void OnDestroy()
-    {
-        // Clean up the listeners:
-        //loadBannerButton.onClick.RemoveAllListeners();
-        //showBannerButton.onClick.RemoveAllListeners();
-        //hideBannerButton.onClick.RemoveAllListeners();
-    }
 }
