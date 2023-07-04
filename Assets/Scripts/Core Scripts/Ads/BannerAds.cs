@@ -43,10 +43,6 @@ public class BannerAds : MonoBehaviour
     {
         yield return null;
         LoadBanner();
-        if (showingAd)
-        {
-            ShowBannerAd();
-        }
     }
 
     private void DefineCurUnitId()
@@ -77,16 +73,10 @@ public class BannerAds : MonoBehaviour
     // Implement code to execute when the loadCallback event triggers:
     void OnBannerLoaded()
     {
-        // Debug.Log("Banner loaded");
-
-        // Configure the Show Banner button to call the ShowBannerAd() method when clicked:
-        // showBannerButton.onClick.AddListener(ShowBannerAd);
-        // Configure the Hide Banner button to call the HideBannerAd() method when clicked:
-        // hideBannerButton.onClick.AddListener(HideBannerAd);
-
-        // Enable both buttons:
-        //showBannerButton.interactable = true;
-        //hideBannerButton.interactable = true;
+        if (showingAd)
+        {
+            ShowBannerAd();
+        }
     }
 
     // Implement code to execute when the load errorCallback event triggers:
