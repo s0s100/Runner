@@ -12,8 +12,8 @@ public class SceneController : MonoBehaviour
     private ShopController shopController;
 
     private const float LOAD_TIME = 1.0f;
-    public const int MENU_SCENE_NUMBER = 0;
-    public const int GAME_SCENE_NUMBER = 1;
+    public const int MENU_SCENE_NUMBER = 1;
+    public const int GAME_SCENE_NUMBER = 2;
 
     private void Start()
     {

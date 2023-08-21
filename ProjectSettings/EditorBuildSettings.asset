@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/FirstAndroidScene.unity
+    guid: e2780eed1ed23b843a54b0d59b2a075a
+  - enabled: 1
     path: Assets/Scenes/StartingMenuScene.unity
     guid: 82e5429dd74eaf142b1f47cedf10552a
   - enabled: 1
